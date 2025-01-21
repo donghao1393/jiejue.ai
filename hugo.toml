@@ -1,0 +1,113 @@
+baseURL = "https://jiejue.ai/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh"
+title = "爱解决"
+theme = "hugo-theme-dream"
+
+enableGitInfo = true
+enableRobotsTXT = true
+
+hasCJKLanguage = true
+
+[services]
+  [services.disqus]
+    shortname = "ai-jie-jue"
+  [services.googleAnalytics]
+    # ID = "G-"
+
+[params]
+  # 背景图片
+  background = "#f7f7f7"
+  
+  # 标题配置
+  headerTitle = "爱解决"
+  motto = "用AI为人民服务"
+  
+  # 其他配置
+  siteStartYear = 2025
+  favicon = "/favicon.ico"
+  darkMode = true
+  
+  # 评论系统配置（可选）
+  # option: disqus
+  # disqusShortname = "your-disqus-shortname"
+  # utterancesRepo = ""
+  # option: leancloud
+  # valine = true
+  # LEANCLOUD_APP_ID = ""
+  # LEANCLOUD_APP_KEY = ""
+  # option: waline
+  # waline = true
+  # walineServer = ""
+
+  # below from theme
+  # zenMode = true
+
+  lightTheme = "emerald"
+  darkTheme = "forest"
+
+  # backgroundImage = "me/background.jpg"
+  # backgroundImageDark = ""
+
+  # 作者信息
+  author = "董昊"
+  avatar = "/favicon.ico"
+  description = '硅基生物幼稚园协调员'
+  # https://gohugo.io/templates/embedded/#configure-x-twitter-cards
+
+  footerBottomText = "硅基生物幼稚园"
+
+  rss = true
+
+  # Syntax highlighting
+  # customSyntaxHighlighting = true
+
+  # options
+  stickyNav = true
+  # reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
+  # collapseNavItems = ["posts", "categories", "tags"]
+  # noDefaultSummaryCover = true
+  showTableOfContents = true
+  showSummaryCoverInPost = true
+  imageZoomableInPost = true
+  showPrevNextPost = true
+  # reorderShares = ["x", "facebook", "whatsapp"]
+
+  # 社交链接 >>
+  # [params.social]
+    # github = "donghao1393"
+    # linkedin = "donghao1393"
+    # twitter = "donghao1393"
+  # << not supported yet in the theme
+
+  [params.navItems]
+    # github = { href = "https://github.com/", target = "_blank", icon = "logo-github", title = "GitHub" }
+    # linkedin = { href = "https://linkedin.com/in/", target = "_blank", icon = "logo-linkedin", title = "Linkedin" }
+    # twitter = { href = "https://twitter.com/", target = "_blank", icon = "logo-twitter", title = "Twitter" }
+    # email = { href = "mailto:", target = "_blank", icon = "mail-outline", title = "Email" }
+    # wechat = { href = "", target = "_blank", icon = "logo-wechat", title = "WeChat" }
+
+    # [params.advanced]
+    # customCSS = ["css/custom.css"]
+    # customJS = []
+
+  [params.experimental]
+    jsDate = true
+    jsDateFormat = "yyyy年MM月dd日"
+
+# 菜单配置
+[menu]
+  [[menu.main]]
+    name = "文章"
+    url = "/posts"
+    weight = 1
+  [[menu.main]]
+    name = "关于"
+    url = "/about"
+    weight = 2
+
+# Markup 配置
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
