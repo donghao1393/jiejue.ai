@@ -95,6 +95,10 @@ hasCJKLanguage = true
     jsDate = true
     jsDateFormat = "yyyy年MM月dd日"
 
+[permalinks]
+  posts = '/:year/:month/:slug/'
+  tags = '/:slug/'
+
 # 菜单配置
 # [menu]
 #   [[menu.main]]
