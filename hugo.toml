@@ -96,15 +96,15 @@ hasCJKLanguage = true
     jsDateFormat = "yyyy年MM月dd日"
 
 # 菜单配置
-[menu]
-  [[menu.main]]
-    name = "文章"
-    url = "/posts"
-    weight = 1
-  [[menu.main]]
-    name = "关于"
-    url = "/about"
-    weight = 2
+# [menu]
+#   [[menu.main]]
+#     name = "文章"
+#     url = "/posts"
+#     weight = 1
+#   [[menu.main]]
+#     name = "关于"
+#     url = "/about"
+#     weight = 2
 
 # Markup 配置
 [markup]
