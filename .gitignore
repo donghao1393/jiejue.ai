@@ -21,3 +21,5 @@ Gemfile.lock
 /public
 .hugo_build.lock
 /resources/
+content/posts/*/**
+!content/posts/*/*.md
