@@ -9,6 +9,9 @@ enableRobotsTXT = true
 
 hasCJKLanguage = true
 
+# 使用html尾缀
+uglyURLs = false
+
 [services]
   [services.disqus]
     shortname = "ai-jie-jue"
