@@ -3,7 +3,7 @@ title: "简单介绍一下"
 date: 2025-01-21
 slug: 'jian-dan-jie-shao'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250122192521314.png"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250122211357575.webp"
 ---
 ## 梦想，dream
 
