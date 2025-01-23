@@ -10,6 +10,11 @@ enableRobotsTXT = true
 
 hasCJKLanguage = true
 
+ignoreFiles = [
+  "^posts/.+\\.md$",         # 忽略posts下所有.md文件
+  # "(?<!index)\\.md$"         # 只保留index.md
+]
+
 # 使用html尾缀
 uglyURLs = false
 
