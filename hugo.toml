@@ -11,7 +11,7 @@ enableRobotsTXT = true
 hasCJKLanguage = true
 
 ignoreFiles = [
-  "^posts/.+\\.md$",         # 忽略posts下所有.md文件
+  "^posts/?.*/.+\\.md$",         # 忽略posts下、以及子目录中的所有.md文件
   # "(?<!index)\\.md$"         # 只保留index.md
 ]
 
