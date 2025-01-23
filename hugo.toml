@@ -4,6 +4,7 @@ defaultContentLanguage = "zh"
 title = "爱解决"
 theme = "hugo-theme-dream"
 
+# 确保页面生成时更新lastmod时间
 enableGitInfo = true
 enableRobotsTXT = true
 
