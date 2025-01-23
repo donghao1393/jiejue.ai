@@ -16,7 +16,7 @@ uglyURLs = false
   [services.disqus]
     # shortname = "ai-jie-jue"
   [services.googleAnalytics]
-    # ID = "G-"
+    ID = "G-S0KCH9BW4F"
 
 [params]
   # 背景图片
