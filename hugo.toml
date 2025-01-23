@@ -14,7 +14,7 @@ uglyURLs = false
 
 [services]
   [services.disqus]
-    shortname = "ai-jie-jue"
+    # shortname = "ai-jie-jue"
   [services.googleAnalytics]
     # ID = "G-"
 
