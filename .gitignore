@@ -22,4 +22,4 @@ Gemfile.lock
 .hugo_build.lock
 /resources/
 content/posts/*/**
-!content/posts/*/*.md
+!content/posts/*/index.md
