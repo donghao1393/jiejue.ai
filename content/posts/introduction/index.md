@@ -1,9 +1,14 @@
 ---
-title: "简单介绍一下"
+title: "简单介绍一下这个博客"
 date: 2025-01-21
-slug: 'jian-dan-jie-shao'
+slug: 'about-this-blog'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250122211357575.webp"
+tag:
+  - introduction
+  - about
+  - blog
+  - vision
 ---
 ## 梦想，dream
 
