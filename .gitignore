@@ -23,3 +23,8 @@ Gemfile.lock
 /resources/
 content/posts/*/**
 !content/posts/*/index.md
+!content/posts/*/index_quick.md
+!content/posts/*/index_deep.md
+
+# For Claude
+guide4claude.md
