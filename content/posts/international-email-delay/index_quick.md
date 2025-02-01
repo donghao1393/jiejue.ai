@@ -1,6 +1,6 @@
 ---
 title: "为什么国际邮件收发需要很久？"
-date: 2025-01-30
+date: 2025-01-30T19:03:19+04:00
 slug: 'why-international-email-delay-quick'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250130232237397.webp"

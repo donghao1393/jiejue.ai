@@ -1,6 +1,6 @@
 ---
 title: "让CrossOver支持在Mac上玩魔兽争霸3"
-date: 2024-12-12
+date: 2024-12-12T21:35:12+04:00
 slug: 'play-war3-on-mac'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201100422602.webp"

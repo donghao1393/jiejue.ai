@@ -1,6 +1,6 @@
 ---
 title: "掌握 macOS 截图的各种技巧"
-date: 2024-12-13
+date: 2024-12-13T18:48:22+04:00
 slug: 'master-macos-screenshot'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201095905780.webp"

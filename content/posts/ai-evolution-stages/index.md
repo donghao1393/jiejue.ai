@@ -1,6 +1,6 @@
 ---
 title: "从生产力的角度，看AI革命的三个阶段"
-date: 2025-01-31
+date: 2025-01-31T21:11:30+04:00
 slug: 'three-stages-of-ai-revolution'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250131212619159.webp"

@@ -1,6 +1,6 @@
 ---
 title: "改进 tmuxf：完善 tmux 工作台的保存与恢复"
-date: 2025-02-01
+date: 2025-02-01T21:30:04+04:00
 slug: 'tmuxf-capture-commands'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201213744907.webp"

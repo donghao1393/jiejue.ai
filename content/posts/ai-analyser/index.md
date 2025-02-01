@@ -1,6 +1,6 @@
 ---
 title: "使用Claude大模型阅读文档，成为你的专属分析师"
-date: 2025-01-22
+date: 2025-01-22T20:16:55+04:00
 slug: 'ai-analyser'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250122224004599.webp"

@@ -1,6 +1,6 @@
 ---
 title: "解决 Git 中文件末尾换行符引起的差异问题"
-date: 2025-01-29
+date: 2025-01-29T09:11:16+04:00
 slug: 'fix-git-newline'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250129162636424.webp"
