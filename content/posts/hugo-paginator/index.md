@@ -1,6 +1,6 @@
 ---
 title: "如何让Hugo主题的文章列表全部显示在首页"
-date: 2025-02-01
+date: 2025-02-01T10:33:03+04:00
 slug: 'hugo-show-all-posts-in-homepage'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201103520844.webp"

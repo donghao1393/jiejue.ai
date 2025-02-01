@@ -1,6 +1,6 @@
 ---
 title: "深入理解：国际电子邮件的传输机制与延迟原因"
-date: 2025-01-30
+date: 2025-01-30T19:03:19+04:00
 slug: 'international-email-transmission-and-delay-deep'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250130232237397.webp"

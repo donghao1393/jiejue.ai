@@ -102,7 +102,7 @@ uglyURLs = false
 
   [params.experimental]
     jsDate = true
-    jsDateFormat = "yyyy年MM月dd日"
+    jsDateFormat = "yyyy年MM月dd日 HH:mm"
 
 [permalinks]
   posts = '/:year/:month/:slug/'
