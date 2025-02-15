@@ -10,13 +10,20 @@ enableRobotsTXT = true
 
 hasCJKLanguage = true
 
-ignoreFiles = [
-  "^posts[/?.*]*/.+\\.md$",         # 忽略posts下、以及子目录中的所有.md文件
-  # "(?<!index)\\.md$"         # 只保留index.md
-]
+# ignoreFiles = [
+#   "^posts[/?.*]*/.+\\.md$",
+#   # 忽略posts下、以及子目录中的所有.md文件
+#   # 只保留index.md, index_quick.md, index_deep.md
+# ]
 
 # 使用html尾缀
 uglyURLs = false
+
+[module]
+  [[module.mounts]]
+    includeFiles = ["**/index.md", "**/index_quick.md", "**/index_deep.md"]
+    source = 'content'
+    target = 'content'
 
 [services]
   [services.disqus]
