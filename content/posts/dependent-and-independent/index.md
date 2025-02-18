@@ -36,6 +36,8 @@ tag:
 - 从另一个角度看是方形
 - 但物体本身却是一个圆柱体
 
+![cylinder](https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218175344782.webp)
+
 依赖和独立的关系也是如此。它们不是非此即彼的选择，而是同一个事物在不同维度上的表现。
 
 ## 国家关系的启示
