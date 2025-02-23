@@ -26,7 +26,31 @@ tag:
 
 ## 解决方案
 
-### 步骤1：备份重要文件
+### 步骤1：定位相关提交
+
+在开始操作之前，我们需要找到文件首次进入仓库的时间点。Git提供了几种方法来实现这个目标：
+
+1. 使用 `git log` 的 `--follow` 和 `--reverse` 参数：
+   ```bash
+   git log --follow --reverse -- memory-bank/
+   ```
+   这个命令会按时间顺序显示目录的完整历史，包括重命名记录，最早的提交会显示在最前面。
+
+2. 使用 `git rev-list` 直接定位首次提交：
+   ```bash
+   git rev-list --max-parents=0 HEAD -- memory-bank/
+   ```
+   这个命令会直接返回包含该目录的最早提交的哈希值。
+
+3. 使用 `git log` 的 `--diff-filter=A` 参数：
+   ```bash
+   git log --diff-filter=A -- memory-bank/
+   ```
+   这个命令专门过滤出添加（Add）操作的提交，也就是目录首次出现的提交。
+
+通过这些方法，我们可以准确定位到需要修改的提交点，这对于接下来的操作非常重要。
+
+### 步骤2：备份重要文件
 
 首先，我们需要将要保留的文件做个备份，以防在操作过程中出现意外：
 
@@ -36,7 +60,7 @@ cp -r memory-bank/ /tmp/memory-bank_backup
 
 这行命令将`memory-bank`目录复制到临时目录下。为什么要这么做？因为接下来的操作会涉及到Git历史的修改，我们需要确保数据的安全。
 
-### 步骤2：开始时光旅行
+### 步骤3：开始时光旅行
 
 接下来，我们要使用Git的交互式变基（interactive rebase）功能：
 
@@ -51,11 +75,11 @@ git rebase --committer-date-is-author-date -i HEAD~2
 
 当你执行这个命令后，Git会打开一个编辑器，显示最近的两个提交。每个提交前面都有一个`pick`命令。
 
-### 步骤3：编辑提交
+### 步骤4：编辑提交
 
 在编辑器中，找到包含`memory-bank`相关的提交，将其前面的`pick`改为`edit`。这告诉Git在到达这个提交时暂停，让我们可以修改它。保存并关闭编辑器。
 
-### 步骤4：移除文件但保留内容
+### 步骤5：移除文件但保留内容
 
 当Git暂停在目标提交时，执行以下命令：
 
@@ -71,7 +95,7 @@ git rebase --continue
 3. `--no-edit`：保持提交信息不变
 4. `rebase --continue`：继续完成变基操作
 
-### 步骤5：恢复文件
+### 步骤6：恢复文件
 
 变基操作完成后，将备份的文件复制回来：
 
@@ -79,7 +103,7 @@ git rebase --continue
 cp -r /tmp/memory-bank_backup/ memory-bank/
 ```
 
-### 步骤6：防止再次提交
+### 步骤7：防止再次提交
 
 最后，确保将这个目录添加到`.gitignore`文件中：
 
