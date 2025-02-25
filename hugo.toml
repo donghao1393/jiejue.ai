@@ -80,7 +80,7 @@ uglyURLs = false
 
   # options
   stickyNav = true
-  # reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
+  reorderNavItems = ["search", "rss", "posts", "categories", "tags"]
   # collapseNavItems = ["posts", "categories", "tags"]
   # noDefaultSummaryCover = true
   showTableOfContents = true
