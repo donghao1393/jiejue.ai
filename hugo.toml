@@ -133,6 +133,13 @@ uglyURLs = false
     # 单页浏览量后的图标或提示语
     page_pv_post = ''
 
+# Twikoo评论系统
+  [params.twikoo]
+    enabled = true
+    envID = "https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/"
+    region = "ap-east-1"
+    lang = "zh-CN"
+
 [permalinks]
   posts = '/:year/:month/:slug/'
   tags = '/:slug/'
