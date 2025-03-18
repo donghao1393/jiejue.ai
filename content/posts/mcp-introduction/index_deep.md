@@ -124,18 +124,18 @@ MCP采用客户端-服务器架构，主要组件包括：
 ```mermaid
 flowchart LR
     subgraph "本地计算机"
-        Host["主机（集成MCP客户端）\n如Claude Desktop"]
+        Host["主机（集成MCP客户端）<br>如Claude Desktop"]
         S1["MCP服务器A"]
         S2["MCP服务器B"]
         S3["MCP服务器C"]
         Host <-->|"MCP协议"| S1
         Host <-->|"MCP协议"| S2
         Host <-->|"MCP协议"| S3
-        S1 <--> D1[("本地\n数据源A")]
-        S2 <--> D2[("本地\n数据源B")]
+        S1 <--> D1[("本地<br>数据源A")]
+        S2 <--> D2[("本地<br>数据源B")]
     end
     subgraph "互联网"
-        S3 <-->|"Web APIs"| D3[("远程\n服务C")]
+        S3 <-->|"Web APIs"| D3[("远程<br>服务C")]
     end
 ```
 
