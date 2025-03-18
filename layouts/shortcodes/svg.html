@@ -1,0 +1,13 @@
+{{ $svg := .Get 0 }}
+
+<!-- 直接确定路径 -->
+{{ $path := printf "%s" $svg }}
+
+{{ warnf "Reading SVG from: %s" $path }}
+{{ $svgContent := readFile $path }}
+
+{{ if $svgContent }}
+  {{ $svgContent | safeHTML }}
+{{ else }}
+  {{ errorf "SVG文件无法读取：%s" $path }}
+{{ end }}
