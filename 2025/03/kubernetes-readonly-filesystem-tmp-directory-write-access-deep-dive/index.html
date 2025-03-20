@@ -2,7 +2,7 @@
 <link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/2025/03/kubernetes-readonly-filesystem-tmp-directory-write-access-deep-dive/><meta name=author content="董昊"><meta name=description content="在构建Kubernetes安全架构时，容器文件系统的权限管理是一个关键考量点。特别是在实施零信任安全模型的环境中，只读根文件系统（readOnlyRootFilesystem）是一项重要的安全加固措施。然而，这种安全设置往往会与应用程序的功能需求产生冲突，尤其是对临时文件存储的需求。本文将深入探讨如何在保持高安全标准的同时，为容器提供必要的/tmp目录写入权限。
 "><meta name=keywords content><meta name=generator content="Hugo 0.145.0"><meta property="og:url" content="https://jiejue.ai/2025/03/kubernetes-readonly-filesystem-tmp-directory-write-access-deep-dive/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限"><meta property="og:description" content="在构建Kubernetes安全架构时，容器文件系统的权限管理是一个关键考量点。特别是在实施零信任安全模型的环境中，只读根文件系统（readOnlyRootFilesystem）是一项重要的安全加固措施。然而，这种安全设置往往会与应用程序的功能需求产生冲突，尤其是对临时文件存储的需求。本文将深入探讨如何在保持高安全标准的同时，为容器提供必要的/tmp目录写入权限。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-03-06T16:42:50+04:00"><meta property="article:modified_time" content="2025-03-06T16:52:10+04:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限"><meta name=twitter:description content="在构建Kubernetes安全架构时，容器文件系统的权限管理是一个关键考量点。特别是在实施零信任安全模型的环境中，只读根文件系统（readOnlyRootFilesystem）是一项重要的安全加固措施。然而，这种安全设置往往会与应用程序的功能需求产生冲突，尤其是对临时文件存储的需求。本文将深入探讨如何在保持高安全标准的同时，为容器提供必要的/tmp目录写入权限。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js></script></head><body x-data="{
     flip: false,
-  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/posts title=归档><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/tags title=所有标签><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限"><meta itemprop=description content="在构建Kubernetes安全架构时，容器文件系统的权限管理是一个关键考量点。特别是在实施零信任安全模型的环境中，只读根文件系统（readOnlyRootFilesystem）是一项重要的安全加固措施。然而，这种安全设置往往会与应用程序的功能需求产生冲突，尤其是对临时文件存储的需求。本文将深入探讨如何在保持高安全标准的同时，为容器提供必要的/tmp目录写入权限。"><meta itemprop=datePublished content="2025-03-06T16:42:50+04:00"><meta itemprop=dateModified content="2025-03-06T16:52:10+04:00"><meta itemprop=wordCount content="4378"><header><h1 itemprop=headline>深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限</h1><p class=text-sm><span data-format=luxon>2025-03-06T16:42:50+04:00</span>
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/posts title=归档><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/tags title=所有标签><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限"><meta itemprop=description content="在构建Kubernetes安全架构时，容器文件系统的权限管理是一个关键考量点。特别是在实施零信任安全模型的环境中，只读根文件系统（readOnlyRootFilesystem）是一项重要的安全加固措施。然而，这种安全设置往往会与应用程序的功能需求产生冲突，尤其是对临时文件存储的需求。本文将深入探讨如何在保持高安全标准的同时，为容器提供必要的/tmp目录写入权限。"><meta itemprop=datePublished content="2025-03-06T16:42:50+04:00"><meta itemprop=dateModified content="2025-03-06T16:52:10+04:00"><meta itemprop=wordCount content="4428"><header><h1 itemprop=headline>深入剖析：在Kubernetes只读容器中实现/tmp目录写入权限</h1><p class=text-sm><span data-format=luxon>2025-03-06T16:42:50+04:00</span>
 | <span>9分钟阅读</span>
 | <span>更新于
 <span data-format=luxon>2025-03-06T16:52:10+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
@@ -91,73 +91,78 @@
 </span></span><span style=display:flex><span>  <span style=color:#f92672>emptyDir</span>:
 </span></span><span style=display:flex><span>    <span style=color:#f92672>medium</span>: <span style=color:#ae81ff>Memory</span>
 </span></span><span style=display:flex><span>    <span style=color:#f92672>sizeLimit</span>: <span style=color:#ae81ff>20Gi</span>
-</span></span></code></pre></div><h2 id=结论>结论</h2><p>在Kubernetes环境中实现容器安全与应用功能的平衡是一项持续挑战。通过深入理解卷挂载机制与安全上下文，我们可以设计出既满足严格安全要求又不影响应用正常运行的部署配置。</p><p>使用<code>emptyDir</code>卷挂载到<code>/tmp</code>目录是一种简单而有效的解决方案，它允许保持根文件系统只读的同时，为应用程序提供必要的临时文件写入能力。通过正确配置和遵循最佳实践，可以在不牺牲安全性的前提下满足应用的功能需求。</p><p>这种方法不仅适用于<code>/tmp</code>目录，还可以扩展到任何应用程序需要写入的目录，为构建安全、稳定的Kubernetes环境提供了可行路径。</p><h2 id=需要配图的位置>需要配图的位置</h2><ol><li>在"容器安全与临时存储的平衡挑战"部分后：需要一张展示容器安全层次与文件系统权限关系的图表</li><li>在"深入理解Kubernetes卷与安全上下文"部分：需要一张展示卷挂载与容器文件系统关系的技术图解</li><li>在"安全影响分析"部分前：需要一张对比实施前后安全状态的对比图</li></ol><h2 id=mermaid图解>Mermaid图解</h2><h3 id=卷挂载与只读文件系统的关系>卷挂载与只读文件系统的关系</h3><pre class=mermaid>graph TD
-    subgraph "Kubernetes Node"
-        subgraph "Pod" 
-            subgraph "Container"
+</span></span></code></pre></div><h2 id=结论>结论</h2><p>在Kubernetes环境中实现容器安全与应用功能的平衡是一项持续挑战。通过深入理解卷挂载机制与安全上下文，我们可以设计出既满足严格安全要求又不影响应用正常运行的部署配置。</p><p>使用<code>emptyDir</code>卷挂载到<code>/tmp</code>目录是一种简单而有效的解决方案，它允许保持根文件系统只读的同时，为应用程序提供必要的临时文件写入能力。通过正确配置和遵循最佳实践，可以在不牺牲安全性的前提下满足应用的功能需求。</p><p>这种方法不仅适用于<code>/tmp</code>目录，还可以扩展到任何应用程序需要写入的目录，为构建安全、稳定的Kubernetes环境提供了可行路径。</p><h2 id=需要配图的位置>需要配图的位置</h2><ol><li>在"容器安全与临时存储的平衡挑战"部分后：需要一张展示容器安全层次与文件系统权限关系的图表</li><li>在"深入理解Kubernetes卷与安全上下文"部分：需要一张展示卷挂载与容器文件系统关系的技术图解</li><li>在"安全影响分析"部分前：需要一张对比实施前后安全状态的对比图</li></ol><h2 id=mermaid图解>Mermaid图解</h2><h3 id=卷挂载与只读文件系统的关系>卷挂载与只读文件系统的关系</h3><pre class=mermaid>
+  graph TD
+    subgraph &#34;Kubernetes Node&#34;
+        subgraph &#34;Pod&#34; 
+            subgraph &#34;Container&#34;
                 A[应用进程]
                 B[根文件系统\n/]
                 C[临时目录\n/tmp]
                 
-                A -->|读取| B
-                A -->|读写| C
+                A --&gt;|读取| B
+                A --&gt;|读写| C
                 
                 style B fill:#ffdddd,stroke:#cc0000,stroke-width:2px
                 style C fill:#ddffdd,stroke:#00cc00,stroke-width:2px
             end
             
             D[emptyDir Volume]
-            C -.->|挂载| D
+            C -.-&gt;|挂载| D
         end
         
         E[节点文件系统]
-        D -.->|创建于| E
+        D -.-&gt;|创建于| E
     end
     
-    F[容器镜像] -->|只读层| B
+    F[容器镜像] --&gt;|只读层| B
     
     style A fill:#d0e0ff,stroke:#0066cc,stroke-width:2px
     style D fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
     style E fill:#e0e0e0,stroke:#9e9e9e,stroke-width:2px
-    style F fill:#bbdefb,stroke:#1976d2,stroke-width:2px</pre><h3 id=安全上下文与卷的执行顺序>安全上下文与卷的执行顺序</h3><pre class=mermaid>sequenceDiagram
+    style F fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+</pre><h3 id=安全上下文与卷的执行顺序>安全上下文与卷的执行顺序</h3><pre class=mermaid>
+  sequenceDiagram
     participant API as Kubernetes API
     participant Kubelet
     participant CRI as 容器运行时
     participant FS as 文件系统
     
-    API->>Kubelet: 创建Pod请求
-    Kubelet->>CRI: 创建容器请求
-    CRI->>FS: 准备容器根文件系统
-    CRI->>FS: 应用readOnlyRootFilesystem
+    API-&gt;&gt;Kubelet: 创建Pod请求
+    Kubelet-&gt;&gt;CRI: 创建容器请求
+    CRI-&gt;&gt;FS: 准备容器根文件系统
+    CRI-&gt;&gt;FS: 应用readOnlyRootFilesystem
     Note over FS: 根文件系统变为只读
-    CRI->>FS: 创建emptyDir卷
-    CRI->>FS: 挂载emptyDir卷到/tmp
+    CRI-&gt;&gt;FS: 创建emptyDir卷
+    CRI-&gt;&gt;FS: 挂载emptyDir卷到/tmp
     Note over FS: /tmp目录可读写
-    CRI->>Kubelet: 容器创建完成
-    Kubelet->>API: Pod运行状态更新</pre><h3 id=安全增强措施层次>安全增强措施层次</h3><pre class=mermaid>graph LR
-    A[基础安全层] --> B[容器安全层] --> C[运行时安全层] --> D[应用安全层]
+    CRI-&gt;&gt;Kubelet: 容器创建完成
+    Kubelet-&gt;&gt;API: Pod运行状态更新
+</pre><h3 id=安全增强措施层次>安全增强措施层次</h3><pre class=mermaid>
+  graph LR
+    A[基础安全层] --&gt; B[容器安全层] --&gt; C[运行时安全层] --&gt; D[应用安全层]
     
-    subgraph "基础安全层"
+    subgraph &#34;基础安全层&#34;
         A1[节点强化]
         A2[网络策略]
         A3[加密存储]
     end
     
-    subgraph "容器安全层"
+    subgraph &#34;容器安全层&#34;
         B1[镜像扫描]
         B2[最小基础镜像]
         B3[只读根文件系统]
         B4[非root用户]
     end
     
-    subgraph "运行时安全层"
+    subgraph &#34;运行时安全层&#34;
         C1[Pod安全标准]
         C2[准入控制]
         C3[运行时沙箱]
         C4[特定目录写入权限]
     end
     
-    subgraph "应用安全层"
+    subgraph &#34;应用安全层&#34;
         D1[安全编码实践]
         D2[依赖管理]
         D3[RBAC权限控制]
@@ -167,23 +172,24 @@
     style B3 fill:#ffdddd,stroke:#cc0000,stroke-width:2px
     style C4 fill:#ddffdd,stroke:#00cc00,stroke-width:2px
     
-    B3 -.->|平衡| C4</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a class="group btn btn-outline" href=/2025/03/git-undo-commands-guide/ title=Git补救指南：如何优雅地撤销错误提交><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">上一页</span>
-<span class="max-w-48 truncate">Git补救指南：如何优雅地撤销错误提交</span></div></a><a class="group btn btn-outline" href=/2025/03/git-lfs-best-practices/ title="Git LFS：优雅管理大文件的最佳实践"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 group-hover:text-neutral-content/60 text-xs font-normal">下一页</span>
+    B3 -.-&gt;|平衡| C4
+</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/2025/03/git-undo-commands-guide/ title=Git补救指南：如何优雅地撤销错误提交><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">上一页</span>
+<span class="max-w-48 truncate">Git补救指南：如何优雅地撤销错误提交</span></div></a><a role=button class="btn btn-outline h-12" href=/2025/03/git-lfs-best-practices/ title="Git LFS：优雅管理大文件的最佳实践"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
 <span class="max-w-48 truncate">Git LFS：优雅管理大文件的最佳实践</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/2025/03/kubernetes-readonly-filesystem-tmp-directory-write-access-deep-dive/",lang:"zh-CN"})</script></article></section></article></div><div class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#容器安全与临时存储的平衡挑战>容器安全与临时存储的平衡挑战</a></li><li><a href=#深入理解kubernetes卷与安全上下文>深入理解Kubernetes卷与安全上下文</a><ul><li><a href=#卷的工作原理>卷的工作原理</a></li><li><a href=#安全上下文的执行机制>安全上下文的执行机制</a></li></ul></li><li><a href=#解决方案使用emptydir卷实现安全与功能的平衡>解决方案：使用emptyDir卷实现安全与功能的平衡</a><ul><li><a href=#详细配置示例与解析>详细配置示例与解析</a></li><li><a href=#emptydir的高级配置选项>emptyDir的高级配置选项</a></li></ul></li><li><a href=#安全影响分析>安全影响分析</a><ul><li><a href=#安全增强点>安全增强点</a></li><li><a href=#潜在安全注意点>潜在安全注意点</a></li></ul></li><li><a href=#实施最佳实践>实施最佳实践</a><ul><li><a href=#生产环境配置建议>生产环境配置建议</a></li><li><a href=#审计与合规>审计与合规</a></li></ul></li><li><a href=#常见应用案例分析>常见应用案例分析</a><ul><li><a href=#java应用>Java应用</a></li><li><a href=#web服务器>Web服务器</a></li><li><a href=#数据库容器>数据库容器</a></li></ul></li><li><a href=#未来发展与ai应用展望>未来发展与AI应用展望</a><ul><li><a href=#kubernetes安全发展趋势>Kubernetes安全发展趋势</a></li><li><a href=#ai应用特殊需求>AI应用特殊需求</a></li></ul></li><li><a href=#结论>结论</a></li><li><a href=#需要配图的位置>需要配图的位置</a></li><li><a href=#mermaid图解>Mermaid图解</a><ul><li><a href=#卷挂载与只读文件系统的关系>卷挂载与只读文件系统的关系</a></li><li><a href=#安全上下文与卷的执行顺序>安全上下文与卷的执行顺序</a></li><li><a href=#安全增强措施层次>安全增强措施层次</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
 本站总访问量 <span id=busuanzi_value_site_pv></span>
 </span>&nbsp;|&nbsp;
 <span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
 本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
-    { name: 'moon', status: 'y' },
     { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
     { name: 'desktop', status: 'auto' }
   ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
 本站总访问量 <span id=busuanzi_value_site_pv></span>
 </span>&nbsp;|&nbsp;
 <span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
 本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
-    { name: 'moon', status: 'y' },
     { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
     { name: 'desktop', status: 'auto' }
   ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script type=module>
       import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
