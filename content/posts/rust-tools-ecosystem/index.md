@@ -29,6 +29,20 @@ Rust写的工具通常具有几个显著的优势：
 
 ## 终端增强工具
 
+### Shell与命令环境
+
+#### Fish Shell - 用户友好的命令行shell
+
+[Fish](https://github.com/fish-shell/fish-shell) 是一个用Rust编写的智能且用户友好的命令行shell，具有语法高亮、自动补全和智能建议等特性，使终端体验更加现代化。
+
+关键特性：
+- 开箱即用的语法高亮
+- 基于历史的智能自动补全
+- 简单易用的脚本语法
+- 内置帮助系统和丰富的文档
+
+[了解Fish Shell的安全编程]({{< ref "/posts/fish-shell-safety/index.md" >}} "Fish Shell 的安全编程：从文件重命名说起")
+
 ### Shell与命令历史
 
 #### Atuin - 智能Shell历史管理
@@ -147,6 +161,22 @@ qsv select name,age data.csv
 grex "user@example.com" "admin@server.org"
 ^(?:admin@server\.org|user@example\.com)$
 ```
+
+## 编程语言工具
+
+### Python工具
+
+#### uv - 超快的Python包管理器
+
+[uv](https://github.com/astral-sh/uv) 是一个用Rust编写的极快的Python包管理器和环境管理工具，可以作为pip和venv的替代品。
+
+关键特性：
+- 比pip快10-100倍的包安装速度
+- 兼容pip的命令行接口
+- 内置虚拟环境管理
+- 可靠的依赖解析
+
+[uv快速入门指南]({{< ref "/posts/python-uv/index_quick.md" >}} "告别繁琐：uv 让 Python 环境管理更简单高效") | [深入理解uv的技术原理]({{< ref "/posts/python-uv/index_deep.md" >}} "uv：重新定义 Python 包管理与环境隔离的未来")
 
 ## 开发工具
 
