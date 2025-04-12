@@ -1,74 +1,69 @@
 <!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>如何解决电脑内存莫名被吃光的问题 | 爱解决</title>
 <link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/><meta name=author content="董昊"><meta name=description content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。
-'><meta name=keywords content><meta name=generator content="Hugo 0.145.0"><meta property="og:url" content="https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="如何解决电脑内存莫名被吃光的问题"><meta property="og:description" content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-02-25T00:26:22+04:00"><meta property="article:modified_time" content="2025-02-25T00:34:21+04:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="如何解决电脑内存莫名被吃光的问题"><meta name=twitter:description content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。'><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js></script></head><body x-data="{
+'><meta name=keywords content><meta name=generator content="Hugo 0.146.3"><meta property="og:url" content="https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="如何解决电脑内存莫名被吃光的问题"><meta property="og:description" content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-02-25T00:26:22+04:00"><meta property="article:modified_time" content="2025-02-25T00:34:21+04:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="如何解决电脑内存莫名被吃光的问题"><meta name=twitter:description content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。'><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js></script></head><body x-data="{
     flip: false,
   }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/posts title=归档><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/tags title=所有标签><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="如何解决电脑内存莫名被吃光的问题"><meta itemprop=description content='作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。'><meta itemprop=datePublished content="2025-02-25T00:26:22+04:00"><meta itemprop=dateModified content="2025-02-25T00:34:21+04:00"><meta itemprop=wordCount content="1846"><header><h1 itemprop=headline>如何解决电脑内存莫名被吃光的问题</h1><p class=text-sm><span data-format=luxon>2025-02-25T00:26:22+04:00</span>
 | <span>4分钟阅读</span>
 | <span>更新于
 <span data-format=luxon>2025-02-25T00:34:21+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
-<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e7%94%b5%e8%84%91%e5%86%85%e5%ad%98%e8%8e%ab%e5%90%8d%e8%a2%ab%e5%90%83%e5%85%89%e7%9a%84%e9%97%ae%e9%a2%98&amp;url=https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e7%94%b5%e8%84%91%e5%86%85%e5%ad%98%e8%8e%ab%e5%90%8d%e8%a2%ab%e5%90%83%e5%85%89%e7%9a%84%e9%97%ae%e9%a2%98%20https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225002834946.webp alt=如何解决电脑内存莫名被吃光的问题><p>作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。</p><h2 id=发现问题我的电脑怎么这么卡>发现问题：我的电脑怎么这么卡？</h2><p>小李是一名普通的财务人员，最近他发现自己的电脑变得异常缓慢。每当他需要打开Excel处理财务报表时，电脑就像老人走路一样龟速，甚至有时会完全卡住。小李只好向IT部门求助，但得到的回应往往是：&ldquo;重启一下电脑试试看。&rdquo;</p><p>重启确实能暂时缓解问题，但很快问题又会再次出现。这是为什么呢？</p><h2 id=调查过程寻找记忆的小偷>调查过程：寻找记忆的小偷</h2><p>要找出是什么程序在偷偷占用内存，我们可以使用系统自带的工具来查看。</p><p>在MacOS系统上，我们可以用"活动监视器"这个工具：</p><p><img src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225003017057.webp alt="活动监视器界面示意图 - 显示各个进程占用的内存"></p><p>通过观察，我们发现一个叫"某安全软件"的进程占用了惊人的32GB内存！对于一台16GB内存的电脑来说，这意味着所有内存都被占用，甚至还要使用硬盘空间来模拟内存（这叫做"交换内存"），这就是为什么电脑会变得如此缓慢。</p><p>为了进一步确认问题，我们可以使用命令行工具检查：</p><pre tabindex=0><code>$ top -o MEM
-Processes: 597 total, 6 running, 591 sleeping, 3345 threads            15:05:52
-Load Avg: 4.14, 6.03, 7.50  CPU usage: 16.31% user, 12.21% sys, 71.46% idle
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e7%94%b5%e8%84%91%e5%86%85%e5%ad%98%e8%8e%ab%e5%90%8d%e8%a2%ab%e5%90%83%e5%85%89%e7%9a%84%e9%97%ae%e9%a2%98&amp;url=https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e7%94%b5%e8%84%91%e5%86%85%e5%ad%98%e8%8e%ab%e5%90%8d%e8%a2%ab%e5%90%83%e5%85%89%e7%9a%84%e9%97%ae%e9%a2%98%20https://jiejue.ai/2025/02/how-to-fix-computer-memory-issues/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225002834946.webp alt=如何解决电脑内存莫名被吃光的问题><p>作为一名普通办公室职员，你是否曾遇到过电脑突然变得卡顿不堪，甚至无法正常打开文件的情况？这可能是因为你的电脑内存被某个程序悄悄"吃光"了！今天，我就和大家分享一次我解决大型企业安全软件导致内存泄漏问题的经历。</p><h2 id=发现问题我的电脑怎么这么卡>发现问题：我的电脑怎么这么卡？</h2><p>小李是一名普通的财务人员，最近他发现自己的电脑变得异常缓慢。每当他需要打开Excel处理财务报表时，电脑就像老人走路一样龟速，甚至有时会完全卡住。小李只好向IT部门求助，但得到的回应往往是：&ldquo;重启一下电脑试试看。&rdquo;</p><p>重启确实能暂时缓解问题，但很快问题又会再次出现。这是为什么呢？</p><h2 id=调查过程寻找记忆的小偷>调查过程：寻找记忆的小偷</h2><p>要找出是什么程序在偷偷占用内存，我们可以使用系统自带的工具来查看。</p><p>在MacOS系统上，我们可以用"活动监视器"这个工具：</p><p><img src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225003017057.webp alt="活动监视器界面示意图 - 显示各个进程占用的内存"></p><p>通过观察，我们发现一个叫"某安全软件"的进程占用了惊人的32GB内存！对于一台16GB内存的电脑来说，这意味着所有内存都被占用，甚至还要使用硬盘空间来模拟内存（这叫做"交换内存"），这就是为什么电脑会变得如此缓慢。</p><p>为了进一步确认问题，我们可以使用命令行工具检查：</p><p class=mathjax>$ top -o MEM
+Processes: 597 total, 6 running, 591 sleeping, 3345 threads 15:05:52
+Load Avg: 4.14, 6.03, 7.50 CPU usage: 16.31% user, 12.21% sys, 71.46% idle
 SharedLibs: 283M resident, 48M data, 21M linkedit.
 MemRegions: 569011 total, 5009M resident, 375M private, 1518M shared.
 PhysMem: 15G used (4832M wired, 2441M compressor), 133M unused.
 VM: 244T vsize, 4915M framework vsize, 707542034(0) swapins, 725738737(0) swapou
 Networks: packets: 321637686/182G in, 373742644/194G out.
 Disks: 495571575/15T read, 285149199/12T written.
-
-PID    COMMAND      %CPU TIME     #TH    #WQ  #PORT MEM    PURG   CMPRS PGRP
-37458  com.beyondtr 6.9  02:18:52 8      7    54    32G+   0B     31G   37458
-0      kernel_task  11.9 67:01:42 560/10 0    0     2316M+ 0B     0B    0
-1174   WindowServer 32.2 40:36:52 20     5    7198  1308M+ 13M    760M  1174
-1540   com.crowdstr 0.7  01:56:29 6      5    118   568M   0B     495M  1540
-44045  OrbStack Hel 0.4  01:50.23 72     2    235   554M   0B     316M  44045
-2573   iTerm2       8.4  14:01:35 10/2   6    484   408M   0B     117M  2573
-$ ps aux | awk &#39;{print $4&#34;\t&#34;$11}&#39; | sort -n | tail -n 20
-0.5    npm
-0.5    npm
-0.5    npm
-0.5    npm
-0.5    npm
-0.5    npm
-0.5    npm
-0.6    /Applications/ChatGPT.app/Contents/MacOS/ChatGPT
-0.6    /Applications/Claude.app/Contents/Frameworks/Claude
-0.7    /Applications/Claude.app/Contents/Frameworks/Claude
-0.7    /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
-0.8    /Library/Application
-1.0    /Library/Application
-1.0    /Library/SystemExtensions/2EA82EEB-3E89-4B87-8DE2-B9C8E55AE16A/com.beyondtrust.endpointsecurity.systemextension/Contents/MacOS/com.beyondtrust.endpointsecurity
-1.2    /Applications/Claude.app/Contents/MacOS/Claude
-1.3    /Applications/Claude.app/Contents/Frameworks/Claude
-1.3    /Applications/iTerm.app/Contents/MacOS/iTerm2
-1.3    /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer
-1.6    /Applications/OrbStack.app/Contents/Frameworks/OrbStack
-5.6    /Applications/Claude.app/Contents/Frameworks/Claude
-</code></pre><p>这个命令会按内存使用量排序显示所有进程。果然，名为"某安全软件"的进程位居榜首，占用了32GB内存！</p><h2 id=真相大白所谓的高端安全软件其实是问题根源>真相大白：所谓的"高端安全软件"其实是问题根源</h2><p>让人震惊的是，这个内存吃货竟然是公司花重金购买的一款知名欧美安全软件。这款名叫BeyondTrust的软件号称能保护企业免受各种网络威胁，但实际上它自身却存在严重的内存泄漏问题。</p><p>内存泄漏是什么意思？简单来说，就是软件申请使用内存后忘记归还，就像你借了图书馆的书却永远不还一样。久而久之，可用内存越来越少，电脑自然就变慢了。</p><h2 id=临时解决方案终止进程>临时解决方案：终止进程</h2><p>既然知道了问题所在，解决起来就相对简单了。我们可以暂时终止这个进程：</p><pre tabindex=0><code>$ ps aux | grep -i beyond
-root              1907  18.0  0.1 412056736  14560   ??  Ss   13Jan25 1819:04.08 /Library/PrivilegedHelperTools/com.beyondtrust.interrogator
-root             37458  11.1  1.2 494362512 200192   ??  Ss   Tue05PM 139:20.98 /Library/SystemExtensions/2EA82EEB-3E89-4B87-8DE2-B9C8E55AE16A/com.beyondtrust.endpointsecurity.systemextension/Contents/MacOS/com.beyondtrust.endpointsecurity
+PID COMMAND %CPU TIME #TH #WQ #PORT MEM PURG CMPRS PGRP
+37458 com.beyondtr 6.9 02:18:52 8 7 54 32G+ 0B 31G 37458
+0 kernel_task 11.9 67:01:42 560/10 0 0 2316M+ 0B 0B 0
+1174 WindowServer 32.2 40:36:52 20 5 7198 1308M+ 13M 760M 1174
+1540 com.crowdstr 0.7 01:56:29 6 5 118 568M 0B 495M 1540
+44045 OrbStack Hel 0.4 01:50.23 72 2 235 554M 0B 316M 44045
+2573 iTerm2 8.4 14:01:35 10/2 6 484 408M 0B 117M 2573
+$ ps aux | awk '{print $4"\t"$11}' | sort -n | tail -n 20
+0.5 npm
+0.5 npm
+0.5 npm
+0.5 npm
+0.5 npm
+0.5 npm
+0.5 npm
+0.6 /Applications/ChatGPT.app/Contents/MacOS/ChatGPT
+0.6 /Applications/Claude.app/Contents/Frameworks/Claude
+0.7 /Applications/Claude.app/Contents/Frameworks/Claude
+0.7 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+0.8 /Library/Application
+1.0 /Library/Application
+1.0 /Library/SystemExtensions/2EA82EEB-3E89-4B87-8DE2-B9C8E55AE16A/com.beyondtrust.endpointsecurity.systemextension/Contents/MacOS/com.beyondtrust.endpointsecurity
+1.2 /Applications/Claude.app/Contents/MacOS/Claude
+1.3 /Applications/Claude.app/Contents/Frameworks/Claude
+1.3 /Applications/iTerm.app/Contents/MacOS/iTerm2
+1.3 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer
+1.6 /Applications/OrbStack.app/Contents/Frameworks/OrbStack
+5.6 /Applications/Claude.app/Contents/Frameworks/Claude</p><p>这个命令会按内存使用量排序显示所有进程。果然，名为"某安全软件"的进程位居榜首，占用了32GB内存！</p><h2 id=真相大白所谓的高端安全软件其实是问题根源>真相大白：所谓的"高端安全软件"其实是问题根源</h2><p>让人震惊的是，这个内存吃货竟然是公司花重金购买的一款知名欧美安全软件。这款名叫BeyondTrust的软件号称能保护企业免受各种网络威胁，但实际上它自身却存在严重的内存泄漏问题。</p><p>内存泄漏是什么意思？简单来说，就是软件申请使用内存后忘记归还，就像你借了图书馆的书却永远不还一样。久而久之，可用内存越来越少，电脑自然就变慢了。</p><h2 id=临时解决方案终止进程>临时解决方案：终止进程</h2><p>既然知道了问题所在，解决起来就相对简单了。我们可以暂时终止这个进程：</p><p class=mathjax>$ ps aux | grep -i beyond
+root 1907 18.0 0.1 412056736 14560 ?? Ss 13Jan25 1819:04.08 /Library/PrivilegedHelperTools/com.beyondtrust.interrogator
+root 37458 11.1 1.2 494362512 200192 ?? Ss Tue05PM 139:20.98 /Library/SystemExtensions/2EA82EEB-3E89-4B87-8DE2-B9C8E55AE16A/com.beyondtrust.endpointsecurity.systemextension/Contents/MacOS/com.beyondtrust.endpointsecurity
 $ kill 1907
 kill: sending signal to 1907 failed: Permission denied
 $ sudo kill 1907
 Password:
 $ top -o MEM
-Processes: 605 total, 5 running, 600 sleeping, 3400 threads            15:16:40
-Load Avg: 4.73, 4.99, 6.03  CPU usage: 20.0% user, 13.75% sys, 66.25% idle
+Processes: 605 total, 5 running, 600 sleeping, 3400 threads 15:16:40
+Load Avg: 4.73, 4.99, 6.03 CPU usage: 20.0% user, 13.75% sys, 66.25% idle
 SharedLibs: 343M resident, 64M data, 26M linkedit.
 MemRegions: 173764 total, 4391M resident, 352M private, 1810M shared.
 PhysMem: 14G used (4854M wired, 2004M compressor), 700M unused.
 VM: 247T vsize, 4915M framework vsize, 707806926(0) swapins, 725844910(0) swapou
 Networks: packets: 321838795/182G in, 373959772/194G out.
 Disks: 495698040/15T read, 285221315/12T written.
-
-PID    COMMAND      %CPU TIME     #TH    #WQ  #PORT MEM    PURG   CMPRS  PGRP
-0      kernel_task  12.9 67:02:59 560/10 0    0     2316M+ 0B     0B     0
-1174   WindowServer 36.3 40:39:42 21/1   5    7204- 1307M+ 17M+   814M   1174
-44045  OrbStack Hel 0.6  01:55.72 72     2    235   564M+  0B     313M-  44045
-93665  Claude Helpe 6.5  01:49.93 33     1    409   455M   0B     25M    93037
-2573   iTerm2       7.0  14:02:34 10     6    479   413M   0B     122M   2573
-</code></pre><p>输入密码后，问题进程被终止，内存立即回到正常水平！电脑也恢复了正常速度，可以流畅地工作了。</p><h2 id=再深一步检查其他系统组件>再深一步：检查其他系统组件</h2><p>解决了主要问题后，我们注意到系统的"窗口服务"组件也占用了不少内存。不过这个组件是系统核心部分，负责显示和管理所有窗口，所以一定程度的内存占用是正常的。</p><p>如果你发现这个组件占用过多内存，可以尝试：</p><ol><li>减少打开的窗口和标签页数量</li><li>重启Dock（程序坞）来刷新窗口管理<pre tabindex=0><code>$ killall Dock
-</code></pre></li></ol><p>这个方法比完全重启电脑更快，而且同样有效。</p><h2 id=反思名牌不等于高质量>反思：名牌不等于高质量</h2><p>这次经历让我们不得不反思：为什么这样一款知名的安全软件会存在如此严重的问题？</p><p>在软件世界里，有时候我们太容易被欧美大品牌的光环所迷惑，认为他们的产品一定是最好的。但事实上，任何软件都可能存在问题，我们需要用实际体验来评判其质量。</p><p>大品牌的软件出现如此明显的内存泄漏问题，且长期不修复，这不仅影响用户体验，还可能导致其他安全隐患。毕竟，一个连自己内存都管理不好的安全软件，如何能可靠地保护我们的系统安全呢？</p><h2 id=总结擦亮眼睛理性选择>总结：擦亮眼睛，理性选择</h2><p>通过这次经历，我们学到了几点重要启示：</p><ol><li>当电脑变慢时，可能是某个程序占用了过多内存</li><li>使用活动监视器或top命令可以找出内存占用大户</li><li>有时候，临时终止问题进程是解决问题的有效方法</li><li>不要盲目相信品牌光环，应该通过实际体验评判软件质量</li></ol><p>希望这篇文章能帮助你在遇到类似问题时，不再束手无策。记住，即使是最普通的用户，也可以通过简单的工具和方法解决看似复杂的计算机问题。</p><p>你有过类似的经历吗？欢迎在评论区分享你的故事和经验！</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/2025/02/android-package-naming-guide/ title=安卓应用包名设计与发布规则全解析><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">上一页</span>
+PID COMMAND %CPU TIME #TH #WQ #PORT MEM PURG CMPRS PGRP
+0 kernel_task 12.9 67:02:59 560/10 0 0 2316M+ 0B 0B 0
+1174 WindowServer 36.3 40:39:42 21/1 5 7204- 1307M+ 17M+ 814M 1174
+44045 OrbStack Hel 0.6 01:55.72 72 2 235 564M+ 0B 313M- 44045
+93665 Claude Helpe 6.5 01:49.93 33 1 409 455M 0B 25M 93037
+2573 iTerm2 7.0 14:02:34 10 6 479 413M 0B 122M 2573</p><p>输入密码后，问题进程被终止，内存立即回到正常水平！电脑也恢复了正常速度，可以流畅地工作了。</p><h2 id=再深一步检查其他系统组件>再深一步：检查其他系统组件</h2><p>解决了主要问题后，我们注意到系统的"窗口服务"组件也占用了不少内存。不过这个组件是系统核心部分，负责显示和管理所有窗口，所以一定程度的内存占用是正常的。</p><p>如果你发现这个组件占用过多内存，可以尝试：</p><ol><li>减少打开的窗口和标签页数量</li><li>重启Dock（程序坞）来刷新窗口管理<p class=mathjax>$ killall Dock</p></li></ol><p>这个方法比完全重启电脑更快，而且同样有效。</p><h2 id=反思名牌不等于高质量>反思：名牌不等于高质量</h2><p>这次经历让我们不得不反思：为什么这样一款知名的安全软件会存在如此严重的问题？</p><p>在软件世界里，有时候我们太容易被欧美大品牌的光环所迷惑，认为他们的产品一定是最好的。但事实上，任何软件都可能存在问题，我们需要用实际体验来评判其质量。</p><p>大品牌的软件出现如此明显的内存泄漏问题，且长期不修复，这不仅影响用户体验，还可能导致其他安全隐患。毕竟，一个连自己内存都管理不好的安全软件，如何能可靠地保护我们的系统安全呢？</p><h2 id=总结擦亮眼睛理性选择>总结：擦亮眼睛，理性选择</h2><p>通过这次经历，我们学到了几点重要启示：</p><ol><li>当电脑变慢时，可能是某个程序占用了过多内存</li><li>使用活动监视器或top命令可以找出内存占用大户</li><li>有时候，临时终止问题进程是解决问题的有效方法</li><li>不要盲目相信品牌光环，应该通过实际体验评判软件质量</li></ol><p>希望这篇文章能帮助你在遇到类似问题时，不再束手无策。记住，即使是最普通的用户，也可以通过简单的工具和方法解决看似复杂的计算机问题。</p><p>你有过类似的经历吗？欢迎在评论区分享你的故事和经验！</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/2025/02/android-package-naming-guide/ title=安卓应用包名设计与发布规则全解析><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">上一页</span>
 <span class="max-w-48 truncate">安卓应用包名设计与发布规则全解析</span></div></a><a role=button class="btn btn-outline h-12" href=/2025/02/mongodb-compass-azure-cosmos-compatibility/ title="解决 MongoDB Compass 连接 Azure Cosmos DB 的版本兼容性问题"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
 <span class="max-w-48 truncate">解决 MongoDB Compass 连接 Azure Cosmos DB 的版本兼容性问题</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/2025/02/how-to-fix-computer-memory-issues/",lang:"zh-CN"})</script></article></section></article></div><div class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#发现问题我的电脑怎么这么卡>发现问题：我的电脑怎么这么卡？</a></li><li><a href=#调查过程寻找记忆的小偷>调查过程：寻找记忆的小偷</a></li><li><a href=#真相大白所谓的高端安全软件其实是问题根源>真相大白：所谓的"高端安全软件"其实是问题根源</a></li><li><a href=#临时解决方案终止进程>临时解决方案：终止进程</a></li><li><a href=#再深一步检查其他系统组件>再深一步：检查其他系统组件</a></li><li><a href=#反思名牌不等于高质量>反思：名牌不等于高质量</a></li><li><a href=#总结擦亮眼睛理性选择>总结：擦亮眼睛，理性选择</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
 本站总访问量 <span id=busuanzi_value_site_pv></span>
@@ -92,4 +87,4 @@ PID    COMMAND      %CPU TIME     #TH    #WQ  #PORT MEM    PURG   CMPRS  PGRP
         background: 'oklch(var(--b1))',
         margin: 24,
       })
-    </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js></script><script nomodule src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js></script></body></html>
+    </script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{displayMath:[["\\[","\\]"],["$$","$$"]],inlineMath:[["\\(","\\)"]]}}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js></script><script nomodule src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js></script></body></html>
