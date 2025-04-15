@@ -21,7 +21,7 @@ uglyURLs = false
 
 [module]
   [[module.mounts]]
-    includeFiles = ["search/_index.md", "**/index.md", "**/index_quick.md", "**/index_deep.md"]
+    includeFiles = ["search/_index.md", "**/index.md", "**/index_**.md"]
     source = 'content'
     target = 'content'
 
