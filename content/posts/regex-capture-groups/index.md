@@ -210,6 +210,7 @@ graph LR
 1. [Regex101](https://regex101.com/) - 实时测试和解释正则表达式
 2. [RegExr](https://regexr.com/) - 交互式正则学习和测试工具
 3. [Regexper](https://regexper.com/) - 将正则表达式转换为可视图表
+4. [Pyrexp](https://pythonium.net/regex) - 测试和可视化正则表达式
 
 ## 小结
 
