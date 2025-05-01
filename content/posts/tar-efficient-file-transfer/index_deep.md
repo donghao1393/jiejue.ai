@@ -4,7 +4,7 @@ date: 2025-03-27T23:10:12+04:00
 slug: 'deep-dive-efficient-file-transfer-with-tar'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327231241540.webp"
-tag:
+tags:
   - 命令行技巧
   - 文件传输
   - 系统原理

@@ -4,7 +4,7 @@ date: 2025-02-14T00:51:50+04:00
 slug: 'future-car-as-platform'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250214010323340.webp"
-tag:
+tags:
   - 未来汽车
   - 智能驾驶
   - 生活方式

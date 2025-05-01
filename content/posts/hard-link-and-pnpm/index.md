@@ -4,7 +4,7 @@ date: 2025-02-16T02:08:22+04:00
 slug: 'understanding-hard-link-and-pnpm-storage'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250216020817544.webp"
-tag:
+tags:
   - 前端开发
   - Node.js
   - pnpm

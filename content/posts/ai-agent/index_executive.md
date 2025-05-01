@@ -4,7 +4,7 @@ date: 2025-04-15T01:03:42+04:00
 slug: 'ai-agents-strategic-guide-for-executives-specialization-and-business-transformation'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415011500090.webp"
-tag:
+tags:
   - 人工智能
   - AI Agent
   - 商业战略

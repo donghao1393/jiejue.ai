@@ -4,7 +4,7 @@ date: 2025-03-30T19:12:37+04:00
 slug: 'smart-photo-deduplication-with-fclones'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330191346982.webp"
-tag:
+tags:
   - 效率工具
   - 文件管理
   - 照片整理

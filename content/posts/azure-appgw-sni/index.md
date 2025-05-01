@@ -4,7 +4,7 @@ date: 2025-03-18T20:59:56+04:00
 slug: 'solving-connection-reset-with-sni-in-azure-application-gateway'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318210156389.webp"
-tag:
+tags:
   - Azure
   - 网络
   - 应用网关

@@ -4,7 +4,7 @@ date: 2025-03-21T18:53:50+04:00
 slug: 'kubernetes-ingress-conflicts-troubleshooting'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250321185459888.webp"
-tag:
+tags:
   - Kubernetes
   - 网络
   - 问题排查

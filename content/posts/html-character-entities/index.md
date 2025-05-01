@@ -4,7 +4,7 @@ date: 2025-03-19T18:56:18+04:00
 slug: 'mastering-html-xml-character-entities'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250319185845640.webp"
-tag:
+tags:
   - 前端开发
   - HTML
   - XML

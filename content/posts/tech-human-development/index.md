@@ -4,7 +4,7 @@ date: 2025-02-14T00:32:59+04:00
 slug: 'technology-human-development-perspective'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250214003913698.webp"
-tag:
+tags:
   - 科技发展
   - 社会进步
   - 人性化

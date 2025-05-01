@@ -4,7 +4,7 @@ date: 2025-03-11T22:29:45+04:00
 slug: 'elegant-internal-service-access-with-kubernetes-fish'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250311223222293.webp"
-tag:
+tags:
   - Kubernetes
   - Fish Shell
   - DevOps

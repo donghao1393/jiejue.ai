@@ -4,7 +4,7 @@ date: 2025-02-19T20:27:04+04:00
 slug: 'ai-struggle-through-maos-thought'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250219203145718.webp"
-tag:
+tags:
   - AI
   - 科技
   - 思想

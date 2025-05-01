@@ -4,7 +4,7 @@ date: 2025-02-13T20:32:18+04:00
 slug: 'rethinking-ai-security'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250213203825912.webp"
-tag:
+tags:
   - AI安全
   - 人工智能
   - 技术演进

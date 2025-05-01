@@ -4,7 +4,7 @@ date: 2025-02-01T08:50:37+04:00
 slug: 'k8s-dns-troubleshooting'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201085756908.webp"
-tag:
+tags:
   - Kubernetes
   - DNS
   - Azure

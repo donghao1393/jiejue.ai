@@ -4,7 +4,7 @@ date: 2025-03-12T18:40:48+04:00
 slug: 'ai-blender-collaboration-revolution'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250312184651169.webp"
-tag:
+tags:
   - AI应用
   - 3D建模
   - 人机协作

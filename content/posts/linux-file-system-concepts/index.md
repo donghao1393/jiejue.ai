@@ -4,7 +4,7 @@ date: 2025-04-06T18:16:06+04:00
 slug: 'linux-filesystem-internals'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250406181945788.webp"
-tag:
+tags:
   - Linux
   - 文件系统
   - 技术原理

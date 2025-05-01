@@ -4,7 +4,7 @@ date: 2025-03-27T22:47:42+04:00
 slug: 'perfect-file-sync-with-rsync'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327225522772.webp"
-tag:
+tags:
   - 效率工具
   - 文件管理
   - 命令行

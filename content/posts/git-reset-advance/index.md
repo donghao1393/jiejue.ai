@@ -4,7 +4,7 @@ date: 2025-02-20T22:09:26+04:00
 slug: 'git-reset-advance'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250220221107797.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 技巧分享

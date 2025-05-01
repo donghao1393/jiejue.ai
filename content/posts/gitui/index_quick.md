@@ -4,7 +4,7 @@ date: 2025-03-29T18:07:58+04:00
 slug: 'gitui-quick-start-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329181902877.webp"
-tag:
+tags:
   - Git
   - 命令行工具
   - 开发工具

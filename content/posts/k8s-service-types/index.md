@@ -4,7 +4,7 @@ date: 2025-03-13T22:09:00+04:00
 slug: 'k8s-service-types-deep-dive'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313221221836.webp"
-tag:
+tags:
   - Kubernetes
   - 网络架构
   - 负载均衡

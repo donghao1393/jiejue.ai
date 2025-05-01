@@ -4,7 +4,7 @@ date: 2025-03-13T21:48:04+04:00
 slug: 'fix-broken-python-virtual-environment-uv'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313215012469.webp"
-tag:
+tags:
   - Python
   - uv
   - 故障排除

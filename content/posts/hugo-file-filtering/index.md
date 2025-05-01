@@ -4,7 +4,7 @@ date: 2025-02-16T01:44:29+04:00
 slug: 'hugo-file-filtering-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250216014557430.webp"
-tag:
+tags:
   - Hugo
   - 博客
   - 配置

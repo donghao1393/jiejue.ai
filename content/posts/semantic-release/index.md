@@ -4,7 +4,7 @@ date: 2025-03-13T21:15:50+04:00
 slug: 'automatic-versioning-with-semantic-release'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313211837337.webp"
-tag:
+tags:
   - DevOps
   - Git
   - 自动化

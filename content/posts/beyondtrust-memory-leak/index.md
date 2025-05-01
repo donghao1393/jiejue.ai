@@ -4,7 +4,7 @@ date: 2025-02-25T00:26:22+04:00
 slug: 'how-to-fix-computer-memory-issues'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225002834946.webp"
-tag:
+tags:
   - 电脑故障
   - 内存问题
   - 软件质量

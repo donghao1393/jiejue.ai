@@ -4,7 +4,7 @@ date: 2025-03-29T00:16:14+04:00
 slug: 'kubectl-logs-selector-limiting'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329001815828.webp"
-tag:
+tags:
   - Kubernetes
   - kubectl
   - 运维技巧

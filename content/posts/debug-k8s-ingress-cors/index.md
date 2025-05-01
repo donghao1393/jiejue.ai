@@ -4,7 +4,7 @@ date: 2025-02-14T17:05:31+04:00
 slug: 'debug-k8s-ingress-cors-journey'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250214170724294.webp"
-tag:
+tags:
   - Kubernetes
   - 问题排查
   - 网络

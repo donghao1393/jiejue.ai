@@ -4,7 +4,7 @@ date: 2025-03-18T21:44:39+04:00
 slug: 'embedding-svg-in-hugo-blog-easy-way'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318215159430.webp"
-tag:
+tags:
   - Hugo
   - SVG
   - 静态站点

@@ -4,7 +4,7 @@ date: 2025-02-18T15:49:14+04:00
 slug: 'unity-of-dependence-and-independence'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218155207657.webp"
-tag:
+tags:
   - 哲学思考
   - 社会观察
 ---

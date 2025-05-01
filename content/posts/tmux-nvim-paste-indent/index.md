@@ -4,7 +4,7 @@ date: 2025-02-08T13:43:58+04:00
 slug: 'tmux-nvim-paste-indent'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208140012411.webp"
-tag:
+tags:
   - Neovim
   - Tmux
   - 问题排查

@@ -4,7 +4,7 @@ date: 2025-02-09T21:33:00+04:00
 slug: 'mcp-dbutils-deep-dive'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250209213924711.webp"
-tag:
+tags:
   - MCP
   - Database
   - Architecture

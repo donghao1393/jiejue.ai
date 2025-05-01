@@ -4,7 +4,7 @@ date: 2025-02-18T20:50:05+04:00
 slug: 'claude-api-content-types'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218205523451.webp"
-tag:
+tags:
   - API
   - Claude
   - LLM

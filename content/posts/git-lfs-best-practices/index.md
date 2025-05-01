@@ -4,7 +4,7 @@ date: 2025-03-06T09:13:29+04:00
 slug: 'git-lfs-best-practices'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250306091706492.webp"
-tag:
+tags:
   - Git
   - 工具
   - 大文件

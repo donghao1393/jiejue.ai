@@ -4,7 +4,7 @@ date: 2025-02-25T16:45:24+04:00
 slug: 'git-reference-conflict-troubleshooting'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225164831752.webp"
-tag:
+tags:
   - Git
   - 问题排查
   - 开发工具

@@ -4,7 +4,7 @@ date: 2025-03-27T23:19:21+04:00
 slug: 'mac-thunderbolt-transfer-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327232101037.webp"
-tag:
+tags:
   - Mac使用技巧
   - 数据传输
   - 雷电接口

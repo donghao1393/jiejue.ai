@@ -4,7 +4,7 @@ date: 2025-04-20T23:53:54+04:00
 slug: 'display-nerd-fonts-on-github'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250420235634187.webp"
-tag:
+tags:
   - 前端技术
   - 字体设计
   - 开发工具

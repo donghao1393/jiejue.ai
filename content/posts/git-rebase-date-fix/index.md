@@ -4,7 +4,7 @@ date: 2025-02-13T22:35:10+04:00
 slug: 'git-rebase-date-fix'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250213223635432.webp"
-tag:
+tags:
   - Git
   - 技术实战
 ---

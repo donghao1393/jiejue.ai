@@ -4,7 +4,7 @@ date: 2025-03-08T00:23:27+04:00
 slug: 'git-undo-commands-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250308002608381.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 版本控制

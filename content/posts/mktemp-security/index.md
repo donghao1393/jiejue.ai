@@ -4,7 +4,7 @@ date: 2025-04-15T23:14:00+04:00
 slug: 'tmp-private-tmp-security'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415231607011.webp"
-tag:
+tags:
   - 文件系统
   - 安全
   - macOS

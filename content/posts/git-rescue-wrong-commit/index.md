@@ -4,7 +4,7 @@ date: 2025-02-15T18:02:12+04:00
 slug: 'git-rescue-wrong-commit'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250215180523878.webp"
-tag:
+tags:
   - Git
   - 技术小窍门
 ---

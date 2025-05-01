@@ -4,7 +4,7 @@ date: 2025-02-01T21:30:04+04:00
 slug: 'tmuxf-capture-commands'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201213744907.webp"
-tag:
+tags:
   - fish shell
   - tmux
   - 工作流

@@ -4,7 +4,7 @@ date: 2025-03-18T17:44:43+04:00
 slug: 'mcp-beginner-guide-finding-services'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318174824108.webp"
-tag:
+tags:
   - AI
   - MCP
   - 开源

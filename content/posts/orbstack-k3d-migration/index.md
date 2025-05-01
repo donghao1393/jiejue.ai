@@ -4,7 +4,7 @@ date: 2025-03-27T23:30:18+04:00
 slug: 'mac-orbstack-k3d-migration-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250328000821584.webp"
-tag:
+tags:
   - 容器技术
   - Kubernetes
   - Orbstack

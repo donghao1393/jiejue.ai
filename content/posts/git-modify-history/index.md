@@ -4,7 +4,7 @@ date: 2025-02-15T18:41:11+04:00
 slug: 'git-modify-history-commit'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250215185158165.webp"
-tag:
+tags:
   - Git
   - 开发技巧
 ---

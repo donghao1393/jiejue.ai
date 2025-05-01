@@ -4,7 +4,7 @@ date: 2025-03-27T23:49:41+04:00
 slug: 'python-uv-quick-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327235234200.webp"
-tag:
+tags:
   - Python
   - 开发工具
   - 环境管理

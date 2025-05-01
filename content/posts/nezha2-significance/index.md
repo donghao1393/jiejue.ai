@@ -4,7 +4,7 @@ date: 2025-02-15T21:44:07+04:00
 slug: 'nezha-2-significance'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250215214821941.webp"
-tag:
+tags:
   - 文化
   - 电影
   - 动画

@@ -4,7 +4,7 @@ date: 2025-02-02T11:26:52+04:00
 slug: 'blog-migration-time-processing'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202113321139.webp"
-tag:
+tags:
   - 技术
   - 博客
   - Shell

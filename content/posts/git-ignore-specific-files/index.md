@@ -4,7 +4,7 @@ date: 2025-03-21T18:27:40+04:00
 slug: 'git-ignore-tracked-file-changes'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250321184923034.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 版本控制

@@ -4,7 +4,7 @@ date: 2025-03-12T19:25:12+04:00
 slug: 'boost-macos-productivity-with-alfred-workflows'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250312192922845.webp"
-tag:
+tags:
   - macOS
   - 生产力
   - Alfred

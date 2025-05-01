@@ -4,7 +4,7 @@ date: 2025-02-20T21:26:37+04:00
 slug: 'domain-redirect-without-dns-support'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250220213019741.webp"
-tag:
+tags:
   - 网站迁移
   - 域名重定向
   - 技术方案

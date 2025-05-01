@@ -4,7 +4,7 @@ date: 2025-03-17T19:19:10+04:00
 slug: 'macos-gui-launch-missing-path-commands'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250317192952444.webp"
-tag:
+tags:
   - macOS
   - 系统开发
   - 环境变量

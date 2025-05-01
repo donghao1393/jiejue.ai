@@ -4,7 +4,7 @@ date: 2025-02-25T04:36:09+08:00
 slug: 'android-package-naming-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225003817430.webp"
-tag:
+tags:
   - Android
   - 开发
   - Google Play

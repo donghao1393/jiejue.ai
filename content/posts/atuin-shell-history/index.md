@@ -4,7 +4,7 @@ date: 2025-03-29T15:08:52+04:00
 slug: 'enhance-terminal-history-with-atuin'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329151034574.webp"
-tag:
+tags:
   - 命令行工具
   - 效率工具
 ---

@@ -4,7 +4,7 @@ date: 2025-03-13T21:29:47+04:00
 slug: 'beware-of-traps-in-official-docs'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313213145816.webp"
-tag:
+tags:
   - Azure
   - 云计算
   - 故障排除

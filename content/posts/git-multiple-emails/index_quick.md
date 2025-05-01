@@ -4,7 +4,7 @@ date: 2025-04-18T18:48:56+04:00
 slug: 'quick-git-email-setup-for-multiple-projects'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250418185144971.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 实用技巧

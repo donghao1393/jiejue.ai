@@ -4,7 +4,7 @@ date: 2025-02-24T23:53:45+04:00
 slug: 'android-compilation-error-debugging'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250224235521827.webp"
-tag:
+tags:
   - Android
   - 编程技巧
   - 调试

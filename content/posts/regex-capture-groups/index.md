@@ -4,7 +4,7 @@ date: 2025-04-16T22:08:48+04:00
 slug: 'regex-capture-groups-advanced-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250416221201505.webp"
-tag:
+tags:
   - 技术技巧
   - 正则表达式
   - 文本处理

@@ -4,7 +4,7 @@ date: 2025-02-18T10:00:14+04:00
 slug: 'knowledge-society-guide-yourself'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218100114871.webp"
-tag:
+tags:
   - 知识管理
   - 个人成长
   - 社会发展

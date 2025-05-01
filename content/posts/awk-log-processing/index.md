@@ -4,7 +4,7 @@ date: 2025-02-23T10:51:32+04:00
 slug: 'awk-log-processing-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250223105350142.webp"
-tag:
+tags:
   - Linux
   - 文本处理
   - AWK

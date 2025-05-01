@@ -4,7 +4,7 @@ date: 2025-02-08T14:19:07+04:00
 slug: 'lazyvim-guide-for-word-users'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208142143106.webp"
-tag:
+tags:
   - vim
   - lazyvim
   - 编辑器

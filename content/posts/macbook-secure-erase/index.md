@@ -4,7 +4,7 @@ date: 2025-05-01T17:56:46+04:00
 slug: 'secure-erase-macbook-data'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250501175925048.webp"
-tag:
+tags:
   - MacBook
   - 数据安全
   - 硬件加密

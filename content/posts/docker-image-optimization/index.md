@@ -4,7 +4,7 @@ date: 2025-02-08T18:49:54+04:00
 slug: 'docker-image-optimization'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208185542747.webp"
-tag:
+tags:
   - Docker
   - 性能优化
   - DevOps

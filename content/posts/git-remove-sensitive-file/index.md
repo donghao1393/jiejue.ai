@@ -4,7 +4,7 @@ date: 2025-02-18T17:45:37+04:00
 slug: 'how-to-remove-sensitive-files-from-git-history'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218174927737.webp"
-tag:
+tags:
   - Git
   - 开发技巧
   - 安全实践

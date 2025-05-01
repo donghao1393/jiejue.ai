@@ -4,7 +4,7 @@ date: 2025-02-08T19:01:43+04:00
 slug: 'kustomize-patches-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208190510206.webp"
-tag:
+tags:
   - Kubernetes
   - DevOps
   - 配置管理

@@ -4,7 +4,7 @@ date: 2025-02-24T23:41:44+04:00
 slug: 'android-app-cicd-automation'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250224234437821.webp"
-tag:
+tags:
   - Android开发
   - CI/CD
   - 自动化构建

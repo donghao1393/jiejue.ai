@@ -4,7 +4,7 @@ date: 2025-03-31T00:13:04+04:00
 slug: 'rust-tools-ecosystem-overview'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250331001534659.webp"
-tag:
+tags:
   - Rust
   - 工具
   - 效率

@@ -4,7 +4,7 @@ date: 2025-03-25T20:16:20+04:00
 slug: 'kusto-query-language-for-log-analysis'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250325201800819.webp"
-tag:
+tags:
   - 技术
   - 数据分析
   - Azure

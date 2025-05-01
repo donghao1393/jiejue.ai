@@ -4,7 +4,7 @@ date: 2025-02-18T23:02:32+04:00
 slug: 'fish-shell-safety-programming'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218230450853.webp"
-tag:
+tags:
   - Shell
   - 安全编程
   - Fish

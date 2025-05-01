@@ -4,7 +4,7 @@ date: 2025-02-24T07:10:12+04:00
 slug: 'work-for-your-dream'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250224072548822.webp"
-tag:
+tags:
   - 愿景
   - 组织文化
 ---

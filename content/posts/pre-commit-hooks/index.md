@@ -4,7 +4,7 @@ date: 2025-03-23T17:33:47+04:00
 slug: 'pre-commit-hooks-automation'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250323174022149.webp"
-tag:
+tags:
   - 开发工具
   - 代码质量
   - Git

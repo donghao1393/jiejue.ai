@@ -4,7 +4,7 @@ date: 2025-04-15T23:05:25+04:00
 slug: 'macos-command-line-treasures'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415230851041.webp"
-tag:
+tags:
   - macOS
   - 命令行
   - 开发工具

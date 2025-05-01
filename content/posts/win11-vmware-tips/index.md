@@ -4,7 +4,7 @@ date: 2025-03-30T15:21:05+04:00
 slug: 'windows-11-vmware-mac-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330152257692.webp"
-tag:
+tags:
   - 虚拟化
   - Mac
   - Windows

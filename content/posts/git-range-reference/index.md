@@ -4,7 +4,7 @@ date: 2025-04-21T09:41:48+04:00
 slug: 'understanding-git-references-and-ranges'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250421094621981.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 版本控制

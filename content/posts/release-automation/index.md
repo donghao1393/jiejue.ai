@@ -4,7 +4,7 @@ date: 2025-02-19T21:49:58+04:00
 slug: 'release-automation-best-practices'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250219215307280.webp"
-tag:
+tags:
   - DevOps
   - 持续集成
   - 自动化

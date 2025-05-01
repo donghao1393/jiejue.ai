@@ -4,7 +4,7 @@ date: 2025-03-06T16:42:50+04:00
 slug: 'kubernetes-readonly-filesystem-tmp-directory-write-access-deep-dive'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250306165302266.webp"
-tag:
+tags:
   - Kubernetes
   - 容器安全
   - emptyDir

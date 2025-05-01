@@ -4,7 +4,7 @@ date: 2025-04-15T22:21:48+04:00
 slug: 'git-cross-branch-file-management'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415222445445.webp"
-tag:
+tags:
   - Git
   - 开发工具
   - 效率提升

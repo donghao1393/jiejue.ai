@@ -4,7 +4,7 @@ date: 2025-02-25T00:15:48+04:00
 slug: 'mongodb-compass-azure-cosmos-compatibility'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225001857779.webp"
-tag:
+tags:
   - MongoDB
   - Azure
   - 数据库

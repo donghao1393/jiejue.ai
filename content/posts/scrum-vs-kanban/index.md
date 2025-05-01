@@ -4,7 +4,7 @@ date: 2025-03-18T16:57:02+04:00
 slug: 'scrum-vs-kanban-developers-survival-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318165917141.webp"
-tag:
+tags:
   - 软件开发
   - 项目管理
   - 敏捷开发

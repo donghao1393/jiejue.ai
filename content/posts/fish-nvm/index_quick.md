@@ -4,7 +4,7 @@ date: 2025-02-07T23:16:09+04:00
 slug: 'fish-shell-node-version-manager-quick-start'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208144106522.webp"
-tag:
+tags:
   - Fish Shell
   - Node.js
   - 开发工具

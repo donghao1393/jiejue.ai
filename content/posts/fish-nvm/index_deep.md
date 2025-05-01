@@ -4,7 +4,7 @@ date: 2025-02-07T23:16:43+04:00
 slug: 'fish-shell-node-version-manager-deep-dive'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208144106522.webp"
-tag:
+tags:
   - Fish Shell
   - Node.js
   - Shell编程

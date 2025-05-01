@@ -4,7 +4,7 @@ date: 2025-02-13T23:20:13+04:00
 slug: 'chinese-prompting-advantage'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250213231817670.webp"
-tag:
+tags:
   - AI
   - 提示词工程
   - LLM开发

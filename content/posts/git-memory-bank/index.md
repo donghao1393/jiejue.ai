@@ -4,7 +4,7 @@ date: 2025-02-23T11:57:36+04:00
 slug: 'git-remove-sensitive-directory-from-history'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250223115927338.webp"
-tag:
+tags:
   - Git
   - 版本控制
   - 教程

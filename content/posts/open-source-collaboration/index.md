@@ -4,7 +4,7 @@ date: 2025-04-21T00:38:34+04:00
 slug: 'open-source-collaboration-legal-governance'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250421004049703.webp"
-tag:
+tags:
   - 开源
   - CLA协议
   - 项目治理

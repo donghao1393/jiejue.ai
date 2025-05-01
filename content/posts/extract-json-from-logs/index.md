@@ -4,7 +4,7 @@ date: 2025-02-16T20:34:33+04:00
 slug: 'extract-json-from-logs'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250216203652932.webp"
-tag:
+tags:
   - Linux
   - 运维
   - 日志分析

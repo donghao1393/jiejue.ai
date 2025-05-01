@@ -4,7 +4,7 @@ date: 2025-04-21T00:09:43+04:00
 slug: 'python-version-management-with-pyenv'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250421001116715.webp"
-tag:
+tags:
   - Python
   - 环境管理
   - 开发工具

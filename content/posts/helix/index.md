@@ -4,7 +4,7 @@ date: 2025-03-30T17:18:26+04:00
 slug: 'helix-editor-experience'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330173009598.webp"
-tag:
+tags:
   - 工具
   - 编辑器
   - 命令行

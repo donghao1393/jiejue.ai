@@ -4,7 +4,7 @@ date: 2025-02-05T23:09:13+04:00
 slug: 'future-chip-market-and-ai-dawn'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250205232205932.webp"
-tag:
+tags:
   - 芯片产业
   - AI发展
   - 技术趋势

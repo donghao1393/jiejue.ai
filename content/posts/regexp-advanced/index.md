@@ -4,7 +4,7 @@ date: 2025-02-10T13:13:02+04:00
 slug: 'regexp-advanced-features'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250210131708495.webp"
-tag:
+tags:
   - 正则表达式
   - ripgrep
   - PCRE2

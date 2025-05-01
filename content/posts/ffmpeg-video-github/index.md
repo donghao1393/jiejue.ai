@@ -4,7 +4,7 @@ date: 2025-03-17T19:39:11+04:00
 slug: 'github-video-conversion-guide'
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250317194206557.webp"
-tag:
+tags:
   - FFmpeg
   - GitHub
   - 项目展示
