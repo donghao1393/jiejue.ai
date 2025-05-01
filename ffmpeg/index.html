@@ -1,0 +1,281 @@
+<!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>FFmpeg | 爱解决</title>
+<link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ffmpeg/><meta name=author content="董昊"><meta name=description content="硅基生物幼稚园协调员"><meta name=generator content="Hugo 0.147.0"><meta property="og:url" content="https://jiejue.ai/ffmpeg/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="FFmpeg"><meta property="og:description" content="硅基生物幼稚园协调员"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="FFmpeg"><meta name=twitter:description content="硅基生物幼稚园协调员"><link rel=stylesheet href=/css/output.min.css><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/posts title=归档><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/tags title=所有标签><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="flex flex-col md:flex-row mt-4"><div class="md:basis-[200px] lg:basis-[300px] p-4 prose dark:prose-invert"><h1 class=text-2xl>FFmpeg</h1><p class=text-sm>1篇文章</p><div class="flex flex-wrap gap-4 mt-6"><a href=/3d%E5%BB%BA%E6%A8%A1/ class="badge h-6 no-underline hover:badge-primary">3D建模
+</a><a href=/3d%E8%A7%86%E9%A2%91/ class="badge h-6 no-underline hover:badge-primary">3d视频
+</a><a href=/about/ class="badge h-6 no-underline hover:badge-primary">About
+</a><a href=/ai/ class="badge h-6 no-underline hover:badge-primary">AI
+</a><a href=/ai-agent/ class="badge h-6 no-underline hover:badge-primary">AI Agent
+</a><a href=/ai%E5%AE%89%E5%85%A8/ class="badge h-6 no-underline hover:badge-primary">AI安全
+</a><a href=/ai%E5%8F%91%E5%B1%95/ class="badge h-6 no-underline hover:badge-primary">AI发展
+</a><a href=/ai%E5%BA%94%E7%94%A8/ class="badge h-6 no-underline hover:badge-primary">AI应用
+</a><a href=/aks/ class="badge h-6 no-underline hover:badge-primary">AKS
+</a><a href=/aldente/ class="badge h-6 no-underline hover:badge-primary">Aldente
+</a><a href=/alfred/ class="badge h-6 no-underline hover:badge-primary">Alfred
+</a><a href=/android/ class="badge h-6 no-underline hover:badge-primary">Android
+</a><a href=/android%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">Android开发
+</a><a href=/api/ class="badge h-6 no-underline hover:badge-primary">API
+</a><a href=/apple-silicon/ class="badge h-6 no-underline hover:badge-primary">Apple Silicon
+</a><a href=/applescript/ class="badge h-6 no-underline hover:badge-primary">AppleScript
+</a><a href=/architecture/ class="badge h-6 no-underline hover:badge-primary">Architecture
+</a><a href=/awk/ class="badge h-6 no-underline hover:badge-primary">AWK
+</a><a href=/azure/ class="badge h-6 no-underline hover:badge-primary">Azure
+</a><a href=/blog/ class="badge h-6 no-underline hover:badge-primary">Blog
+</a><a href=/ci/cd/ class="badge h-6 no-underline hover:badge-primary">CI/CD
+</a><a href=/claude/ class="badge h-6 no-underline hover:badge-primary">Claude
+</a><a href=/cla%E5%8D%8F%E8%AE%AE/ class="badge h-6 no-underline hover:badge-primary">CLA协议
+</a><a href=/cli/ class="badge h-6 no-underline hover:badge-primary">CLI
+</a><a href=/crossover/ class="badge h-6 no-underline hover:badge-primary">Crossover
+</a><a href=/csv%E5%A4%84%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">CSV处理
+</a><a href=/database/ class="badge h-6 no-underline hover:badge-primary">Database
+</a><a href=/devops/ class="badge h-6 no-underline hover:badge-primary">DevOps
+</a><a href=/devsecops/ class="badge h-6 no-underline hover:badge-primary">DevSecOps
+</a><a href=/dns/ class="badge h-6 no-underline hover:badge-primary">DNS
+</a><a href=/docker/ class="badge h-6 no-underline hover:badge-primary">Docker
+</a><a href=/emptydir/ class="badge h-6 no-underline hover:badge-primary">EmptyDir
+</a><span class="badge h-6 badge-primary">FFmpeg
+</span><a href=/ffplay/ class="badge h-6 no-underline hover:badge-primary">Ffplay
+</a><a href=/fish/ class="badge h-6 no-underline hover:badge-primary">Fish
+</a><a href=/fish-shell/ class="badge h-6 no-underline hover:badge-primary">Fish Shell
+</a><a href=/git/ class="badge h-6 no-underline hover:badge-primary">Git
+</a><a href=/github/ class="badge h-6 no-underline hover:badge-primary">GitHub
+</a><a href=/github-actions/ class="badge h-6 no-underline hover:badge-primary">GitHub Actions
+</a><a href=/google-play/ class="badge h-6 no-underline hover:badge-primary">Google Play
+</a><a href=/grafana/ class="badge h-6 no-underline hover:badge-primary">Grafana
+</a><a href=/html/ class="badge h-6 no-underline hover:badge-primary">HTML
+</a><a href=/hugo/ class="badge h-6 no-underline hover:badge-primary">Hugo
+</a><a href=/ingress/ class="badge h-6 no-underline hover:badge-primary">Ingress
+</a><a href=/introduction/ class="badge h-6 no-underline hover:badge-primary">Introduction
+</a><a href=/json/ class="badge h-6 no-underline hover:badge-primary">JSON
+</a><a href=/kdl/ class="badge h-6 no-underline hover:badge-primary">KDL
+</a><a href=/kubectl/ class="badge h-6 no-underline hover:badge-primary">Kubectl
+</a><a href=/kubernetes/ class="badge h-6 no-underline hover:badge-primary">Kubernetes
+</a><a href=/kustomize/ class="badge h-6 no-underline hover:badge-primary">Kustomize
+</a><a href=/lazyvim/ class="badge h-6 no-underline hover:badge-primary">LazyVim
+</a><a href=/linux/ class="badge h-6 no-underline hover:badge-primary">Linux
+</a><a href=/llm/ class="badge h-6 no-underline hover:badge-primary">LLM
+</a><a href=/llm%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">LLM开发
+</a><a href=/mac/ class="badge h-6 no-underline hover:badge-primary">Mac
+</a><a href=/macbook/ class="badge h-6 no-underline hover:badge-primary">Macbook
+</a><a href=/macos/ class="badge h-6 no-underline hover:badge-primary">MacOS
+</a><a href=/mac%E7%8E%AF%E5%A2%83%E8%BF%81%E7%A7%BB/ class="badge h-6 no-underline hover:badge-primary">Mac环境迁移
+</a><a href=/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">Mac使用技巧
+</a><a href=/mcp/ class="badge h-6 no-underline hover:badge-primary">MCP
+</a><a href=/mongodb/ class="badge h-6 no-underline hover:badge-primary">MongoDB
+</a><a href=/neovim/ class="badge h-6 no-underline hover:badge-primary">Neovim
+</a><a href=/node.js/ class="badge h-6 no-underline hover:badge-primary">Node.js
+</a><a href=/onedrive/ class="badge h-6 no-underline hover:badge-primary">OneDrive
+</a><a href=/orbstack/ class="badge h-6 no-underline hover:badge-primary">Orbstack
+</a><a href=/pcre2/ class="badge h-6 no-underline hover:badge-primary">PCRE2
+</a><a href=/pnpm/ class="badge h-6 no-underline hover:badge-primary">Pnpm
+</a><a href=/postgresql/ class="badge h-6 no-underline hover:badge-primary">PostgreSQL
+</a><a href=/python/ class="badge h-6 no-underline hover:badge-primary">Python
+</a><a href=/rag/ class="badge h-6 no-underline hover:badge-primary">Rag
+</a><a href=/release/ class="badge h-6 no-underline hover:badge-primary">Release
+</a><a href=/ripgrep/ class="badge h-6 no-underline hover:badge-primary">Ripgrep
+</a><a href=/rust/ class="badge h-6 no-underline hover:badge-primary">Rust
+</a><a href=/s3/ class="badge h-6 no-underline hover:badge-primary">S3
+</a><a href=/securitycontext/ class="badge h-6 no-underline hover:badge-primary">SecurityContext
+</a><a href=/semantic-release/ class="badge h-6 no-underline hover:badge-primary">Semantic Release
+</a><a href=/shell/ class="badge h-6 no-underline hover:badge-primary">Shell
+</a><a href=/shell%E7%BC%96%E7%A8%8B/ class="badge h-6 no-underline hover:badge-primary">Shell编程
+</a><a href=/ssh/ class="badge h-6 no-underline hover:badge-primary">SSH
+</a><a href=/ssl/tls/ class="badge h-6 no-underline hover:badge-primary">SSL/TLS
+</a><a href=/svg/ class="badge h-6 no-underline hover:badge-primary">SVG
+</a><a href=/tmux/ class="badge h-6 no-underline hover:badge-primary">Tmux
+</a><a href=/usage/ class="badge h-6 no-underline hover:badge-primary">Usage
+</a><a href=/uv/ class="badge h-6 no-underline hover:badge-primary">Uv
+</a><a href=/vim/ class="badge h-6 no-underline hover:badge-primary">Vim
+</a><a href=/vision/ class="badge h-6 no-underline hover:badge-primary">Vision
+</a><a href=/vmware/ class="badge h-6 no-underline hover:badge-primary">VMware
+</a><a href=/war3/ class="badge h-6 no-underline hover:badge-primary">War3
+</a><a href=/webdav/ class="badge h-6 no-underline hover:badge-primary">WebDAV
+</a><a href=/web%E6%80%A7%E8%83%BD/ class="badge h-6 no-underline hover:badge-primary">Web性能
+</a><a href=/windows/ class="badge h-6 no-underline hover:badge-primary">Windows
+</a><a href=/xml/ class="badge h-6 no-underline hover:badge-primary">XML
+</a><a href=/%E5%AE%89%E5%85%A8/ class="badge h-6 no-underline hover:badge-primary">安全
+</a><a href=/%E5%AE%89%E5%85%A8%E7%BC%96%E7%A8%8B/ class="badge h-6 no-underline hover:badge-primary">安全编程
+</a><a href=/%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/ class="badge h-6 no-underline hover:badge-primary">安全实践
+</a><a href=/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class="badge h-6 no-underline hover:badge-primary">版本控制
+</a><a href=/%E5%8C%85%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">包管理
+</a><a href=/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">编程技巧
+</a><a href=/%E7%BC%96%E8%BE%91%E5%99%A8/ class="badge h-6 no-underline hover:badge-primary">编辑器
+</a><a href=/%E5%8D%9A%E5%AE%A2/ class="badge h-6 no-underline hover:badge-primary">博客
+</a><a href=/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/ class="badge h-6 no-underline hover:badge-primary">产品设计
+</a><a href=/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/ class="badge h-6 no-underline hover:badge-primary">持续集成
+</a><a href=/%E5%88%9B%E4%BD%9C%E8%80%85%E7%BB%8F%E6%B5%8E/ class="badge h-6 no-underline hover:badge-primary">创作者经济
+</a><a href=/%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class="badge h-6 no-underline hover:badge-primary">大模型
+</a><a href=/%E5%A4%A7%E6%95%B0%E6%8D%AE/ class="badge h-6 no-underline hover:badge-primary">大数据
+</a><a href=/%E5%A4%A7%E6%96%87%E4%BB%B6/ class="badge h-6 no-underline hover:badge-primary">大文件
+</a><a href=/%E4%BB%A3%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">代理
+</a><a href=/%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/ class="badge h-6 no-underline hover:badge-primary">代码调试
+</a><a href=/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/ class="badge h-6 no-underline hover:badge-primary">代码质量
+</a><a href=/%E7%94%B5%E6%B1%A0%E4%BF%9D%E5%85%BB/ class="badge h-6 no-underline hover:badge-primary">电池保养
+</a><a href=/%E7%94%B5%E8%84%91%E6%95%85%E9%9A%9C/ class="badge h-6 no-underline hover:badge-primary">电脑故障
+</a><a href=/%E7%94%B5%E5%BD%B1/ class="badge h-6 no-underline hover:badge-primary">电影
+</a><a href=/%E8%B0%83%E8%AF%95/ class="badge h-6 no-underline hover:badge-primary">调试
+</a><a href=/%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98/ class="badge h-6 no-underline hover:badge-primary">定制主题
+</a><a href=/%E5%8A%A8%E7%94%BB/ class="badge h-6 no-underline hover:badge-primary">动画
+</a><a href=/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6/ class="badge h-6 no-underline hover:badge-primary">二进制文件
+</a><a href=/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/ class="badge h-6 no-underline hover:badge-primary">负载均衡
+</a><a href=/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/ class="badge h-6 no-underline hover:badge-primary">个人成长
+</a><a href=/%E5%B7%A5%E5%85%B7/ class="badge h-6 no-underline hover:badge-primary">工具
+</a><a href=/%E5%B7%A5%E5%85%B7%E9%9B%86%E6%88%90/ class="badge h-6 no-underline hover:badge-primary">工具集成
+</a><a href=/%E5%B7%A5%E4%BD%9C%E6%B5%81/ class="badge h-6 no-underline hover:badge-primary">工作流
+</a><a href=/%E5%8A%9F%E8%83%BD%E9%94%AE/ class="badge h-6 no-underline hover:badge-primary">功能键
+</a><a href=/%E4%BE%9B%E7%94%B5/ class="badge h-6 no-underline hover:badge-primary">供电
+</a><a href=/%E5%85%B1%E4%BA%AB/ class="badge h-6 no-underline hover:badge-primary">共享
+</a><a href=/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/ class="badge h-6 no-underline hover:badge-primary">故障排查
+</a><a href=/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4/ class="badge h-6 no-underline hover:badge-primary">故障排除
+</a><a href=/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/ class="badge h-6 no-underline hover:badge-primary">环境变量
+</a><a href=/%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">环境管理
+</a><a href=/%E6%8A%80%E5%B7%A7%E5%88%86%E4%BA%AB/ class="badge h-6 no-underline hover:badge-primary">技巧分享
+</a><a href=/%E6%8A%80%E6%9C%AF/ class="badge h-6 no-underline hover:badge-primary">技术
+</a><a href=/%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88/ class="badge h-6 no-underline hover:badge-primary">技术方案
+</a><a href=/%E6%8A%80%E6%9C%AF%E9%9D%A9%E5%91%BD/ class="badge h-6 no-underline hover:badge-primary">技术革命
+</a><a href=/%E6%8A%80%E6%9C%AF%E9%9D%A9%E6%96%B0/ class="badge h-6 no-underline hover:badge-primary">技术革新
+</a><a href=/%E6%8A%80%E6%9C%AF%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">技术技巧
+</a><a href=/%E6%8A%80%E6%9C%AF%E7%A7%91%E6%99%AE/ class="badge h-6 no-underline hover:badge-primary">技术科普
+</a><a href=/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/ class="badge h-6 no-underline hover:badge-primary">技术趋势
+</a><a href=/%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%85%A5/ class="badge h-6 no-underline hover:badge-primary">技术深入
+</a><a href=/%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98/ class="badge h-6 no-underline hover:badge-primary">技术实战
+</a><a href=/%E6%8A%80%E6%9C%AF%E5%B0%8F%E7%AA%8D%E9%97%A8/ class="badge h-6 no-underline hover:badge-primary">技术小窍门
+</a><a href=/%E6%8A%80%E6%9C%AF%E6%BC%94%E8%BF%9B/ class="badge h-6 no-underline hover:badge-primary">技术演进
+</a><a href=/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">技术原理
+</a><a href=/%E5%81%A5%E5%BA%B7/ class="badge h-6 no-underline hover:badge-primary">健康
+</a><a href=/%E6%95%99%E7%A8%8B/ class="badge h-6 no-underline hover:badge-primary">教程
+</a><a href=/%E6%88%AA%E5%9B%BE/ class="badge h-6 no-underline hover:badge-primary">截图
+</a><a href=/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/ class="badge h-6 no-underline hover:badge-primary">经验分享
+</a><a href=/%E9%9D%99%E6%80%81%E7%AB%99%E7%82%B9/ class="badge h-6 no-underline hover:badge-primary">静态站点
+</a><a href=/%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">开发
+</a><a href=/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/ class="badge h-6 no-underline hover:badge-primary">开发工具
+</a><a href=/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">开发技巧
+</a><a href=/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/ class="badge h-6 no-underline hover:badge-primary">开发效率
+</a><a href=/%E5%BC%80%E6%BA%90/ class="badge h-6 no-underline hover:badge-primary">开源
+</a><a href=/%E7%A7%91%E6%8A%80/ class="badge h-6 no-underline hover:badge-primary">科技
+</a><a href=/%E7%A7%91%E6%8A%80%E5%8F%91%E5%B1%95/ class="badge h-6 no-underline hover:badge-primary">科技发展
+</a><a href=/%E7%A7%91%E6%99%AE/ class="badge h-6 no-underline hover:badge-primary">科普
+</a><a href=/%E9%9B%B7%E7%94%B5%E6%8E%A5%E5%8F%A3/ class="badge h-6 no-underline hover:badge-primary">雷电接口
+</a><a href=/%E5%8E%86%E5%8F%B2%E8%BF%BD%E8%B8%AA/ class="badge h-6 no-underline hover:badge-primary">历史追踪
+</a><a href=/%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">敏捷开发
+</a><a href=/%E5%91%BD%E4%BB%A4%E8%A1%8C/ class="badge h-6 no-underline hover:badge-primary">命令行
+</a><a href=/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/ class="badge h-6 no-underline hover:badge-primary">命令行工具
+</a><a href=/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">命令行技巧
+</a><a href=/%E9%AD%94%E5%85%BD%E4%BA%89%E9%9C%B8/ class="badge h-6 no-underline hover:badge-primary">魔兽争霸
+</a><a href=/%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/ class="badge h-6 no-underline hover:badge-primary">内存问题
+</a><a href=/%E5%86%85%E7%BD%91%E8%AE%BF%E9%97%AE/ class="badge h-6 no-underline hover:badge-primary">内网访问
+</a><a href=/%E9%85%8D%E7%BD%AE/ class="badge h-6 no-underline hover:badge-primary">配置
+</a><a href=/%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">配置管理
+</a><a href=/%E5%89%8D%E7%AB%AF%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">前端技巧
+</a><a href=/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/ class="badge h-6 no-underline hover:badge-primary">前端技术
+</a><a href=/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">前端开发
+</a><a href=/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/ class="badge h-6 no-underline hover:badge-primary">人工智能
+</a><a href=/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/ class="badge h-6 no-underline hover:badge-primary">人机协作
+</a><a href=/%E4%BA%BA%E6%80%A7%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">人性化
+</a><a href=/%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6/ class="badge h-6 no-underline hover:badge-primary">认知科学
+</a><a href=/%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">日志处理
+</a><a href=/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/ class="badge h-6 no-underline hover:badge-primary">日志分析
+</a><a href=/%E5%AE%B9%E5%99%A8%E5%AE%89%E5%85%A8/ class="badge h-6 no-underline hover:badge-primary">容器安全
+</a><a href=/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/ class="badge h-6 no-underline hover:badge-primary">容器技术
+</a><a href=/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">软件开发
+</a><a href=/%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F/ class="badge h-6 no-underline hover:badge-primary">软件质量
+</a><a href=/%E5%95%86%E4%B8%9A%E6%88%98%E7%95%A5/ class="badge h-6 no-underline hover:badge-primary">商业战略
+</a><a href=/%E7%A4%BE%E4%BC%9A%E5%88%9B%E6%96%B0/ class="badge h-6 no-underline hover:badge-primary">社会创新
+</a><a href=/%E7%A4%BE%E4%BC%9A%E5%8F%91%E5%B1%95/ class="badge h-6 no-underline hover:badge-primary">社会发展
+</a><a href=/%E7%A4%BE%E4%BC%9A%E8%A7%82%E5%AF%9F/ class="badge h-6 no-underline hover:badge-primary">社会观察
+</a><a href=/%E7%A4%BE%E4%BC%9A%E8%BF%9B%E6%AD%A5/ class="badge h-6 no-underline hover:badge-primary">社会进步
+</a><a href=/%E7%A4%BE%E5%8C%BA%E5%BB%BA%E8%AE%BE/ class="badge h-6 no-underline hover:badge-primary">社区建设
+</a><a href=/%E7%94%9F%E4%BA%A7%E5%8A%9B/ class="badge h-6 no-underline hover:badge-primary">生产力
+</a><a href=/%E7%94%9F%E6%B4%BB%E6%96%B9%E5%BC%8F/ class="badge h-6 no-underline hover:badge-primary">生活方式
+</a><a href=/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">实用技巧
+</a><a href=/%E5%B8%82%E5%9C%BA%E9%A2%84%E6%B5%8B/ class="badge h-6 no-underline hover:badge-primary">市场预测
+</a><a href=/%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">视频处理
+</a><a href=/%E8%BE%93%E5%85%A5%E6%B3%95/ class="badge h-6 no-underline hover:badge-primary">输入法
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/ class="badge h-6 no-underline hover:badge-primary">数据安全
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">数据处理
+</a><a href=/%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93/ class="badge h-6 no-underline hover:badge-primary">数据传输
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/ class="badge h-6 no-underline hover:badge-primary">数据分析
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">数据可视化
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%BA%93/ class="badge h-6 no-underline hover:badge-primary">数据库
+</a><a href=/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/ class="badge h-6 no-underline hover:badge-primary">数据同步
+</a><a href=/%E6%95%B0%E5%AD%97%E5%8C%96%E8%BD%AC%E5%9E%8B/ class="badge h-6 no-underline hover:badge-primary">数字化转型
+</a><a href=/%E6%95%B0%E5%AD%97%E7%94%9F%E6%B4%BB/ class="badge h-6 no-underline hover:badge-primary">数字生活
+</a><a href=/%E6%95%B0%E5%AD%97%E5%8A%A9%E6%89%8B/ class="badge h-6 no-underline hover:badge-primary">数字助手
+</a><a href=/%E6%80%9D%E6%83%B3/ class="badge h-6 no-underline hover:badge-primary">思想
+</a><a href=/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/ class="badge h-6 no-underline hover:badge-primary">提示词工程
+</a><a href=/%E7%BD%91%E7%BB%9C/ class="badge h-6 no-underline hover:badge-primary">网络
+</a><a href=/%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/ class="badge h-6 no-underline hover:badge-primary">网络架构
+</a><a href=/%E7%BD%91%E7%AB%99%E8%BF%81%E7%A7%BB/ class="badge h-6 no-underline hover:badge-primary">网站迁移
+</a><a href=/%E5%BE%AE%E4%BF%A1/ class="badge h-6 no-underline hover:badge-primary">微信
+</a><a href=/%E6%9C%AA%E6%9D%A5%E6%B1%BD%E8%BD%A6/ class="badge h-6 no-underline hover:badge-primary">未来汽车
+</a><a href=/%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B/ class="badge h-6 no-underline hover:badge-primary">未来展望
+</a><a href=/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">文本处理
+</a><a href=/%E6%96%87%E6%A1%A3/ class="badge h-6 no-underline hover:badge-primary">文档
+</a><a href=/%E6%96%87%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">文化
+</a><a href=/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/ class="badge h-6 no-underline hover:badge-primary">文件传输
+</a><a href=/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">文件管理
+</a><a href=/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/ class="badge h-6 no-underline hover:badge-primary">文件系统
+</a><a href=/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/ class="badge h-6 no-underline hover:badge-primary">问题排查
+</a><a href=/%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/ class="badge h-6 no-underline hover:badge-primary">问题修复
+</a><a href=/%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91/ class="badge h-6 no-underline hover:badge-primary">系统开发
+</a><a href=/%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">系统原理
+</a><a href=/%E6%98%BE%E7%A4%BA%E5%99%A8/ class="badge h-6 no-underline hover:badge-primary">显示器
+</a><a href=/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">项目管理
+</a><a href=/%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA/ class="badge h-6 no-underline hover:badge-primary">项目展示
+</a><a href=/%E9%A1%B9%E7%9B%AE%E6%B2%BB%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">项目治理
+</a><a href=/%E6%95%88%E7%8E%87/ class="badge h-6 no-underline hover:badge-primary">效率
+</a><a href=/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/ class="badge h-6 no-underline hover:badge-primary">效率工具
+</a><a href=/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/ class="badge h-6 no-underline hover:badge-primary">效率提升
+</a><a href=/%E5%8D%8F%E8%AE%AE/ class="badge h-6 no-underline hover:badge-primary">协议
+</a><a href=/%E8%8A%AF%E7%89%87%E4%BA%A7%E4%B8%9A/ class="badge h-6 no-underline hover:badge-primary">芯片产业
+</a><a href=/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">性能优化
+</a><a href=/%E8%99%9A%E6%8B%9F%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">虚拟化
+</a><a href=/%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/ class="badge h-6 no-underline hover:badge-primary">虚拟环境
+</a><a href=/%E7%9C%BC%E9%95%9C/ class="badge h-6 no-underline hover:badge-primary">眼镜
+</a><a href=/%E9%9A%90%E7%A7%81%E5%AE%89%E5%85%A8/ class="badge h-6 no-underline hover:badge-primary">隐私安全
+</a><a href=/%E5%BA%94%E7%94%A8%E6%8D%9F%E5%9D%8F/ class="badge h-6 no-underline hover:badge-primary">应用损坏
+</a><a href=/%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3/ class="badge h-6 no-underline hover:badge-primary">应用网关
+</a><a href=/%E7%A1%AC%E4%BB%B6%E5%8A%A0%E5%AF%86/ class="badge h-6 no-underline hover:badge-primary">硬件加密
+</a><a href=/%E9%82%AE%E4%BB%B6/ class="badge h-6 no-underline hover:badge-primary">邮件
+</a><a href=/%E5%9F%9F%E5%90%8D%E9%87%8D%E5%AE%9A%E5%90%91/ class="badge h-6 no-underline hover:badge-primary">域名重定向
+</a><a href=/%E6%84%BF%E6%99%AF/ class="badge h-6 no-underline hover:badge-primary">愿景
+</a><a href=/%E4%BA%91%E5%AD%98%E5%82%A8/ class="badge h-6 no-underline hover:badge-primary">云存储
+</a><a href=/%E4%BA%91%E8%AE%A1%E7%AE%97/ class="badge h-6 no-underline hover:badge-primary">云计算
+</a><a href=/%E8%BF%90%E7%BB%B4/ class="badge h-6 no-underline hover:badge-primary">运维
+</a><a href=/%E8%BF%90%E7%BB%B4%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">运维技巧
+</a><a href=/%E7%85%A7%E7%89%87%E6%95%B4%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">照片整理
+</a><a href=/%E5%93%B2%E5%AD%A6%E6%80%9D%E8%80%83/ class="badge h-6 no-underline hover:badge-primary">哲学思考
+</a><a href=/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/ class="badge h-6 no-underline hover:badge-primary">正则表达式
+</a><a href=/%E7%9F%A5%E8%AF%86/ class="badge h-6 no-underline hover:badge-primary">知识
+</a><a href=/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/ class="badge h-6 no-underline hover:badge-primary">知识管理
+</a><a href=/%E8%81%8C%E5%9C%BA%E6%8A%80%E8%83%BD/ class="badge h-6 no-underline hover:badge-primary">职场技能
+</a><a href=/%E6%99%BA%E8%83%BD%E9%A9%BE%E9%A9%B6/ class="badge h-6 no-underline hover:badge-primary">智能驾驶
+</a><a href=/%E7%BB%88%E7%AB%AF/ class="badge h-6 no-underline hover:badge-primary">终端
+</a><a href=/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/ class="badge h-6 no-underline hover:badge-primary">终端工具
+</a><a href=/%E7%BB%88%E7%AB%AF%E6%8A%80%E5%B7%A7/ class="badge h-6 no-underline hover:badge-primary">终端技巧
+</a><a href=/%E7%BB%88%E8%BA%AB%E5%AD%A6%E4%B9%A0/ class="badge h-6 no-underline hover:badge-primary">终身学习
+</a><a href=/%E4%B8%93%E4%B8%9A%E5%8C%96ai/ class="badge h-6 no-underline hover:badge-primary">专业化AI
+</a><a href=/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/ class="badge h-6 no-underline hover:badge-primary">转义字符
+</a><a href=/%E5%AD%97%E4%BD%93%E8%AE%BE%E8%AE%A1/ class="badge h-6 no-underline hover:badge-primary">字体设计
+</a><a href=/%E8%87%AA%E5%8A%A8%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">自动化
+</a><a href=/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/ class="badge h-6 no-underline hover:badge-primary">自动化构建
+</a><a href=/%E8%87%AA%E5%8A%A8%E7%BC%A9%E8%BF%9B/ class="badge h-6 no-underline hover:badge-primary">自动缩进
+</a><a href=/%E7%BB%84%E7%BB%87%E6%96%87%E5%8C%96/ class="badge h-6 no-underline hover:badge-primary">组织文化
+</a><a href=/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/ class="badge h-6 no-underline hover:badge-primary">最佳实践</a></div></div><div class="divider divider-vertical md:divider-horizontal px-4 md:px-0"></div><div class=flex-1><div class=dream-grid><div class="w-full md:w-1/2 lg:w-1/3 p-4 dream-column"><a class="card bg-base-100 hover:bg-base-content/10 shadow-xl cursor-pointer dark:border dark:border-base-content/30" href=/2025/03/github-video-conversion-guide/><figure><img src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250317194206557.webp alt=打造动态吸睛的GitHub项目展示：视频转换与优化指南></figure><div class=card-body><h2 class=card-title>打造动态吸睛的GitHub项目展示：视频转换与优化指南</h2><p class="date text-base-content/60"><span data-format=luxon>2025-03-17T19:39:11+04:00</span></p><p>在GitHub项目README中展示动态演示效果，可以让你的项目更加直观、生动，大幅提升用户体验。本文将介绍如何将你的软件操作录屏转换为GitHub友好的格式，包括调整播放速度、优化文件大小，以及解决各种常见问题。</p><div class="card-actions justify-between items-center mt-4"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center"><ion-icon name=time class=mr-1></ion-icon><span>4分钟阅读</span></div></div></div></a></div></div></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js></script><script nomodule src=https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js></script></body></html>
