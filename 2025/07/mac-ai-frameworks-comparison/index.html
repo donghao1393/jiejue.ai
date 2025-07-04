@@ -1,0 +1,204 @@
+<!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战 | 爱解决</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/2025/07/mac-ai-frameworks-comparison/><meta name=author content="董昊"><meta name=description content="如果你拥有一台搭载M芯片的Mac，你可能已经感受到了苹果芯片在AI任务上的惊人表现。但作为开发者，你是否困惑过：面对MLX和PyTorch两套框架，该如何选择？这不仅仅是一个技术问题，更关乎Mac平台AI生态的未来走向。
+"><meta name=keywords content="MPS,MLX,PyTorch,Apple Silicon,机器学习,AI开发"><meta name=generator content="Hugo 0.147.9"><meta property="og:url" content="https://jiejue.ai/2025/07/mac-ai-frameworks-comparison/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战"><meta property="og:description" content="如果你拥有一台搭载M芯片的Mac，你可能已经感受到了苹果芯片在AI任务上的惊人表现。但作为开发者，你是否困惑过：面对MLX和PyTorch两套框架，该如何选择？这不仅仅是一个技术问题，更关乎Mac平台AI生态的未来走向。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-04T23:19:41+04:00"><meta property="article:modified_time" content="2025-07-04T23:26:38+04:00"><meta property="article:tag" content="MPS"><meta property="article:tag" content="MLX"><meta property="article:tag" content="PyTorch"><meta property="article:tag" content="Apple Silicon"><meta property="article:tag" content="机器学习"><meta property="article:tag" content="AI开发"><meta name=twitter:card content="summary"><meta name=twitter:title content="Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战"><meta name=twitter:description content="如果你拥有一台搭载M芯片的Mac，你可能已经感受到了苹果芯片在AI任务上的惊人表现。但作为开发者，你是否困惑过：面对MLX和PyTorch两套框架，该如何选择？这不仅仅是一个技术问题，更关乎Mac平台AI生态的未来走向。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/posts title=归档><ion-icon class=group-hover:text-primary-content name=archive></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/tags title=所有标签><ion-icon class=group-hover:text-primary-content name=pricetags></ion-icon></a></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战"><meta itemprop=description content="如果你拥有一台搭载M芯片的Mac，你可能已经感受到了苹果芯片在AI任务上的惊人表现。但作为开发者，你是否困惑过：面对MLX和PyTorch两套框架，该如何选择？这不仅仅是一个技术问题，更关乎Mac平台AI生态的未来走向。"><meta itemprop=datePublished content="2025-07-04T23:19:41+04:00"><meta itemprop=dateModified content="2025-07-04T23:26:38+04:00"><meta itemprop=wordCount content="3504"><meta itemprop=keywords content="MPS,MLX,PyTorch,Apple Silicon,机器学习,AI开发"><header><h1 itemprop=headline>Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战</h1><p class=text-sm><span data-format=luxon>2025-07-04T23:19:41+04:00</span>
+| <span>7分钟阅读</span>
+| <span>更新于
+<span data-format=luxon>2025-07-04T23:26:38+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Mac%e5%b9%b3%e5%8f%b0AI%e5%bc%80%e5%8f%91%e5%a4%a7%e5%88%86%e5%8f%89%ef%bc%9aMPS%e3%80%81MLX%e4%b8%8ePyTorch%e7%9a%84%e7%94%9f%e6%80%81%e4%b9%8b%e6%88%98&amp;url=https://jiejue.ai/2025/07/mac-ai-frameworks-comparison/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/2025/07/mac-ai-frameworks-comparison/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Mac%e5%b9%b3%e5%8f%b0AI%e5%bc%80%e5%8f%91%e5%a4%a7%e5%88%86%e5%8f%89%ef%bc%9aMPS%e3%80%81MLX%e4%b8%8ePyTorch%e7%9a%84%e7%94%9f%e6%80%81%e4%b9%8b%e6%88%98%20https://jiejue.ai/2025/07/mac-ai-frameworks-comparison/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704232154711.webp alt=Mac平台AI开发大分叉：MPS、MLX与PyTorch的生态之战><p>如果你拥有一台搭载M芯片的Mac，你可能已经感受到了苹果芯片在AI任务上的惊人表现。但作为开发者，你是否困惑过：面对MLX和PyTorch两套框架，该如何选择？这不仅仅是一个技术问题，更关乎Mac平台AI生态的未来走向。</p><h2 id=mps苹果为mac-ai加速埋下的种子>MPS：苹果为Mac AI加速埋下的种子</h2><p>首先，我们需要理解什么是MPS（Metal Performance Shaders）。想象一下，传统的电脑就像一个老式工厂，CPU是万能工人，什么活都能干，但速度有限；GPU则像专业流水线，擅长做重复性工作。苹果的MPS，就是让Mac的GPU专门为AI计算开辟了一条"高速公路"。</p><h3 id=mps与apple生态的关系>MPS与Apple生态的关系</h3><p>MPS并不是凭空出现的。它建立在苹果多年来在图形处理领域的积累之上：</p><pre class=mermaid>
+  graph TD
+    A[Metal Framework 2014] --&gt; B[Metal Performance Shaders 2015]
+    B --&gt; C[Core ML 2017]
+    C --&gt; D[Apple Silicon M1 2020]
+    D --&gt; E[MPS for PyTorch 2022]
+    E --&gt; F[MLX Framework 2023]
+    
+    style D fill:#e1f5fe
+    style F fill:#f3e5f5
+</pre><p>苹果的策略很清晰：从底层硬件到上层框架，构建一个完全掌控的AI计算栈。M芯片的统一内存架构（CPU和GPU共享内存）为这一战略提供了硬件基础，而MPS则是软件层面的核心技术。</p><h2 id=ai浪潮中的平台之争>AI浪潮中的平台之争</h2><p>随着ChatGPT等大模型引爆AI热潮，开发者们突然发现手中的Mac不再只是"工作电脑"，而是可以运行先进AI模型的"超级计算机"。但问题来了：用什么框架？</p><h3 id=传统格局cuda的统治与挑战>传统格局：CUDA的统治与挑战</h3><p>长期以来，AI开发几乎等同于NVIDIA CUDA开发。这就像修路只修一条主干道，所有人都走同一条路：</p><div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px;border-radius:10px;color:#fff;margin:20px 0"><strong>CUDA生态的优势：</strong><br>• 成熟的工具链和生态系统<br>• 丰富的预训练模型库<br>• 强大的性能优化<br>• 广泛的社区支持</div><p>但苹果选择了另一条路：自建生态。这就像在CUDA这条主干道旁，苹果修建了一条专为Mac用户设计的"专用车道"。</p><h2 id=两大框架的正面交锋>两大框架的正面交锋</h2><p>现在，Mac开发者面临两个选择：经过MPS优化的PyTorch，或者苹果原生的MLX。这不是简单的技术选择，而是两种哲学的碰撞。</p><h3 id=生态系统对比>生态系统对比</h3><pre class=mermaid>
+  mindmap
+  root((AI框架选择))
+    PyTorch with MPS
+      跨平台兼容
+        Windows/Linux/Mac
+        云端训练本地推理
+      成熟生态
+        HuggingFace Hub
+        50000+预训练模型
+        丰富的工具链
+      学习资源
+        大量教程
+        活跃社区
+        企业支持
+    MLX Native
+      Apple专用
+        统一内存优化
+        Metal深度集成
+        iOS/macOS原生
+      性能优先
+        专门优化
+        更高效率
+        更少内存占用
+      轻量设计
+        简洁API
+        快速启动
+        适合部署
+</pre><h3 id=性能数据对比>性能数据对比</h3><p>基于Apple官方测试数据，我们可以看到两个框架在同一硬件上的表现差异：</p><div style="display:flex;justify-content:space-between;margin:20px 0"><div style=flex:1;background:#f8f9fa;padding:15px;margin-right:10px;border-radius:8px><h4 style=color:#1976d2;margin-top:0>PyTorch MPS</h4><ul><li><strong>Llama 3.1-8B推理:</strong> ~26 tokens/s</li><li><strong>内存效率:</strong> 中等</li><li><strong>启动时间:</strong> 较慢</li><li><strong>兼容性:</strong> 部分操作需CPU回退</li></ul></div><div style=flex:1;background:#f3e5f5;padding:15px;margin-left:10px;border-radius:8px><h4 style=color:#7b1fa2;margin-top:0>MLX Native</h4><ul><li><strong>Llama 3.1-8B推理:</strong> ~33 tokens/s</li><li><strong>内存效率:</strong> 高</li><li><strong>启动时间:</strong> 快</li><li><strong>兼容性:</strong> 所有操作原生支持</li></ul></div></div><h3 id=sdpa算法实现质量>SDPA算法实现质量</h3><p>在核心的注意力机制（Scaled Dot-Product Attention）实现上，两个框架有明显差异：</p><p><strong>MLX的优势：</strong></p><ul><li>原生fused attention kernel</li><li>支持各种attention变体（Multi-Head、Grouped Query、Multi-Query）</li><li>高效的KV cache实现</li><li>无CPU回退需求</li></ul><p><strong>PyTorch MPS的挑战：</strong></p><ul><li>部分复杂attention操作仍需CPU执行</li><li>内存拷贝开销较大</li><li>某些优化在MPS上未实现</li><li>容易受macOS更新影响</li></ul><h3 id=代码风格对比同样的任务不同的实现>代码风格对比：同样的任务，不同的实现</h3><p>为了让大家直观感受两个框架的差异，我们来看看同一个任务在两个框架中的实现方式。以一个简单的图像分类模型为例：</p><p><strong>PyTorch + MPS 实现风格：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> torch
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torch.nn <span style=color:#66d9ef>as</span> nn
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> torchvision.models <span style=color:#66d9ef>as</span> models
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> torchvision <span style=color:#f92672>import</span> transforms
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 检查MPS设备可用性</span>
+</span></span><span style=display:flex><span>device <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>device(<span style=color:#e6db74>&#34;mps&#34;</span> <span style=color:#66d9ef>if</span> torch<span style=color:#f92672>.</span>backends<span style=color:#f92672>.</span>mps<span style=color:#f92672>.</span>is_available() <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#34;cpu&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;使用设备: </span><span style=color:#e6db74>{</span>device<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 加载预训练模型（丰富的模型库）</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>resnet50(pretrained<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>model<span style=color:#f92672>.</span>eval()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 图像预处理（成熟的工具链）</span>
+</span></span><span style=display:flex><span>transform <span style=color:#f92672>=</span> transforms<span style=color:#f92672>.</span>Compose([
+</span></span><span style=display:flex><span>    transforms<span style=color:#f92672>.</span>Resize(<span style=color:#ae81ff>256</span>),
+</span></span><span style=display:flex><span>    transforms<span style=color:#f92672>.</span>CenterCrop(<span style=color:#ae81ff>224</span>),
+</span></span><span style=display:flex><span>    transforms<span style=color:#f92672>.</span>ToTensor(),
+</span></span><span style=display:flex><span>    transforms<span style=color:#f92672>.</span>Normalize(mean<span style=color:#f92672>=</span>[<span style=color:#ae81ff>0.485</span>, <span style=color:#ae81ff>0.456</span>, <span style=color:#ae81ff>0.406</span>], 
+</span></span><span style=display:flex><span>                        std<span style=color:#f92672>=</span>[<span style=color:#ae81ff>0.229</span>, <span style=color:#ae81ff>0.224</span>, <span style=color:#ae81ff>0.225</span>])
+</span></span><span style=display:flex><span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 推理过程</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>classify_image</span>(image_path):
+</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> Image<span style=color:#f92672>.</span>open(image_path)
+</span></span><span style=display:flex><span>    input_tensor <span style=color:#f92672>=</span> transform(image)<span style=color:#f92672>.</span>unsqueeze(<span style=color:#ae81ff>0</span>)<span style=color:#f92672>.</span>to(device)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>with</span> torch<span style=color:#f92672>.</span>no_grad():
+</span></span><span style=display:flex><span>        outputs <span style=color:#f92672>=</span> model(input_tensor)
+</span></span><span style=display:flex><span>        probabilities <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>nn<span style=color:#f92672>.</span>functional<span style=color:#f92672>.</span>softmax(outputs[<span style=color:#ae81ff>0</span>], dim<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> probabilities
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用方式：直接调用成熟的API</span>
+</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> classify_image(<span style=color:#e6db74>&#34;cat.jpg&#34;</span>)
+</span></span></code></pre></div><p><strong>MLX 实现风格：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> mlx.core <span style=color:#66d9ef>as</span> mx
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> mlx.nn <span style=color:#66d9ef>as</span> nn
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> mlx.utils <span style=color:#f92672>import</span> tree_map
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># MLX自动使用最优设备，无需手动指定</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;MLX自动优化设备使用&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 定义模型结构（需要手动构建）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SimpleClassifier</span>(nn<span style=color:#f92672>.</span>Module):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, num_classes<span style=color:#f92672>=</span><span style=color:#ae81ff>1000</span>):
+</span></span><span style=display:flex><span>        super()<span style=color:#f92672>.</span><span style=color:#a6e22e>__init__</span>()
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>conv1 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Conv2d(<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>64</span>, kernel_size<span style=color:#f92672>=</span><span style=color:#ae81ff>7</span>, stride<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, padding<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>bn1 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>BatchNorm(<span style=color:#ae81ff>64</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>pool <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>MaxPool2d(kernel_size<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, stride<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, padding<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>fc <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>64</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>56</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>56</span>, num_classes)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__call__</span>(self, x):
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> mx<span style=color:#f92672>.</span>maximum(self<span style=color:#f92672>.</span>bn1(self<span style=color:#f92672>.</span>conv1(x)), <span style=color:#ae81ff>0</span>)  <span style=color:#75715e># ReLU</span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>pool(x)
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> x<span style=color:#f92672>.</span>reshape(x<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>], <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>fc(x)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 创建模型</span>
+</span></span><span style=display:flex><span>model <span style=color:#f92672>=</span> SimpleClassifier()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 图像预处理（需要手动实现）</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>preprocess_image</span>(image_path):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 简化的预处理流程</span>
+</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> mx<span style=color:#f92672>.</span>array(load_image(image_path))  <span style=color:#75715e># 需要自己实现load_image</span>
+</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> mx<span style=color:#f92672>.</span>transpose(image, (<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>))  <span style=color:#75715e># HWC -&gt; CHW</span>
+</span></span><span style=display:flex><span>    image <span style=color:#f92672>=</span> image <span style=color:#f92672>/</span> <span style=color:#ae81ff>255.0</span>  <span style=color:#75715e># 归一化</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> mx<span style=color:#f92672>.</span>expand_dims(image, <span style=color:#ae81ff>0</span>)  <span style=color:#75715e># 添加batch维度</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 推理过程</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>classify_image_mlx</span>(image_path):
+</span></span><span style=display:flex><span>    input_tensor <span style=color:#f92672>=</span> preprocess_image(image_path)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># MLX的延迟计算特性</span>
+</span></span><span style=display:flex><span>    logits <span style=color:#f92672>=</span> model(input_tensor)
+</span></span><span style=display:flex><span>    probabilities <span style=color:#f92672>=</span> mx<span style=color:#f92672>.</span>softmax(logits, axis<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 执行计算</span>
+</span></span><span style=display:flex><span>    mx<span style=color:#f92672>.</span>eval(probabilities)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> probabilities
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用方式：更多手动工作，但性能更优</span>
+</span></span><span style=display:flex><span>result <span style=color:#f92672>=</span> classify_image_mlx(<span style=color:#e6db74>&#34;cat.jpg&#34;</span>)
+</span></span></code></pre></div><h3 id=代码风格差异解读>代码风格差异解读</h3><p>即使不懂编程，你也能从代码对比中感受到两种不同的设计哲学：</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0"><div style=background:#e3f2fd;padding:15px;border-radius:8px><h4 style=color:#1976d2;margin-top:0>🧰 PyTorch：工具箱式</h4><ul><li><strong>"拿来即用"</strong>：预训练模型一行代码搞定</li><li><strong>"电器化"</strong>：需要明确告诉系统用哪个设备</li><li><strong>"标准化"</strong>：图像处理有现成的标准流程</li><li><strong>"积木式"</strong>：各种功能模块可以随意组合</li></ul></div><div style=background:#f3e5f5;padding:15px;border-radius:8px><h4 style=color:#7b1fa2;margin-top:0>⚡ MLX：手工艺式</h4><ul><li><strong>"量身定制"</strong>：需要手动构建适合的模型结构</li><li><strong>"智能化"</strong>：自动选择最佳的计算方式</li><li><strong>"精简化"</strong>：代码更简洁，但需要更多背景知识</li><li><strong>"性能导向"</strong>：每一行代码都为效率优化</li></ul></div></div><p>就像<strong>买衣服</strong>一样：PyTorch像是去商场，各种成衣应有尽有，拿了就能穿；MLX像是找裁缝定制，需要自己提供设计想法，但最终的合身程度会更好。</p><h2 id=开发者的现实选择>开发者的现实选择</h2><p>虽然MLX在性能上有优势，但选择框架需要考虑更多因素。让我用一个类比来说明：</p><div style="background:#fff3e0;border-left:4px solid #ff9800;padding:15px;margin:20px 0"><strong>中药配方的比喻：</strong><br><br><strong>MLX</strong> 就像一个刚开垦的小药圃，只有几味品质极佳的药材，药性纯正，但要配个完整方子还得等它慢慢长大。<br><br><strong>PyTorch</strong> 则像一家百年老药房，什么疑难杂症都能找到对症的药，虽然个别药材（MPS支持）品质还需改进，但至少能立即开方治病。</div><h3 id=实际使用场景分析>实际使用场景分析</h3><pre class=mermaid>
+  flowchart TD
+    A[我要开发AI应用] --&gt; B{项目类型？}
+    
+    B --&gt;|研究实验| C{平台需求？}
+    B --&gt;|产品开发| D{目标用户？}
+    B --&gt;|性能优化| E{关键指标？}
+    
+    C --&gt;|仅Mac| F[考虑MLX]
+    C --&gt;|跨平台| G[选择PyTorch]
+    
+    D --&gt;|Mac/iOS用户| H[优先MLX]
+    D --&gt;|通用用户| I[选择PyTorch]
+    
+    E --&gt;|推理速度| J[MLX更优]
+    E --&gt;|开发效率| K[PyTorch更优]
+    
+    F --&gt; L{生态需求？}
+    G --&gt; M[PyTorch + MPS]
+    H --&gt; N{开发资源？}
+    I --&gt; M
+    J --&gt; L
+    K --&gt; M
+    
+    L --&gt;|需要丰富模型| O[PyTorch + 手动转换]
+    L --&gt;|从零开始| P[直接用MLX]
+    
+    N --&gt;|资源充足| P
+    N --&gt;|快速开发| Q[PyTorch + 后期迁移]
+    
+    style F fill:#e8f5e8
+    style P fill:#e8f5e8
+    style M fill:#fff2e8
+    style O fill:#fff2e8
+    style Q fill:#fff2e8
+</pre><h2 id=对mac-ai生态的影响>对Mac AI生态的影响</h2><p>这场框架之争的结果将深刻影响Mac平台的AI发展方向：</p><h3 id=短期影响1-2年>短期影响（1-2年）</h3><p><strong>如果PyTorch MPS持续改进：</strong></p><ul><li>Mac将更好地融入主流AI开发生态</li><li>开发者学习成本较低</li><li>更多AI应用会原生支持Mac</li></ul><p><strong>如果MLX快速发展：</strong></p><ul><li>Apple可能推动更多专有AI功能</li><li>Mac在AI推理场景有独特优势</li><li>可能出现平台分化</li></ul><h3 id=长期影响3-5年>长期影响（3-5年）</h3><p>最可能的情况是<strong>混合生态</strong>的形成：</p><ol><li><strong>PyTorch + MPS</strong>：主流AI开发、研究、训练</li><li><strong>MLX</strong>：高性能推理、Apple生态应用、移动端部署</li><li><strong>相互促进</strong>：MLX的优化经验反馈到PyTorch MPS</li></ol><h3 id=给开发者的建议>给开发者的建议</h3><p>对于不同类型的开发者，我的建议是：</p><p><strong>学生/研究者：</strong></p><ul><li>优先学习PyTorch，生态完整，学习资源丰富</li><li>了解MLX基础，关注其发展动态</li></ul><p><strong>企业开发者：</strong></p><ul><li>根据产品需求选择：跨平台用PyTorch，Apple专用考虑MLX</li><li>可以采用"PyTorch开发，MLX部署"的策略</li></ul><p><strong>个人开发者：</strong></p><ul><li>如果只做Mac/iOS应用，可以大胆尝试MLX</li><li>如果需要快速产品化，仍然推荐PyTorch</li></ul><h2 id=技术路线建议>技术路线建议</h2><p>基于当前生态状况，我建议采用<strong>渐进式策略</strong>：</p><pre class=mermaid>
+  gantt
+    title Mac AI开发技术路线图
+    dateFormat  YYYY-MM
+    section 短期策略
+    学习PyTorch基础    :done, pytorch-basic, 2024-01, 2024-06
+    掌握MPS使用       :done, mps-usage, 2024-03, 2024-08
+    贡献MPS优化       :active, mps-contrib, 2024-06, 2025-06
+    section 中期策略
+    实验MLX项目       :mlx-exp, 2024-09, 2025-03
+    性能对比测试      :perf-test, 2025-01, 2025-06
+    section 长期策略
+    混合方案部署      :hybrid, 2025-03, 2026-01
+    生态选择确定      :eco-choice, 2025-06, 2026-06
+</pre><p><strong>具体行动建议：</strong></p><ol><li><strong>当前阶段</strong>：专注PyTorch MPS，为关键算法（如SDPA）贡献优化代码</li><li><strong>实验阶段</strong>：在非关键项目中尝试MLX，积累经验</li><li><strong>决策阶段</strong>：根据项目需求和生态发展情况，选择最适合的技术栈</li></ol><h2 id=结语>结语</h2><p>Mac平台的AI框架之争，本质上反映了技术发展的两种路径：开放生态vs封闭优化。PyTorch代表了开放、兼容的发展思路，而MLX体现了苹果一贯的垂直整合策略。</p><p>作为开发者，我们既要关注性能数据，更要考虑生态完整性。当前阶段，<strong>为PyTorch MPS贡献代码，同时关注MLX发展</strong>，可能是最明智的选择。毕竟，良好的工具不仅要跑得快，更要让开发者能够快速构建出真正有用的应用。</p><p>这场生态之战的最终赢家，或许不是某一个框架的完全胜利，而是两种路径的互相促进，最终为Mac用户带来更好的AI体验。</p><hr><p><em>你的Mac已经为AI时代做好了准备，现在轮到你选择合适的工具，开始你的AI开发之旅了。</em></p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><div></div><a role=button class="btn btn-outline h-12" href=/2025/07/it-skill-map-guide/ title=IT技能大陆：你的数字冒险指南><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
+<span class="max-w-48 truncate">IT技能大陆：你的数字冒险指南</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/2025/07/mac-ai-frameworks-comparison/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#mps苹果为mac-ai加速埋下的种子>MPS：苹果为Mac AI加速埋下的种子</a><ul><li><a href=#mps与apple生态的关系>MPS与Apple生态的关系</a></li></ul></li><li><a href=#ai浪潮中的平台之争>AI浪潮中的平台之争</a><ul><li><a href=#传统格局cuda的统治与挑战>传统格局：CUDA的统治与挑战</a></li></ul></li><li><a href=#两大框架的正面交锋>两大框架的正面交锋</a><ul><li><a href=#生态系统对比>生态系统对比</a></li><li><a href=#性能数据对比>性能数据对比</a></li><li><a href=#sdpa算法实现质量>SDPA算法实现质量</a></li><li><a href=#代码风格对比同样的任务不同的实现>代码风格对比：同样的任务，不同的实现</a></li><li><a href=#代码风格差异解读>代码风格差异解读</a></li></ul></li><li><a href=#开发者的现实选择>开发者的现实选择</a><ul><li><a href=#实际使用场景分析>实际使用场景分析</a></li></ul></li><li><a href=#对mac-ai生态的影响>对Mac AI生态的影响</a><ul><li><a href=#短期影响1-2年>短期影响（1-2年）</a></li><li><a href=#长期影响3-5年>长期影响（3-5年）</a></li><li><a href=#给开发者的建议>给开发者的建议</a></li></ul></li><li><a href=#技术路线建议>技术路线建议</a></li><li><a href=#结语>结语</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
