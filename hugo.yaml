@@ -1,0 +1,156 @@
+baseURL: https://jiejue.ai/
+languageCode: zh-cn
+defaultContentLanguage: zh
+title: 爱解决
+theme: hugo-theme-dream
+# 确保页面生成时更新lastmod时间
+enableGitInfo: true
+enableRobotsTXT: true
+
+hasCJKLanguage: true
+# 使用html尾缀
+uglyURLs: false
+module:
+  mounts:
+    - includeFiles:
+        - search/_index.md
+        - "**/index.md"
+        - "**/index_**.md"
+      source: content
+      target: content
+services:
+  disqus: {}
+  googleAnalytics:
+    ID: G-S0KCH9BW4F
+params:
+  # 背景图片
+  background: "#f7f7f7"
+  # 标题配置
+  headerTitle: 爱解决
+  motto: 用AI为人民服务
+  # 其他配置
+  siteStartYear: 2025
+  favicon: /favicon.ico
+  darkMode: true
+  lightTheme: emerald
+  darkTheme: forest
+  # backgroundImage: "me/background.jpg"
+  # backgroundImageDark: ""
+  # 作者信息
+  author: 董昊
+  avatar: /favicon.ico
+  description: 硅基生物幼稚园协调员
+  footerBottomText: 硅基生物幼稚园
+  rss: true
+  # Syntax highlighting
+  # customSyntaxHighlighting: true
+  # options
+  stickyNav: true
+  reorderNavItems:
+    - search
+    - rss
+    - posts
+    - categories
+    - tags
+  collapseNavItems:
+    - posts
+    - categories
+    - tags
+  # noDefaultSummaryCover: true
+  showTableOfContents: true
+  showSummaryCoverInPost: true
+  imageZoomableInPost: true
+  showPrevNextPost: true
+  # reorderShares:
+  #   - x
+  #   - facebook
+  #   - whatsapp
+  # 社交链接 >>
+  # social:
+  #   github: donghao1393
+  #   linkedin: donghao1393
+  #   twitter: donghao1393
+  # << not supported yet in the theme
+  # navItems:
+  #   github:
+  #     href: https://github.com/
+  #     target: _blank
+  #     icon: logo-github
+  #     title: GitHub
+  #   linkedin:
+  #     href: https://linkedin.com/in/
+  #     target: _blank
+  #     icon: logo-linkedin
+  #     title: Linkedin
+  #   twitter:
+  #     href: https://twitter.com/
+  #     target: _blank
+  #     icon: logo-twitter
+  #     title: Twitter
+  #   email:
+  #     href: "mailto:"
+  #     target: _blank
+  #     icon: mail-outline
+  #     title: Email
+  #   wechat:
+  #     href: ""
+  #     target: _blank
+  #     icon: logo-wechat
+  #     title: WeChat
+  # advanced:
+  #   customCSS:
+  #     - css/custom.css
+  #   customJS: []
+  experimental:
+    jsDate: true
+    jsDateFormat: yyyy年MM月dd日 HH:mm
+  # 添加不蒜子计数
+  busuanzi:
+    enable: true
+    # 是否开启全站独立访客数
+    site_uv: true
+    # 全站独立访客数前的图标或提示语
+    site_uv_pre: <i class="fa fa-user"></i>
+    # 全站独立访客数后的图标或提示语
+    site_uv_post: ""
+    # 是否开启全站浏览量
+    site_pv: true
+    # 全站浏览量前的图标或提示语
+    site_pv_pre: <i class="fa fa-eye"></i>
+    # 全站浏览量后的图标或提示语
+    site_pv_post: ""
+    # 是否开启单页浏览量
+    page_pv: true
+    # 单页浏览量前的图标或提示语
+    page_pv_pre: <i class="far fa-eye fa-fw"></i>
+    # 单页浏览量后的图标或提示语
+    page_pv_post: ""
+  # Twikoo评论系统
+  twikoo:
+    enabled: true
+    envID: https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/
+    region: ap-east-1
+    lang: zh-CN
+permalinks:
+  posts: /:year/:month/:slug/
+  tags: /:slug/
+# Markup 配置
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+            - - $
+              - $
+
