@@ -23,6 +23,7 @@ Gemfile.lock
 /resources/
 content/posts/*/**
 !content/posts/*/index.md
+!content/posts/*/index.ru.md
 !content/posts/*/index_*.md
 
 # For Claude
