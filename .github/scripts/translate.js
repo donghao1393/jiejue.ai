@@ -125,7 +125,20 @@ async function processMarkdownFile(filePath) {
   const translatedBody = translatedParagraphs.join('\n\n');
   
   // 构建俄语版本的完整内容
-  const ruContent = matter.stringify(translatedBody, translatedAttributes);
+  // 手动构建markdown内容（front-matter格式）
+  const frontMatterYaml = Object.keys(translatedAttributes).map(key => {
+    const value = translatedAttributes[key];
+    if (Array.isArray(value)) {
+      return `${key}:\n${value.map(item => `  - ${JSON.stringify(item)}`).join('\n')}`;
+    } else if (typeof value === 'string') {
+      return `${key}: ${JSON.stringify(value)}`;
+    } else {
+      return `${key}: ${value}`;
+    }
+  }).join('\n');
+  
+  const ruContent = `---\n${frontMatterYaml}\n---\n\n${translatedBody}`;
+
   
   // 确保目录存在并写入文件
   await fs.ensureDir(path.dirname(ruPath));
