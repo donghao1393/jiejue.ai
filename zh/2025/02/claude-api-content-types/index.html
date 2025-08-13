@@ -1,0 +1,145 @@
+<!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Claude API 的消息内容类型详解 | 爱解决</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/zh/2025/02/claude-api-content-types/><meta name=author content="董昊"><meta name=description content="最近在深入研究 Claude API 时，发现官方文档对消息内容类型的描述比较分散。本文将系统地介绍 Claude API 中的各种内容类型、数据格式以及最佳实践方式。
+"><meta name=keywords content="API,Claude,LLM"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/zh/2025/02/claude-api-content-types/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="Claude API 的消息内容类型详解"><meta property="og:description" content="最近在深入研究 Claude API 时，发现官方文档对消息内容类型的描述比较分散。本文将系统地介绍 Claude API 中的各种内容类型、数据格式以及最佳实践方式。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-02-18T20:50:05+04:00"><meta property="article:modified_time" content="2025-05-01T19:59:05+04:00"><meta property="article:tag" content="API"><meta property="article:tag" content="Claude"><meta property="article:tag" content="LLM"><meta name=twitter:card content="summary"><meta name=twitter:title content="Claude API 的消息内容类型详解"><meta name=twitter:description content="最近在深入研究 Claude API 时，发现官方文档对消息内容类型的描述比较分散。本文将系统地介绍 Claude API 中的各种内容类型、数据格式以及最佳实践方式。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/zh class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/zh/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/zh/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/zh/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title=切换语言><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">中文</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/ hreflang=ru class="flex items-center gap-2"><span class="flag flag-ru"></span>
+<span class=language-name>Русский</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Claude API 的消息内容类型详解"><meta itemprop=description content="最近在深入研究 Claude API 时，发现官方文档对消息内容类型的描述比较分散。本文将系统地介绍 Claude API 中的各种内容类型、数据格式以及最佳实践方式。"><meta itemprop=datePublished content="2025-02-18T20:50:05+04:00"><meta itemprop=dateModified content="2025-05-01T19:59:05+04:00"><meta itemprop=wordCount content="1070"><meta itemprop=keywords content="API,Claude,LLM"><header><h1 itemprop=headline>Claude API 的消息内容类型详解</h1><p class=text-sm><span data-format=luxon>2025-02-18T20:50:05+04:00</span>
+| <span>3分钟阅读</span>
+| <span>更新于
+<span data-format=luxon>2025-05-01T19:59:05+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Claude%20API%20%e7%9a%84%e6%b6%88%e6%81%af%e5%86%85%e5%ae%b9%e7%b1%bb%e5%9e%8b%e8%af%a6%e8%a7%a3&amp;url=https://jiejue.ai/zh/2025/02/claude-api-content-types/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/zh/2025/02/claude-api-content-types/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Claude%20API%20%e7%9a%84%e6%b6%88%e6%81%af%e5%86%85%e5%ae%b9%e7%b1%bb%e5%9e%8b%e8%af%a6%e8%a7%a3%20https://jiejue.ai/zh/2025/02/claude-api-content-types/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218205523451.webp alt="Claude API 的消息内容类型详解"><p>最近在深入研究 Claude API 时，发现官方文档对消息内容类型的描述比较分散。本文将系统地介绍 Claude API 中的各种内容类型、数据格式以及最佳实践方式。</p><h2 id=消息结构概览>消息结构概览</h2><p>Claude API 支持 JSON 和 XML 两种格式。两种格式各有特点：</p><ul><li>JSON 格式更适合程序化调用</li><li>XML 格式更适合在提示词中使用</li></ul><p>一个完整的消息结构应该包含：</p><pre class=mermaid>
+  graph TD
+    A[Messages] --&gt; B[系统级配置]
+    A --&gt; C[项目指令]
+    A --&gt; D[文档内容]
+    A --&gt; E[用户消息]
+    D --&gt; D1[文本文档]
+    D --&gt; D2[PDF文档]
+    D --&gt; D3[内容块]
+    D --&gt; D4[图片]
+</pre><h2 id=内容类型详解>内容类型详解</h2><p>Claude API 支持以下几种内容类型：</p><h3 id=1-text-类型>1. text 类型</h3><p>最基础的文本类型，支持普通文本内容：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;text&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;文本内容&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;source&#34;</span>: <span style=color:#e6db74>&#34;source.txt&#34;</span>,        <span style=color:#75715e>// 可选
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;文档标题&#34;</span>,           <span style=color:#75715e>// 可选
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#f92672>&#34;context&#34;</span>: <span style=color:#e6db74>&#34;文档说明&#34;</span>          <span style=color:#75715e>// 可选
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><h3 id=2-pdf-类型>2. pdf 类型</h3><p>用于处理 PDF 文档：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;pdf&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;source&#34;</span>: <span style=color:#e6db74>&#34;document.pdf&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;&lt;base64 encoded content&gt;&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;context&#34;</span>: <span style=color:#e6db74>&#34;PDF document metadata&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=3-content-类型>3. content 类型</h3><p>用于结构化的内容块：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;content&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;content&#34;</span>: [
+</span></span><span style=display:flex><span>    {<span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;第一个内容块&#34;</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;第二个内容块&#34;</span>}
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;source&#34;</span>: <span style=color:#e6db74>&#34;structured.txt&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=4-image-类型>4. image 类型</h3><p>用于处理图片内容：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;image&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;source&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;base64&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;media_type&#34;</span>: <span style=color:#e6db74>&#34;image/jpeg&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;data&#34;</span>: <span style=color:#e6db74>&#34;&lt;base64 encoded image&gt;&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=最佳实践示例>最佳实践示例</h2><p>下面是一个完整的 API 调用示例，展示如何组织多种内容类型：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> anthropic
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> base64
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>client <span style=color:#f92672>=</span> anthropic<span style=color:#f92672>.</span>Anthropic()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 准备 PDF 内容</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> open(<span style=color:#e6db74>&#34;document.pdf&#34;</span>, <span style=color:#e6db74>&#34;rb&#34;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>    pdf_content <span style=color:#f92672>=</span> base64<span style=color:#f92672>.</span>b64encode(f<span style=color:#f92672>.</span>read())<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 准备图片内容</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> open(<span style=color:#e6db74>&#34;image.jpg&#34;</span>, <span style=color:#e6db74>&#34;rb&#34;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>    image_content <span style=color:#f92672>=</span> base64<span style=color:#f92672>.</span>b64encode(f<span style=color:#f92672>.</span>read())<span style=color:#f92672>.</span>decode()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 创建消息</span>
+</span></span><span style=display:flex><span>message <span style=color:#f92672>=</span> client<span style=color:#f92672>.</span>messages<span style=color:#f92672>.</span>create(
+</span></span><span style=display:flex><span>    model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;claude-3-5-sonnet-20241022&#34;</span>,
+</span></span><span style=display:flex><span>    max_tokens<span style=color:#f92672>=</span><span style=color:#ae81ff>1024</span>,
+</span></span><span style=display:flex><span>    messages<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;role&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;content&#34;</span>: [
+</span></span><span style=display:flex><span>                <span style=color:#75715e># 系统指令</span>
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;text&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;使用以下规则处理文档...&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;context&#34;</span>: <span style=color:#e6db74>&#34;system instructions&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;processing_rules.md&#34;</span>
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#75715e># PDF 文档</span>
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;pdf&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;source&#34;</span>: <span style=color:#e6db74>&#34;document.pdf&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;text&#34;</span>: pdf_content,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;context&#34;</span>: <span style=color:#e6db74>&#34;Main document for analysis&#34;</span>
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#75715e># 结构化内容</span>
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;content&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;content&#34;</span>: [
+</span></span><span style=display:flex><span>                        {<span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;Section 1: Introduction&#34;</span>},
+</span></span><span style=display:flex><span>                        {<span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;Section 2: Methods&#34;</span>}
+</span></span><span style=display:flex><span>                    ],
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;source&#34;</span>: <span style=color:#e6db74>&#34;outline.txt&#34;</span>
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#75715e># 图片</span>
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;image&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;source&#34;</span>: {
+</span></span><span style=display:flex><span>                        <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;base64&#34;</span>,
+</span></span><span style=display:flex><span>                        <span style=color:#e6db74>&#34;media_type&#34;</span>: <span style=color:#e6db74>&#34;image/jpeg&#34;</span>,
+</span></span><span style=display:flex><span>                        <span style=color:#e6db74>&#34;data&#34;</span>: image_content
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#75715e># 用户问题</span>
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;text&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;分析上述文档和图片的内容&#34;</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            ]
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    ]
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p>如果在提示词中使用 XML 格式，可以这样组织：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#f92672>&lt;document&gt;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&lt;source&gt;</span>main_doc.pdf<span style=color:#f92672>&lt;/source&gt;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&lt;context&gt;</span>主文档内容<span style=color:#f92672>&lt;/context&gt;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&lt;content&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;text&gt;</span>文档内容...<span style=color:#f92672>&lt;/text&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;image&gt;</span>base64编码的图片内容<span style=color:#f92672>&lt;/image&gt;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&lt;/content&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/document&gt;</span>
+</span></span></code></pre></div><h2 id=关键注意事项>关键注意事项</h2><ol><li><p><strong>内容顺序</strong></p><ul><li>系统指令应放在最前面</li><li>文档内容按重要性排序</li><li>用户实际问题放在最后</li></ul></li><li><p><strong>字段使用</strong></p><ul><li><code>context</code> 字段用于提供元数据说明</li><li><code>title</code> 字段用于简短标识</li><li><code>source</code> 字段用于文件溯源</li></ul></li><li><p><strong>性能优化</strong></p><ul><li>使用文档引用避免重复内容</li><li>PDF 和图片注意大小限制（32MB）</li><li>合理使用 prompt caching</li></ul></li></ol><h2 id=使用建议>使用建议</h2><ol><li><p><strong>保持一致性</strong></p><ul><li>JSON 或 XML 格式选择一种并坚持使用</li><li>标签命名保持统一</li><li>文档引用方式保持一致</li></ul></li><li><p><strong>结构化管理</strong></p><ul><li>使用嵌套结构表达层级关系</li><li>合理组织多文档的顺序</li><li>清晰标注文档类型和用途</li></ul></li><li><p><strong>错误处理</strong></p><ul><li>验证 base64 编码的完整性</li><li>检查文件大小限制</li><li>处理格式转换异常</li></ul></li></ol><h2 id=结语>结语</h2><p>熟练运用 Claude API 的各种内容类型，可以大大提升工作效率。关键是要理解每种类型的特点和适用场景，并在实践中不断优化使用方式。希望本文能帮助你更好地使用 Claude API。</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/zh/2025/02/fish-shell-safety-programming/ title="Fish Shell 的安全编程：从文件重命名说起"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">上一页</span>
+<span class="max-w-48 truncate">Fish Shell 的安全编程：从文件重命名说起</span></div></a><a role=button class="btn btn-outline h-12" href=/zh/2025/02/how-to-remove-sensitive-files-from-git-history/ title="如何从 Git 历史中优雅地移除敏感文件"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
+<span class="max-w-48 truncate">如何从 Git 历史中优雅地移除敏感文件</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/zh/2025/02/claude-api-content-types/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#消息结构概览>消息结构概览</a></li><li><a href=#内容类型详解>内容类型详解</a><ul><li><a href=#1-text-类型>1. text 类型</a></li><li><a href=#2-pdf-类型>2. pdf 类型</a></li><li><a href=#3-content-类型>3. content 类型</a></li><li><a href=#4-image-类型>4. image 类型</a></li></ul></li><li><a href=#最佳实践示例>最佳实践示例</a></li><li><a href=#关键注意事项>关键注意事项</a></li><li><a href=#使用建议>使用建议</a></li><li><a href=#结语>结语</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
