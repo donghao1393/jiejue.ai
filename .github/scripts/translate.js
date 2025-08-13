@@ -147,6 +147,14 @@ async function processMarkdownFile(filePath) {
     return placeholder;
   });
 
+  // 保护HTML标签（包含属性）
+  bodyToTranslate = bodyToTranslate.replace(/<[^>]+>/g, (match) => {
+    const placeholder = `__PROTECTED_HTML_TAG_${blockIndex}__`;
+    protectedBlocks[blockIndex] = match;
+    blockIndex++;
+    return placeholder;
+  });
+
   // 翻译处理后的内容
   const translatedBody = await translateWithDeepL(bodyToTranslate);
 
@@ -158,6 +166,7 @@ async function processMarkdownFile(filePath) {
     const linkPlaceholder = `__PROTECTED_LINK_URL_${i}__`;
     const imagePlaceholder = `__PROTECTED_IMAGE_${i}__`;
     const shortcodePlaceholder = `__PROTECTED_SHORTCODE_${i}__`;
+    const htmlTagPlaceholder = `__PROTECTED_HTML_TAG_${i}__`;
 
     // 按类型恢复内容
     finalBody = finalBody.replace(new RegExp(codeBlockPlaceholder, 'g'), protectedBlocks[i]);
@@ -165,6 +174,7 @@ async function processMarkdownFile(filePath) {
     finalBody = finalBody.replace(new RegExp(linkPlaceholder, 'g'), protectedBlocks[i]);
     finalBody = finalBody.replace(new RegExp(imagePlaceholder, 'g'), protectedBlocks[i]);
     finalBody = finalBody.replace(new RegExp(shortcodePlaceholder, 'g'), protectedBlocks[i]);
+    finalBody = finalBody.replace(new RegExp(htmlTagPlaceholder, 'g'), protectedBlocks[i]);
   }
   
   // 构建俄语版本的完整内容
