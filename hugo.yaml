@@ -1,7 +1,21 @@
 baseURL: https://jiejue.ai/
-languageCode: zh-cn
 defaultContentLanguage: zh
-title: 爱解决
+defaultContentLanguageInSubdir: true
+languages:
+  zh:
+    languageCode: zh-cn
+    languageName: 中文
+    title: 爱解决
+    weight: 1 
+    params:
+      description: "一个热爱解决问题的网站"
+  ru:
+    languageCode: ru-RU
+    languageName: Русский
+    title: ЛюбимРешать
+    weight: 2
+    params:
+      description: "Сайт, который любит решать проблемы"
 theme: hugo-theme-dream
 # 确保页面生成时更新lastmod时间
 enableGitInfo: true
@@ -15,7 +29,9 @@ module:
     - includeFiles:
         - search/_index.md
         - "**/index.md"
+        - "**/index.ru.md"
         - "**/index_**.md"
+        - "**/index_**.ru.md"
       source: content
       target: content
 services:
@@ -28,6 +44,13 @@ params:
   # 标题配置
   headerTitle: 爱解决
   motto: 用AI为人民服务
+  # 如果想要顶部右侧独立显示
+  # languageSwitcherPosition: "inline"
+  # 如果想要两个地方都显示
+  # languageSwitcherPosition: "both"
+  # 如果想要只在下拉菜单中显示
+  # languageSwitcherPosition: "dropdown"
+  languageSwitcherPosition: "inline"
   # 其他配置
   siteStartYear: 2025
   favicon: /favicon.ico
@@ -39,13 +62,13 @@ params:
   # 作者信息
   author: 董昊
   avatar: /favicon.ico
-  description: 硅基生物幼稚园协调员
-  footerBottomText: 硅基生物幼稚园
+  footerBottomText: "一个热爱解决问题的网站"
   rss: true
   # Syntax highlighting
   # customSyntaxHighlighting: true
   # options
   stickyNav: true
+  # Language switcher options: "inline" (top right), "dropdown" (only in menu), "both" (default)
   reorderNavItems:
     - search
     - rss
