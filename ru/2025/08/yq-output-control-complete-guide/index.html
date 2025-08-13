@@ -1,0 +1,316 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/08/yq-output-control-complete-guide/><meta name=author content="董昊"><meta name=description content="Представьте, что вы - инженер DevOps, у которого под рукой сложный конфигурационный файл Kubernetes, содержащий информацию о конфигурации десятков сервисов. Внезапно руководство просит вас извлечь таблицу Excel с именами, номерами версий и конфигурациями ресурсов всех сервисов. Использование традиционных методов может потребовать многочасового ручного копирования и вставки, но, овладев навыками управления выводом yq, эту задачу можно решить с помощью всего одной строки команды.
+"><meta name=keywords content="Yq,YAML,DevOps,Управление Конфигурацией,Обработка Данных"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/08/yq-output-control-complete-guide/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат"><meta property="og:description" content="Представьте, что вы - инженер DevOps, у которого под рукой сложный конфигурационный файл Kubernetes, содержащий информацию о конфигурации десятков сервисов. Внезапно руководство просит вас извлечь таблицу Excel с именами, номерами версий и конфигурациями ресурсов всех сервисов. Использование традиционных методов может потребовать многочасового ручного копирования и вставки, но, овладев навыками управления выводом yq, эту задачу можно решить с помощью всего одной строки команды."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-08-11T18:58:27+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Yq"><meta property="article:tag" content="YAML"><meta property="article:tag" content="DevOps"><meta property="article:tag" content="Управление Конфигурацией"><meta property="article:tag" content="Обработка Данных"><meta name=twitter:card content="summary"><meta name=twitter:title content="Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат"><meta name=twitter:description content="Представьте, что вы - инженер DevOps, у которого под рукой сложный конфигурационный файл Kubernetes, содержащий информацию о конфигурации десятков сервисов. Внезапно руководство просит вас извлечь таблицу Excel с именами, номерами версий и конфигурациями ресурсов всех сервисов. Использование традиционных методов может потребовать многочасового ручного копирования и вставки, но, овладев навыками управления выводом yq, эту задачу можно решить с помощью всего одной строки команды."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/08/yq-output-control-complete-guide/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат"><meta itemprop=description content="Представьте, что вы - инженер DevOps, у которого под рукой сложный конфигурационный файл Kubernetes, содержащий информацию о конфигурации десятков сервисов. Внезапно руководство просит вас извлечь таблицу Excel с именами, номерами версий и конфигурациями ресурсов всех сервисов. Использование традиционных методов может потребовать многочасового ручного копирования и вставки, но, овладев навыками управления выводом yq, эту задачу можно решить с помощью всего одной строки команды."><meta itemprop=datePublished content="2025-08-11T18:58:27+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="6615"><meta itemprop=keywords content="Yq,YAML,DevOps,Управление Конфигурацией,Обработка Данных"><header><h1 itemprop=headline>Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат</h1><p class=text-sm><span data-format=luxon>2025-08-11T18:58:27+04:00</span>
+| <span>14 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%9f%d0%be%d0%bb%d0%bd%d0%be%d0%b5%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8e%20%d0%b2%d1%8b%d0%b2%d0%be%d0%b4%d0%be%d0%bc%20yq:%20%d0%b8%d1%81%d0%ba%d1%83%d1%81%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d1%80%d0%b5%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85%20%d0%b8%d0%b7%20YAML%20%d0%b2%20%d0%bb%d1%8e%d0%b1%d0%be%d0%b9%20%d1%84%d0%be%d1%80%d0%bc%d0%b0%d1%82&amp;url=https://jiejue.ai/ru/2025/08/yq-output-control-complete-guide/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/08/yq-output-control-complete-guide/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%9f%d0%be%d0%bb%d0%bd%d0%be%d0%b5%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8e%20%d0%b2%d1%8b%d0%b2%d0%be%d0%b4%d0%be%d0%bc%20yq:%20%d0%b8%d1%81%d0%ba%d1%83%d1%81%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d1%80%d0%b5%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85%20%d0%b8%d0%b7%20YAML%20%d0%b2%20%d0%bb%d1%8e%d0%b1%d0%be%d0%b9%20%d1%84%d0%be%d1%80%d0%bc%d0%b0%d1%82%20https://jiejue.ai/ru/2025/08/yq-output-control-complete-guide/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250811190257896.webp alt="Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат"><p>Представьте, что вы - инженер DevOps, у которого под рукой сложный конфигурационный файл Kubernetes, содержащий информацию о конфигурации десятков сервисов. Внезапно руководство просит вас извлечь таблицу Excel с именами, номерами версий и конфигурациями ресурсов всех сервисов. Использование традиционных методов может потребовать многочасового ручного копирования и вставки, но, овладев навыками управления выводом yq, эту задачу можно решить с помощью всего одной строки команды.</p><p>&lt;! &ndash;подробнее&ndash;></p><h2 id=почему-управление-выводом-так-важно>Почему управление выводом так важно?</h2><p>YAML стал стандартом де-факто для конфигурационных файлов в современных средах DevOps. От Kubernetes до конвейеров CI/CD, от конфигурации микросервисов до кода инфраструктуры - YAML присутствует везде. Но примитивные структуры YAML часто не отвечают нашим потребностям:</p><ul><li><strong>Оперативному и обслуживающему персоналу</strong> необходимо генерировать отчеты о мониторинге, для чего требуется импорт данных в формате CSV в Excel.</li><li><strong>Разработчикам</strong> нужно извлекать переменные окружения, требуется формат Shell-скрипта</li><li><strong>Менеджеру проекта</strong> нужен список сервисов в формате лаконичной таблицы.</li><li><strong>Аудитору безопасности</strong> необходимо настроить разрешения, требуется формат JSON для обработки другими инструментами.</li></ul><p>yq - это не только инструмент для запросов в YAML, но и мощный конвертер форматов данных. Освоить управление его выводом - все равно что овладеть магией преобразования данных.</p><h2 id=основные-концепции-управления-выводом-yq>Основные концепции управления выводом yq</h2><h3 id=три-стадии-потока-данных>Три стадии потока данных</h3><p>Обработка данных в yq происходит по четкой схеме: ** Входная структура → Логика преобразования → Выходной формат **</p><pre class=mermaid>
+  graph LR
+    A[YAML输入] --&gt; B[数据选择和变换]
+    B --&gt; C[格式化处理]
+    C --&gt; D[目标输出]
+    
+    B --&gt; E[&#34;.field[]&lt;br/&gt;keys[]&lt;br/&gt;to_entries[]&#34;]
+    C --&gt; F[&#34;@csv&lt;br/&gt;@tsv&lt;br/&gt;@json&lt;br/&gt;-r&#34;]
+    
+    style A fill:#e1f5fe
+    style D fill:#f3e5f5
+    style B fill:#fff3e0
+    style C fill:#e8f5e8
+```.
+
+### Сериализация: понимание представления данных в yq
+
+yq рассматривает все данные как **последовательность**. Это ключевой момент для понимания управления выводом:
+
+- Массивы сами являются последовательностями: __PROTECTED_INLINE_CODE__31__.
+- Массивы объектов - это последовательности последовательностей: значения атрибутов каждого объекта образуют последовательность.
+- Оператор `[]` - это сердце сериализации: он &#34;сплющивает&#34; структурированные данные в последовательность.
+
+## Практические сценарии: от базового до продвинутого
+
+Давайте рассмотрим несколько реальных сценариев в DevOps, чтобы получить представление о различных техниках управления выводом yq.
+
+### Сценарий 1: Управление конфигурацией сервиса
+
+Предположим, что у вас есть файл конфигурации сервиса следующего вида:
+
+```yaml
+services:
+  web-app:
+    image: &#34;nginx:1.21&#34;
+    replicas: 3
+    resources:
+      cpu: &#34;500m&#34;
+      memory: &#34;512Mi&#34;
+    ports: [80, 443]
+  api-service:
+    image: &#34;node:16-alpine&#34;
+    replicas: 2
+    resources:
+      cpu: &#34;1000m&#34;
+      memory: &#34;1Gi&#34;
+    ports: [3000, 9090]
+  database:
+    image: &#34;postgres:14&#34;
+    replicas: 1
+    resources:
+      cpu: &#34;2000m&#34; 
+      memory: &#34;2Gi&#34;
+    ports: [5432]
+```.
+
+#### Базовый запрос: получить список сервисов
+
+```bash
+# 获取所有服务名称
+yq &#39;keys[]&#39; services.yaml
+</pre><p>Выходные данные:</p><pre tabindex=0><code>web-app
+api-service
+database
+</code></pre><h4 id=табличный-вывод-генерирует-отчет-о-распределении-ресурсов>Табличный вывод: генерирует отчет о распределении ресурсов.</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 生成TSV格式的资源配置表</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | [.key, .value.image, .value.replicas, .value.resources.cpu, .value.resources.memory] | @tsv&#39;</span> services.yaml
+</span></span></code></pre></div><p>Выходные данные:</p><pre tabindex=0><code>web-app        nginx:1.21      3   500m    512Mi
+api-service    node:16-alpine  2   1000m   1Gi
+database       postgres:14     1   2000m   2Gi
+</code></pre><p>Этот вывод можно импортировать непосредственно в Excel или другие программы для работы с электронными таблицами.</p><h4 id=пользовательский-формат-генерировать-конфигурацию-оболочки>Пользовательский формат: генерировать конфигурацию оболочки</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 生成环境变量格式</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | .key + &#34;_IMAGE=&#34; + .value.image&#39;</span> services.yaml
+</span></span></code></pre></div><p>Выходные данные:
+<strong>PROTECTED_CODE_BLOCK__7</strong></p><h3 id=сценарий-2-работа-со-сложными-вложенными-структурами>Сценарий 2: Работа со сложными вложенными структурами</h3><p>В реальных корпоративных средах конфигурации обычно бывают более сложными. Ниже приведен пример конфигурации с несколькими окружениями и несколькими арендаторами:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>environments</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>production</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>tenants</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>customer-a</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;web&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;v1.2.3&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>resources</span>: {<span style=color:#f92672>cpu</span>: <span style=color:#e6db74>&#34;1000m&#34;</span><span style=color:#f92672>, memory</span>: <span style=color:#e6db74>&#34;1Gi&#34;</span>}
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;api&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;v2.1.0&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>resources</span>: {<span style=color:#f92672>cpu</span>: <span style=color:#e6db74>&#34;500m&#34;</span><span style=color:#f92672>, memory</span>: <span style=color:#e6db74>&#34;512Mi&#34;</span>}
+</span></span><span style=display:flex><span>      <span style=color:#f92672>customer-b</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;web&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;v1.2.1&#34;</span> 
+</span></span><span style=display:flex><span>            <span style=color:#f92672>resources</span>: {<span style=color:#f92672>cpu</span>: <span style=color:#e6db74>&#34;2000m&#34;</span><span style=color:#f92672>, memory</span>: <span style=color:#e6db74>&#34;2Gi&#34;</span>}
+</span></span><span style=display:flex><span>  <span style=color:#f92672>staging</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>tenants</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>customer-a</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>          - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;web&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;v1.3.0-beta&#34;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>resources</span>: {<span style=color:#f92672>cpu</span>: <span style=color:#e6db74>&#34;500m&#34;</span><span style=color:#f92672>, memory</span>: <span style=color:#e6db74>&#34;512Mi&#34;</span>}
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### Расширение нескольких слоев вложенных данных</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```bash</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成完整的服务部署清单</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>yq &#39;.environments | to_entries[] | .key as $env | .value.tenants | to_entries[] | .key as $tenant | .value.services[] | [$env, $tenant, .name, .version, .resources.cpu, .resources.memory] | @tsv&#39; complex.yaml</span>
+</span></span></code></pre></div><p>Выход:</p><pre tabindex=0><code>production  customer-a  web  v1.2.3      1000m  1Gi
+production  customer-a  api  v2.1.0      500m   512Mi
+production  customer-b  web  v1.2.1      2000m  2Gi
+staging     customer-a  web  v1.3.0-beta 500m   512Mi
+</code></pre><p>Этот формат вывода особенно удобен для импорта в инструменты управления проектами или системы мониторинга.</p><h3 id=сценарий-3-обработка-данных-протоколирования-и-мониторинга>Сценарий 3: Обработка данных протоколирования и мониторинга</h3><p>Работа DevOps часто требует извлечения связанной с мониторингом информации из конфигураций:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>monitoring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>alerts</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>cpu_usage</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>threshold</span>: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>severity</span>: <span style=color:#e6db74>&#34;warning&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>targets</span>: [<span style=color:#e6db74>&#34;web-app&#34;</span>, <span style=color:#e6db74>&#34;api-service&#34;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>memory_usage</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>threshold</span>: <span style=color:#ae81ff>90</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>severity</span>: <span style=color:#e6db74>&#34;critical&#34;</span> 
+</span></span><span style=display:flex><span>      <span style=color:#f92672>targets</span>: [<span style=color:#e6db74>&#34;database&#34;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>disk_usage</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>threshold</span>: <span style=color:#ae81ff>85</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>severity</span>: <span style=color:#e6db74>&#34;warning&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>targets</span>: [<span style=color:#e6db74>&#34;web-app&#34;</span>, <span style=color:#e6db74>&#34;database&#34;</span>]
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### Создание JSON-конфигурации мониторинга</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```bash</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成Prometheus告警规则格式</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>yq &#39;.monitoring.alerts | to_entries[] | {&#34;alert&#34;: .key, &#34;expr&#34;: (.key + &#34; &gt; &#34; + (.value.threshold | tostring) + &#34;%&#34;), &#34;severity&#34;: .value.severity, &#34;targets&#34;: .value.targets} | @json&#39; monitoring.yaml</span>
+</span></span></code></pre></div><p>Выход:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{<span style=color:#f92672>&#34;alert&#34;</span>:<span style=color:#e6db74>&#34;cpu_usage&#34;</span>,<span style=color:#f92672>&#34;expr&#34;</span>:<span style=color:#e6db74>&#34;cpu_usage &gt; 80%&#34;</span>,<span style=color:#f92672>&#34;severity&#34;</span>:<span style=color:#e6db74>&#34;warning&#34;</span>,<span style=color:#f92672>&#34;targets&#34;</span>:[<span style=color:#e6db74>&#34;web-app&#34;</span>,<span style=color:#e6db74>&#34;api-service&#34;</span>]}
+</span></span><span style=display:flex><span>{<span style=color:#f92672>&#34;alert&#34;</span>:<span style=color:#e6db74>&#34;memory_usage&#34;</span>,<span style=color:#f92672>&#34;expr&#34;</span>:<span style=color:#e6db74>&#34;memory_usage &gt; 90%&#34;</span>,<span style=color:#f92672>&#34;severity&#34;</span>:<span style=color:#e6db74>&#34;critical&#34;</span>,<span style=color:#f92672>&#34;targets&#34;</span>:[<span style=color:#e6db74>&#34;database&#34;</span>]}
+</span></span><span style=display:flex><span>{<span style=color:#f92672>&#34;alert&#34;</span>:<span style=color:#e6db74>&#34;disk_usage&#34;</span>,<span style=color:#f92672>&#34;expr&#34;</span>:<span style=color:#e6db74>&#34;disk_usage &gt; 85%&#34;</span>,<span style=color:#f92672>&#34;severity&#34;</span>:<span style=color:#e6db74>&#34;warning&#34;</span>,<span style=color:#f92672>&#34;targets&#34;</span>:[<span style=color:#e6db74>&#34;web-app&#34;</span>,<span style=color:#e6db74>&#34;database&#34;</span>]}
+</span></span></code></pre></div><h2 id=параметры-форматирования-с-пояснениями>Параметры форматирования с пояснениями</h2><h3 id=семейство-форматирования>Семейство форматирования</h3><h4 id=tsv-tab-separated-values>@tsv (Tab-Separated Values)</h4><ul><li><strong>Сценарий</strong>: данные содержат запятые или должны быть импортированы из Excel.</li><li><strong>Особенности</strong>: разделение по табуляции, сильная обработка специальных символов</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.data[] | [.field1, .field2] | @tsv&#39;</span>
+</span></span></code></pre></div><h4 id=csv-comma-separated-values>@csv (Comma-Separated Values)</h4><ul><li><strong>Сценарий</strong>: стандартные требования к файлу CSV.</li><li><strong>Функция</strong>: автоматическая обработка экранирования кавычек</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.data[] | [.field1, .field2] | @csv&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### @html (таблица HTML)</span>
+</span></span><span style=display:flex><span>- **Сценарий**: веб-отчеты или встраивание документов.
+</span></span><span style=display:flex><span>- **Функции**: Генерировать HTML-таблицу напрямую.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.data[] | [.field1, .field2] | @html&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Структурированный формат</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### @json</span>
+</span></span><span style=display:flex><span>- **Применимые сценарии**: вызовы API, генерация конфигурационных файлов
+</span></span><span style=display:flex><span>- **Особенности**: стандартный формат JSON, подходит для программной обработки
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.config | @json&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### @yaml</span>
+</span></span><span style=display:flex><span>- **Сценарий**: преобразование файлов конфигурации, резервное копирование
+</span></span><span style=display:flex><span>- **Функция**: вывод в формате YAML
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.subset | @yaml&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Удобный для программирования формат</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### @sh (переменные оболочки)</span>
+</span></span><span style=display:flex><span>- **Сценарий**: Генерация сценариев оболочки, переменные окружения
+</span></span><span style=display:flex><span>- **Функции**: Автоматически обрабатывает экранирование специальных символов.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.config | to_entries[] | .key + &#34;=&#34; + (.value | tostring | @sh)&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#### @base64/@uri</span>
+</span></span><span style=display:flex><span>- **Сценарий**: кодирование данных, параметры URL
+</span></span><span style=display:flex><span>- **Функции**: автоматическая обработка кодировки
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.secret | @base64&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Дополнительные советы и лучшие практики</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Условный вывод и фильтрация</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span><span style=color:#75715e># 只输出高CPU使用的服务</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | select(.value.resources.cpu | tonumber &gt; 1000) | [.key, .value.resources.cpu] | @tsv&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 按环境分组输出</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.environments.production | keys[] | select(. | contains(&#34;customer&#34;))&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Восстановление и вычисление данных</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span><span style=color:#75715e># 计算总资源使用量</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services[] | .resources.cpu | sub(&#34;m&#34;; &#34;&#34;) | tonumber&#39;</span> services.yaml | awk <span style=color:#e6db74>&#39;{sum+=$1} END {print sum &#34;m&#34;}&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成摘要报告</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | length as $total | &#34;Total services: &#34; + ($total | tostring)&#39;</span> services.yaml
+</span></span></code></pre></div><h3 id=искусство-конвейеризации>Искусство конвейеризации</h3><p>Настоящая мощь yq заключается в комбинировании конвейерных операций. Ниже показаны несколько мощных комбинаций:</p><pre class=mermaid>
+  graph TD
+    A[原始数据] --&gt; B[&#34;.services | to_entries[]&#34;]
+    B --&gt; C[&#34;select() 过滤&#34;]
+    C --&gt; D[&#34;[.key, .value.field] 重组&#34;]
+    D --&gt; E[&#34;@tsv 格式化&#34;]
+    E --&gt; F[最终输出]
+    
+    style A fill:#e1f5fe
+    style F fill:#f3e5f5
+```.
+
+## Оптимизация производительности и соображения
+
+### Работа с большими файлами
+
+При обработке больших файлов YAML учитывайте следующие стратегии оптимизации:
+
+1. **Использовать потоковую передачу**: избегайте загрузки всего файла в память за один раз
+2. **Точный запрос**: используйте конкретные пути вместо глобального поиска
+3. **Пакетная обработка**: разбивайте большие файлы на более мелкие логические единицы
+
+### Обработка ошибок
+
+```bash
+# 安全的字段访问
+yq &#39;.field // &#34;default_value&#34;&#39; data.yaml
+
+# 类型检查
+yq &#39;.field | type&#39; data.yaml
+
+# 存在性检查  
+yq &#39;has(&#34;field&#34;)&#39; data.yaml
+```.
+
+### Советы по отладке
+
+```bash
+# 查看中间结果
+yq &#39;.data | debug&#39; input.yaml
+
+# 类型分析
+yq &#39;.[] | [., type] | @csv&#39; input.yaml
+
+# 结构探索
+yq &#39;paths&#39; input.yaml
+</pre><h2 id=интеграция-с-другими-инструментами>Интеграция с другими инструментами</h2><p>Контроль вывода yq позволяет идеально интегрироваться в существующие цепочки инструментов DevOps:</p><h3 id=интеграция-с-excelgoogle-sheets>Интеграция с Excel/Google Sheets</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 生成带表头的TSV文件</span>
+</span></span><span style=display:flex><span>echo -e <span style=color:#e6db74>&#34;Service\tImage\tReplicas\tCPU\tMemory&#34;</span> &gt; report.tsv
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | [.key, .value.image, .value.replicas, .value.resources.cpu, .value.resources.memory] | @tsv&#39;</span> services.yaml &gt;&gt; report.tsv
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Интеграция с базами данных</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成SQL插入语句</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | &#34;INSERT INTO services VALUES (&#39;</span><span style=color:#ae81ff>\&#39;</span><span style=color:#e6db74>&#39;&#34; + .key + &#34;&#39;</span><span style=color:#ae81ff>\&#39;</span>, <span style=color:#e6db74>&#39;\&#39;&#39; &#34; + .value.image + &#34;&#39;</span><span style=color:#ae81ff>\&#39;</span><span style=color:#f92672>)</span>;<span style=color:#e6db74>&#34;&#39;
+</span></span></span></code></pre></div><h3 id=интеграция-с-инструментами-мониторинга>Интеграция с инструментами мониторинга</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 生成Prometheus配置</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.monitoring.targets[] | &#34;  - targets: [\&#34;&#34; + .host + &#34;:&#34; + (.port | tostring) + &#34;\&#34;]&#34;&#39;</span> monitoring.yaml
+</span></span></code></pre></div><h2 id=практические-примеры-применения>Практические примеры применения</h2><h3 id=пример-аудит-конфигурации-микросервиса>Пример: аудит конфигурации микросервиса</h3><p>Компании необходимо провести аудит конфигурации безопасности в архитектуре микросервисов. С помощью yq можно быстро извлечь ключевую информацию:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 提取所有对外暴露的服务和端口</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | select(.value.expose == true) | [.key, .value.ports[]] | @csv&#39;</span> services.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 检查镜像版本一致性</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services[].image | sub(&#34;:.*&#34;; &#34;&#34;) | unique&#39;</span> services.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成安全扫描清单</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.services | to_entries[] | {&#34;service&#34;: .key, &#34;image&#34;: .value.image, &#34;ports&#34;: .value.ports} | @json&#39;</span> services.yaml
+</span></span></code></pre></div><h3 id=кейс-сравнение-конфигурации-среды>Кейс: Сравнение конфигурации среды</h3><p>Командам DevOps необходимо сравнивать различия в конфигурации между производственной и тестовой средами:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 生成环境配置对比表</span>
+</span></span><span style=display:flex><span>yq eval-all <span style=color:#e6db74>&#39;. as $item ireduce ({}; . * $item)&#39;</span> prod.yaml staging.yaml | <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>yq <span style=color:#e6db74>&#39;to_entries[] | [.key, (.value.prod.replicas // &#34;N/A&#34;), (.value.staging.replicas // &#34;N/A&#34;)] | @csv&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Резюме и перспективы</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Возможности управления выводом в yq выходят далеко за рамки преобразования форматов; это полноценная экосистема обработки данных. Овладев этими навыками, вы сможете:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- **Повысить производительность**: автоматизировать задачи работы с данными, которые в противном случае выполнялись бы вручную
+</span></span><span style=display:flex><span>- **Улучшить визуализацию данных**: преобразовывать сложные конфигурации в интуитивно понятные таблицы и графики
+</span></span><span style=display:flex><span>- **Улучшить интеграцию инструментов**: устранить барьеры между данными различных систем
+</span></span><span style=display:flex><span>- **Оптимизация процессов эксплуатации и обслуживания**: создание стандартизированных процессов управления конфигурацией и мониторинга
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>По мере развития облачных нативных технологий конфигурационные файлы YAML будут становиться все сложнее. Овладение навыками управления выводом yq позволит вам не только решить текущие задачи, но и подготовиться к будущему развитию технологий.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>В эпоху ИИ и автоматизации эксплуатации и обслуживания способность обрабатывать данные станет основной конкурентоспособностью технических специалистов. yq, как швейцарский армейский нож в экосистеме YAML, заслуживает того, чтобы им овладел каждый инженер DevOps.
+</span></span></code></pre></div></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><div></div><a role=button class="btn btn-outline h-12" href=/ru/2025/08/git-pull-explained-why-not-sync-all-branches/ title="Правда о Git Pull: почему он не синхронизирует все ветви?"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Правда о Git Pull: почему он не синхронизирует все ветви?</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/08/yq-output-control-complete-guide/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#почему-управление-выводом-так-важно>Почему управление выводом так важно?</a></li><li><a href=#основные-концепции-управления-выводом-yq>Основные концепции управления выводом yq</a><ul><li><a href=#три-стадии-потока-данных>Три стадии потока данных</a></li><li><a href=#сценарий-2-работа-со-сложными-вложенными-структурами>Сценарий 2: Работа со сложными вложенными структурами</a></li><li><a href=#сценарий-3-обработка-данных-протоколирования-и-мониторинга>Сценарий 3: Обработка данных протоколирования и мониторинга</a></li></ul></li><li><a href=#параметры-форматирования-с-пояснениями>Параметры форматирования с пояснениями</a><ul><li><a href=#семейство-форматирования>Семейство форматирования</a></li><li><a href=#искусство-конвейеризации>Искусство конвейеризации</a></li></ul></li><li><a href=#интеграция-с-другими-инструментами>Интеграция с другими инструментами</a><ul><li><a href=#интеграция-с-excelgoogle-sheets>Интеграция с Excel/Google Sheets</a></li><li><a href=#интеграция-с-инструментами-мониторинга>Интеграция с инструментами мониторинга</a></li></ul></li><li><a href=#практические-примеры-применения>Практические примеры применения</a><ul><li><a href=#пример-аудит-конфигурации-микросервиса>Пример: аудит конфигурации микросервиса</a></li><li><a href=#кейс-сравнение-конфигурации-среды>Кейс: Сравнение конфигурации среды</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

@@ -1,0 +1,328 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/03/function-calling-to-mcp-paradigm-shift/><meta name=author content="董昊"><meta name=description content="С появлением Model Context Protocol (MCP) пространство интеграции инструментов ИИ претерпевает глубокую смену парадигмы. В этой статье мы рассмотрим эволюцию от вызова функций к MCP, проанализируем их существенные различия, а также изучим текущее состояние и будущее развитие экосистемы MCP. Независимо от того, являетесь ли вы исследователем, разработчиком или просто наблюдателем, интересующимся технологиями ИИ, эта статья поможет вам лучше понять эту развивающуюся область.
+"><meta name=keywords content="AI,MCP,Расширить Свои Финансовые Возможности,Интеграция Инструментов,Протоколы"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/03/function-calling-to-mcp-paradigm-shift/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ"><meta property="og:description" content="С появлением Model Context Protocol (MCP) пространство интеграции инструментов ИИ претерпевает глубокую смену парадигмы. В этой статье мы рассмотрим эволюцию от вызова функций к MCP, проанализируем их существенные различия, а также изучим текущее состояние и будущее развитие экосистемы MCP. Независимо от того, являетесь ли вы исследователем, разработчиком или просто наблюдателем, интересующимся технологиями ИИ, эта статья поможет вам лучше понять эту развивающуюся область."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-03-18T17:44:43+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="AI"><meta property="article:tag" content="MCP"><meta property="article:tag" content="Расширить Свои Финансовые Возможности"><meta property="article:tag" content="Интеграция Инструментов"><meta property="article:tag" content="Протоколы"><meta name=twitter:card content="summary"><meta name=twitter:title content="От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ"><meta name=twitter:description content="С появлением Model Context Protocol (MCP) пространство интеграции инструментов ИИ претерпевает глубокую смену парадигмы. В этой статье мы рассмотрим эволюцию от вызова функций к MCP, проанализируем их существенные различия, а также изучим текущее состояние и будущее развитие экосистемы MCP. Независимо от того, являетесь ли вы исследователем, разработчиком или просто наблюдателем, интересующимся технологиями ИИ, эта статья поможет вам лучше понять эту развивающуюся область."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/03/function-calling-to-mcp-paradigm-shift/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ"><meta itemprop=description content="С появлением Model Context Protocol (MCP) пространство интеграции инструментов ИИ претерпевает глубокую смену парадигмы. В этой статье мы рассмотрим эволюцию от вызова функций к MCP, проанализируем их существенные различия, а также изучим текущее состояние и будущее развитие экосистемы MCP. Независимо от того, являетесь ли вы исследователем, разработчиком или просто наблюдателем, интересующимся технологиями ИИ, эта статья поможет вам лучше понять эту развивающуюся область."><meta itemprop=datePublished content="2025-03-18T17:44:43+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="10978"><meta itemprop=keywords content="AI,MCP,Расширить Свои Финансовые Возможности,Интеграция Инструментов,Протоколы"><header><h1 itemprop=headline>От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ</h1><p class=text-sm><span data-format=luxon>2025-03-18T17:44:43+04:00</span>
+| <span>22 минуты чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%9e%d1%82%20%d0%b2%d1%8b%d0%b7%d0%be%d0%b2%d0%b0%20%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%b9%20%d0%ba%20MCP:%20%d1%81%d0%bc%d0%b5%d0%bd%d0%b0%20%d0%bf%d0%b0%d1%80%d0%b0%d0%b4%d0%b8%d0%b3%d0%bc%d1%8b%20%d0%b2%20%d0%b8%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d0%b8%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d0%be%d0%b2%20%d0%98%d0%98&amp;url=https://jiejue.ai/ru/2025/03/function-calling-to-mcp-paradigm-shift/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/03/function-calling-to-mcp-paradigm-shift/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%9e%d1%82%20%d0%b2%d1%8b%d0%b7%d0%be%d0%b2%d0%b0%20%d1%84%d1%83%d0%bd%d0%ba%d1%86%d0%b8%d0%b9%20%d0%ba%20MCP:%20%d1%81%d0%bc%d0%b5%d0%bd%d0%b0%20%d0%bf%d0%b0%d1%80%d0%b0%d0%b4%d0%b8%d0%b3%d0%bc%d1%8b%20%d0%b2%20%d0%b8%d0%bd%d1%82%d0%b5%d0%b3%d1%80%d0%b0%d1%86%d0%b8%d0%b8%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d0%be%d0%b2%20%d0%98%d0%98%20https://jiejue.ai/ru/2025/03/function-calling-to-mcp-paradigm-shift/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318173901141.webp alt="От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ"><p>С появлением Model Context Protocol (MCP) пространство интеграции инструментов ИИ претерпевает глубокую смену парадигмы. В этой статье мы рассмотрим эволюцию от вызова функций к MCP, проанализируем их существенные различия, а также изучим текущее состояние и будущее развитие экосистемы MCP. Независимо от того, являетесь ли вы исследователем, разработчиком или просто наблюдателем, интересующимся технологиями ИИ, эта статья поможет вам лучше понять эту развивающуюся область.</p><p>&lt;! -еще&ndash;></p><h2 id=от-вызова-функций-до-mcp-историческая-неизбежность-эволюции-технологий>От вызова функций до MCP: историческая неизбежность эволюции технологий</h2><p>Прежде чем мы сможем детально сравнить эти две технологические парадигмы, необходимо понять исторический контекст, в котором они возникли.</p><h3 id=вызов-функций-доминирующее-решение-для-ранней-интеграции-инструментов-ии>Вызов функций: доминирующее решение для ранней интеграции инструментов ИИ</h3><p>Вызов функций был ранним решением для взаимодействия больших языковых моделей (LLM) с внешними инструментами, позволяя модели решать, когда вызывать предопределенные функции и генерировать структурированные аргументы. В этой парадигме модель анализирует намерения пользователя, решает, нужно ли вызвать определенную функцию для выполнения задачи, и предоставляет необходимые параметры.</p><p>На примере вызова функций OpenAI разработчику необходимо:</p><ol><li>определить структуру функции (название, параметры, описание и т. д.) в каждом запросе API</li><li>дождаться, пока модель распознает намерение пользователя и сгенерирует запрос на вызов функции</li><li>получить запрос на вызов функции, выполнить фактическую функцию и вернуть результат в модель.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># OpenAI Function Calling示例（简化版）</span>
+</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> client<span style=color:#f92672>.</span>chat<span style=color:#f92672>.</span>completions<span style=color:#f92672>.</span>create(
+</span></span><span style=display:flex><span>    model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;gpt-4o&#34;</span>,
+</span></span><span style=display:flex><span>    messages<span style=color:#f92672>=</span>[
+</span></span><span style=display:flex><span>        {<span style=color:#e6db74>&#34;role&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>, <span style=color:#e6db74>&#34;content&#34;</span>: <span style=color:#e6db74>&#34;北京现在的天气如何？&#34;</span>}
+</span></span><span style=display:flex><span>    ],
+</span></span><span style=display:flex><span>    tools<span style=color:#f92672>=</span>[{
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;function&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;function&#34;</span>: {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;get_weather&#34;</span>, 
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;获取指定位置的天气信息&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;parameters&#34;</span>: {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;object&#34;</span>, 
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;properties&#34;</span>: {
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;location&#34;</span>: {<span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>, <span style=color:#e6db74>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;城市名称&#34;</span>},
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;unit&#34;</span>: {<span style=color:#e6db74>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>, <span style=color:#e6db74>&#34;enum&#34;</span>: [<span style=color:#e6db74>&#34;celsius&#34;</span>, <span style=color:#e6db74>&#34;fahrenheit&#34;</span>]}
+</span></span><span style=display:flex><span>                }, 
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;required&#34;</span>: [<span style=color:#e6db74>&#34;location&#34;</span>]
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }]
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Ограничения вызова функций и необходимость тонкой настройки</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Хотя вызов функций добавляет ИИ возможность взаимодействовать с внешними системами, на практике было выявлено несколько ключевых ограничений:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> <span style=color:#f92672>**</span>Закрытая экосистема<span style=color:#f92672>**</span>: каждый поставщик ИИ (например, OpenAI, Anthropic, Google) имеет собственную реализацию Function Calling, которая не совместима друг с другом<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> <span style=color:#f92672>**</span>Отсутствие стандартов<span style=color:#f92672>**</span>: отсутствие единых стандартов приводит к тому, что разработчикам приходится адаптировать разный код для каждой платформы<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> <span style=color:#f92672>**</span>Необходимость тонкой настройки<span style=color:#f92672>**</span>: чтобы добиться наилучшей производительности, модель обычно необходимо точно настроить под цель<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>В частности, по последнему пункту в документации Microsoft Azure OpenAI четко сказано: <span style=color:#e6db74>&#34;Тонкая настройка моделей с помощью примеров вызовов инструментов может **улучшить результаты работы модели**, позволяя вам:</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Получать последовательно оформленные ответы, даже если не предоставлены полные определения функций
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Получить более точные и последовательные результаты<span style=color:#e6db74>&#34;.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>В связи с этим возникает вопрос: почему вызов функций нуждается в тонкой настройке<span style=color:#960050;background-color:#1e0010>?</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Основная причина заключается в том, что в то время как LLM понимает естественный язык, вызов функций <span style=color:#f92672>-</span> это интерфейс, определяемый человеком, который требует от модели изучения определенных шаблонов вызова<span style=color:#f92672>.</span> Модель должна понимать:
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> когда следует вызывать функцию (а не отвечать напрямую)
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> какую функцию следует вызвать
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> как правильно сконструировать параметры
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Тонкая настройка обучает модель этим навыкам, предоставляя множество примеров, но это означает, что для каждой новой функции или набора функций может потребоваться дополнительная работа по тонкой настройке<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## MCP: Open Protocol Redefines AI Tool Integration</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Контекстный протокол модели (MCP) использует совершенно иной подход к проблеме интеграции инструментов ИИ<span style=color:#f92672>.</span> MCP <span style=color:#f92672>-</span> это не API<span style=color:#f92672>-</span>функция, а скорее <span style=color:#f92672>**</span>Открытый протокол стандартов<span style=color:#f92672>**</span>, определяющий единый способ взаимодействия систем ИИ с внешними инструментами и ресурсами<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Основные концепции MCP</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>MCP следует следующей основной философии дизайна:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> <span style=color:#f92672>**</span>Протокол превыше всего<span style=color:#f92672>**</span>: кросс<span style=color:#f92672>-</span>платформенная совместимость за счет определения стандартных протоколов вместо API<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> <span style=color:#f92672>**</span>Архитектура клиент<span style=color:#f92672>-</span>сервер<span style=color:#f92672>**</span>: четкое разделение модели ИИ (клиент) и поставщика инструментов (сервер)<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> <span style=color:#f92672>**</span>Многочисленные прото<span style=color:#f92672>-</span>языки<span style=color:#f92672>**</span>: не только вызовы функций, но и доступ к ресурсам, шаблоны подсказок и другие многочисленные режимы взаимодействия
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4.</span> <span style=color:#f92672>**</span>Человек в петле<span style=color:#f92672>**</span>: акцент на безопасности, клиент контролирует доступ к инструментам<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5.</span> <span style=color:#f92672>**</span>Открытые стандарты<span style=color:#f92672>**</span>: открытые стандарты, управляемые сообществом, чтобы избежать привязки к производителю<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Аналогия между MCP и HTTP: от информационного силоса к открытой экологии</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Между MCP и HTTP существуют удивительные параллели<span style=color:#f92672>.</span> На заре существования Сети различные компьютерные сети общались с помощью проприетарных протоколов (например, AOL, CompuServe), создавая информационные силосы<span style=color:#f92672>.</span> Появление HTTP как открытого стандартного протокола унифицировало сетевые коммуникации и вызвало взрывной рост Сети<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Аналогичным образом, до появления MCP все основные поставщики ИИ имели собственные реализации функциональных вызовов, создавая <span style=color:#e6db74>&#34;силосы возможностей ИИ&#34;</span><span style=color:#f92672>.</span> MCP, как единый стандарт, имеет потенциал для изменения всей экосистемы интеграции инструментов ИИ<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>mermaid
+</span></span><span style=display:flex><span>flowchart LR
+</span></span><span style=display:flex><span>    subgraph <span style=color:#e6db74>&#34;Web发展类比&#34;</span>
+</span></span><span style=display:flex><span>        direction TB
+</span></span><span style=display:flex><span>        a1[封闭网络] <span style=color:#f92672>--&gt;</span> a2[HTTP统一标准] <span style=color:#f92672>--&gt;</span> a3[Web繁荣]
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    subgraph <span style=color:#e6db74>&#34;AI工具集成发展&#34;</span>
+</span></span><span style=display:flex><span>        direction TB
+</span></span><span style=display:flex><span>        b1[Function Calling孤岛] <span style=color:#f92672>--&gt;</span> b2[MCP统一标准] <span style=color:#f92672>--&gt;</span> b3[AI工具生态繁荣]
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    a1 <span style=color:#f92672>-.</span>类比<span style=color:#f92672>.-&gt;</span> b1
+</span></span><span style=display:flex><span>    a2 <span style=color:#f92672>-.</span>类比<span style=color:#f92672>.-&gt;</span> b2
+</span></span><span style=display:flex><span>    a3 <span style=color:#f92672>-.</span>类比<span style=color:#f92672>.-&gt;</span> b3
+</span></span></code></pre></div><h3 id=техническая-архитектура-mcp>Техническая архитектура MCP</h3><p>MCP использует клиент-серверную архитектуру, и основные компоненты включают в себя:</p><ol><li><strong>Хост</strong>: например, Claude Desktop, в который интегрирован клиент MCP.</li><li><strong>Клиент</strong>: поддерживает соединение 1:1 с сервером.</li><li><strong>Сервер</strong>: предоставляет инструменты, ресурсы и советы.</li><li><strong>Транспорт</strong>: поддерживает несколько методов обмена данными (например, stdio, SSE).</li></ol><pre class=mermaid>
+  flowchart LR
+    subgraph &#34;本地计算机&#34;
+        Host[&#34;主机（集成MCP客户端）&lt;br&gt;如Claude Desktop&#34;]
+        S1[&#34;MCP服务器A&#34;]
+        S2[&#34;MCP服务器B&#34;]
+        S3[&#34;MCP服务器C&#34;]
+        Host &lt;--&gt;|&#34;MCP协议&#34;| S1
+        Host &lt;--&gt;|&#34;MCP协议&#34;| S2
+        Host &lt;--&gt;|&#34;MCP协议&#34;| S3
+        S1 &lt;--&gt; D1[(&#34;本地&lt;br&gt;数据源A&#34;)]
+        S2 &lt;--&gt; D2[(&#34;本地&lt;br&gt;数据源B&#34;)]
+    end
+    subgraph &#34;互联网&#34;
+        S3 &lt;--&gt;|&#34;Web APIs&#34;| D3[(&#34;远程&lt;br&gt;服务C&#34;)]
+    end
+```.
+
+### Почему MCP не нуждается в тонкой настройке?
+
+Вернемся к первоначальному вопросу: почему MCP не нуждается в тонкой настройке? Ответ кроется в дизайне протокола и стандартизированном интерфейсе:
+
+1. **Унифицированные интерфейсы**: MCP определяет стандартизированные интерфейсы для инструментов, ресурсов и подсказок, так что модели естественным образом понимают, как их использовать.
+2. **Структурированное взаимодействие**: архитектура клиент-сервер обеспечивает последовательные паттерны взаимодействия, которые легко осваиваются моделями.
+3. **Самоописывающиеся инструменты**: инструменты MCP содержат богатые метаданные, которые позволяют моделям понять, как использовать инструмент.
+4. **Разделение забот**: MCP отделяет &#34;как выполнять&#34; от &#34;когда выполнять&#34;, так что модели нужно сосредоточиться только на последнем.
+
+Точно так же, как нам не нужно обучать браузеры понимать HTTP-серверы, модели с поддержкой MCP естественным образом понимают MCP-совместимые инструменты.
+
+## Состояние экосистемы MCP и проблемы индексирования
+
+С ростом популярности MCP все больше разработчиков и организаций создают MCP-сервисы. Однако это породило новую проблему: как эффективно обнаруживать и индексировать эти сервисы?
+
+### Существующие решения для индексирования MCP-сервисов
+
+Существует несколько основных подходов к индексированию MCP-сервисов:
+
+#### 1. Поиск на GitHub и листинги Awesome
+
+MCP-сервисы обнаруживаются с помощью поиска на GitHub или поддерживаемых сообществом списков &#34;Awesome&#34;:
+- [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers)
+- [appcypher/awesome-mcp-servers](https://github.com/appcypher/awesome-mcp-servers)
+
+Преимущества:
+- Открытый исходный код, управляемый сообществом, быстрое обновление контента
+- Базовая категоризация и фильтрация
+- Есть контроль качества (через PR и аудит)
+
+Слабые стороны:
+- Фрагментация информации
+- Пользовательский опыт не интуитивен
+- Отсутствие данных о производительности и совместимости в реальном времени
+
+#### 2. Специализированные места сбора
+
+Некоторые сайты посвящены сбору и организации MCP-сервисов:
+- [glama.ai/mcp/servers](https://glama.ai/mcp/servers)
+- [pulsemcp.com](https://www.pulsemcp.com)
+
+Преимущество:
+- Более структурированное представление данных
+- Лучшее удобство для пользователей и функциональность поиска
+- Предоставляет дополнительную информацию (например, совместимость, рейтинги безопасности)
+
+Слабые стороны:
+- Зависимость обновлений от владельцев веб-сайтов
+- Возможность коммерциализации
+- Отсутствие глубокой вовлеченности сообщества
+
+### Будущее обнаружения услуг MCP: появится ли &#34;Google&#34;?
+
+Существующие механизмы индексирования MCP-сервисов находятся на ранних стадиях, подобно каталогам и спискам ссылок в раннем Вебе. По мере развития экосистемы мы можем увидеть более зрелые решения для обнаружения сервисов:
+
+1. **Специализированная поисковая система**: подобно поисковой системе Google для MCP-сервисов, но с большим акцентом на показатели разработчиков, такие как техническая совместимость и стабильность API.
+
+2. **Встроенный в протокол механизм обнаружения**: сам MCP может развить встроенный протокол обнаружения сервисов, подобный системе DNS.
+
+3. **Распределенный каталог**: децентрализованный доверенный каталог сервисов на основе блокчейна или аналогичной технологии.
+
+4. **Экосистемные хабы**: платформы, уже находящиеся в центре экосистемы ИИ (например, Anthropic, OpenAI или GitHub), могут стать доминирующими.
+
+Идеальная система индексирования MCP должна иметь:
+- Стандартизированные метаданные
+- Мониторинг в реальном времени
+- Система обратной связи с пользователями
+- Автоматизированное тестирование
+- Контроль версий
+- Семантический поиск
+
+## Пример: использование погодного сервиса MCP
+
+Чтобы продемонстрировать полезность MCP, вот шаги по установке и использованию службы &#34;adhikasp/mcp-weather&#34;:
+
+### Подготовка к установке
+
+1. **Пререквизиты
+   - Получите API-ключ AccuWeather ([developer.accuweather.com](https://developer.accuweather.com/)).
+   - Установите Python 3.8+ и инструмент управления пакетами uv
+
+2. **Метод установки**
+
+   Метод 1: Используйте репозиторий GitHub напрямую
+   ```bash
+   git clone https://github.com/adhikasp/mcp-weather.git
+   cd mcp-weather
+   uv venv
+   uv sync
+   echo &#34;ACCUWEATHER_API_KEY=your_api_key_here&#34; &gt; .env
+   python -m mcp_weather.weather  # 仅测试
+</pre><p>Метод 2: Использовать предварительно собранный пакет PyPI (если он выпущен)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pip install mcp-weather
+</span></span></code></pre></div><ol start=3><li><p><strong>Настройте Claude для рабочего стола</strong></p><p>Добавьте в конфигурационный файл Claude for Desktop:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;mcpServers&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;weather&#34;</span>: {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;command&#34;</span>: <span style=color:#e6db74>&#34;uvx&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;args&#34;</span>: [
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;--from&#34;</span>, 
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;git+https://github.com/adhikasp/mcp-weather.git&#34;</span>, 
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;mcp-weather&#34;</span>
+</span></span><span style=display:flex><span>      ],
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;env&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;ACCUWEATHER_API_KEY&#34;</span>: <span style=color:#e6db74>&#34;your_api_key_here&#34;</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li></ol><h3 id=детали-реализации-сервиса>Детали реализации сервиса</h3><p>Давайте посмотрим на основной код реализации этой службы MCP:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a6e22e>@mcp.tool</span>()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_hourly_weather</span>(location: str) <span style=color:#f92672>-&gt;</span> Dict:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Get hourly weather forecast for a location.&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    api_key <span style=color:#f92672>=</span> os<span style=color:#f92672>.</span>getenv(<span style=color:#e6db74>&#34;ACCUWEATHER_API_KEY&#34;</span>)
+</span></span><span style=display:flex><span>    base_url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;http://dataservice.accuweather.com&#34;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 获取位置信息</span>
+</span></span><span style=display:flex><span>    location_key <span style=color:#f92672>=</span> get_cached_location_key(location) <span style=color:#f92672>or</span> <span style=color:#66d9ef>await</span> fetch_location_key(location)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 获取当前天气和预报</span>
+</span></span><span style=display:flex><span>    current_conditions <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> fetch_current_conditions(location_key)
+</span></span><span style=display:flex><span>    forecast <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> fetch_hourly_forecast(location_key)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 格式化返回数据</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;location&#34;</span>: location,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;current_conditions&#34;</span>: format_current_conditions(current_conditions),
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;hourly_forecast&#34;</span>: format_hourly_forecast(forecast)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Эта упрощенная версия кода показывает основную структуру реализации инструмента MCP<span style=color:#f92672>.</span> Фреймворк FastMCP автоматически обрабатывает определения типов, проверку параметров и преобразование результатов, определяя инструменты через декоратор Python <span style=color:#960050;background-color:#1e0010>`</span><span style=color:#a6e22e>@mcp.tool</span>()<span style=color:#960050;background-color:#1e0010>`</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Использование сервисных инструментов</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>После установки и настройки сервиса MCP вы можете использовать его естественным образом в Claude:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> спросите: <span style=color:#e6db74>&#34;Будет ли завтра дождь в Пекине?&#34;</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> Claude распознает это как запрос о погоде и автоматически вызывает службу MCP<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> служба MCP запрашивает данные у AccuWeather API<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4.</span> Claude получает данные и генерирует ответ на естественном языке<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Весь процесс прозрачен для пользователя, обеспечивая бесперебойную работу<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Сосуществование и взаимодополняемость MCP и вызова функций</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Хотя MCP решает многие проблемы функционального вызова, эти два метода, скорее всего, будут сосуществовать еще долгое время, каждый из них будет обслуживать различные сценарии:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Причины сосуществования</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> <span style=color:#f92672>**</span>Различные сценарии применения
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> FC подходит для простых сценариев с прямыми вызовами API и специализированных приложений, требующих глубокой настройки модели<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> MCP подходит для сложной многоинструментальной интеграции и кроссплатформенных приложений<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> <span style=color:#f92672>**</span>Путь эволюции технологии
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> FC может перенять опыт MCP и принять более стандартизированные интерфейсы
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> MCP также может интегрировать некоторые преимущества FC, такие как более тесная интеграция моделей
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> <span style=color:#f92672>**</span>Факторы бизнес<span style=color:#f92672>-</span>стратегии<span style=color:#f92672>**</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> Поставщики бизнес<span style=color:#f92672>-</span>моделей заинтересованы в сохранении собственных экосистем API<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>-</span> Сообщества с открытым исходным кодом, с другой стороны, поддерживают открытые стандарты
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Возможные архитектуры будущего</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>В будущем мы можем увидеть гибридную архитектуру, в которой нижний уровень использует вызов функций (возможно, с тонкой настройкой) для обеспечения преимуществ производительности, а верхний уровень предоставляет единую экосистему абстракций и инструментов через MCP<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>mermaid
+</span></span><span style=display:flex><span>flowchart TD
+</span></span><span style=display:flex><span>    User[用户]
+</span></span><span style=display:flex><span>    Client[MCP客户端]
+</span></span><span style=display:flex><span>    Server1[MCP服务器1]
+</span></span><span style=display:flex><span>    Server2[MCP服务器2]
+</span></span><span style=display:flex><span>    LLM[大型语言模型]
+</span></span><span style=display:flex><span>    FC[Function Calling层]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    User <span style=color:#f92672>--&gt;</span> Client
+</span></span><span style=display:flex><span>    Client <span style=color:#f92672>&lt;--&gt;</span> Server1
+</span></span><span style=display:flex><span>    Client <span style=color:#f92672>&lt;--&gt;</span> Server2
+</span></span><span style=display:flex><span>    Client <span style=color:#f92672>&lt;--&gt;</span> LLM
+</span></span><span style=display:flex><span>    LLM <span style=color:#f92672>&lt;--&gt;</span> FC
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    classDef standardLayer fill:<span style=color:#75715e>#f9f,stroke:#333,stroke-width:2px;</span>
+</span></span><span style=display:flex><span>    classDef optimizedLayer fill:<span style=color:#75715e>#bbf,stroke:#333,stroke-width:2px;</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Client</span>,Server1,Server2 standardLayer;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LLM</span>,FC optimizedLayer;
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Заключение</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>MCP представляет собой будущее направление интеграции инструментов ИИ, решая многочисленные проблемы, с которыми сталкивается Function Calling, с помощью открытых протоколов<span style=color:#f92672>.</span> Это не только устраняет зависимость от тонкой настройки, но и создает процветающую экосистему сервисов<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Конечно, экосистема MCP все еще находится на ранней стадии и сталкивается с такими проблемами, как обнаружение сервисов и эволюция стандартов<span style=color:#f92672>.</span> По мере того как все больше разработчиков и организаций присоединяются к экосистеме MCP, мы ожидаем появления новых инновационных решений<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Ожидается, что MCP, являясь ключевой инфраструктурой для развития ИИ, будет способствовать интеграции и масштабированию возможностей ИИ так же, как HTTP для Web<span style=color:#f92672>.</span> Никогда еще не было лучшего времени для разработчиков и пользователей, чтобы понять и принять участие в этой технологической волне<span style=color:#e6db74>&#34;.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Чего вы ожидаете от будущего MCP<span style=color:#960050;background-color:#1e0010>?</span> Считаете ли вы, что он полностью заменит вызов функций<span style=color:#960050;background-color:#1e0010>?</span> Не стесняйтесь поделиться своими соображениями в разделе комментариев<span style=color:#960050;background-color:#1e0010>!</span>
+</span></span></code></pre></div></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/03/mcp-beginner-guide-finding-services/ title="Начало работы с MCP: попрощайтесь с тонкой настройкой и легко находите службы с открытым исходным кодом"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Начало работы с MCP: попрощайтесь с тонкой настройкой и легко находите службы с открытым исходным кодом</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/03/scrum-vs-kanban-developers-survival-guide/ title="Agile Battlefield: A Developer's Survival Guide to Scrum and Kanban"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Agile Battlefield: A Developer's Survival Guide to Scrum and Kanban</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/03/function-calling-to-mcp-paradigm-shift/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#от-вызова-функций-до-mcp-историческая-неизбежность-эволюции-технологий>От вызова функций до MCP: историческая неизбежность эволюции технологий</a><ul><li><a href=#вызов-функций-доминирующее-решение-для-ранней-интеграции-инструментов-ии>Вызов функций: доминирующее решение для ранней интеграции инструментов ИИ</a></li><li><a href=#техническая-архитектура-mcp>Техническая архитектура MCP</a></li><li><a href=#детали-реализации-сервиса>Детали реализации сервиса</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

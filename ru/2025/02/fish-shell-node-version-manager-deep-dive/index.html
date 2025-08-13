@@ -1,0 +1,314 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/02/fish-shell-node-version-manager-deep-dive/><meta name=author content="董昊"><meta name=description content="Версионность Node.js - ключевая тема в современной фронтенд-разработке. Для разных проектов могут потребоваться разные версии Node.js, как элегантно решить эту проблему в среде fish shell? Давайте разберемся, как работает nvm.fish, и рассмотрим лучшие практики.
+"><meta name=keywords content="Рыбья Раковина,Node.js,Программирование В Оболочке,Инструмент Разработки"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/02/fish-shell-node-version-manager-deep-dive/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика"><meta property="og:description" content="Версионность Node.js - ключевая тема в современной фронтенд-разработке. Для разных проектов могут потребоваться разные версии Node.js, как элегантно решить эту проблему в среде fish shell? Давайте разберемся, как работает nvm.fish, и рассмотрим лучшие практики."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-02-07T23:16:43+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Рыбья Раковина"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Программирование В Оболочке"><meta property="article:tag" content="Инструмент Разработки"><meta name=twitter:card content="summary"><meta name=twitter:title content="Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика"><meta name=twitter:description content="Версионность Node.js - ключевая тема в современной фронтенд-разработке. Для разных проектов могут потребоваться разные версии Node.js, как элегантно решить эту проблему в среде fish shell? Давайте разберемся, как работает nvm.fish, и рассмотрим лучшие практики."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/02/fish-shell-node-version-manager-deep-dive/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика"><meta itemprop=description content="Версионность Node.js - ключевая тема в современной фронтенд-разработке. Для разных проектов могут потребоваться разные версии Node.js, как элегантно решить эту проблему в среде fish shell? Давайте разберемся, как работает nvm.fish, и рассмотрим лучшие практики."><meta itemprop=datePublished content="2025-02-07T23:16:43+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="6831"><meta itemprop=keywords content="Рыбья Раковина,Node.js,Программирование В Оболочке,Инструмент Разработки"><header><h1 itemprop=headline>Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика</h1><p class=text-sm><span data-format=luxon>2025-02-07T23:16:43+04:00</span>
+| <span>14 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%91%d0%be%d0%bb%d0%b5%d0%b5%20%d0%b3%d0%bb%d1%83%d0%b1%d0%be%d0%ba%d0%be%d0%b5%20%d0%bf%d0%be%d0%bd%d0%b8%d0%bc%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d0%be%d0%bd%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20Node.js%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Fish%20Shell%20-%20%d0%bf%d1%80%d0%b8%d0%bd%d1%86%d0%b8%d0%bf%d1%8b%20%d0%b8%20%d0%bf%d1%80%d0%b0%d0%ba%d1%82%d0%b8%d0%ba%d0%b0&amp;url=https://jiejue.ai/ru/2025/02/fish-shell-node-version-manager-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/02/fish-shell-node-version-manager-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%91%d0%be%d0%bb%d0%b5%d0%b5%20%d0%b3%d0%bb%d1%83%d0%b1%d0%be%d0%ba%d0%be%d0%b5%20%d0%bf%d0%be%d0%bd%d0%b8%d0%bc%d0%b0%d0%bd%d0%b8%d0%b5%20%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d0%be%d0%bd%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20Node.js%20%d1%81%20%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e%20Fish%20Shell%20-%20%d0%bf%d1%80%d0%b8%d0%bd%d1%86%d0%b8%d0%bf%d1%8b%20%d0%b8%20%d0%bf%d1%80%d0%b0%d0%ba%d1%82%d0%b8%d0%ba%d0%b0%20https://jiejue.ai/ru/2025/02/fish-shell-node-version-manager-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208144106522.webp alt="Более глубокое понимание версионирования Node.js с помощью Fish Shell - принципы и практика"><p>Версионность Node.js - ключевая тема в современной фронтенд-разработке. Для разных проектов могут потребоваться разные версии Node.js, как элегантно решить эту проблему в среде fish shell? Давайте разберемся, как работает nvm.fish, и рассмотрим лучшие практики.</p><p>&lt;! &ndash;подробнее&mldr;</p><h2 id=основные-проблемы-версионирования>Основные проблемы версионирования</h2><p>Версионирование Node.js в основном требует решения следующих вопросов:</p><ol><li>управление двоичными файлами: как загружать, хранить и организовывать различные версии двоичных файлов Node.js</li><li>переменные окружения: как динамически изменять переменные окружения, такие как PATH, для переключения версии Node.js в текущей сессии оболочки</li><li>ассоциация проектов: как связать конкретный проект с конкретной версией Node.js</li><li>управление зависимостями: как обеспечить совместимость глобально установленных пакетов npm между различными версиями Node.js</li></ol><h2 id=принцип-реализации-nvmfish>принцип реализации nvm.fish</h2><h3 id=1-структура-хранения-версий>1. Структура хранения версий</h3><p>nvm.fish использует простую структуру файловой системы:</p><pre tabindex=0><code>~/.local/share/nvm/
+├── v14.17.0/
+│   ├── bin/
+│   │   ├── node
+│   │   └── npm
+│   └── lib/
+├── v16.14.0/
+└── .index    # 版本索引文件
+```.
+
+Каждая версия имеет отдельный каталог, содержащий полные двоичные файлы и зависимые библиотеки.
+
+### 2. Управление переменными окружения
+
+nvm.fish обеспечивает переключение версий через механизм переменных окружения fish:
+
+```fish
+function _nvm_version_activate --argument-names ver
+    set --global nvm_current_version $ver
+    set --prepend PATH $nvm_data/$ver/bin
+end
+
+function _nvm_version_deactivate --argument-names ver
+    set --erase nvm_current_version
+    set --erase PATH
+end
+```.
+
+Эта реализация гарантирует, что:
+- переключение версий влияет только на текущую сессию оболочки.
+- Разные окна терминала могут использовать разные версии Node.js.
+- Быстрый возврат к версии системы по умолчанию
+
+### 3. Автоматическое определение версии
+
+nvm.fish использует рекурсивный восходящий поиск для нахождения конфигурационных файлов:
+
+```fish
+function _nvm_find_up --argument-names path file
+    test -e &#34;$path/$file&#34; &amp;&amp; echo $path/$file || begin
+        test ! -z &#34;$path&#34; || return
+        _nvm_find_up (string replace --regex -- &#39;/[^/]*.
+
+Такая конструкция позволяет:
+- Автоматическое определение требований к версии Node.js проекта в любом подкаталоге
+- Поддержка нескольких форматов конфигурационных файлов (.nvmrc, .node-version).
+- Поддерживать восходящее наследование конфигураций проекта
+
+## Дополнительные возможности и лучшие практики
+
+### 1. Удаленное кэширование индексов
+
+nvm.fish поддерживает локальный индекс версий, с помощью которого вы можете:
+- Быстро находить доступные версии Node.js.
+- Поддерживать псевдонимы версий (например, lts, latest).
+- Реализовать интеллектуальное сопоставление версий
+
+```mermaid
+graph TD
+    A[版本请求] --&gt; B{检查本地索引}
+    B -- 已过期 --&gt; C[更新远程索引]
+    B -- 未过期 --&gt; D[查找匹配版本]
+    C --&gt; D
+    D --&gt; E[返回版本信息]
+</code></pre><h3 id=2-адаптация-архитектуры>2. Адаптация архитектуры</h3><p>nvm.fish может интеллектуально определять архитектуру системы и загружать соответствующие двоичные файлы:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fish data-lang=fish><span style=display:flex><span><span style=color:#66d9ef>switch</span> $arch
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> i*<span style=color:#ae81ff>86</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> arch x86
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> x86_64
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> arch x64
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> arm64
+</span></span><span style=display:flex><span>        string match <span style=color:#a6e22e>--regex</span> <span style=color:#a6e22e>--quiet</span> <span style=color:#e6db74>&#34;v(?&lt;major&gt;\d+)&#34;</span> $ver
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>test</span> <span style=color:#e6db74>&#34;</span>$os<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> darwin <span style=color:#a6e22e>-a</span> $major <span style=color:#a6e22e>-lt</span> <span style=color:#ae81ff>16</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>set</span> arch x64
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Эта</span> конструкция справляется с:
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- различные</span> архитектуры процессоров <span style=color:#f92672>(</span><span style=color:#a6e22e>x86</span>, x64, ARM<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- особые</span> случаи <span style=color:#f92672>(</span><span style=color:#a6e22e>например</span>, эмуляция Rosetta <span style=color:#ae81ff>2</span> для компьютеров M1 Mac<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- проблемы</span> совместимости исторических версий
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 3. Поддержка зеркал
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Чтобы</span> адаптироваться к сетевому окружению в разных регионах, nvm.fish предоставляет возможность настройки зеркал:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```fish
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用自定义镜像
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>set</span> <span style=color:#a6e22e>-g</span> nvm_mirror https://npmmirror.com/mirrors/node
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 支持的下载模式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>_nvm_download</span>
+</span></span><span style=display:flex><span>    command curl <span style=color:#a6e22e>--silent</span> $nvm_mirror/$ver/$dir.$ext
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 4. интеграция оболочки
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>nvm</span>.fish предоставляет богатый опыт работы с командной строкой через систему дополнений fish:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```fish
+</span></span><span style=display:flex><span>complete <span style=color:#a6e22e>--command</span> nvm <span style=color:#a6e22e>--exclusive</span> <span style=color:#a6e22e>--condition</span> __fish_use_subcommand
+</span></span><span style=display:flex><span>complete <span style=color:#a6e22e>--command</span> nvm <span style=color:#a6e22e>--exclusive</span> <span style=color:#a6e22e>--condition</span> <span style=color:#e6db74>&#34;__fish_seen_subcommand_from install&#34;</span> <span style=color:#a6e22e>--arguments</span> <span style=color:#e6db74>&#34;(
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    test -e </span>$nvm_data<span style=color:#e6db74> &amp;&amp; string split &#39; &#39; &lt;</span>$nvm_data<span style=color:#e6db74>/.index
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>)&#34;</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Она</span> предназначена для обеспечения:
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Контекстно-зависимое</span> завершение команд
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Динамические</span> списки версий
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Подсказки</span> команд в реальном времени
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Инженерия на практике
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 1. Стандартизация проекта
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Рекомендуется</span> использовать файл __PROTECTED_INLINE_CODE__11__ для управления версиями Node.js в вашем проекте:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```bash
+</span></span><span style=display:flex><span><span style=color:#75715e># .nvmrc
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>16</span>.<span style=color:#ae81ff>14</span>.<span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><p>Работает с системами CI/CD:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># GitHub Actions示例</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v2</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Setup Node.js</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      curl -o- https://raw.githubusercontent.com/fish-shell/nvm.fish/main/install.sh | fish
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      nvm install</span>
+</span></span></code></pre></div><h3 id=2-работа-в-команде>2. Работа в команде</h3><p>Чтобы гарантировать, что члены команды используют согласованную версию Node.js:</p><ol><li>укажите требования к версии в документации проекта</li><li>используйте git-хуки для автоматической проверки версий Node.js</li><li>настройте интеграцию с редактором (например, параметры рабочего пространства VSCode)</li></ol><h2 id=перспективы-на-будущее>Перспективы на будущее</h2><p>По мере развития экосистемы Node.js развиваются и инструменты версионирования:</p><ol><li><p>Тенденции контейнеризации</p><ul><li>Контейнеризация сред разработки</li><li>Параллельная работа нескольких версий</li><li>Изолированное управление зависимостями</li></ul></li><li><p>Новые инструменты управления пакетами</p><ul><li>Возвышение pnpm</li><li>Непрерывные инновации в yarn</li><li>Постоянная эволюция npm</li></ul></li><li><p>Поддержка кросс-платформ</p><ul><li>Популярность архитектуры ARM</li><li>Облачная среда разработки</li><li>Режим удаленной разработки</li></ul></li></ol><p>Дизайн nvm.fish оставляет пространство для расширения с учетом этих изменений и способен адаптироваться к будущим потребностям разработки благодаря модульной структуре и понятным интерфейсам.</p><h2 id=резюме>Резюме</h2><p>nvm.fish хорошо решает проблему версионирования Node.js в среде fish shell благодаря своему элегантному дизайну и мощным функциям. Он не только обеспечивает удобство использования, но и играет важную роль в инженерной практике. По мере развития модели разработки такие инструменты будут продолжать играть ключевую роль в повышении эффективности разработки.</p><hr><ul><li>Рисунок: Структура файловой системы nvm.fish</li></ul><pre class=mermaid>
+  graph TD
+    NVM[~/.local/share/nvm/] --&gt; Index[.index&lt;br/&gt;版本索引文件]
+    NVM --&gt; V22[v22.12.0/]
+    V22 --&gt; Bin22[bin/]
+    Bin22 --&gt; Node22[node]
+    Bin22 --&gt; NPM22[npm]
+    V22 --&gt; Lib22[lib/]
+    
+    style NVM fill:#f9f,stroke:#333,stroke-width:2px
+    style Index fill:#bbf,stroke:#333,stroke-width:1px
+    style V22 fill:#bfb,stroke:#333,stroke-width:1px
+```.
+
+- На рисунке показано, как изменяются переменные окружения при переключении между версиями.
+```fish
+$ echo &#34;16.14.0&#34; &gt; .nvmrc
+$ cd ..
+$ nvm use lts
+Now using Node v22.12.0 (npm 10.9.0) ~/.local/share/nvm/v22.12.0/bin/node
+$ nvm list
+   v16.14.0 lts/gallium
+ ▶ v22.12.0 lts/jod
+$ z -
+$ nvm use
+Now using Node v16.14.0 (npm 8.3.1) ~/.local/share/nvm/v16.14.0/bin/node
+$ nvm list
+ ▶ v16.14.0 lts/gallium
+   v22.12.0 lts/jod
+``` с диаграммой, показывающей, как изменяются переменные окружения при переключении между версиями.
+ &#34;&#34; $path) $file
+    end
+end
+```.
+
+Такая конструкция позволяет:
+- Автоматическое определение требований к версии Node.js проекта в любом подкаталоге
+- Поддержка нескольких форматов конфигурационных файлов (.nvmrc, .node-version).
+- Поддерживать восходящее наследование конфигураций проекта
+
+## Дополнительные возможности и лучшие практики
+
+### 1. Удаленное кэширование индексов
+
+nvm.fish поддерживает локальный индекс версий, с помощью которого вы можете:
+- Быстро находить доступные версии Node.js.
+- Поддерживать псевдонимы версий (например, lts, latest).
+- Реализовать интеллектуальное сопоставление версий
+
+```mermaid
+graph TD
+    A[版本请求] --&gt; B{检查本地索引}
+    B -- 已过期 --&gt; C[更新远程索引]
+    B -- 未过期 --&gt; D[查找匹配版本]
+    C --&gt; D
+    D --&gt; E[返回版本信息]
+</pre><h3 id=2-адаптация-архитектуры-1>2. Адаптация архитектуры</h3><p>nvm.fish может интеллектуально определять архитектуру системы и загружать соответствующие двоичные файлы:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fish data-lang=fish><span style=display:flex><span><span style=color:#66d9ef>switch</span> $arch
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> i*<span style=color:#ae81ff>86</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> arch x86
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> x86_64
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>set</span> arch x64
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> arm64
+</span></span><span style=display:flex><span>        string match <span style=color:#a6e22e>--regex</span> <span style=color:#a6e22e>--quiet</span> <span style=color:#e6db74>&#34;v(?&lt;major&gt;\d+)&#34;</span> $ver
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>test</span> <span style=color:#e6db74>&#34;</span>$os<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> darwin <span style=color:#a6e22e>-a</span> $major <span style=color:#a6e22e>-lt</span> <span style=color:#ae81ff>16</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>set</span> arch x64
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Эта</span> конструкция справляется с:
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- различные</span> архитектуры процессоров <span style=color:#f92672>(</span><span style=color:#a6e22e>x86</span>, x64, ARM<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- особые</span> случаи <span style=color:#f92672>(</span><span style=color:#a6e22e>например</span>, эмуляция Rosetta <span style=color:#ae81ff>2</span> для компьютеров M1 Mac<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- проблемы</span> совместимости исторических версий
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 3. Поддержка зеркал
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Чтобы</span> адаптироваться к сетевому окружению в разных регионах, nvm.fish предоставляет возможность настройки зеркал:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```fish
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用自定义镜像
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>set</span> <span style=color:#a6e22e>-g</span> nvm_mirror https://npmmirror.com/mirrors/node
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 支持的下载模式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>_nvm_download</span>
+</span></span><span style=display:flex><span>    command curl <span style=color:#a6e22e>--silent</span> $nvm_mirror/$ver/$dir.$ext
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 4. интеграция оболочки
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>nvm</span>.fish предоставляет богатый опыт работы с командной строкой через систему дополнений fish:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```fish
+</span></span><span style=display:flex><span>complete <span style=color:#a6e22e>--command</span> nvm <span style=color:#a6e22e>--exclusive</span> <span style=color:#a6e22e>--condition</span> __fish_use_subcommand
+</span></span><span style=display:flex><span>complete <span style=color:#a6e22e>--command</span> nvm <span style=color:#a6e22e>--exclusive</span> <span style=color:#a6e22e>--condition</span> <span style=color:#e6db74>&#34;__fish_seen_subcommand_from install&#34;</span> <span style=color:#a6e22e>--arguments</span> <span style=color:#e6db74>&#34;(
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    test -e </span>$nvm_data<span style=color:#e6db74> &amp;&amp; string split &#39; &#39; &lt;</span>$nvm_data<span style=color:#e6db74>/.index
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>)&#34;</span>
+</span></span><span style=display:flex><span>```.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Она</span> предназначена для обеспечения:
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Контекстно-зависимое</span> завершение команд
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Динамические</span> списки версий
+</span></span><span style=display:flex><span><span style=color:#a6e22e>- Подсказки</span> команд в реальном времени
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Инженерия на практике
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 1. Стандартизация проекта
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Рекомендуется</span> использовать файл __PROTECTED_INLINE_CODE__11__ для управления версиями Node.js в вашем проекте:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>```bash
+</span></span><span style=display:flex><span><span style=color:#75715e># .nvmrc
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>16</span>.<span style=color:#ae81ff>14</span>.<span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><p>Работает с системами CI/CD:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># GitHub Actions示例</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v2</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Setup Node.js</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      curl -o- https://raw.githubusercontent.com/fish-shell/nvm.fish/main/install.sh | fish
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      nvm install</span>
+</span></span></code></pre></div><h3 id=2-работа-в-команде-1>2. Работа в команде</h3><p>Чтобы гарантировать, что члены команды используют согласованную версию Node.js:</p><ol><li>укажите требования к версии в документации проекта</li><li>используйте git-хуки для автоматической проверки версий Node.js</li><li>настройте интеграцию с редактором (например, параметры рабочего пространства VSCode)</li></ol><h2 id=перспективы-на-будущее-1>Перспективы на будущее</h2><p>По мере развития экосистемы Node.js развиваются и инструменты версионирования:</p><ol><li><p>Тенденции контейнеризации</p><ul><li>Контейнеризация сред разработки</li><li>Параллельная работа нескольких версий</li><li>Изолированное управление зависимостями</li></ul></li><li><p>Новые инструменты управления пакетами</p><ul><li>Возвышение pnpm</li><li>Непрерывные инновации в yarn</li><li>Постоянная эволюция npm</li></ul></li><li><p>Поддержка кросс-платформ</p><ul><li>Популярность архитектуры ARM</li><li>Облачная среда разработки</li><li>Режим удаленной разработки</li></ul></li></ol><p>Дизайн nvm.fish оставляет пространство для расширения с учетом этих изменений и способен адаптироваться к будущим потребностям разработки благодаря модульной структуре и понятным интерфейсам.</p><h2 id=резюме-1>Резюме</h2><p>nvm.fish хорошо решает проблему версионирования Node.js в среде fish shell благодаря своему элегантному дизайну и мощным функциям. Он не только обеспечивает удобство использования, но и играет важную роль в инженерной практике. По мере развития модели разработки такие инструменты будут продолжать играть ключевую роль в повышении эффективности разработки.</p><hr><ul><li>Рисунок: Структура файловой системы nvm.fish</li></ul><pre class=mermaid>
+  graph TD
+    NVM[~/.local/share/nvm/] --&gt; Index[.index&lt;br/&gt;版本索引文件]
+    NVM --&gt; V22[v22.12.0/]
+    V22 --&gt; Bin22[bin/]
+    Bin22 --&gt; Node22[node]
+    Bin22 --&gt; NPM22[npm]
+    V22 --&gt; Lib22[lib/]
+    
+    style NVM fill:#f9f,stroke:#333,stroke-width:2px
+    style Index fill:#bbf,stroke:#333,stroke-width:1px
+    style V22 fill:#bfb,stroke:#333,stroke-width:1px
+```.
+
+- На рисунке показано, как изменяются переменные окружения при переключении между версиями.
+```fish
+$ echo &#34;16.14.0&#34; &gt; .nvmrc
+$ cd ..
+$ nvm use lts
+Now using Node v22.12.0 (npm 10.9.0) ~/.local/share/nvm/v22.12.0/bin/node
+$ nvm list
+   v16.14.0 lts/gallium
+ ▶ v22.12.0 lts/jod
+$ z -
+$ nvm use
+Now using Node v16.14.0 (npm 8.3.1) ~/.local/share/nvm/v16.14.0/bin/node
+$ nvm list
+ ▶ v16.14.0 lts/gallium
+   v22.12.0 lts/jod
+``` с диаграммой, показывающей, как изменяются переменные окружения при переключении между версиями.
+</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/02/tmux-nvim-paste-indent/ title="Устранение неполадок с автоматическим отступом пасты Neovim в сеансах Tmux"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Устранение неполадок с автоматическим отступом пасты Neovim в сеансах Tmux</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/02/fish-shell-node-version-manager-quick-start/ title="Средства версионирования Node.js под Fish Shell - краткое руководство по запуску"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Средства версионирования Node.js под Fish Shell - краткое руководство по запуску</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/02/fish-shell-node-version-manager-deep-dive/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#основные-проблемы-версионирования>Основные проблемы версионирования</a></li><li><a href=#принцип-реализации-nvmfish>принцип реализации nvm.fish</a><ul><li><a href=#1-структура-хранения-версий>1. Структура хранения версий</a></li><li><a href=#2-адаптация-архитектуры>2. Адаптация архитектуры</a></li><li><a href=#2-работа-в-команде>2. Работа в команде</a></li></ul></li><li><a href=#перспективы-на-будущее>Перспективы на будущее</a></li><li><a href=#резюме>Резюме</a><ul><li><a href=#2-адаптация-архитектуры-1>2. Адаптация архитектуры</a></li><li><a href=#2-работа-в-команде-1>2. Работа в команде</a></li></ul></li><li><a href=#перспективы-на-будущее-1>Перспективы на будущее</a></li><li><a href=#резюме-1>Резюме</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

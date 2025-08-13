@@ -1,0 +1,303 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Redis primer: руководство по структуре данных, понятное даже новичку | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/07/redis-starter-guide/><meta name=author content="董昊"><meta name=description content="Redis - одновременно знакомый и незнакомый термин для многих разработчиков. Возможно, мы слышали, что он быстрый и является базой данных in-memory, но когда действительно нужно связаться и использовать Redis, часто путаемся в его структуре данных и работе. В этой статье мы будем использовать визуальные диаграммы и практические операции, чтобы помочь людям, не имеющим опыта работы с Redis, быстро понять основные концепции Redis и то, как его использовать.
+"><meta name=keywords content="Redis,Всеобъемлющая База Данных,(Вычислительный) Кэш,Начало Работы"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/07/redis-starter-guide/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Redis primer: руководство по структуре данных, понятное даже новичку"><meta property="og:description" content="Redis - одновременно знакомый и незнакомый термин для многих разработчиков. Возможно, мы слышали, что он быстрый и является базой данных in-memory, но когда действительно нужно связаться и использовать Redis, часто путаемся в его структуре данных и работе. В этой статье мы будем использовать визуальные диаграммы и практические операции, чтобы помочь людям, не имеющим опыта работы с Redis, быстро понять основные концепции Redis и то, как его использовать."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-04T20:55:21+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Redis"><meta property="article:tag" content="Всеобъемлющая База Данных"><meta property="article:tag" content="(Вычислительный) Кэш"><meta property="article:tag" content="Начало Работы"><meta name=twitter:card content="summary"><meta name=twitter:title content="Redis primer: руководство по структуре данных, понятное даже новичку"><meta name=twitter:description content="Redis - одновременно знакомый и незнакомый термин для многих разработчиков. Возможно, мы слышали, что он быстрый и является базой данных in-memory, но когда действительно нужно связаться и использовать Redis, часто путаемся в его структуре данных и работе. В этой статье мы будем использовать визуальные диаграммы и практические операции, чтобы помочь людям, не имеющим опыта работы с Redis, быстро понять основные концепции Redis и то, как его использовать."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/07/redis-starter-guide/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Redis primer: руководство по структуре данных, понятное даже новичку"><meta itemprop=description content="Redis - одновременно знакомый и незнакомый термин для многих разработчиков. Возможно, мы слышали, что он быстрый и является базой данных in-memory, но когда действительно нужно связаться и использовать Redis, часто путаемся в его структуре данных и работе. В этой статье мы будем использовать визуальные диаграммы и практические операции, чтобы помочь людям, не имеющим опыта работы с Redis, быстро понять основные концепции Redis и то, как его использовать."><meta itemprop=datePublished content="2025-07-04T20:55:21+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="7125"><meta itemprop=keywords content="Redis,Всеобъемлющая База Данных,(Вычислительный) Кэш,Начало Работы"><header><h1 itemprop=headline>Redis primer: руководство по структуре данных, понятное даже новичку</h1><p class=text-sm><span data-format=luxon>2025-07-04T20:55:21+04:00</span>
+| <span>15 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Redis%20primer:%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%82%d1%83%d1%80%d0%b5%20%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85,%20%d0%bf%d0%be%d0%bd%d1%8f%d1%82%d0%bd%d0%be%d0%b5%20%d0%b4%d0%b0%d0%b6%d0%b5%20%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d1%83&amp;url=https://jiejue.ai/ru/2025/07/redis-starter-guide/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/07/redis-starter-guide/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Redis%20primer:%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%81%d1%82%d1%80%d1%83%d0%ba%d1%82%d1%83%d1%80%d0%b5%20%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85,%20%d0%bf%d0%be%d0%bd%d1%8f%d1%82%d0%bd%d0%be%d0%b5%20%d0%b4%d0%b0%d0%b6%d0%b5%20%d0%bd%d0%be%d0%b2%d0%b8%d1%87%d0%ba%d1%83%20https://jiejue.ai/ru/2025/07/redis-starter-guide/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704211411434.webp alt="Redis primer: руководство по структуре данных, понятное даже новичку"><p>Redis - одновременно знакомый и незнакомый термин для многих разработчиков. Возможно, мы слышали, что он быстрый и является базой данных in-memory, но когда действительно нужно связаться и использовать Redis, часто путаемся в его структуре данных и работе. В этой статье мы будем использовать визуальные диаграммы и практические операции, чтобы помочь людям, не имеющим опыта работы с Redis, быстро понять основные концепции Redis и то, как его использовать.</p><p>&lt;! -еще&ndash;></p><h2 id=первые-впечатления-что-такое-redis>Первые впечатления: что такое Redis?</h2><p>Представьте, что вы работаете в библиотеке. Традиционные базы данных SQL похожи на большие библиотеки со строгой системой классификации, где каждая книга размещена на фиксированной полке в соответствии с десятичной классификацией Дьюи, и вам нужно сначала найти нужную область классификации, а затем искать ее по очереди в соответствии с ее номером.</p><p>Redis - это как маленькая полка быстрого доступа на столе библиотекаря. Там размещены все наиболее часто используемые справочные материалы, и вам достаточно сказать библиотекарю название книги, и он тут же выдаст ее вам, что невероятно быстро. Но полка быстрого доступа имеет ограниченное пространство, она не может вместить все книги, и если администратор отлучается (перезагрузка сервера), книги может потребоваться переставить.</p><pre class=mermaid>
+  graph LR
+    subgraph &#34;传统数据库&#34;
+        SQL[&#34;SQL数据库&lt;br/&gt;磁盘存储&lt;br/&gt;表格结构&lt;br/&gt;持久化&#34;]
+    end
+    
+    subgraph &#34;Redis缓存层&#34;
+        Redis[&#34;Redis&lt;br/&gt;内存存储&lt;br/&gt;键值结构&lt;br/&gt;超高速&#34;]
+    end
+    
+    APP[&#34;应用程序&#34;] --&gt; Redis
+    Redis --&gt; SQL
+    
+    Redis -.-&gt; |缓存热点数据| APP
+    SQL -.-&gt; |主要数据存储| APP
+</pre><h2 id=пространство-данных-redis-16-отдельных-комнат>Пространство данных Redis: 16 отдельных комнат</h2><p>Redis обладает уникальной особенностью: внутри него находится 16 отдельных баз данных (пронумерованных 0-15). Это похоже на здание склада с 16 комнатами, в каждой из которых есть свои отдельные полки и предметы, не мешающие друг другу.</p><pre class=mermaid>
+  graph TD
+    subgraph &#34;Redis实例&#34;
+        DB0[&#34;数据库0&lt;br/&gt;默认连接&lt;br/&gt;存放系统级数据&#34;]
+        DB1[&#34;数据库1&lt;br/&gt;业务数据&lt;br/&gt;用户信息等&#34;]
+        DB2[&#34;数据库2&lt;br/&gt;缓存数据&#34;]
+        DB3[&#34;数据库3&lt;br/&gt;...&#34;]
+        DBO[&#34;数据库15&lt;br/&gt;...&#34;]
+    end
+    
+    USER[&#34;用户连接&#34;] --&gt; DB0
+    USER -.-&gt; |SELECT 1| DB1
+    USER -.-&gt; |SELECT 2| DB2
+```.
+
+На практике, когда вы подключаетесь к Redis, по умолчанию используется база данных 0. Если вам нужно переключиться на другую базу данных, используйте команду `SELECT`:
+
+```bash
+# 默认在数据库0
+redis-cli&gt; KEYS *
+1) &#34;gq:search-index-docs-count&#34;
+
+# 切换到数据库1
+redis-cli&gt; SELECT 1
+OK
+
+# 现在在数据库1，可以看到完全不同的数据
+redis-cli[1]&gt; KEYS *
+1) &#34;client:all:quota_last_updated_minute&#34;
+2) &#34;purchase:820f672f-98bf-9639-41b8-1150b535aef5:budget_v2&#34;
+...
+</pre><p>Обратите внимание на изменение в подсказке командной строки: <code>[1]</code> в <code>redis-cli[1]></code> указывает на то, что вы сейчас находитесь в базе данных 1.</p><h2 id=типы-данных-redis-больше-чем-простые-пары-ключ-значение>Типы данных Redis: больше, чем простые пары ключ-значение</h2><p>Если вы знакомы с Python или JSON, вы можете думать о парах ключ-значение как о строках, сопоставленных со строками. Но Redis предоставляет пять специально оптимизированных типов данных, каждый из которых имеет определенное назначение:</p><h3 id=1-string-строка>1. String (Строка)</h3><p>Самый базовый тип, который может хранить текст, числа и даже двоичные данные:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>SET user:name <span style=color:#e6db74>&#34;张三&#34;</span>
+</span></span><span style=display:flex><span>GET user:name
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: &#34;张三&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>SET counter <span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>INCR counter
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: 101</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 2. Hash</span>
+</span></span><span style=display:flex><span>Hash - это не криптографическая концепция, а сопоставление полей и значений, как в словаре Python. Он особенно подходит для хранения информации об объектах:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>HSET user:1000 name <span style=color:#e6db74>&#34;张三&#34;</span> age <span style=color:#ae81ff>30</span> email <span style=color:#e6db74>&#34;zhang@example.com&#34;</span>
+</span></span><span style=display:flex><span>HGETALL user:1000
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1) &#34;name&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2) &#34;张三&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3) &#34;age&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4) &#34;30&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 5) &#34;email&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 6) &#34;zhang@example.com&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Именно такую структуру записи о покупке мы видели ранее:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>HGETALL purchase:820f672f-98bf-9639-41b8-1150b535aef5:budget_v2
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回预算相关的4个字段和值</span>
+</span></span></code></pre></div><h3 id=3-список>3. Список</h3><p>Упорядоченная последовательность элементов, поддерживающая вставку и удаление с обоих концов:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>LPUSH messages <span style=color:#e6db74>&#34;最新消息&#34;</span>
+</span></span><span style=display:flex><span>LPUSH messages <span style=color:#e6db74>&#34;较早消息&#34;</span>
+</span></span><span style=display:flex><span>LRANGE messages <span style=color:#ae81ff>0</span> -1
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: [&#34;最新消息&#34;, &#34;较早消息&#34;]</span>
+</span></span></code></pre></div><h3 id=4-набор>4. Набор</h3><p>Неупорядоченная и неповторяющаяся коллекция элементов:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>SADD tags <span style=color:#e6db74>&#34;redis&#34;</span> <span style=color:#e6db74>&#34;数据库&#34;</span> <span style=color:#e6db74>&#34;nosql&#34;</span>
+</span></span><span style=display:flex><span>SMEMBERS tags
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: [&#34;redis&#34;, &#34;数据库&#34;, &#34;nosql&#34;]</span>
+</span></span></code></pre></div><h3 id=5-сортированное-множество>5. Сортированное множество</h3><p>Каждый элемент имеет оценку и отсортирован по ней:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ZADD leaderboard <span style=color:#ae81ff>100</span> <span style=color:#e6db74>&#34;玩家A&#34;</span> <span style=color:#ae81ff>85</span> <span style=color:#e6db74>&#34;玩家B&#34;</span> <span style=color:#ae81ff>120</span> <span style=color:#e6db74>&#34;玩家C&#34;</span>
+</span></span><span style=display:flex><span>ZRANGE leaderboard <span style=color:#ae81ff>0</span> -1 WITHSCORES
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回按分数排序: [&#34;玩家B&#34;, &#34;85&#34;, &#34;玩家A&#34;, &#34;100&#34;, &#34;玩家C&#34;, &#34;120&#34;]</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span> <span style=color:#75715e>### 5.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>mermaid
+</span></span><span style=display:flex><span>graph TD
+</span></span><span style=display:flex><span>    subgraph <span style=color:#e6db74>&#34;Redis数据类型&#34;</span>
+</span></span><span style=display:flex><span>        STRING<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;字符串&lt;br/&gt;简单键值对&lt;br/&gt;计数器&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>        HASH<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;哈希&lt;br/&gt;对象属性&lt;br/&gt;用户信息&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>        LIST<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;列表&lt;br/&gt;消息队列&lt;br/&gt;时间线&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>        SET<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;集合&lt;br/&gt;标签系统&lt;br/&gt;去重&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>        ZSET<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;有序集合&lt;br/&gt;排行榜&lt;br/&gt;优先级队列&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    STRING --&gt; |<span style=color:#e6db74>&#34;SET key value&#34;</span>| V1<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;value&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    HASH --&gt; |<span style=color:#e6db74>&#34;HSET key field value&#34;</span>| V2<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;field1: value1&lt;br/&gt;field2: value2&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    LIST --&gt; |<span style=color:#e6db74>&#34;LPUSH key value&#34;</span>| V3<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;[value3, value2, value1]&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    SET --&gt; |<span style=color:#e6db74>&#34;SADD key value&#34;</span>| V4<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;{value1, value2, value3}&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>    ZSET --&gt; |<span style=color:#e6db74>&#34;ZADD key score value&#34;</span>| V5<span style=color:#f92672>[</span><span style=color:#e6db74>&#34;value1: score1&lt;br/&gt;value2: score2&#34;</span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><h2 id=искусство-именования-имен-ключей-redis>Искусство именования имен ключей Redis</h2><p>В Redis нет настоящей иерархии, все ключи плоские. Однако разработчики создали &ldquo;псевдоиерархическое&rdquo; соглашение об именовании, используя двоеточия (:):</p><pre tabindex=0><code>purchase:820f672f-98bf-9639-41b8-1150b535aef5:budget_v2
+^~~~~~~  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^~~~~~~~~
+类型      唯一标识符(UUID)                     属性/版本
+```.
+
+Это соглашение об именовании имеет несколько преимуществ:
+
+1. **Четкая организация**: с первого взгляда видно, для чего используются данные
+2. **Запросы с подбором шаблонов**: для поиска совместимых ключей можно использовать подстановочные знаки
+3. **Предотвращение конфликтов имен**: ключи для разных функциональных модулей не переименовываются
+
+```mermaid
+graph LR
+    subgraph &#34;键名组织&#34;
+        K1[&#34;purchase:uuid1:budget_v2&#34;] 
+        K2[&#34;purchase:uuid1:order_info&#34;]
+        K3[&#34;purchase:uuid2:budget_v2&#34;]
+        K4[&#34;user:uuid1:profile&#34;]
+        K5[&#34;user:uuid1:settings&#34;]
+    end
+    
+    Q1[&#34;KEYS purchase:*&#34;] --&gt; K1
+    Q1 --&gt; K2
+    Q1 --&gt; K3
+    
+    Q2[&#34;KEYS *:budget_v2&#34;] --&gt; K1
+    Q2 --&gt; K3
+    
+    Q3[&#34;KEYS user:uuid1:*&#34;] --&gt; K4
+    Q3 --&gt; K5
+```.
+
+Важно понимать: для Redis вся строка - это имя ключа, без отношений &#34;родитель-ребенок&#34;. Когда вы выполняете `KEYS purchase:*`, Redis возвращает все совпадающие полные имена ключей, а не &#34;подкаталоги&#34;, как в файловой системе.
+
+## Практическая работа: подключение к Redis и запрос к нему
+
+### Подключение к Redis
+
+Если вы работаете в среде Kubernetes, вы можете создать клиентский подкаст Redis:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-client
+spec:
+  containers:
+  - name: redis-client
+    image: redis
+    command: [ &#34;sh&#34;, &#34;-c&#34;, &#34;sleep 3h&#34; ]
+```.
+
+Затем перейдите в подкаст и подключитесь к Redis:
+
+```bash
+# 进入Pod
+kubectl exec -it redis-cli -- bash
+
+# 连接Redis（替换为你的实际连接信息）
+redis-cli -h your-redis-host -p 6379 -a your-password
+
+# 如果使用SSL（Azure Redis默认启用）
+redis-cli -h your-redis-host -p 6380 --tls -a your-password
+</code></pre><h3 id=основные-команды-запроса>Основные команды запроса</h3><p>После успешного подключения вы можете использовать эти неинтрузивные команды для изучения данных:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 测试连接</span>
+</span></span><span style=display:flex><span>PING
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: PONG</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看当前数据库的所有键（小心使用，数据量大时会很慢）</span>
+</span></span><span style=display:flex><span>KEYS *
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 更安全的方式：分批查看键</span>
+</span></span><span style=display:flex><span>SCAN <span style=color:#ae81ff>0</span> MATCH purchase:* COUNT <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看数据库中键的总数</span>
+</span></span><span style=display:flex><span>DBSIZE
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 检查特定键的类型</span>
+</span></span><span style=display:flex><span>TYPE purchase:820f672f-98bf-9639-41b8-1150b535aef5:budget_v2
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回: hash</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看键的过期时间</span>
+</span></span><span style=display:flex><span>TTL some-key
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回剩余秒数，-1表示永不过期，-2表示键不存在</span>
+</span></span></code></pre></div><h3 id=запрос-содержимого-на-основе-типа-данных>Запрос содержимого на основе типа данных</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 如果是字符串</span>
+</span></span><span style=display:flex><span>GET key-name
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果是哈希</span>
+</span></span><span style=display:flex><span>HGETALL key-name
+</span></span><span style=display:flex><span>HKEYS key-name    <span style=color:#75715e># 只看字段名</span>
+</span></span><span style=display:flex><span>HVALS key-name    <span style=color:#75715e># 只看值</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果是列表</span>
+</span></span><span style=display:flex><span>LRANGE key-name <span style=color:#ae81ff>0</span> -1   <span style=color:#75715e># 查看所有元素</span>
+</span></span><span style=display:flex><span>LLEN key-name          <span style=color:#75715e># 查看列表长度</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果是集合</span>
+</span></span><span style=display:flex><span>SMEMBERS key-name      <span style=color:#75715e># 查看所有成员</span>
+</span></span><span style=display:flex><span>SCARD key-name         <span style=color:#75715e># 查看成员数量</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果是有序集合</span>
+</span></span><span style=display:flex><span>ZRANGE key-name <span style=color:#ae81ff>0</span> -1 WITHSCORES  <span style=color:#75715e># 查看所有成员和分数</span>
+</span></span><span style=display:flex><span>ZCARD key-name                   <span style=color:#75715e># 查看成员数量</span>
+</span></span></code></pre></div><h3 id=сценарии-использования-redis-и-их-значение>Сценарии использования Redis и их значение</h3><h3 id=зачем-вам-нужен-redis>Зачем вам нужен Redis?</h3><p>Основная сила Redis - это <strong>скорость</strong>. Будучи базой данных in-memory, он обеспечивает микросекундное время отклика, что особенно ценно в следующих сценариях:</p><ol><li><p><strong>кэширующий слой</strong>: снижение нагрузки на базу данных</p><ul><li>Хранение горячих данных в Redis</li><li>Приложение сначала проверяет Redis, а не базу данных</li><li>Значительное улучшение времени отклика</li></ul></li><li><p><strong>Функция реального времени</strong>:</p><ul><li>подсчет пользователей в режиме онлайн</li><li>Таблицы лидеров в реальном времени</li><li>Ограничитель потока (для предотвращения злоупотребления API)</li></ul></li><li><p><strong>Хранилище сессий</strong>:</p><ul><li>статус входа пользователя</li><li>Содержимое корзины</li><li>Временная информация о конфигурации</li></ul></li><li><p><strong>Очередь сообщений</strong>:</p><ul><li>Простая очередь задач</li><li>Публикация/подписка сообщений</li></ul></li></ol><pre class=mermaid>
+  graph TD
+    subgraph &#34;典型Web应用架构&#34;
+        USER[&#34;用户请求&#34;] --&gt; APP[&#34;应用服务器&#34;]
+        APP --&gt; REDIS[&#34;Redis缓存&#34;]
+        APP --&gt; DB[&#34;SQL数据库&#34;]
+        
+        REDIS -.-&gt; |缓存命中&lt;br/&gt;微秒响应| APP
+        DB -.-&gt; |缓存未命中&lt;br/&gt;毫秒响应| APP
+        
+        APP --&gt; |更新数据| DB
+        APP --&gt; |更新缓存| REDIS
+    end
+```.
+
+### Постоянство: временное или основное хранилище?
+
+Позиционирование Redis зависит от вашей конфигурации:
+
+** как кэш (режим по умолчанию)**:
+- Данные хранятся в памяти
+- Данные теряются после перезагрузки сервера
+- Основные данные остаются в базе данных SQL
+- Redis - это просто слой ускорения
+
+**В качестве основного хранилища (настройка персистентности)**:
+- Включите снимки RDB или ведение журнала AOF
+- Данные периодически сохраняются на диск
+- Может использоваться как уникальное хранилище для определенных данных
+
+В корпоративных средах (например, Azure Redis Cache) постоянство часто включается для обеспечения надежности данных.
+
+## Практические рекомендации
+
+### Безопасный способ исследования
+
+Если вы только начинаете работать с Redis, рекомендуем использовать эти безопасные команды:
+
+```bash
+# 查看基本信息
+INFO
+INFO memory
+INFO stats
+
+# 安全地浏览键（避免使用KEYS *）
+SCAN 0 MATCH *your-pattern* COUNT 10
+
+# 查看样本数据
+RANDOMKEY
+TYPE &lt;random-key&gt;
+# 然后根据类型使用相应的查看命令
+```.
+
+### Примечания
+
+1. **Избегайте блокирующих команд**: в производственных средах команды `KEYS *` и `MONITOR` могут повлиять на производительность.
+2. **Используйте SCAN вместо KEYS**: Команды SCAN более безопасны для больших наборов данных.
+3. **Понимайте концепции баз данных**: помните, что данные в разных базах данных полностью изолированы.
+4. **Обратите внимание на TTL**: некоторые ключи могут иметь срок действия и будут автоматически удалены после истечения срока действия.
+
+Я полагаю, что благодаря этой статье вы получили базовое представление о Redis. Redis - это не просто &#34;быстрое хранилище ключей и значений&#34;, это мощный сервер структур данных in-memory для современных приложений, обеспечивающий высокопроизводительную обработку данных.
+
+Далее вы можете попробовать выполнить эти команды в безопасной среде, чтобы ознакомиться с Redis. Помните, что ключ к пониманию Redis - это осознание того, что он принципиально отличается от традиционных реляционных баз данных: он плоский, in-memory и ориентирован на структуру данных, и эти характеристики способствуют его уникальной ценности.
+</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/07/git-submodule-complete-guide/ title="Полное руководство по субмодулям Git: понимание субмодулей по порядку"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Полное руководство по субмодулям Git: понимание субмодулей по порядку</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/07/azure-function-storage-deep-analysis/ title="Глубокий анализ учетной записи Azure Function App Storage: практика эксплуатации и обслуживания и обнаружение конфликтов"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Глубокий анализ учетной записи Azure Function App Storage: практика эксплуатации и обслуживания и обнаружение конфликтов</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/07/redis-starter-guide/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#первые-впечатления-что-такое-redis>Первые впечатления: что такое Redis?</a></li><li><a href=#пространство-данных-redis-16-отдельных-комнат>Пространство данных Redis: 16 отдельных комнат</a></li><li><a href=#типы-данных-redis-больше-чем-простые-пары-ключ-значение>Типы данных Redis: больше, чем простые пары ключ-значение</a><ul><li><a href=#1-string-строка>1. String (Строка)</a></li><li><a href=#3-список>3. Список</a></li><li><a href=#4-набор>4. Набор</a></li><li><a href=#5-сортированное-множество>5. Сортированное множество</a></li></ul></li><li><a href=#искусство-именования-имен-ключей-redis>Искусство именования имен ключей Redis</a><ul><li><a href=#основные-команды-запроса>Основные команды запроса</a></li><li><a href=#запрос-содержимого-на-основе-типа-данных>Запрос содержимого на основе типа данных</a></li><li><a href=#сценарии-использования-redis-и-их-значение>Сценарии использования Redis и их значение</a></li><li><a href=#зачем-вам-нужен-redis>Зачем вам нужен Redis?</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

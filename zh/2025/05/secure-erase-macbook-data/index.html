@@ -1,0 +1,126 @@
+<!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>安全擦除MacBook数据：Apple硬件加密背后的秘密 | 爱解决</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/zh/2025/05/secure-erase-macbook-data/><meta name=author content="董昊"><meta name=description content="当你准备出售、赠送或以旧换新你的MacBook时，如何确保个人数据的安全？Apple的硬件加密技术提供了一种优雅而强大的解决方案，特别是在Apple Silicon芯片或T2安全芯片的Mac设备上。本文将揭示这些设备如何保护你的数据，并提供实用指南帮助你安全地擦除旧设备。
+"><meta name=keywords content="Macbook,数据安全,硬件加密,Apple Silicon"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/zh/2025/05/secure-erase-macbook-data/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="安全擦除MacBook数据：Apple硬件加密背后的秘密"><meta property="og:description" content="当你准备出售、赠送或以旧换新你的MacBook时，如何确保个人数据的安全？Apple的硬件加密技术提供了一种优雅而强大的解决方案，特别是在Apple Silicon芯片或T2安全芯片的Mac设备上。本文将揭示这些设备如何保护你的数据，并提供实用指南帮助你安全地擦除旧设备。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-05-01T17:56:46+04:00"><meta property="article:modified_time" content="2025-05-01T19:59:05+04:00"><meta property="article:tag" content="Macbook"><meta property="article:tag" content="数据安全"><meta property="article:tag" content="硬件加密"><meta property="article:tag" content="Apple Silicon"><meta name=twitter:card content="summary"><meta name=twitter:title content="安全擦除MacBook数据：Apple硬件加密背后的秘密"><meta name=twitter:description content="当你准备出售、赠送或以旧换新你的MacBook时，如何确保个人数据的安全？Apple的硬件加密技术提供了一种优雅而强大的解决方案，特别是在Apple Silicon芯片或T2安全芯片的Mac设备上。本文将揭示这些设备如何保护你的数据，并提供实用指南帮助你安全地擦除旧设备。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/zh class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/zh/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/zh/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/zh/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/zh/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title=切换语言><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">中文</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/ru/2025/05/secure-erase-macbook-data/ class="flex items-center gap-2"><span class="flag flag-ru"></span>
+<span class=language-name>Русский</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="安全擦除MacBook数据：Apple硬件加密背后的秘密"><meta itemprop=description content="当你准备出售、赠送或以旧换新你的MacBook时，如何确保个人数据的安全？Apple的硬件加密技术提供了一种优雅而强大的解决方案，特别是在Apple Silicon芯片或T2安全芯片的Mac设备上。本文将揭示这些设备如何保护你的数据，并提供实用指南帮助你安全地擦除旧设备。"><meta itemprop=datePublished content="2025-05-01T17:56:46+04:00"><meta itemprop=dateModified content="2025-05-01T19:59:05+04:00"><meta itemprop=wordCount content="2966"><meta itemprop=keywords content="Macbook,数据安全,硬件加密,Apple Silicon"><header><h1 itemprop=headline>安全擦除MacBook数据：Apple硬件加密背后的秘密</h1><p class=text-sm><span data-format=luxon>2025-05-01T17:56:46+04:00</span>
+| <span>6分钟阅读</span>
+| <span>更新于
+<span data-format=luxon>2025-05-01T19:59:05+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%e5%ae%89%e5%85%a8%e6%93%a6%e9%99%a4MacBook%e6%95%b0%e6%8d%ae%ef%bc%9aApple%e7%a1%ac%e4%bb%b6%e5%8a%a0%e5%af%86%e8%83%8c%e5%90%8e%e7%9a%84%e7%a7%98%e5%af%86&amp;url=https://jiejue.ai/zh/2025/05/secure-erase-macbook-data/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/zh/2025/05/secure-erase-macbook-data/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%e5%ae%89%e5%85%a8%e6%93%a6%e9%99%a4MacBook%e6%95%b0%e6%8d%ae%ef%bc%9aApple%e7%a1%ac%e4%bb%b6%e5%8a%a0%e5%af%86%e8%83%8c%e5%90%8e%e7%9a%84%e7%a7%98%e5%af%86%20https://jiejue.ai/zh/2025/05/secure-erase-macbook-data/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250501175925048.webp alt=安全擦除MacBook数据：Apple硬件加密背后的秘密><p>当你准备出售、赠送或以旧换新你的MacBook时，如何确保个人数据的安全？Apple的硬件加密技术提供了一种优雅而强大的解决方案，特别是在Apple Silicon芯片或T2安全芯片的Mac设备上。本文将揭示这些设备如何保护你的数据，并提供实用指南帮助你安全地擦除旧设备。</p><h2 id=为什么普通的删除文件不够安全>为什么普通的"删除文件"不够安全？</h2><p>小李是一位财务助理，他决定升级自己工作用的旧MacBook Air。作为处理公司财务数据的专业人士，他担心：<strong>&ldquo;如果我只是删除文件，数据恢复公司是否能够提取出我的敏感信息？&rdquo;</strong></p><p>这是一个合理的担忧。传统的文件删除只是移除了文件系统中的索引，而实际数据仍保留在存储介质上，直到被新数据覆盖。专业的数据恢复服务确实可以恢复这些"删除"的文件。</p><p>但是，Apple的现代Mac设备采用了一种从根本上不同的方法——硬件级加密。</p><h2 id=apple的硬件加密安全的基石>Apple的硬件加密：安全的基石</h2><h3 id=现代mac的加密是怎么工作的>现代Mac的加密是怎么工作的？</h3><p>在配备Apple Silicon（M1、M2、M3系列）或T2安全芯片的Mac设备上，所有数据<strong>始终</strong>处于加密状态，即使你没有启用FileVault。这是因为这些设备采用了硬件级的强制加密（存储器上的所有数据一直都是加密的），区别仅在于加密密钥是如何保护的。</p><pre class=mermaid>
+  flowchart TD
+    subgraph 物理隔离
+        direction TB
+        SE[Secure Enclave 安全隔区]
+        AP[应用处理器&lt;br&gt;运行macOS]
+        
+        subgraph SE内部
+            direction LR
+            ROM[Boot ROM&lt;br&gt;固化信任根]
+            sepOS[sepOS&lt;br&gt;安全操作系统]
+            MPE[内存保护引擎]
+            TRNG[真随机数生成器]
+            SEKeys[UID/GID密钥存储]
+            SEAES[SE专用AES引擎]
+        end
+    end
+    
+    subgraph 密钥层次结构
+        direction TB
+        UID[&#34;设备唯一密钥(UID)&lt;br&gt;在制造时烧录&lt;br&gt;无法读取&#34;]
+        UserPass[&#34;用户密码/密钥&#34;]
+        ClassKey[&#34;类密钥&lt;br&gt;(受UID和用户密码保护)&#34;]
+        VolumeKey[&#34;卷密钥&lt;br&gt;(受类密钥保护)&#34;]
+        MediaKey[&#34;介质密钥&lt;br&gt;(可快速擦除)&#34;]
+    end
+    
+    subgraph 存储架构
+        direction TB
+        DMA[&#34;直接内存访问路径&#34;]
+        AES[&#34;专用AES加密引擎&#34;]
+        NAND[&#34;NAND闪存&lt;br&gt;(物理存储)&#34;]
+        Effaceable[&#34;可擦除存储区&lt;br&gt;(存储MediaKey)&#34;]
+    end
+    
+    AP &lt;--&gt; SE
+    SE --&gt; SEKeys
+    SEKeys --&gt; UID
+    SE --&gt; DMA
+    DMA --&gt; AES
+    AES --&gt; NAND
+    UID --&gt; ClassKey
+    UserPass --&gt; ClassKey
+    ClassKey --&gt; VolumeKey
+    VolumeKey --&gt; MediaKey
+    MediaKey --&gt; Effaceable
+    
+    class SE,ROM,MPE,TRNG,SEAES,SEKeys secure;
+    class UID,ClassKey,VolumeKey,MediaKey key;
+    class AES hardware;
+    
+    classDef secure fill:#f9d,stroke:#333,stroke-width:2px;
+    classDef key fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef hardware fill:#fdb,stroke:#333,stroke-width:1px;
+</pre><p><strong>Apple Silicon/T2 Mac安全架构图：展示了安全隔区和加密组件之间的关系</strong></p><p>这种加密系统的核心是：</p><ol><li><strong>Secure Enclave（安全隔区）</strong>：这是芯片内的一个独立安全处理器，与主系统隔离</li><li><strong>设备唯一标识符(UID)</strong>：每台设备在制造时烧录的独特密钥，无法被读取或提取</li><li><strong>专用AES加密引擎</strong>：处理实时数据加密/解密，无需降低性能</li></ol><p>关键是，整个加密系统建立在<strong>物理隔离</strong>的基础上。密钥存储在安全区域中，即使是Apple公司也无法提取。</p><h3 id=擦除过程密钥销毁而非数据覆写>擦除过程：密钥销毁而非数据覆写</h3><p>当你在Apple Silicon或T2 Mac上执行"抹除所有内容和设置"时，系统并不需要覆写所有数据（这在SSD上效率低且可能降低寿命）。相反，它只是销毁加密密钥。</p><pre class=mermaid>
+  sequenceDiagram
+    participant User as 用户
+    participant macOS as macOS系统
+    participant SE as Secure Enclave
+    participant AES as AES加密引擎
+    participant Storage as 存储设备
+    
+    Note over SE: 设备唯一标识符(UID)&lt;br&gt;在芯片制造时烧录
+    
+    rect rgb(240, 240, 255)
+    Note right of User: 设备首次设置
+    SE-&gt;&gt;SE: 使用TRNG生成&lt;br&gt;短暂包装密钥(Ephemeral Key)
+    SE-&gt;&gt;SE: 结合UID生成卷密钥(Volume Key)
+    SE-&gt;&gt;AES: 安全传输卷密钥(不经过系统内存)
+    AES-&gt;&gt;Storage: 加密所有写入数据
+    end
+    
+    rect rgb(255, 240, 240)
+    Note right of User: 正常使用设备
+    User-&gt;&gt;macOS: 读取/写入文件
+    macOS-&gt;&gt;AES: 请求解密/加密
+    AES-&gt;&gt;SE: 请求解包密钥
+    SE--&gt;&gt;AES: 提供解包密钥(不透露原始密钥)
+    AES-&gt;&gt;Storage: 加密写入/解密读取
+    Storage--&gt;&gt;User: 安全数据访问
+    end
+    
+    rect rgb(240, 255, 240)
+    Note right of User: 擦除设备
+    User-&gt;&gt;macOS: 执行&#34;抹除所有内容和设置&#34;
+    macOS-&gt;&gt;SE: 请求擦除密钥
+    SE-&gt;&gt;SE: 不可逆销毁&lt;br&gt;所有派生密钥
+    SE-&gt;&gt;SE: 生成新的随机密钥
+    Note over Storage: 旧数据物理存在&lt;br&gt;但无法解密
+    end
+</pre><p><strong>加密密钥生成与销毁流程：展示了从设备设置到数据擦除的完整过程</strong></p><p>这就像：你的文件被放在一个特殊的数学宝库中，只有通过特定的数学公式（密钥）才能将其中的内容转换为可读形式。当你销毁这个数学公式时，即使宝库本身及其内容仍然存在，但它已变成了无法破解的随机数字集合。随着新数据的写入，这些随机数字会逐渐被覆盖，但即使它们仍然存在，也永远无法还原为原始内容。</p><p>这种方法有几个显著优势：</p><ul><li><strong>瞬时完成</strong>：仅销毁密钥比覆写整个驱动器快数千倍</li><li><strong>更安全</strong>：即使使用最先进的设备也无法恢复数据</li><li><strong>保护SSD寿命</strong>：避免不必要的写入周期</li></ul><h2 id=实操指南安全擦除你的mac>实操指南：安全擦除你的Mac</h2><p>以下是擦除配备Apple Silicon或T2芯片Mac的步骤：</p><h3 id=准备工作>准备工作</h3><ol><li><strong>备份重要数据</strong>：确保所有重要文件已安全备份</li><li><strong>注销账户</strong>：退出iCloud、iTunes/App Store、iMessage等所有账户</li><li><strong>取下外接设备</strong>：断开所有外部存储设备和配件</li></ol><h3 id=执行抹除过程>执行抹除过程</h3><ol><li>前往<strong>系统设置</strong> > <strong>通用</strong> > <strong>传输或重置</strong></li><li>点击<strong>抹除所有内容和设置</strong></li><li>输入管理员密码确认</li><li>按照屏幕提示完成重置过程</li></ol><p>系统会自动重启进入恢复模式，并要求连接Wi-Fi。这是因为Mac需要：</p><ul><li>与Apple服务器通信以解除激活锁</li><li>验证设备未被标记为丢失</li><li>完全清除与你Apple ID的关联</li></ul><p>连接网络后，你会看到"本Mac已被激活"的提示，然后可以选择重新安装macOS或关机。</p><h3 id=完整的恢复流程>完整的恢复流程</h3><p>如果你要将设备交给新用户，最好完成整个重置流程：</p><ol><li>在前面步骤后，选择<strong>重新安装macOS</strong></li><li>系统会自动下载安装最新版本的macOS</li><li>完成后，设备将呈现"欢迎使用"界面，就像全新的Mac一样</li></ol><h2 id=常见问题解答>常见问题解答</h2><h3 id=如果我的mac没有启用filevault数据安全吗>如果我的Mac没有启用FileVault，数据安全吗？</h3><p>对于Apple Silicon或T2 Mac，即使没有启用FileVault，执行"抹除所有内容和设置"也能安全地销毁数据。硬件加密始终处于激活状态，区别仅在于密钥受到额外的用户密码保护与否。</p><h3 id=为什么还需要filevault>为什么还需要FileVault？</h3><p>虽然所有数据已经加密，但启用FileVault会增加额外的安全层：</p><ul><li>开机必须输入密码才能访问数据</li><li>防止物理访问攻击（如设备被盗）</li><li>满足企业和合规性要求</li></ul><h3 id=旧款mac如何安全擦除>旧款Mac如何安全擦除？</h3><p>如果你的Mac没有Apple Silicon或T2芯片：</p><ol><li>确保启用FileVault并等待加密完成</li><li>然后使用恢复模式中的磁盘工具擦除驱动器</li><li>对于HDD，考虑使用安全抹除选项（写入零值）</li></ol><h2 id=结论>结论</h2><p>Apple的硬件加密架构为Mac用户提供了前所未有的数据安全保障。通过销毁加密密钥而非覆写数据，Apple创造了一种既安全又高效的数据清除机制。当你准备转手你的MacBook时，只需简单几步，就能确保个人数据永远不会落入他人之手。</p><p>对于现代Mac用户，这种安全设计意味着更少的担忧和更多的安心。无论你是升级到新设备，还是将旧Mac赠送给亲友，你的数据隐私都有最高级别的保护。</p><p>你是否还有关于Mac数据安全的疑问？欢迎在评论区分享你的想法和经验！</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/zh/2025/05/true-random-number-generator/ title=真随机数发生器：数字安全的基石><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">上一页</span>
+<span class="max-w-48 truncate">真随机数发生器：数字安全的基石</span></div></a><a role=button class="btn btn-outline h-12" href=/zh/2025/04/understanding-git-references-and-ranges/ title=深入理解Git引用与范围表示法：从点到线的思维转变><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
+<span class="max-w-48 truncate">深入理解Git引用与范围表示法：从点到线的思维转变</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/zh/2025/05/secure-erase-macbook-data/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#为什么普通的删除文件不够安全>为什么普通的"删除文件"不够安全？</a></li><li><a href=#apple的硬件加密安全的基石>Apple的硬件加密：安全的基石</a><ul><li><a href=#现代mac的加密是怎么工作的>现代Mac的加密是怎么工作的？</a></li><li><a href=#擦除过程密钥销毁而非数据覆写>擦除过程：密钥销毁而非数据覆写</a></li></ul></li><li><a href=#实操指南安全擦除你的mac>实操指南：安全擦除你的Mac</a><ul><li><a href=#准备工作>准备工作</a></li><li><a href=#执行抹除过程>执行抹除过程</a></li><li><a href=#完整的恢复流程>完整的恢复流程</a></li></ul></li><li><a href=#常见问题解答>常见问题解答</a><ul><li><a href=#如果我的mac没有启用filevault数据安全吗>如果我的Mac没有启用FileVault，数据安全吗？</a></li><li><a href=#为什么还需要filevault>为什么还需要FileVault？</a></li><li><a href=#旧款mac如何安全擦除>旧款Mac如何安全擦除？</a></li></ul></li><li><a href=#结论>结论</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

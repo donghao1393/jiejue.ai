@@ -1,0 +1,245 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/><meta name=author content="董昊"><meta name=description content="Сталкивались ли вы когда-нибудь с такой ситуацией: один и тот же файл конфигурации YAML в одном окружении с развертыванием Helm выдает ошибку, в другом окружении с Kustomize - ошибку, но успешно? Если вас когда-нибудь беспокоил этот &ldquo;психический феномен&rdquo;, то эта статья раскроет вам правду.
+"><meta name=keywords content="Kubernetes,Руль,Кастомизация,DevOps,YAML,Управление Конфигурацией"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes"><meta property="og:description" content="Сталкивались ли вы когда-нибудь с такой ситуацией: один и тот же файл конфигурации YAML в одном окружении с развертыванием Helm выдает ошибку, в другом окружении с Kustomize - ошибку, но успешно? Если вас когда-нибудь беспокоил этот “психический феномен”, то эта статья раскроет вам правду."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-31T17:14:09+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Kubernetes"><meta property="article:tag" content="Руль"><meta property="article:tag" content="Кастомизация"><meta property="article:tag" content="DevOps"><meta property="article:tag" content="YAML"><meta property="article:tag" content="Управление Конфигурацией"><meta name=twitter:card content="summary"><meta name=twitter:title content="Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes"><meta name=twitter:description content="Сталкивались ли вы когда-нибудь с такой ситуацией: один и тот же файл конфигурации YAML в одном окружении с развертыванием Helm выдает ошибку, в другом окружении с Kustomize - ошибку, но успешно? Если вас когда-нибудь беспокоил этот “психический феномен”, то эта статья раскроет вам правду."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/07/helm-vs-kustomize-yaml-validation-differences/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes"><meta itemprop=description content="Сталкивались ли вы когда-нибудь с такой ситуацией: один и тот же файл конфигурации YAML в одном окружении с развертыванием Helm выдает ошибку, в другом окружении с Kustomize - ошибку, но успешно? Если вас когда-нибудь беспокоил этот “психический феномен”, то эта статья раскроет вам правду."><meta itemprop=datePublished content="2025-07-31T17:14:09+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="6347"><meta itemprop=keywords content="Kubernetes,Руль,Кастомизация,DevOps,YAML,Управление Конфигурацией"><header><h1 itemprop=headline>Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes</h1><p class=text-sm><span data-format=luxon>2025-07-31T17:14:09+04:00</span>
+| <span>13 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%9f%d0%be%d1%87%d0%b5%d0%bc%d1%83%20%d1%80%d0%b0%d0%b7%d0%b2%d0%b5%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20Helm%20%d0%bd%d0%b5%20%d1%83%d0%b4%d0%b0%d0%b5%d1%82%d1%81%d1%8f,%20%d0%b0%20Kustomize%20-%20%d1%83%d0%b4%d0%b0%d0%b5%d1%82%d1%81%d1%8f?%20%d0%93%d0%bb%d1%83%d0%b1%d0%be%d0%ba%d0%be%d0%b5%20%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%b2%20%d1%80%d0%b0%d0%b7%d0%bb%d0%b8%d1%87%d0%b8%d1%8f%20%d0%b2%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b5%20YAML%20%d0%b2%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d0%b0%d1%85%20%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b3%d1%83%d1%80%d0%b0%d1%86%d0%b8%d0%b8%20Kubernetes&amp;url=https://jiejue.ai/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%9f%d0%be%d1%87%d0%b5%d0%bc%d1%83%20%d1%80%d0%b0%d0%b7%d0%b2%d0%b5%d1%80%d1%82%d1%8b%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5%20Helm%20%d0%bd%d0%b5%20%d1%83%d0%b4%d0%b0%d0%b5%d1%82%d1%81%d1%8f,%20%d0%b0%20Kustomize%20-%20%d1%83%d0%b4%d0%b0%d0%b5%d1%82%d1%81%d1%8f?%20%d0%93%d0%bb%d1%83%d0%b1%d0%be%d0%ba%d0%be%d0%b5%20%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5%20%d0%b2%20%d1%80%d0%b0%d0%b7%d0%bb%d0%b8%d1%87%d0%b8%d1%8f%20%d0%b2%20%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b5%20YAML%20%d0%b2%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%d0%b0%d1%85%20%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b3%d1%83%d1%80%d0%b0%d1%86%d0%b8%d0%b8%20Kubernetes%20https://jiejue.ai/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250731175254528.webp alt="Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes"><p>Сталкивались ли вы когда-нибудь с такой ситуацией: один и тот же файл конфигурации YAML в одном окружении с развертыванием Helm выдает ошибку, в другом окружении с Kustomize - ошибку, но успешно? Если вас когда-нибудь беспокоил этот &ldquo;психический феномен&rdquo;, то эта статья раскроет вам правду.</p><p>&lt;! &ndash;подробнее&ndash;></p><h2 id=проблема-одна-и-та-же-конфигурация-разные-результаты>Проблема: одна и та же конфигурация, разные результаты</h2><p>Недавно мы столкнулись с интересным феноменом при работе с конфигурацией Kubernetes ingress. Один и тот же конфигурационный файл YAML:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>ingress</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>path</span>: <span style=color:#e6db74>&#34;/(?!service\/|admin)(.*)&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>pathType</span>: <span style=color:#ae81ff>ImplementationSpecific</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>В среде Stage, управляемой с помощью Helm, такая конфигурация приводит к сбою развертывания со следующим сообщением об ошибке</span>:
+</span></span></code></pre></div><p>Error: failed to parse helm/values.yaml:
+error converting YAML to JSON: yaml: line 64: found unknown escape character</p><pre tabindex=0><code>
+Однако в тестовой среде, управляемой с помощью Kustomization, эта же конфигурация успешно развертывается и работает нормально.
+
+Что еще более странно, так это то, что когда мы смотрим на развернутые ресурсы, мы обнаруживаем, что формат путей, сохраненных в двух средах, удивительно отличается:
+
+```bash
+# Stage环境 (Helm管理)
+$ kubectl get ingress web-portal -o yaml | yq .spec.rules[0].http.paths[0].path
+/(?!service/|admin)(.*)
+
+# Test环境 (Kustomization管理)  
+$ kubectl get ingress web-portal -o yaml | yq .spec.rules[0].http.paths[0].path
+/(?!service\/|admin)(.*)
+```.
+
+## Коренная причина: разные философии проверки YAML.
+
+После глубокого исследования мы обнаружили, что за этим явлением скрываются две разные философии разработки инструментов и различия в технической реализации.
+
+### Helm: &#34;Перфекционист&#34; для строгой валидации
+
+Helm использует строгую стратегию проверки YAML, которая осуществляется следующим образом:
+
+```mermaid
+graph LR
+    A[YAML输入] --&gt; B[Go模板引擎]
+    B --&gt; C[严格YAML解析器]
+    C --&gt; D[Schema验证]
+    D --&gt; E[部署到Kubernetes]
+    
+    C --&gt;|验证失败| F[立即报错]
+```.
+
+**Технические детали:**.
+- Использует библиотеку `ghodss/yaml` языка Go для разбора YAML
+- Строго следует спецификации YAML 1.2
+- Немедленно сообщает об ошибках для неизвестных управляющих последовательностей (например, `\/`).
+- Принятие политики Fail Fast.
+
+В нашем случае `\/` распознается парсером Go YAML как неизвестная управляющая последовательность, поскольку прямой слэш `/` не нуждается в экранировании в самой спецификации YAML.
+
+### Kustomize: &#34;прагматик&#34; свободной обработки.
+
+Kustomize использует более мягкую стратегию валидации:
+
+```mermaid
+graph LR
+    A[YAML输入] --&gt; B[宽松YAML解析]
+    B --&gt; C[Patch应用]
+    C --&gt; D[kubectl验证]
+    D --&gt; E[部署到Kubernetes]
+    
+    B --&gt;|尽力解析| F[容忍非标准格式]
+```.
+
+**Технические подробности:**
+- Применяет более мягкую стратегию разбора YAML
+- Рассматривает спорное содержимое как литералы
+- Окончательная проверка и развертывание через kubectl.
+- Применяется стратегия Best Effort.
+
+## Переходим к техническим тонкостям: в чем разница?
+
+### 1. Серые зоны спецификации YAML.
+
+В спецификации YAML есть некоторая двусмысленность в определении управляющих символов. В строках с двойными кавычками:
+
+- `\&#34;` - законная управляющая последовательность (двойные кавычки)
+- `\\` - законная последовательность экранирования (обратная косая черта)
+- `\/` - этот вариант является спорным
+
+Согласно спецификации YAML 1.2, прямой слэш `/` не нужно экранировать в YAML, поэтому `\/` технически можно считать &#34;неизвестной последовательностью экранирования&#34;.
+
+### 2. Различия в реализации библиотек Go
+
+**Helm использует более строгую библиотеку парсинга**:
+```go
+// Helm使用的ghodss/yaml库会严格检查转义序列
+func parseYAML(data []byte) error {
+    if containsUnknownEscape(data) {
+        return fmt.Errorf(&#34;unknown escape character&#34;)
+    }
+    // ...
+}
+```.
+
+**Kustomize и kubectl используют более мягкую библиотеку парсинга**: ```go
+// Helm使用的ghodss/yaml库会严格检查转义序列
+func parseYAML(data []byte) error {
+    if containsUnknownEscape(data) {
+        return fmt.Errorf(&#34;unknown escape character&#34;)
+    }
+    // ...
+}
+```:
+```go
+// 更宽松的解析策略
+func parseYAML(data []byte) error {
+    // 尝试解析，遇到可疑内容时作为字面量处理
+    return tryBestEffortParse(data)
+}
+```.
+
+### 3. Различия в потоке обработки
+
+Давайте сравним поток обработки в этих двух системах:
+
+| Stage | Helm | Kustomize | Result Difference |
+|------|------|-----------|----------|
+| **Проверка синтаксиса YAML** | Строгая проверка | Свободный парсинг | Helm отклоняет `\/`, Kustomize принимает |
+| **Обработка индийских символов** | Переход на строгий режим YAML | Режим совместимости | Различные допуски |
+| **Обработка шаблонов** | Предварительно обработанные шаблоны Go | Без слоя шаблонов | Рулевой с дополнительным слоем валидации |
+| **Окончательное хранение** | `/(?!service/|admin)(.*)` | `/(?!service\/|admin)(.*)` | Разные форматы, но функционально эквивалентные |
+
+## Практическое решение
+
+На основе проведенного анализа мы предлагаем несколько решений:
+
+### Решение 1: Использовать одинарные кавычки (рекомендуется)
+
+Одиночные кавычки являются буквальными строками в YAML и не экранируются:
+
+```yaml
+ingress:
+  paths:
+    - path: &#39;/(?!service/|admin)(.*)&#39;  # 推荐：使用单引号
+      pathType: ImplementationSpecific
+```.
+
+### Вариант 2: Правильное экранирование двойных кавычек
+
+Если необходимо использовать двойные кавычки, то правильным способом их написания будет следующий:
+
+```yaml
+ingress:
+  paths:
+    - path: &#34;/(?!service/|admin)(.*)&#34;   # 正确：不转义正斜杠
+      pathType: ImplementationSpecific
+```.
+
+### Вариант 3: Проверка совместимости с цепочкой инструментов
+
+Добавьте проверку синтаксиса YAML в процесс CI/CD:
+
+```bash
+# 添加到CI/CD流程中
+yamllint values.yaml
+helm template . --dry-run --debug
+</code></pre><h2 id=более-широкие-последствия-выбор-правильных-инструментов>Более широкие последствия: выбор правильных инструментов</h2><p>Этот случай отражает более глубокий вопрос: как правильно выбрать инструмент управления конфигурацией Kubernetes?</p><h3 id=сценарии-использования-helm>Сценарии использования Helm:</h3><ul><li><strong>Сложные развертывания приложений</strong>: сложные приложения, требующие шаблонизации и параметризации.</li><li><strong>Требования к управлению пакетами</strong>: сценарии, требующие контроля версий, управления зависимостями</li><li><strong>Строго регулируемые среды</strong>: команды, которые хотят выявлять проблемы с конфигурацией на ранних стадиях.</li></ul><h3 id=kustomize-соответствует-сценариям>Kustomize соответствует сценариям:</h3><ul><li><strong>Дифференциация сред</strong>: сценарии, требующие индивидуальных конфигураций для разных сред.</li><li><strong>Инкрементная миграция</strong>: проекты, постепенно переходящие от традиционных конфигураций YAML</li><li><strong>Простые и интуитивные</strong>: команды, которые хотят избежать сложности шаблонов</li></ul><h2 id=рекомендации-по-инженерной-практике>Рекомендации по инженерной практике</h2><p>Основываясь на этом глубоком анализе, мы предлагаем следующие рекомендации по инженерной практике:</p><h3 id=1-согласовать-спецификации-конфигурации>1. Согласовать спецификации конфигурации</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># 团队YAML编写规范</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>rules</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>正则表达式路径使用单引号</span>
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>避免在YAML中使用不必要的转义</span>
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>在CI中添加多工具兼容性检查</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 2. Дерево принятия решений по выбору инструмента</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>```mermaid</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>graph TD</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>A[需要配置管理工具] --&gt; B{是否需要复杂模板化？}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>B --&gt;|是| C[考虑Helm]</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>B --&gt;|否| D{是否需要多环境差异化？}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>D --&gt;|是| E[考虑Kustomize]</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>D --&gt;|否| F[使用原生kubectl]</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>C --&gt; G{团队对严格验证的接受度？}</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>G --&gt;|高| H[选择Helm]</span>
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>G --&gt;|低| I[考虑Helm + 宽松配置]</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>E --&gt; J[选择Kustomize]</span>
+</span></span></code></pre></div><h3 id=3-гибридные-программы>3. Гибридные программы</h3><p>Для крупных проектов рассмотрите возможность сочетания:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 使用Helm进行基础应用打包</span>
+</span></span><span style=display:flex><span>helm template my-app ./helm-chart &gt; base-manifests.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用Kustomize进行环境定制</span>
+</span></span><span style=display:flex><span>kustomize build overlays/production | kubectl apply -f -
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Перспективы развития технологий: будущие направления</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>По мере развития экосистемы Kubernetes развиваются и инструменты управления конфигурациями:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 1. Тенденции стандартизации</span>
+</span></span><span style=display:flex><span>- Поддержка **OCI**: и Helm, и Kustomize приближаются к стандарту OCI.
+</span></span><span style=display:flex><span>- **Интеграция с CUE**: новый язык конфигурации CUE обеспечивает более высокую безопасность типов.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 2. Интеграция инструментов</span>
+</span></span><span style=display:flex><span>- **Kubectl встроил Kustomize**: kubectl уже имеет встроенную функциональность Kustomize
+</span></span><span style=display:flex><span>- **Helm в сочетании с Kustomize**: все больше и больше проектов начинают использовать сочетание
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### 3. Конфигурация с помощью ИИ</span>
+</span></span><span style=display:flex><span>- **Интеллектуальная проверка**: ИИ может помочь обнаружить потенциальные проблемы в конфигурации
+</span></span><span style=display:flex><span>- **Автоисправление**: автоматическое исправление распространенных ошибок конфигурации на основе лучших практик
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Заключение</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Эта, казалось бы, простая проблема со сбегающими символами YAML на самом деле показывает разницу в философии проектирования различных инструментов. Строгая проверка Helm помогает нам обнаружить проблемы на ранней стадии, в то время как свободная обработка Kustomize позволяет нам быстро адаптироваться к различным сценариям.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Идеального инструмента не существует, есть только правильный выбор. Понимание особенностей и ограничений каждого инструмента - единственный способ принимать оптимальные решения в сложных облачных нативных средах.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Как инженеры облачных решений, мы должны не только освоить использование инструментов, но и понять принципы, лежащие в их основе. Только так мы сможем быстро определить первопричину проблемы и разработать эффективное решение, когда столкнемся с <span style=color:#e6db74>&#34;психическим феноменом&#34;</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>*Сталкивались ли вы в своей работе с подобными несоответствиями инструментов? Не стесняйтесь поделиться своим опытом и соображениями в разделе комментариев. Если вы нашли эту статью полезной, почему бы не поделиться ею с коллегами по команде и не улучшить свою практику использования облачных технологий вместе? *
+</span></span></code></pre></div></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/07/posix-abstraction-layer-architecture/ title="Забытый слой магии: как POSIX навел порядок в компьютерном мире"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Забытый слой магии: как POSIX навел порядок в компьютерном мире</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/07/git-stash-selective-apply-files/ title="Выборочное применение Git Stash: как восстановить только нужные изменения файлов"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Выборочное применение Git Stash: как восстановить только нужные изменения файлов</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/07/helm-vs-kustomize-yaml-validation-differences/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#проблема-одна-и-та-же-конфигурация-разные-результаты>Проблема: одна и та же конфигурация, разные результаты</a></li><li><a href=#более-широкие-последствия-выбор-правильных-инструментов>Более широкие последствия: выбор правильных инструментов</a><ul><li><a href=#сценарии-использования-helm>Сценарии использования Helm:</a></li><li><a href=#kustomize-соответствует-сценариям>Kustomize соответствует сценариям:</a></li></ul></li><li><a href=#рекомендации-по-инженерной-практике>Рекомендации по инженерной практике</a><ul><li><a href=#1-согласовать-спецификации-конфигурации>1. Согласовать спецификации конфигурации</a></li><li><a href=#3-гибридные-программы>3. Гибридные программы</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

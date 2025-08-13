@@ -1,0 +1,320 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/02/android-compilation-error-debugging/><meta name=author content="董昊"><meta name=description content="Ошибки компиляции - это проблема, с которой сталкивается каждый разработчик в процессе разработки Android. Разработчикам, которые имеют некоторый опыт в разработке Android, но не слишком хорошо знакомы с процессом компиляции и отладки, может быть сложно решать эти проблемы систематически. В этой статье мы подробно расскажем, как анализировать и решать ошибки компиляции в проектах Android на реальном примере, чтобы помочь вам улучшить свои навыки отладки.
+"><meta name=keywords content="Android (Операционная Система),Советы По Программированию,Регулировка Компонентов Во Время Тестирования"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/02/android-compilation-error-debugging/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения"><meta property="og:description" content="Ошибки компиляции - это проблема, с которой сталкивается каждый разработчик в процессе разработки Android. Разработчикам, которые имеют некоторый опыт в разработке Android, но не слишком хорошо знакомы с процессом компиляции и отладки, может быть сложно решать эти проблемы систематически. В этой статье мы подробно расскажем, как анализировать и решать ошибки компиляции в проектах Android на реальном примере, чтобы помочь вам улучшить свои навыки отладки."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-02-24T23:53:45+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Android (Операционная Система)"><meta property="article:tag" content="Советы По Программированию"><meta property="article:tag" content="Регулировка Компонентов Во Время Тестирования"><meta name=twitter:card content="summary"><meta name=twitter:title content="Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения"><meta name=twitter:description content="Ошибки компиляции - это проблема, с которой сталкивается каждый разработчик в процессе разработки Android. Разработчикам, которые имеют некоторый опыт в разработке Android, но не слишком хорошо знакомы с процессом компиляции и отладки, может быть сложно решать эти проблемы систематически. В этой статье мы подробно расскажем, как анализировать и решать ошибки компиляции в проектах Android на реальном примере, чтобы помочь вам улучшить свои навыки отладки."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/02/android-compilation-error-debugging/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения"><meta itemprop=description content="Ошибки компиляции - это проблема, с которой сталкивается каждый разработчик в процессе разработки Android. Разработчикам, которые имеют некоторый опыт в разработке Android, но не слишком хорошо знакомы с процессом компиляции и отладки, может быть сложно решать эти проблемы систематически. В этой статье мы подробно расскажем, как анализировать и решать ошибки компиляции в проектах Android на реальном примере, чтобы помочь вам улучшить свои навыки отладки."><meta itemprop=datePublished content="2025-02-24T23:53:45+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="7030"><meta itemprop=keywords content="Android (Операционная Система),Советы По Программированию,Регулировка Компонентов Во Время Тестирования"><header><h1 itemprop=headline>Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения</h1><p class=text-sm><span data-format=luxon>2025-02-24T23:53:45+04:00</span>
+| <span>15 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%a1%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%bd%d1%8b%d0%b9%20%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4%20%d0%ba%20%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d1%8e%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20%d0%ba%d0%be%d0%bc%d0%bf%d0%b8%d0%bb%d1%8f%d1%86%d0%b8%d0%b8%20Android:%20%d0%be%d1%82%20%d0%b0%d0%bd%d0%b0%d0%bb%d0%b8%d0%b7%d0%b0%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20%d0%b4%d0%be%20%d0%b8%d1%85%20%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d1%8f&amp;url=https://jiejue.ai/ru/2025/02/android-compilation-error-debugging/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/02/android-compilation-error-debugging/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%a1%d0%b8%d1%81%d1%82%d0%b5%d0%bc%d0%bd%d1%8b%d0%b9%20%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4%20%d0%ba%20%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d1%8e%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20%d0%ba%d0%be%d0%bc%d0%bf%d0%b8%d0%bb%d1%8f%d1%86%d0%b8%d0%b8%20Android:%20%d0%be%d1%82%20%d0%b0%d0%bd%d0%b0%d0%bb%d0%b8%d0%b7%d0%b0%20%d0%be%d1%88%d0%b8%d0%b1%d0%be%d0%ba%20%d0%b4%d0%be%20%d0%b8%d1%85%20%d1%80%d0%b5%d1%88%d0%b5%d0%bd%d0%b8%d1%8f%20https://jiejue.ai/ru/2025/02/android-compilation-error-debugging/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250224235521827.webp alt="Системный подход к решению ошибок компиляции Android: от анализа ошибок до их решения"><p>Ошибки компиляции - это проблема, с которой сталкивается каждый разработчик в процессе разработки Android. Разработчикам, которые имеют некоторый опыт в разработке Android, но не слишком хорошо знакомы с процессом компиляции и отладки, может быть сложно решать эти проблемы систематически. В этой статье мы подробно расскажем, как анализировать и решать ошибки компиляции в проектах Android на реальном примере, чтобы помочь вам улучшить свои навыки отладки.</p><p>&lt;! -еще&ndash;></p><h2 id=сценарий-проблемы>Сценарий проблемы</h2><p>Представьте, что вы только что получили проект Android и пытаетесь собрать его, но сталкиваетесь со следующей ошибкой компиляции:</p><pre tabindex=0><code>&gt; Task :app:compileReleaseKotlin FAILED
+e: file:///path/to/MainActivity.kt:28:32 Unresolved reference: adapter
+e: file:///path/to/MainActivity.kt:44:38 Unresolved reference: LogAdapter
+e: file:///path/to/MainActivity.kt:58:22 Unresolved reference: LogAdapter
+```.
+
+Подобные ошибки могут показаться простыми, но их решение может потребовать структурированного мышления и исследования. Далее мы пошагово покажем, как найти и решить эту проблему, начав с анализа ошибок.
+
+## Систематический подход к анализу
+
+Давайте начнем с блок-схемы, чтобы дать общее представление о систематическом подходе к решению ошибок компиляции Android:
+
+```mermaid
+flowchart TD
+    A[遇到编译错误] --&gt; B[理解错误信息]
+    B --&gt; C[检查源代码]
+    C --&gt; D[验证类路径和文件]
+    D --&gt; E{文件是否存在?}
+    E --&gt;|是| F[检查文件内容]
+    E --&gt;|否| G[创建缺失文件]
+    F --&gt; H{内容是否正确?}
+    H --&gt;|是| I[检查其他依赖]
+    H --&gt;|否| J[修复或完善文件]
+    G --&gt; K[收集相关信息]
+    J --&gt; K
+    I --&gt; K
+    K --&gt; L[实现解决方案]
+    L --&gt; M[重新构建项目]
+    M --&gt; N{构建是否成功?}
+    N --&gt;|是| O[问题解决]
+    N --&gt;|否| P[分析新错误]
+    P --&gt; B
+```.
+
+Эта блок-схема показывает весь процесс от возникновения ошибки компиляции до ее окончательного решения. Ниже мы подробно рассмотрим каждый шаг:
+
+### 1. Понимание сообщения об ошибке
+
+Первый шаг при возникновении ошибки компиляции - внимательно прочитать сообщение об ошибке и понять, что оно означает:
+
+- Тип ошибки: `Unresolved reference` (неразрешенная ссылка) указывает на то, что код ссылается на несуществующий или недоступный идентификатор.
+- Место ошибки: проблема четко идентифицирована в конкретном номере строки и месте в файле `MainActivity.kt`.
+- Объект ошибки: `adapter` и `LogAdapter` - это неразрешенные ссылки, которые привели к сбою компиляции.
+
+Эти три сообщения об ошибках дали важные подсказки: класс LogAdapter используется в классе MainActivity, но компилятор не смог найти определение этого класса.
+
+### 2. Проверьте исходный код
+
+После выявления проблемы следующим шагом будет проверка соответствующих исходных файлов на предмет их реального использования:
+
+```kotlin
+// 查看MainActivity.kt的关键部分
+private lateinit var logAdapter: LogAdapter
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    // ...
+    
+    // 初始化适配器
+    logAdapter = LogAdapter()
+    
+    // ...
+}
+
+private fun setupUI() {
+    // ...
+    
+    // 设置RecyclerView
+    val recyclerView = findViewById&lt;RecyclerView&gt;(R.id.rvLogs)
+    recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+    recyclerView.adapter = logAdapter
+}
+```.
+
+Как видно из кода, MainActivity действительно использует класс LogAdapter для предоставления данных RecyclerView. Как видно из оператора импорта:
+
+```kotlin
+import ai.jiejue.mfdetector.ui.adapter.LogAdapter
+</code></pre><h3 id=3-проверьте-путь-к-классу-и-существование-файла>3. Проверьте путь к классу и существование файла</h3><p>Далее нам нужно проверить, существует ли класс LogAdapter по указанному пути:</p><pre tabindex=0><code>/path/to/ai/jiejue/mfdetector/ui/adapter/LogAdapter.kt
+</code></pre><p>Мы можем убедиться в этом, проверив файловую систему:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 检查adapter目录</span>
+</span></span><span style=display:flex><span>ls /path/to/ai/jiejue/mfdetector/ui
+</span></span></code></pre></div><p>Результат показывает, что каталог адаптера существует:</p><pre tabindex=0><code>adapter
+viewmodel
+</code></pre><p>Проверьте содержимое каталога адаптера дальше:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ls /path/to/ai/jiejue/mfdetector/ui/adapter
+</span></span></code></pre></div><p>Результаты показывают:</p><pre tabindex=0><code>LogAdapter.kt
+```.
+
+Это интересно - файл существует, но компилятор его не распознает. Причин такой ситуации может быть несколько:
+
+1. файл существует, но его содержимое пусто или неполно
+2. имя класса в файле не совпадает с именем импортируемого класса
+3. файл имеет проблемы с правами доступа и не может быть прочитан
+
+### 4. Проверьте содержимое файла
+
+Попробуйте прочитать содержимое файла LogAdapter.kt:
+
+```bash
+cat /path/to/ai/jiejue/mfdetector/ui/adapter/LogAdapter.kt
+</code></pre><p>Если содержимое не выводится, то, возможно, файл пуст или есть проблемы с правами доступа. Это объясняет, почему компилятор не может найти определение класса LogAdapter.</p><h3 id=5-сбор-необходимой-информации>5. Сбор необходимой информации</h3><p>Прежде чем создавать недостающий класс, нам нужно понять, как он должен работать. Для этого нужно посмотреть на классы и интерфейсы, связанные с ним:</p><ol><li><strong>посмотрите на класс ViewModel</strong>: поскольку адаптеры обычно связаны с источниками данных.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// LogViewModel.kt
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogViewModel</span>(application: Application) : AndroidViewModel(application) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> repository: LogRepository
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>val</span> logs = repository.getAllLogs()
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> **Вид DataModel**: чтобы понять, с каким типом данных адаптер должен работать.
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>kotlin
+</span></span><span style=display:flex><span><span style=color:#75715e>// LogEntry.kt
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>@Entity</span>(tableName = <span style=color:#e6db74>&#34;logs&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogEntry</span>(
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@PrimaryKey</span>(autoGenerate = <span style=color:#66d9ef>true</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> id: Long = <span style=color:#ae81ff>0</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> timestamp: Long,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> eventType: String,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> filePath: String,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@TypeConverters</span>(ProcessListConverter<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> processes: List&lt;ProcessInfo&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ProcessInfo</span>(
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> packageName: String,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> appName: String,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> status: String
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><ol start=3><li><strong>Исследовать файл макета</strong>: понять элементы пользовательского интерфейса и структуру представления.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#75715e>&lt;!-- item_log.xml --&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;androidx.cardview.widget.CardView&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;LinearLayout&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span> <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/tvTimestamp&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span> <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/tvEventInfo&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span> <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/tvFilePath&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&lt;TextView</span> <span style=color:#a6e22e>android:id=</span><span style=color:#e6db74>&#34;@+id/tvProcesses&#34;</span> <span style=color:#f92672>/&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&lt;/LinearLayout&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/androidx.cardview.widget.CardView&gt;</span>
+</span></span></code></pre></div><h2 id=реализуйте-решение>Реализуйте решение</h2><p>Основываясь на собранной информации, мы теперь знаем достаточно, чтобы реализовать класс LogAdapter:</p><h3 id=1-создайте-класс-logadapter>1. Создайте класс LogAdapter.</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>package</span> ai.jiejue.mfdetector.ui.adapter
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> android.view.LayoutInflater
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> android.view.View
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> android.view.ViewGroup
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> android.widget.TextView
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> androidx.recyclerview.widget.DiffUtil
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> androidx.recyclerview.widget.ListAdapter
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> androidx.recyclerview.widget.RecyclerView
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> ai.jiejue.mfdetector.R
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> ai.jiejue.mfdetector.data.model.LogEntry
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.text.SimpleDateFormat
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.util.Date
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.util.Locale
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogAdapter</span> : ListAdapter&lt;LogEntry, <span style=color:#a6e22e>LogAdapter</span>.LogViewHolder&gt;(LogDiffCallback()) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onCreateViewHolder</span>(parent: ViewGroup, viewType: Int): LogViewHolder {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> view = <span style=color:#a6e22e>LayoutInflater</span>.from(parent.context)
+</span></span><span style=display:flex><span>            .inflate(<span style=color:#a6e22e>R</span>.layout.item_log, parent, <span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> LogViewHolder(view)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBindViewHolder</span>(holder: LogViewHolder, position: Int) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> logEntry = getItem(position)
+</span></span><span style=display:flex><span>        holder.bind(logEntry)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogViewHolder</span>(itemView: View) : <span style=color:#a6e22e>RecyclerView</span>.ViewHolder(itemView) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvTimestamp: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvTimestamp)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvEventType: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvEventType)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvFilePath: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvFilePath)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvProcesses: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvProcesses)
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> dateFormat = SimpleDateFormat(<span style=color:#e6db74>&#34;yyyy-MM-dd HH:mm:ss&#34;</span>, <span style=color:#a6e22e>Locale</span>.getDefault())
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>bind</span>(logEntry: LogEntry) {
+</span></span><span style=display:flex><span>            tvTimestamp.text = dateFormat.format(Date(logEntry.timestamp))
+</span></span><span style=display:flex><span>            tvEventType.text = logEntry.eventType
+</span></span><span style=display:flex><span>            tvFilePath.text = logEntry.filePath
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 处理进程信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>val</span> processesText = logEntry.processes.joinToString(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>) { 
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${it.appName}</span><span style=color:#e6db74> (</span><span style=color:#e6db74>${it.packageName}</span><span style=color:#e6db74>): </span><span style=color:#e6db74>${it.status}</span><span style=color:#e6db74>&#34;</span> 
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            tvProcesses.text = processesText
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LogDiffCallback</span> : <span style=color:#a6e22e>DiffUtil</span>.ItemCallback&lt;LogEntry&gt;() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>areItemsTheSame</span>(oldItem: LogEntry, newItem: LogEntry): Boolean {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> oldItem.id <span style=color:#f92672>==</span> newItem.id
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>areContentsTheSame</span>(oldItem: LogEntry, newItem: LogEntry): Boolean {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> oldItem <span style=color:#f92672>==</span> newItem
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>###</span> <span style=color:#ae81ff>2.</span> Найдите и исправьте несоответствия в компоновке
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>После двойной проверки файла макета item_log.xml мы обнаружили, что __PROTECTED_INLINE_CODE__21__, на который ссылается LogAdapter, на самом деле является `tvEventInfo` в макете, что является непоследовательным именованием:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>kotlin
+</span></span><span style=display:flex><span><span style=color:#75715e>// 错误版本
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvEventType: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvEventType)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 修正版本
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> tvEventType: TextView = itemView.findViewById(<span style=color:#a6e22e>R</span>.id.tvEventInfo)
+</span></span></code></pre></div><p>Эта несогласованность является частой причиной сбоев во время выполнения, поэтому при написании адаптеров уделяйте особое внимание совпадению идентификаторов представлений.</p><h3 id=3-пересборка-проекта>3. Пересборка проекта</h3><p>После выполнения описанных выше изменений снова соберите проект:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>./build-release.fish
+</span></span></code></pre></div><p>Сборка прошла успешно, ошибки компиляции устранены!</p><h2 id=советы-и-лучшие-практики-по-отладке>Советы и лучшие практики по отладке</h2><p>Существует множество типов ошибок компиляции, с которыми сталкиваются разработчики, но их решения обычно одинаковы. В следующей таблице приведены распространенные типы ошибок компиляции Android и способы их решения:</p><pre class=mermaid>
+  mindmap
+  root(常见Android编译错误)
+    引用错误
+      Unresolved reference
+        [检查导入语句]
+        [验证类是否存在]
+        [检查包名称]
+      Cannot access class
+        [检查访问修饰符]
+        [检查模块依赖]
+    资源错误
+      Resource not found
+        [检查R文件生成]
+        [验证资源命名]
+      Resource linking failed
+        [检查XML语法]
+        [清理项目]
+    依赖问题
+      Library version conflict
+        [检查依赖树]
+        [显式定义版本]
+      Missing dependency
+        [添加缺失依赖]
+    类型错误
+      Type mismatch
+        [检查类型转换]
+      Null safety issues
+        [添加非空检查]
+    Gradle错误
+      Plugin version issues
+        [更新Gradle插件]
+      Configuration errors
+        [检查build.gradle]
+```.
+
+
+На этом примере мы можем обобщить следующие советы и лучшие практики отладки:
+
+### 1. Систематический подход к отладке
+
+1. **Понять сообщение об ошибке**: не просто увидели ошибку и запаниковали, внимательно прочитайте сообщение об ошибке, чтобы понять тип, место и контекст ошибки
+2. **Проверьте исходный код**: проверьте соответствующие файлы, чтобы понять, как код используется на самом деле
+3. **Пошаговая проверка**: начните с места ошибки и постепенно расширяйте ее, проверяя связанные с ней классы, интерфейсы и файлы ресурсов
+4. **Собирайте информацию о зависимостях**: соберите достаточно информации, чтобы понять взаимосвязи между компонентами, прежде чем решать проблему
+5. **Реализация решения**: реализуйте целевое решение на основе собранной информации.
+
+### 2. Советы по предотвращению ошибок компиляции
+
+1. **Согласованность имен**: сохраняйте согласованность идентификаторов макетов, имен переменных и имен классов, чтобы избежать путаницы.
+2. **Периодические сборки**: собирайте проект часто, чтобы обнаружить проблемы на ранней стадии
+3. **Модульная разработка**: разделяйте функциональность на небольшие модули, чтобы изолировать потенциальные проблемы
+4. **Использование подсказок IDE**: используйте все возможности Android Studio по проверке кода и подсказкам.
+5. **Контроль версий**: используйте инструменты контроля версий, такие как Git, чтобы легко отслеживать и сравнивать изменения кода.
+
+## Дополнительные размышления: почему возникает эта проблема?
+
+В реальной разработке ситуация &#34;файл существует, но его содержимое пусто&#34; может быть вызвана различными причинами:
+
+1. **Конфликт при слиянии кода**: при командной работе слияние кода может привести к появлению пустых файлов.
+2. **Ошибка в работе Git**: Неправильная работа Git может привести к потере содержимого файла.
+3. **Проблемы миграции проекта**: при миграции проекта некоторые файлы могут быть скопированы некорректно.
+4. **Проблема с редактором**: некоторые операции редактора могут привести к случайному удалению содержимого файла.
+
+Это напоминание о необходимости соблюдать особую осторожность при совместной работе и управлении проектами, чтобы обеспечить целостность кода.
+
+## Заключение
+
+Решение ошибок компиляции Android требует системного мышления и аналитических навыков. Понимание сообщений об ошибках, изучение зависимостей кода, сбор необходимой информации и, наконец, реализация целевых решений позволяют эффективно устранить большинство проблем компиляции.
+
+Надеемся, что этот практический пример поможет вам улучшить навыки отладки в разработке под Android и создать собственные идеи и методы устранения проблем. Помните, что отладка - это не только навык, но и образ мышления, который требует терпения, внимательности и систематического подхода.
+
+---
+
+К концу этой статьи вы должны более уверенно сталкиваться с ошибками компиляции в Android-проектах и уметь применять систематический подход к их анализу и решению. Если у вас остались вопросы или вы столкнулись с другими типами проблем компиляции, не стесняйтесь делиться ими в разделе комментариев!
+
+**Примечание**: Ссылка на изображение действительна в течение 10 минут.
+</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/02/mongodb-compass-azure-cosmos-compatibility/ title="Устранение проблем совместимости версий при подключении MongoDB Compass к Azure Cosmos DB"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Устранение проблем совместимости версий при подключении MongoDB Compass к Azure Cosmos DB</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/02/android-app-cicd-automation/ title="Практика непрерывной интеграции и автоматизированного выпуска релизов для Android-проектов"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Практика непрерывной интеграции и автоматизированного выпуска релизов для Android-проектов</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/02/android-compilation-error-debugging/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#сценарий-проблемы>Сценарий проблемы</a><ul><li><a href=#3-проверьте-путь-к-классу-и-существование-файла>3. Проверьте путь к классу и существование файла</a></li><li><a href=#5-сбор-необходимой-информации>5. Сбор необходимой информации</a></li></ul></li><li><a href=#реализуйте-решение>Реализуйте решение</a><ul><li><a href=#1-создайте-класс-logadapter>1. Создайте класс LogAdapter.</a></li><li><a href=#3-пересборка-проекта>3. Пересборка проекта</a></li></ul></li><li><a href=#советы-и-лучшие-практики-по-отладке>Советы и лучшие практики по отладке</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

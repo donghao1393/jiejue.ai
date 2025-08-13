@@ -1,0 +1,327 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Zoom AI Companion: технология распознавания голоса для интеллектуального диалога | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/07/zoom-ai-companion-tech-analysis/><meta name=author content="董昊"><meta name=description content="Когда вы видите в реальном времени транскрибированный текст, появляющийся предложение за предложением на встрече в Zoom, ИИ-помощник может точно резюмировать основные моменты обсуждения и даже ответить на вопрос: &ldquo;Какие цифры продаж мы только что обсуждали? Вы когда-нибудь задумывались, как достигается техническая магия, стоящая за такими вопросами?
+"><meta name=keywords content="Zoom,Архитектура Технологии Искусственного Интеллекта,Распознавание Речи,Интеграция Крупных Моделей,Корпоративные Приложения Искусственного Интеллекта"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/07/zoom-ai-companion-tech-analysis/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Zoom AI Companion: технология распознавания голоса для интеллектуального диалога"><meta property="og:description" content="Когда вы видите в реальном времени транскрибированный текст, появляющийся предложение за предложением на встрече в Zoom, ИИ-помощник может точно резюмировать основные моменты обсуждения и даже ответить на вопрос: “Какие цифры продаж мы только что обсуждали? Вы когда-нибудь задумывались, как достигается техническая магия, стоящая за такими вопросами?"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-18T08:04:59+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Zoom"><meta property="article:tag" content="Архитектура Технологии Искусственного Интеллекта"><meta property="article:tag" content="Распознавание Речи"><meta property="article:tag" content="Интеграция Крупных Моделей"><meta property="article:tag" content="Корпоративные Приложения Искусственного Интеллекта"><meta name=twitter:card content="summary"><meta name=twitter:title content="Zoom AI Companion: технология распознавания голоса для интеллектуального диалога"><meta name=twitter:description content="Когда вы видите в реальном времени транскрибированный текст, появляющийся предложение за предложением на встрече в Zoom, ИИ-помощник может точно резюмировать основные моменты обсуждения и даже ответить на вопрос: “Какие цифры продаж мы только что обсуждали? Вы когда-нибудь задумывались, как достигается техническая магия, стоящая за такими вопросами?"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/07/zoom-ai-companion-tech-analysis/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Zoom AI Companion: технология распознавания голоса для интеллектуального диалога"><meta itemprop=description content="Когда вы видите в реальном времени транскрибированный текст, появляющийся предложение за предложением на встрече в Zoom, ИИ-помощник может точно резюмировать основные моменты обсуждения и даже ответить на вопрос: “Какие цифры продаж мы только что обсуждали? Вы когда-нибудь задумывались, как достигается техническая магия, стоящая за такими вопросами?"><meta itemprop=datePublished content="2025-07-18T08:04:59+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="10453"><meta itemprop=keywords content="Zoom,Архитектура Технологии Искусственного Интеллекта,Распознавание Речи,Интеграция Крупных Моделей,Корпоративные Приложения Искусственного Интеллекта"><header><h1 itemprop=headline>Zoom AI Companion: технология распознавания голоса для интеллектуального диалога</h1><p class=text-sm><span data-format=luxon>2025-07-18T08:04:59+04:00</span>
+| <span>21 минута чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Zoom%20AI%20Companion:%20%d1%82%d0%b5%d1%85%d0%bd%d0%be%d0%bb%d0%be%d0%b3%d0%b8%d1%8f%20%d1%80%d0%b0%d1%81%d0%bf%d0%be%d0%b7%d0%bd%d0%b0%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20%d0%b3%d0%be%d0%bb%d0%be%d1%81%d0%b0%20%d0%b4%d0%bb%d1%8f%20%d0%b8%d0%bd%d1%82%d0%b5%d0%bb%d0%bb%d0%b5%d0%ba%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b3%d0%be%20%d0%b4%d0%b8%d0%b0%d0%bb%d0%be%d0%b3%d0%b0&amp;url=https://jiejue.ai/ru/2025/07/zoom-ai-companion-tech-analysis/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/07/zoom-ai-companion-tech-analysis/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Zoom%20AI%20Companion:%20%d1%82%d0%b5%d1%85%d0%bd%d0%be%d0%bb%d0%be%d0%b3%d0%b8%d1%8f%20%d1%80%d0%b0%d1%81%d0%bf%d0%be%d0%b7%d0%bd%d0%b0%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f%20%d0%b3%d0%be%d0%bb%d0%be%d1%81%d0%b0%20%d0%b4%d0%bb%d1%8f%20%d0%b8%d0%bd%d1%82%d0%b5%d0%bb%d0%bb%d0%b5%d0%ba%d1%82%d1%83%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b3%d0%be%20%d0%b4%d0%b8%d0%b0%d0%bb%d0%be%d0%b3%d0%b0%20https://jiejue.ai/ru/2025/07/zoom-ai-companion-tech-analysis/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250718080753567.webp alt="Zoom AI Companion: технология распознавания голоса для интеллектуального диалога"><p>Когда вы видите в реальном времени транскрибированный текст, появляющийся предложение за предложением на встрече в Zoom, ИИ-помощник может точно резюмировать основные моменты обсуждения и даже ответить на вопрос: &ldquo;Какие цифры продаж мы только что обсуждали? Вы когда-нибудь задумывались, как достигается техническая магия, стоящая за такими вопросами?</p><p>Как пользователь, испытавший Zoom AI Companion, я решил глубже изучить технологию этой, казалось бы, простой, но чрезвычайно сложной системы искусственного интеллекта.</p><p>&lt;! -еще&ndash;></p><h2 id=техническое-исследование-с-простой-проблемы>Техническое исследование с простой проблемы</h2><p>Изначально меня заинтриговали несколько, казалось бы, простых технических вопросов:</p><ul><li>Использует ли Zoom такую модель, как OpenAI Whisper, для транскрипции голоса?</li><li>Использует ли Zoom для транскрипции речи модель, подобную OpenAI Whisper? Вызывает ли функция подведения итогов встречи непосредственно большую языковую модель, такую как ChatGPT?</li><li>Вызывает ли функция подведения итогов встречи непосредственно большую языковую модель, например ChatGPT? Используются ли в реализации такие продвинутые функции, как OpenAI Function Calling или Anthropic MCP?</li></ul><p>Проведя глубокое исследование, я обнаружил, что ответы оказались интереснее, чем ожидалось, и раскрыли сложные технические решения, лежащие в основе продукта ИИ корпоративного уровня.</p><h2 id=стратегия-ии-zoom-двойное-страхование>Стратегия ИИ Zoom &ldquo;Двойное страхование&rdquo;</h2><h3 id=неожиданные-сочетания-партнеров>Неожиданные сочетания партнеров</h3><p>Неожиданным образом компания Zoom установила глубокие партнерские отношения сразу с двумя прямыми конкурентами:</p><p><strong>Сотрудничество с OpenAI (март 2023 года)</strong>.</p><ul><li>Интеграция технологии ChatGPT для подведения итогов совещаний и создания контента</li><li>Возможности распознавания речи с помощью моделей Whisper</li></ul><p><strong>Антропическое сотрудничество (май 2023 г.)</strong></p><ul><li>Инвестиции и интеграция модели Claude</li><li>Сосредоточьтесь на обслуживании клиентов и сценариях, требующих строгого соблюдения правил</li></ul><p>За этой, казалось бы, противоречивой стратегией скрывается подход Federated AI Approach, предложенный директором по продуктам Zoom Смитой Хашим.</p><h3 id=что-такое-федеративный-подход-к-ии>Что такое федеративный подход к ИИ?</h3><p>Проще говоря, это означает, что мы не складываем все яйца в одну корзину, а Zoom использует модели от нескольких поставщиков ИИ одновременно, разумно выбирая наиболее подходящую технологию в зависимости от потребностей различных сценариев:</p><pre class=mermaid>
+  graph LR
+    A[会议场景] --&gt; B{任务类型}
+    B --&gt;|日常总结| C[OpenAI ChatGPT&lt;br/&gt;快速准确]
+    B --&gt;|客服对话| D[Anthropic Claude&lt;br/&gt;安全规范]
+    B --&gt;|语音转录| E[类似Whisper技术&lt;br/&gt;多语言支持]
+    B --&gt;|情感分析| F[Zoom自研模型&lt;br/&gt;深度定制]
+```_.
+
+Преимущества этой стратегии очевидны:
+- **Диверсификация рисков**: избегайте чрезмерной зависимости от одного поставщика.
+- **Технологическая взаимодополняемость**: использование опыта разных моделей
+- **Гибкое реагирование**: быстрая адаптация к изменениям в технологиях искусственного интеллекта
+
+## Техническая архитектура: проще, чем ожидалось
+
+После глубокого анализа я обнаружил, что основной технический процесс Zoom AI Companion на самом деле довольно прост и не требует сложных протоколов Function Calling или MCP:
+
+### Фактический поток обработки данных
+
+```mermaid
+graph TB
+    A[实时音频] --&gt; B[语音识别引擎&lt;br/&gt;类似Whisper技术]
+    B --&gt; C[转录文本]
+    
+    C --&gt; D[智能路由器]
+    D --&gt; E{场景判断}
+    
+    E --&gt;|会议总结| F[OpenAI ChatGPT&lt;br/&gt;文本输入：请总结这段内容]
+    E --&gt;|客服对话| G[Anthropic Claude&lt;br/&gt;文本输入：请专业回复客户]  
+    E --&gt;|情感分析| H[Zoom自研模型&lt;br/&gt;分析语调和情绪]
+    
+    F --&gt; I[结果整合]
+    G --&gt; I
+    H --&gt; I
+    
+    I --&gt; J[统一界面展示]
+```_.
+
+### Почему вам не нужна сложная оркестровка ИИ?
+
+Причина проста: ** Это типичный &#34;конвейерный&#34; процесс **.
+
+1. **Перевод аудио в текст**: использование развитых API для распознавания речи
+2. **Понимание текста**: ввод результата транскрипции в виде обычного текста в большую модель.
+3. **Интеграция результатов**: объединение результатов различных моделей на уровне приложения
+
+Весь процесс похож на производственную линию, где каждая часть сосредоточена на задаче, с которой она справляется лучше всего.
+
+### Конкретные детали потока данных
+
+Давайте подробнее рассмотрим особенности движения данных в системе:
+
+```mermaid
+sequenceDiagram
+    participant User as 👤用户说话
+    participant Audio as 🎵音频处理
+    participant Whisper as 🤖OpenAI Whisper
+    participant Router as 🔀Zoom路由器
+    participant GPT as 🧠OpenAI GPT
+    participant Claude as 🤝Anthropic Claude
+    participant UI as 📱用户界面
+    
+    User-&gt;&gt;Audio: 实时音频流
+    Audio-&gt;&gt;Whisper: POST /v1/audio/transcriptions
+    Note over Whisper: 简单的音频文件上传&lt;br/&gt;无需复杂参数
+    Whisper--&gt;&gt;Audio: 返回纯文本转录
+    
+    Audio-&gt;&gt;Router: 传递转录文本
+    Router-&gt;&gt;Router: 分析场景和任务类型
+    
+    alt 会议总结场景
+        Router-&gt;&gt;GPT: POST /v1/chat/completions
+        Note over GPT: {&#34;messages&#34;: [{&#34;role&#34;: &#34;user&#34;,&lt;br/&gt;&#34;content&#34;: &#34;请总结: [转录文本]&#34;}]}
+        GPT--&gt;&gt;Router: 返回会议总结
+    else 客服对话场景
+        Router-&gt;&gt;Claude: POST /v1/messages  
+        Note over Claude: {&#34;messages&#34;: [{&#34;role&#34;: &#34;user&#34;,&lt;br/&gt;&#34;content&#34;: &#34;客户说: [转录文本]&#34;}]}
+        Claude--&gt;&gt;Router: 返回专业回复
+    end
+    
+    Router-&gt;&gt;UI: 整合所有AI结果
+    UI-&gt;&gt;User: 统一界面展示
+</pre><h3 id=почему-вам-не-нужен-сложный-вызов-функций>Почему вам не нужен сложный вызов функций?</h3><p>Многие задаются вопросом, почему Zoom не использует такие продвинутые функции, как вызов функций в OpenAI или MCP в Anthropic. Ответ прост:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 实际的API调用就是这样直接：</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 步骤1：语音转录</span>
+</span></span><span style=display:flex><span>transcription <span style=color:#f92672>=</span> openai<span style=color:#f92672>.</span>audio<span style=color:#f92672>.</span>transcriptions<span style=color:#f92672>.</span>create(
+</span></span><span style=display:flex><span>    file<span style=color:#f92672>=</span>audio_file,
+</span></span><span style=display:flex><span>    model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;whisper-1&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>text_content <span style=color:#f92672>=</span> transcription<span style=color:#f92672>.</span>text
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 步骤2：根据场景选择模型</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> meeting_context <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;summary&#34;</span>:
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 直接的文本输入，无需函数调用</span>
+</span></span><span style=display:flex><span>    response <span style=color:#f92672>=</span> openai<span style=color:#f92672>.</span>chat<span style=color:#f92672>.</span>completions<span style=color:#f92672>.</span>create(
+</span></span><span style=display:flex><span>        model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;gpt-4&#34;</span>,
+</span></span><span style=display:flex><span>        messages<span style=color:#f92672>=</span>[{
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;role&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>, 
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;content&#34;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;请总结以下会议内容：</span><span style=color:#e6db74>{</span>text_content<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        }]
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#66d9ef>elif</span> meeting_context <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;customer_service&#34;</span>:
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 同样是简单的文本对话</span>
+</span></span><span style=display:flex><span>    response <span style=color:#f92672>=</span> anthropic<span style=color:#f92672>.</span>messages<span style=color:#f92672>.</span>create(
+</span></span><span style=display:flex><span>        model<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;claude-3-sonnet&#34;</span>,
+</span></span><span style=display:flex><span>        messages<span style=color:#f92672>=</span>[{
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;role&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;content&#34;</span>: <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;客户反馈：</span><span style=color:#e6db74>{</span>text_content<span style=color:#e6db74>}</span><span style=color:#e6db74>，请提供专业回复&#34;</span>
+</span></span><span style=display:flex><span>        }]
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 步骤3：结果整合（在应用层完成）</span>
+</span></span><span style=display:flex><span>final_result <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;transcription&#34;</span>: text_content,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;ai_response&#34;</span>: response<span style=color:#f92672>.</span>content,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;timestamp&#34;</span>: datetime<span style=color:#f92672>.</span>now()
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>**</span>Основные причины:<span style=color:#f92672>**</span> <span style=color:#ae81ff>1.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> <span style=color:#f92672>**</span>Задача проста и понятна<span style=color:#f92672>**</span>: в основном понимание и генерация текста, нет необходимости обращаться к внешним инструментам
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> <span style=color:#f92672>**</span>Линейный поток данных<span style=color:#f92672>**</span>: аудио <span style=color:#960050;background-color:#1e0010>→</span> текст <span style=color:#960050;background-color:#1e0010>→</span> обработка ИИ <span style=color:#960050;background-color:#1e0010>→</span> результат, без сложной разветвленной логики
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> <span style=color:#f92672>**</span>Контекстно<span style=color:#f92672>-</span>достаточный<span style=color:#f92672>**</span>: расшифрованный текст содержит всю информацию, необходимую для модели ИИ
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4.</span> <span style=color:#f92672>**</span>В первую очередь производительность<span style=color:#f92672>**</span>: простые вызовы API с меньшей задержкой и лучшим пользовательским опытом
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Глубокая логика, лежащая в основе выбора технологии</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### OpenAI vs Anthropic: в этой области есть свои особенности</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Проанализировав конкретные сценарии применения Zoom, я обнаружил интересную закономерность:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>**</span>Сценарии, в которых OpenAI преуспевает:<span style=color:#f92672>**.</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Быстрая генерация и обобщение контента
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Сложные задачи понимания языка
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Творческая обработка текста
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>**</span>Сильные стороны Антропика Клода:<span style=color:#f92672>**</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Повышение безопасности и соответствия требованиям
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Сдержанные выражения в сценариях обслуживания клиентов
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span> Улучшенные возможности следования правилам
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Это подтвердили представители Zoom, которые особо отметили, что выбрали Claude для своего продукта для контакт<span style=color:#f92672>-</span>центров из<span style=color:#f92672>-</span>за его <span style=color:#e6db74>&#34;конституционного подхода ИИ и способности следовать строгим правилам&#34;</span><span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Инвестиции Zoom в НИОКР: недооцененный технологический барьер</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Многие считают, что Zoom просто обращается к внешним API<span style=color:#f92672>-</span>интерфейсам искусственного интеллекта, но на самом деле Zoom инвестирует значительные средства в собственные технологии в следующих областях:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1.</span> <span style=color:#f92672>**</span>Обработка звука в реальном времени<span style=color:#f92672>**</span>: обработка аудиопотока с низкой задержкой и кодеки<span style=color:#f92672>.</span> <span style=color:#ae81ff>2.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2.</span> <span style=color:#f92672>**</span>Интеллектуальная маршрутизация задач<span style=color:#f92672>**</span>: автоматический выбор наиболее подходящей модели искусственного интеллекта в зависимости от сценария совещания<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3.</span> <span style=color:#f92672>**</span>Анализ настроения и атмосферы<span style=color:#f92672>**</span>: мультимодальный анализ на основе особенностей речи, текстового контента и визуальных сигналов
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4.</span> <span style=color:#f92672>**</span>Интеграция пользовательского опыта<span style=color:#f92672>**</span>: бесшовная интеграция функций ИИ в процесс совещания
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Эти технологии могут показаться непритязательными, но они представляют собой конкурентное преимущество, которое трудно повторить<span style=color:#f92672>.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Интеллектуальный опыт в реальных приложениях</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>### Как работают помощники ИИ на совещаниях?</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Представьте себе типичный сценарий встречи продавцов:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>mermaid
+</span></span><span style=display:flex><span>graph LR
+</span></span><span style=display:flex><span>    A[<span style=color:#e6db74>&#34;🎤 &#39;今天的销售数据增长了15%&#39;&#34;</span>] <span style=color:#f92672>--&gt;</span> B[语音识别]
+</span></span><span style=display:flex><span>    B <span style=color:#f92672>--&gt;</span> C[<span style=color:#e6db74>&#34;📝 转录文本&#34;</span>]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    C <span style=color:#f92672>--&gt;</span> D[多路AI处理]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    D <span style=color:#f92672>--&gt;</span> E[ChatGPT<span style=color:#f92672>&lt;</span>br<span style=color:#f92672>/&gt;</span>会议总结]
+</span></span><span style=display:flex><span>    E <span style=color:#f92672>--&gt;</span> F[<span style=color:#e6db74>&#34;📊 要点：销售增长15%&#34;</span>]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    D <span style=color:#f92672>--&gt;</span> G[Claude<span style=color:#f92672>&lt;</span>br<span style=color:#f92672>/&gt;</span>后续建议] 
+</span></span><span style=display:flex><span>    G <span style=color:#f92672>--&gt;</span> H[<span style=color:#e6db74>&#34;💡 建议深入分析增长原因&#34;</span>]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    D <span style=color:#f92672>--&gt;</span> I[情感分析]
+</span></span><span style=display:flex><span>    I <span style=color:#f92672>--&gt;</span> J[<span style=color:#e6db74>&#34;😊 团队情绪：积极专注&#34;</span>]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    F <span style=color:#f92672>--&gt;</span> K[统一界面]
+</span></span><span style=display:flex><span>    H <span style=color:#f92672>--&gt;</span> K  
+</span></span><span style=display:flex><span>    J <span style=color:#f92672>--&gt;</span> K
+</span></span></code></pre></div><p>Когда кто-то спрашивает: &ldquo;Какие цифры продаж были упомянуты ранее?&rdquo;. Вместо сложного вызова функции система просто отправляет вопрос вместе с ранее расшифрованным текстом в большую модель и позволяет ей найти ответ в контексте.</p><h3 id=анализ-настроения-яркое-пятно-в-технологиях-о-котором-забыли>Анализ настроения: яркое пятно в технологиях, о котором забыли</h3><p>Функциональность анализа настроения часто упускается из виду, но она обладает уникальной ценностью:</p><ul><li><strong>Мониторинг вовлеченности в режиме реального времени</strong>: выявление тех, кто активно вовлечен, и тех, кто может нуждаться во внимании.</li><li><strong>Улавливание атмосферы дискуссии</strong>: выявление моментов напряженности, волнения или замешательства</li><li><strong>Оценка качества решений</strong>: анализ эмоционального состояния команды в момент принятия важных решений</li></ul><p>Эти возможности делают Zoom не просто инструментом для проведения совещаний - это интеллектуальный партнер, понимающий человеческое взаимодействие.</p><h3 id=полный-поток-бизнес-данных-от-голоса-до-понимания>Полный поток бизнес-данных: от голоса до понимания</h3><p>Чтобы сделать технический поток более понятным, давайте рассмотрим, как протекают данные в сценарии полного собрания:</p><pre class=mermaid>
+  graph TD
+    A[&#34;👤 用户: #quot;今天销售增长15#quot;&#34;] --&gt; B[🎙️ 麦克风采集]
+    B --&gt; C[📊 音频数据流]
+    
+    C --&gt; D[🤖 Whisper引擎]
+    D --&gt; E[&#34;📝 #quot;今天销售增长15%#quot;&#34;]
+    
+    E --&gt; F{🔀 Zoom智能路由}
+    
+    F --&gt; G[📈 GPT-4处理]
+    F --&gt; H[💬 Claude处理] 
+    F --&gt; I[😊 情感分析]
+    
+    G --&gt; J[&#34;📋 会议要点:&lt;br&gt;• 销售数据：增长15%&lt;br&gt;• 需要分析原因&#34;]
+    H --&gt; K[&#34;💡 建议回复:&lt;br&gt;基于数据趋势，建议深入&lt;br&gt;分析市场因素&#34;]
+    I --&gt; L[&#34;📊 情感状态:&lt;br&gt;发言者：积极乐观&lt;br&gt;团队氛围：专注投入&#34;]
+    
+    J --&gt; M[🖥️ 会议界面整合]
+    K --&gt; M
+    L --&gt; M
+    
+    M --&gt; N[👥 所有参会者可见]
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+    style J fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fce4ec
+```.
+
+Этот поток показывает несколько ключевых моментов:
+
+1. **Односторонний поток данных**: от аудио к тексту и анализу ИИ без сложных циклов и обратных вызовов
+2. **Параллельная обработка**: разные модели ИИ могут обрабатывать один и тот же текст одновременно, что повышает эффективность.
+3. **Агрегация результатов**: все результаты ИИ просто объединяются на уровне приложения без сложных механизмов координации
+4. **Гарантия реального времени**: каждое соединение оптимизировано для кратчайшего пути, чтобы пользователи не ощущали задержек.
+
+## Ознакомление с технологическими тенденциями
+
+### Простота часто оказывается эффективнее
+
+Успех Zoom AI Companion подтверждает важную мысль: ** Самые эффективные технологические решения часто оказываются самыми простыми**.
+
+Давайте сравним различные варианты технической реализации:
+
+```mermaid
+graph TD
+    subgraph Simple[“🚀 Zoom的简单方案”]
+        A1[音频] --&gt; B1[Whisper API]
+        B1 --&gt; C1[文本]
+        C1 --&gt; D1[智能路由]
+        D1 --&gt; E1[GPT/Claude API]
+        E1 --&gt; F1[结果展示]
+    end
+    
+    subgraph Complex[“🤯 复杂方案（未采用）”]
+        A2[音频] --&gt; B2[ASR引擎]
+        B2 --&gt; C2[文本]
+        C2 --&gt; D2[Function Calling]
+        D2 --&gt; E2[工具选择]
+        E2 --&gt; F2[MCP协调]
+        F2 --&gt; G2[模型间通信]
+        G2 --&gt; H2[结果整合]
+        H2 --&gt; I2[结果展示]
+    end
+    
+    style A1 fill:#e8f5e8
+    style F1 fill:#e8f5e8
+    style A2 fill:#ffebee
+    style I2 fill:#ffebee
+```.
+
+**Почему простое решение лучше? **
+
+| Аспекты | Простое решение | Сложное решение | Zoom
+|------|----------------|----------|
+| **Задержка** | 2-3-секундный отклик | 5-10-секундный отклик |
+| **Стабильность** | Высокая (мало точек отказа) | Низкая (много отказов)|
+| **Стоимость обслуживания** | Низкая | Высокая | Высокая.
+| **Опыт пользователя** | Плавный и ненавязчивый | Значительные задержки |
+| **Технические пороги** | | | Удобство использования и интеграция | Техническая сложность |
+
+Это сравнение иллюстрирует глубокую истину: **Пользовательский опыт и стабильность системы зачастую важнее технической сложности корпоративных приложений**.
+
+Вместо того чтобы стремиться к сложной оркестровке ИИ и межмодельной коммуникации, нам следует сосредоточиться на:
+- выборе правильных технических компонентов
+- Оптимизация пользовательского опыта
+- Обеспечение стабильности и надежности системы
+
+### Будущее направление развития корпоративных приложений ИИ
+
+Исходя из практики Zoom, можно выделить несколько важных тенденций в развитии корпоративных приложений искусственного интеллекта:
+
+1. **Стратегия использования нескольких поставщиков** станет основной, чтобы избежать технологической замкнутости.
+2. **Специализированное разделение труда** станет более четким, и разные модели ИИ будут выполнять разные задачи
+3. **Интеграция пользовательского опыта** станет основной компетенцией
+4. **Приватность и безопасность** будут способствовать увеличению локальных возможностей обработки данных
+
+## Пишите в конце
+
+В то время как мы восхищаемся чудесами технологий искусственного интеллекта, часто легко упустить из виду инженерную изобретательность, стоящую за ними. Успех Zoom AI Companion заключается не только в использовании передовых моделей искусственного интеллекта, но и в том, как эти технологии умело интегрированы для создания действительно полезного опыта использования продукта.
+
+Разработчикам и организациям, стремящимся создать подобные системы, опыт Zoom подсказывает, что вместо того, чтобы стремиться к технической сложности, следует сосредоточиться на решении реальных потребностей пользователей. Иногда самая простая техническая архитектура может создать наибольшую ценность.
+
+В будущем, по мере развития технологий ИИ, мы можем увидеть больше подобных приложений &#34;совместного ИИ&#34;. В этом процессе баланс между технологическим прогрессом и практичностью станет основной задачей, которую должен решить каждый продукт ИИ.
+
+---
+
+*Эта статья основана на техническом анализе публичной информации и направлена на обсуждение идей дизайна и стратегии выбора технологий для приложений ИИ корпоративного уровня. Конкретные технические детали реализации могут измениться в связи с обновлением продукта. *
+</pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/07/git-smart-merge-logic/ title="Как Git разумно справляется с переименованием файлов и конфликтами при слиянии: механизм, учитывающий содержимое, помимо коммита"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Как Git разумно справляется с переименованием файлов и конфликтами при слиянии: механизм, учитывающий содержимое, помимо коммита</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/07/gitignore-clean-project/ title="Попрощайтесь с беспорядком: сделайте каталог проекта чище с помощью .gitignore"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Попрощайтесь с беспорядком: сделайте каталог проекта чище с помощью .gitignore</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/07/zoom-ai-companion-tech-analysis/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#техническое-исследование-с-простой-проблемы>Техническое исследование с простой проблемы</a></li><li><a href=#стратегия-ии-zoom-двойное-страхование>Стратегия ИИ Zoom &ldquo;Двойное страхование&rdquo;</a><ul><li><a href=#неожиданные-сочетания-партнеров>Неожиданные сочетания партнеров</a></li><li><a href=#что-такое-федеративный-подход-к-ии>Что такое федеративный подход к ИИ?</a></li><li><a href=#почему-вам-не-нужен-сложный-вызов-функций>Почему вам не нужен сложный вызов функций?</a></li><li><a href=#анализ-настроения-яркое-пятно-в-технологиях-о-котором-забыли>Анализ настроения: яркое пятно в технологиях, о котором забыли</a></li><li><a href=#полный-поток-бизнес-данных-от-голоса-до-понимания>Полный поток бизнес-данных: от голоса до понимания</a></li></ul></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>

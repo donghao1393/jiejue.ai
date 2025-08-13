@@ -1,0 +1,220 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Краткое руководство по суверенному облаку: когда его нужно рассматривать? | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/06/sovereign-cloud-practical-guide/><meta name=author content="董昊"><meta name=description content="Вы наверняка уже слышали термин &ldquo;суверенное облако&rdquo;, но не уверены, что это такое, не говоря уже о том, когда его нужно использовать. Если вы практикующий специалист по облачным технологиям, ИТ-менеджер или лицо, принимающее решение о выборе облачных услуг для своей организации, в этой статье вы узнаете, что такое суверенное облако.
+"><meta name=keywords content="Облачные Вычисления,Суверенное Облако,Соблюдение Данных,Принятие Корпоративных Решений"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/06/sovereign-cloud-practical-guide/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="Краткое руководство по суверенному облаку: когда его нужно рассматривать?"><meta property="og:description" content="Вы наверняка уже слышали термин “суверенное облако”, но не уверены, что это такое, не говоря уже о том, когда его нужно использовать. Если вы практикующий специалист по облачным технологиям, ИТ-менеджер или лицо, принимающее решение о выборе облачных услуг для своей организации, в этой статье вы узнаете, что такое суверенное облако."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-06-25T20:01:41+04:00"><meta property="article:modified_time" content="2025-08-13T15:03:02+00:00"><meta property="article:tag" content="Облачные Вычисления"><meta property="article:tag" content="Суверенное Облако"><meta property="article:tag" content="Соблюдение Данных"><meta property="article:tag" content="Принятие Корпоративных Решений"><meta name=twitter:card content="summary"><meta name=twitter:title content="Краткое руководство по суверенному облаку: когда его нужно рассматривать?"><meta name=twitter:description content="Вы наверняка уже слышали термин “суверенное облако”, но не уверены, что это такое, не говоря уже о том, когда его нужно использовать. Если вы практикующий специалист по облачным технологиям, ИТ-менеджер или лицо, принимающее решение о выборе облачных услуг для своей организации, в этой статье вы узнаете, что такое суверенное облако."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/06/sovereign-cloud-practical-guide/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Краткое руководство по суверенному облаку: когда его нужно рассматривать?"><meta itemprop=description content="Вы наверняка уже слышали термин “суверенное облако”, но не уверены, что это такое, не говоря уже о том, когда его нужно использовать. Если вы практикующий специалист по облачным технологиям, ИТ-менеджер или лицо, принимающее решение о выборе облачных услуг для своей организации, в этой статье вы узнаете, что такое суверенное облако."><meta itemprop=datePublished content="2025-06-25T20:01:41+04:00"><meta itemprop=dateModified content="2025-08-13T15:03:02+00:00"><meta itemprop=wordCount content="7803"><meta itemprop=keywords content="Облачные Вычисления,Суверенное Облако,Соблюдение Данных,Принятие Корпоративных Решений"><header><h1 itemprop=headline>Краткое руководство по суверенному облаку: когда его нужно рассматривать?</h1><p class=text-sm><span data-format=luxon>2025-06-25T20:01:41+04:00</span>
+| <span>16 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T15:03:02Z</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=%d0%9a%d1%80%d0%b0%d1%82%d0%ba%d0%be%d0%b5%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%81%d1%83%d0%b2%d0%b5%d1%80%d0%b5%d0%bd%d0%bd%d0%be%d0%bc%d1%83%20%d0%be%d0%b1%d0%bb%d0%b0%d0%ba%d1%83:%20%d0%ba%d0%be%d0%b3%d0%b4%d0%b0%20%d0%b5%d0%b3%d0%be%20%d0%bd%d1%83%d0%b6%d0%bd%d0%be%20%d1%80%d0%b0%d1%81%d1%81%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d0%b2%d0%b0%d1%82%d1%8c?&amp;url=https://jiejue.ai/ru/2025/06/sovereign-cloud-practical-guide/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/06/sovereign-cloud-practical-guide/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=%d0%9a%d1%80%d0%b0%d1%82%d0%ba%d0%be%d0%b5%20%d1%80%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be%20%d0%bf%d0%be%20%d1%81%d1%83%d0%b2%d0%b5%d1%80%d0%b5%d0%bd%d0%bd%d0%be%d0%bc%d1%83%20%d0%be%d0%b1%d0%bb%d0%b0%d0%ba%d1%83:%20%d0%ba%d0%be%d0%b3%d0%b4%d0%b0%20%d0%b5%d0%b3%d0%be%20%d0%bd%d1%83%d0%b6%d0%bd%d0%be%20%d1%80%d0%b0%d1%81%d1%81%d0%bc%d0%b0%d1%82%d1%80%d0%b8%d0%b2%d0%b0%d1%82%d1%8c?%20https://jiejue.ai/ru/2025/06/sovereign-cloud-practical-guide/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250625200441324.webp alt="Краткое руководство по суверенному облаку: когда его нужно рассматривать?"><p>Вы наверняка уже слышали термин &ldquo;суверенное облако&rdquo;, но не уверены, что это такое, не говоря уже о том, когда его нужно использовать. Если вы практикующий специалист по облачным технологиям, ИТ-менеджер или лицо, принимающее решение о выборе облачных услуг для своей организации, в этой статье вы узнаете, что такое суверенное облако.</p><p>&lt;! &mdash;далее&ndash;></p><h2 id=что-такое-суверенное-облако>Что такое суверенное облако?</h2><p>Представьте, что важные данные вашей компании подобны ценностям в вашем доме. Традиционные публичные облака (например, AWS, AliCloud) похожи на международную сеть сейфов - безопасно, дешево, хороший сервис, но ваши вещи могут храниться в любом уголке мира, а в некоторых случаях их могут даже потребовать открыть и проверить правительства других стран.</p><p>С другой стороны, Sovereign Cloud - это как отечественный сейф, который вы найдете исключительно в своей стране: данные никогда не покидают пределов страны, люди, которые управляют им, являются гражданами вашей страны, и он полностью защищен законами вашей страны. Это может быть дороже, но вы полностью контролируете ситуацию.</p><p><strong>Проще говоря</strong>: суверенное облако = контролируемый государством сервис облачных вычислений</p><h2 id=традиционная-безопасность---тактическая-суверенное-облако---стратегическая>Традиционная безопасность - тактическая, суверенное облако - стратегическая</h2><p>В традиционной облачной безопасности мы привыкли защищать данные с помощью брандмауэров, шифрования и контроля доступа на &ldquo;тактическом&rdquo; уровне. Это все равно что установить в доме двери, видеонаблюдение и сейфы - это работает, но дом все равно построен на чужой земле.</p><p>Суверенное облако - это совершенно иное мышление:** оно дает вам цифровое &ldquo;государство &ldquo;**, где вы владеете землей, домом, законами, полицией. Это решение стратегического уровня.</p><pre class=mermaid>
+  graph TD
+    A[传统云安全] --&gt; B[防火墙]
+    A --&gt; C[加密技术]
+    A --&gt; D[访问控制]
+    A --&gt; E[监控系统]
+    
+    F[主权云安全] --&gt; G[数据不出境]
+    F --&gt; H[本国法律管辖]
+    F --&gt; I[政府可控运营]
+    F --&gt; J[完整技术栈]
+    
+    B --&gt; K[战术级防护]
+    C --&gt; K
+    D --&gt; K
+    E --&gt; K
+    
+    G --&gt; L[战略级主权]
+    H --&gt; L
+    I --&gt; L
+    J --&gt; L
+```_.
+
+## Какому бизнесу стоит обратить внимание на Sovereign Cloud?
+
+### 1. Правительственные и военные данные
+Если вашими клиентами являются правительственные учреждения или военные, то суверенное облако - это почти необходимость.
+
+**Реальный пример**: Министерство обороны США выбрало AWS Government Cloud, требуя:
+- Все данные должны находиться в США
+- Эксплуатационный персонал должен иметь допуск к государственной безопасности
+- Облачный провайдер должен иметь специальные правительственные сертификаты
+- Не полагаться на иностранные технологии или персонал
+
+**Почему? ** Последствия разглашения государственной тайны катастрофичны, и рисковать нельзя.
+
+### 2. Основные данные финансовых учреждений
+Средства и информация о клиентах, с которыми работают банки, ценные бумаги и страховые компании, являются чрезвычайно конфиденциальными.
+
+**Реальный пример**: дилемма, с которой столкнулся UBS
+- FATCA США требует раскрытия информации о клиентах из США.
+- FATCA США требует раскрытия информации о клиентах из США, но швейцарские законы о банковской тайне запрещают раскрывать данные о клиентах.
+- Решение: использование локального швейцарского &#34;облака&#34; для обеспечения того, чтобы данные никогда не покидали пределов страны.
+- Инвестиции: 1 млрд швейцарских франков в течение 5 лет
+- Результат: Повышение доверия клиентов и возвращение состоятельных клиентов.
+
+### 3. Данные о здравоохранении
+Защита конфиденциальности данных пациентов является строгим требованием во всем мире.
+
+**Немецкая практика**:
+- Закон о защите данных пациентов требует, чтобы медицинские данные находились в Германии.
+- Немецкие больницы не могут напрямую использовать AWS или Azure.
+- Они должны использовать суверенные облачные сервисы, сертифицированные в Германии.
+- Нарушителям грозят крупные штрафы и уголовная ответственность
+
+### 4. Критически важная инфраструктура
+Данные критической инфраструктуры, такой как энергетика, связь, транспорт и т. д., являются вопросом национальной безопасности.
+
+**Почему для данных энергосистем необходимо суверенное облако? **
+- 2015 г. Энергосистема Украины взломана Россией, что привело к масштабному отключению электроэнергии.
+- 2021 г. Американский трубопровод атакован программой-вымогателем, что повлияло на энергоснабжение.
+- Урок: данные критической инфраструктуры никогда не должны быть доступны иностранным правительствам
+
+## Суверенное облако против обычного облака: сравнение затрат и преимуществ
+
+### Разница в стоимости (в пересчете на эквивалентный размер)
+
+**Обычное облако (AWS)**:
+</pre><p>计算成本：$10,000/月
+存储成本：$2,000/月<br>网络成本：$1,500/月
+管理成本：$500/月
+总计：$14,000/月</p><pre tabindex=0><code class=language-. data-lang=.>
+**Суверенное облако**:
+</code></pre><p>计算成本：$15,000/月 (+50%)
+存储成本：$3,000/月 (+50%)
+合规成本：$5,000/月 (新增)
+本地运维：$3,000/月 (新增)
+总计：$26,000/月 (+86%)</p><pre tabindex=0><code class=language-. data-lang=.>
+### Но как насчет стоимости риска?
+
+**Случай со штрафом по GDPR**:
+- В 2019 году British Airways была оштрафована на 183 миллиона фунтов стерлингов за утечку данных.
+- В 2021 году ЕС оштрафовал Amazon на 746 миллионов евро за нарушение GDPR
+- В 2022 году компания Meta была оштрафована на 405 миллионов евро за передачу данных
+
+**Посчитайте**: если вы подвергаетесь риску нарушения требований законодательства о защите данных, &#34;дополнительные расходы&#34; на суверенное облако могут померкнуть по сравнению с одним штрафом.
+
+## Зарубежные проблемы соблюдения нормативных требований для китайских компаний
+
+### Проблемы TikTok - отличный пример для подражания
+
+У компании TikTok возникли проблемы в США:
+- Правительство США обеспокоено тем, что китайское правительство может иметь доступ к данным американских пользователей.
+- Технически невозможно доказать, что Китай вообще не имеет доступа.
+- Политический риск: США и Китай первыми пострадают при ухудшении отношений между ними.
+- Может грозить запрет или принудительная продажа
+
+**Что было бы, если бы TikTok с самого начала использовал суверенное облако США? **
+- Все данные американских пользователей находятся в США.
+- Все люди, управляющие облаком, - граждане США.
+- Они полностью защищены американским законодательством.
+- Правительство США может провести аудит в любое время.
+- Полностью изолирован от китайских систем.
+
+**Результаты**: Многие политические проблемы просто не возникают.
+
+### Аналогичные проблемы и у других китайских компаний.
+
+**Зарубежная облачная стратегия Huawei**:
+- В Таиланде: строительство местных центров обработки данных
+- В Южной Африке: сотрудничество с местными предприятиями
+- В Мексике: полностью локализованное хранилище данных
+- **Существенные**: вынуждены принять модель &#34;суверенного облака&#34;.
+
+**Потребности глобализации компании ByteDance**:
+- TikTok в Европе: под давлением требований GDPR
+- TikTok в Индии: был полностью запрещен.
+- Решение: необходимо создать &#34;локальные суверенные облака&#34; в каждой стране.
+
+## Когда вам нужно задуматься о суверенном облаке?
+
+### Критерии оценки:
+
+1. **Тип заказчика**: правительство, военные, финансы, здравоохранение, инфраструктура.
+2. **Чувствительность данных**: национальная безопасность, коммерческая тайна, личная конфиденциальность
+3. **Законодательные требования**: местные законы прямо требуют, чтобы данные не экспортировались.
+4. **Политический риск**: на бизнес может повлиять геополитика.
+5. **Стоимость соблюдения требований**: штрафы за несоблюдение требований превышают дополнительные расходы на суверенное облако.
+
+### Простой процесс принятия решений:
+
+```mermaid
+graph TD
+    A[你的业务涉及敏感数据吗？] --&gt; B[是]
+    A --&gt; C[否]
+    
+    B --&gt; D[客户是政府/金融/医疗吗？]
+    C --&gt; E[继续使用普通云]
+    
+    D --&gt; F[是]
+    D --&gt; G[否]
+    
+    F --&gt; H[必须考虑主权云]
+    G --&gt; I[当地法律要求数据本地化吗？]
+    
+    I --&gt; J[是]
+    I --&gt; K[否]
+    
+    J --&gt; L[建议使用主权云]
+    K --&gt; M[评估政治风险和合规成本]
+    
+    M --&gt; N[风险高于成本？]
+    N --&gt; O[是] 
+    N --&gt; P[否]
+    
+    O --&gt; Q[使用主权云]
+    P --&gt; R[继续使用普通云]
+```.
+
+## Практический совет
+
+### Если вы решили использовать суверенное облако:
+
+1. **Планируйте заранее**: циклы сертификации и развертывания суверенного облака обычно намного длиннее, чем обычного облака.
+2. **Бюджетируйте хорошо**: подготовьте бюджет, который на 50-100 % больше, чем у обычного облака.
+3. **Выбирайте надежного поставщика**: убедитесь, что провайдер имеет соответствующие сертификаты и истории успеха.
+4. **Миграция поэтапна**: не переносите все операции сразу, начните сначала с наиболее чувствительных.
+
+### Если в данный момент нет необходимости:
+
+1. **Следите за этим**: Законы и правила быстро меняются, и если вам не нужна эта информация сегодня, это не значит, что она не понадобится завтра.
+2. **Подготовьтесь**: поймите, что требуется и сколько стоит переход на суверенное облако.
+3. **ОЦЕНКА РИСКА**: регулярно оценивайте соответствие нормативным требованиям и политические риски для вашего бизнеса
+
+## Резюме основных выводов
+
+1. **Суверенное облако - это не технический вопрос, а вопрос политики и соответствия нормативным требованиям
+2. **Затраты высоки, но они являются необходимостью, а не роскошью для данного бизнеса**.
+3. **Суверенное облако может стать неизбежным выбором для китайских компаний, выходящих за рубеж** **Суверенное облако может стать неизбежным выбором для китайских компаний, выходящих за рубеж
+4. **Лучше знать и планировать заранее, чем реагировать***.
+
+В следующий раз, когда вы услышите слова &#34;локализация данных&#34;, &#34;требования к соответствию&#34;, &#34;политический риск&#34;, вспомните, что существует вариант суверенного облака. Это не панацея, но при правильном сценарии она может стать оптимальным решением.
+
+Помните: в цифровую эпоху суверенитет данных становится важной частью национального суверенитета. Понимание суверенного облака - это понимание будущего направления развития облачных вычислений.
+</code></pre></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/06/digital-sovereignty-cloud-strategy/ title="Изменение облика облачных вычислений в эпоху цифрового суверенитета: от технологического инструмента к национальной стратегии"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Изменение облика облачных вычислений в эпоху цифрового суверенитета: от технологического инструмента к национальной стратегии</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/06/dcp-digital-cinema-practical-guide/ title="Практическое руководство по цифровому кинопакету DCP: что нужно знать киномеханикам и продюсерам"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Практическое руководство по цифровому кинопакету DCP: что нужно знать киномеханикам и продюсерам</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/06/sovereign-cloud-practical-guide/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#что-такое-суверенное-облако>Что такое суверенное облако?</a></li><li><a href=#традиционная-безопасность---тактическая-суверенное-облако---стратегическая>Традиционная безопасность - тактическая, суверенное облако - стратегическая</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
