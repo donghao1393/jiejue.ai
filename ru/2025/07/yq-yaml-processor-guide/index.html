@@ -1,0 +1,188 @@
+<!doctype html><html lang=ru-RU x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>yq: инструмент для простой и эффективной обработки файлов YAML | ЛюбимРешать</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/ru/2025/07/yq-yaml-processor-guide/><meta name=author content="董昊"><meta name=description content="Часто ли вам, как операционному инженеру, требуется найти определенную конфигурацию сервиса в сложных конфигурационных файлах Kubernetes? Если вы все еще используете текстовый редактор для поиска строки за строкой или пишете сложные скрипты для работы с YAML-файлами, то yq - это инструмент, который полностью изменит вашу работу.
+"><meta name=keywords content="DevOps,Kubernetes,YAML,Инструменты Для Обслуживания"><meta name=generator content="Hugo 0.148.2"><meta property="og:url" content="https://jiejue.ai/ru/2025/07/yq-yaml-processor-guide/"><meta property="og:site_name" content="ЛюбимРешать"><meta property="og:title" content="yq: инструмент для простой и эффективной обработки файлов YAML"><meta property="og:description" content="Часто ли вам, как операционному инженеру, требуется найти определенную конфигурацию сервиса в сложных конфигурационных файлах Kubernetes? Если вы все еще используете текстовый редактор для поиска строки за строкой или пишете сложные скрипты для работы с YAML-файлами, то yq - это инструмент, который полностью изменит вашу работу."><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-22T20:32:34+04:00"><meta property="article:modified_time" content="2025-08-13T18:35:28+04:00"><meta property="article:tag" content="DevOps"><meta property="article:tag" content="Kubernetes"><meta property="article:tag" content="YAML"><meta property="article:tag" content="Инструменты Для Обслуживания"><meta name=twitter:card content="summary"><meta name=twitter:title content="yq: инструмент для простой и эффективной обработки файлов YAML"><meta name=twitter:description content="Часто ли вам, как операционному инженеру, требуется найти определенную конфигурацию сервиса в сложных конфигурационных файлах Kubernetes? Если вы все еще используете текстовый редактор для поиска строки за строкой или пишете сложные скрипты для работы с YAML-файлами, то yq - это инструмент, который полностью изменит вашу работу."><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=Повернуть!><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=/ru class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/ru/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/posts title=Архивы><ion-icon name=archive></ion-icon>Архивы</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/ru/tags title="Все теги"><ion-icon name=pricetags></ion-icon>Все теги</a></li></ul></div><div class="dropdown dropdown-end dropdown-hover language-switcher"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" title="Переключить язык"><ion-icon class=group-hover:text-primary-content name=language-outline></ion-icon><span class="ml-1 hidden md:inline group-hover:text-primary-content language-name">Русский</span></div><ul tabindex=0 class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-xl border border-base-content/20" style=min-width:6rem;width:auto><li><a href=/zh/2025/07/yq-yaml-processor-guide/ class="flex items-center gap-2"><span class="flag flag-cn"></span>
+<span class=language-name>中文</span></a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="yq: инструмент для простой и эффективной обработки файлов YAML"><meta itemprop=description content="Часто ли вам, как операционному инженеру, требуется найти определенную конфигурацию сервиса в сложных конфигурационных файлах Kubernetes? Если вы все еще используете текстовый редактор для поиска строки за строкой или пишете сложные скрипты для работы с YAML-файлами, то yq - это инструмент, который полностью изменит вашу работу."><meta itemprop=datePublished content="2025-07-22T20:32:34+04:00"><meta itemprop=dateModified content="2025-08-13T18:35:28+04:00"><meta itemprop=wordCount content="4310"><meta itemprop=keywords content="DevOps,Kubernetes,YAML,Инструменты Для Обслуживания"><header><h1 itemprop=headline>yq: инструмент для простой и эффективной обработки файлов YAML</h1><p class=text-sm><span data-format=luxon>2025-07-22T20:32:34+04:00</span>
+| <span>9 минут чтения</span>
+| <span>Обновлено
+<span data-format=luxon>2025-08-13T18:35:28+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=yq:%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%20%d0%b4%d0%bb%d1%8f%20%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be%d0%b9%20%d0%b8%20%d1%8d%d1%84%d1%84%d0%b5%d0%ba%d1%82%d0%b8%d0%b2%d0%bd%d0%be%d0%b9%20%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8%20%d1%84%d0%b0%d0%b9%d0%bb%d0%be%d0%b2%20YAML&amp;url=https://jiejue.ai/ru/2025/07/yq-yaml-processor-guide/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/ru/2025/07/yq-yaml-processor-guide/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=yq:%20%d0%b8%d0%bd%d1%81%d1%82%d1%80%d1%83%d0%bc%d0%b5%d0%bd%d1%82%20%d0%b4%d0%bb%d1%8f%20%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be%d0%b9%20%d0%b8%20%d1%8d%d1%84%d1%84%d0%b5%d0%ba%d1%82%d0%b8%d0%b2%d0%bd%d0%be%d0%b9%20%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8%20%d1%84%d0%b0%d0%b9%d0%bb%d0%be%d0%b2%20YAML%20https://jiejue.ai/ru/2025/07/yq-yaml-processor-guide/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250722203458668.webp alt="yq: инструмент для простой и эффективной обработки файлов YAML"><p>Часто ли вам, как операционному инженеру, требуется найти определенную конфигурацию сервиса в сложных конфигурационных файлах Kubernetes? Если вы все еще используете текстовый редактор для поиска строки за строкой или пишете сложные скрипты для работы с YAML-файлами, то yq - это инструмент, который полностью изменит вашу работу.</p><h2 id=什么是yq>什么是yq？</h2><p>yq - это &ldquo;интеллектуальный поисковик&rdquo;, созданный специально для файлов YAML. Если вы знакомы с инструментом jq для работы с JSON, то yq - это YAML-версия jq, которая позволяет быстро запрашивать, извлекать и изменять что-либо в YAML-файле с помощью простых команд.</p><p>Представьте, что перед вами толстая телефонная книга и вам нужно найти чей-то номер телефона. Традиционный способ - перелистывать страницы, но yq - это интеллектуальный помощник: достаточно сказать ему &ldquo;найти всех людей с фамилией Чжан&rdquo;, и он тут же выдаст список результатов.</p><h2 id=为什么需要yq>为什么需要yq？</h2><p>В современных средах DevOps мы постоянно сталкиваемся с подобными сценариями:</p><p><strong>Сценарий 1: управление конфигурацией нескольких сервисов</strong>.
+В проекте микросервисов могут быть десятки сервисов, каждый из которых имеет свою конфигурацию Kubernetes. Когда вам нужно быстро просмотреть версии образов всех сервисов, при традиционном методе вам нужно открыть каждый файл и найти их по одному.</p><p><strong>Сценарий 2: пакетное обновление конфигурации</strong>.
+Необходимо изменить лимит ресурсов всех развертываний с 1 ГБ памяти до 2 ГБ, вручную изменять десятки файлов - трудоемко и чревато ошибками.</p><p><strong>Сценарий 3: проверка конфигурации</strong>.
+Перед развертыванием необходимо убедиться, что все службы настроены с правильными тегами и аннотациями, а выполнить проверку вручную со 100-процентной точностью практически невозможно.</p><h2 id=yq的核心概念>yq的核心概念</h2><p>Работа yq может быть понятна с помощью этой блок-схемы:</p><pre class=mermaid>
+  graph TD
+    A[&#34;YAML文件&#34;] --&gt; B[&#34;yq处理器&#34;]
+    B --&gt; C[&#34;选择器&lt;br/&gt;(类似CSS选择器)&#34;]
+    C --&gt; D[&#34;过滤条件&lt;br/&gt;(筛选你要的内容)&#34;]
+    D --&gt; E[&#34;输出结果&lt;br/&gt;(精确匹配的数据)&#34;]
+    
+    style A fill:#e1f5fe
+    style E fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#fce4ec
+</pre><h2 id=安装yq>安装yq</h2><p>Выберите способ установки в соответствии с вашей операционной системой:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># macOS</span>
+</span></span><span style=display:flex><span>brew install yq
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Ubuntu/Debian</span>
+</span></span><span style=display:flex><span>sudo snap install yq
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 或者下载二进制文件</span>
+</span></span><span style=display:flex><span>wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+</span></span><span style=display:flex><span>chmod +x /usr/bin/yq
+</span></span></code></pre></div><p>安装完成后验证：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yq --version
+</span></span></code></pre></div><h2 id=基础语法入门>基础语法入门</h2><p>Синтаксис yq подчиняется простой схеме: <code>yq 'selector' filename</code>.</p><p>Давайте разберемся на конкретном примере. Предположим, у вас есть конфигурационный файл Kubernetes <code>app.yaml</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>apps/v1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Deployment</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>metadata</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>web-server</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>labels</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>app</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>spec</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>replicas</span>: <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>template</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>spec</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>containers</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>image</span>: <span style=color:#ae81ff>nginx:1.19</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>resources</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>limits</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>memory</span>: <span style=color:#e6db74>&#34;1Gi&#34;</span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Service</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>metadata</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>web-service</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>labels</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>app</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>spec</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>ports</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>port</span>: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>targetPort</span>: <span style=color:#ae81ff>8080</span>
+</span></span></code></pre></div><h3 id=基本查询操作>基本查询操作</h3><pre class=mermaid>
+  graph LR
+    A[&#34;yq命令&#34;] --&gt; B[&#34;选择器语法&#34;]
+    B --&gt; C[&#34;输出结果&#34;]
+    
+    subgraph &#34;选择器类型&#34;
+    D[&#34;.key&lt;br/&gt;(获取字段)&#34;]
+    E[&#34;.[]&lt;br/&gt;(遍历数组)&#34;]
+    F[&#34;select()&lt;br/&gt;(条件过滤)&#34;]
+    end
+    
+    B --&gt; D
+    B --&gt; E
+    B --&gt; F
+</pre><p><strong>1. 获取基本信息</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 获取所有资源的kind</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.kind&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 获取所有资源的名称</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.metadata.name&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 获取Deployment的副本数</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;) | .spec.replicas&#39;</span> app.yaml
+</span></span></code></pre></div><p><strong>2. Работа с многодокументным YAML</strong>.</p><p>Это одна из самых мощных возможностей yq. Если ваш YAML-файл содержит несколько документов, разделенных <code>---</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 只获取第一个文档</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(document_index == 0)&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 只获取Deployment类型的文档</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;)&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 只获取Service类型的文档</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Service&#34;)&#39;</span> app.yaml
+</span></span></code></pre></div><h2 id=实用场景演示>实用场景演示</h2><h3 id=场景1快速查看服务镜像版本>场景1：快速查看服务镜像版本</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看所有容器的镜像</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;) | .spec.template.spec.containers[].image&#39;</span> *.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 输出：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># nginx:1.19</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># redis:6.2</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># postgres:13</span>
+</span></span></code></pre></div><h3 id=场景2提取服务端口配置>场景2：提取服务端口配置</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 获取所有Service的端口配置</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Service&#34;) | .metadata.name + &#34;: &#34; + (.spec.ports[].port | tostring)&#39;</span> *.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 输出：</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># web-service: 80</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># api-service: 3000</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># db-service: 5432</span>
+</span></span></code></pre></div><h3 id=场景3验证资源限制配置>场景3：验证资源限制配置</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 检查哪些Deployment没有设置内存限制</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34; and .spec.template.spec.containers[].resources.limits.memory == null) | .metadata.name&#39;</span> *.yaml
+</span></span></code></pre></div><h2 id=修改yaml文件>修改YAML文件</h2><p>yq не только запрашивает, но и изменяет файлы. С помощью параметра <code>-i</code> вы можете изменять исходный файл напрямую:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 更新镜像版本</span>
+</span></span><span style=display:flex><span>yq -i <span style=color:#e6db74>&#39;(select(.kind == &#34;Deployment&#34;) | .spec.template.spec.containers[0].image) = &#34;nginx:1.20&#34;&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 增加副本数</span>
+</span></span><span style=display:flex><span>yq -i <span style=color:#e6db74>&#39;(select(.kind == &#34;Deployment&#34;) | .spec.replicas) = 5&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 添加新的标签</span>
+</span></span><span style=display:flex><span>yq -i <span style=color:#e6db74>&#39;(select(.kind == &#34;Deployment&#34;) | .metadata.labels.environment) = &#34;production&#34;&#39;</span> app.yaml
+</span></span></code></pre></div><h2 id=高级技巧>高级技巧</h2><h3 id=1-输出格式化>1. 输出格式化</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 以JSON格式输出</span>
+</span></span><span style=display:flex><span>yq -o json <span style=color:#e6db74>&#39;.metadata&#39;</span> app.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 紧凑格式输出</span>
+</span></span><span style=display:flex><span>yq -c <span style=color:#e6db74>&#39;.spec.ports&#39;</span> app.yaml
+</span></span></code></pre></div><h3 id=2-条件组合>2. 条件组合</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 多条件查询：找到生产环境的Web应用</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.metadata.labels.app == &#34;web&#34; and .metadata.labels.environment == &#34;production&#34;)&#39;</span> *.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 使用正则表达式</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.metadata.name | test(&#34;^web-.*&#34;))&#39;</span> *.yaml
+</span></span></code></pre></div><h3 id=3-数据统计>3. 数据统计</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 统计Deployment数量</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;)&#39;</span> *.yaml | yq -s <span style=color:#e6db74>&#39;. | length&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 计算总副本数</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;) | .spec.replicas&#39;</span> *.yaml | yq -s <span style=color:#e6db74>&#39;add&#39;</span>
+</span></span></code></pre></div><h2 id=与其他工具配合>与其他工具配合</h2><p>Настоящая сила yq заключается в его использовании в сочетании с другими инструментами командной строки:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 与grep配合查找</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.metadata.name&#39;</span> *.yaml | grep -i <span style=color:#e6db74>&#34;web&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 与sort排序</span>
+</span></span><span style=display:flex><span>yq <span style=color:#e6db74>&#39;.metadata.name&#39;</span> *.yaml | sort
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 生成报表</span>
+</span></span><span style=display:flex><span>yq -r <span style=color:#e6db74>&#39;select(.kind == &#34;Deployment&#34;) | .metadata.name + &#34; -&gt; &#34; + .spec.template.spec.containers[0].image&#39;</span> *.yaml &gt; deployment-images.txt
+</span></span></code></pre></div><h2 id=最佳实践建议>最佳实践建议</h2><ol><li><strong>善用select()过滤器</strong>：这是最常用也最强大的功能</li><li><strong>熟练掌握多文档处理</strong>：现代K8s配置通常都是多文档格式</li><li><strong>结合pipeline思维</strong>：yq的管道操作符<code>|</code>可以串联多个操作</li><li><strong>备份重要文件</strong>：使用<code>-i</code>修改文件前先备份</li><li><strong>利用别名简化常用操作</strong>：<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>alias yq-deps<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;yq &#39;select(.kind == \&#34;Deployment\&#34;) | .metadata.name&#39;&#34;</span>
+</span></span><span style=display:flex><span>alias yq-images<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;yq &#39;select(.kind == \&#34;Deployment\&#34;) | .spec.template.spec.containers[].image&#39;&#34;</span>
+</span></span></code></pre></div></li></ol><h2 id=语法速查表>语法速查表</h2><pre class=mermaid>
+  mindmap
+  root((yq语法))
+    基础查询
+      key[&#34;.key&lt;br&gt;访问键值&#34;]
+      subkey[&#34;.key.subkey&lt;br&gt;嵌套访问&#34;]
+      index[&#34;.[index]&lt;br&gt;数组索引&#34;]
+    条件过滤
+      select[&#34;select()&lt;br&gt;选择符合条件的元素&#34;]
+      test[&#34;test();&lt;br&gt;测试正则表达式&#34;]
+      has[&#34;has()&lt;br&gt;检查是否存在键&#34;]
+    数组操作
+      traverse[&#34;.[]&lt;br&gt;遍历所有元素&#34;]
+      cut[&#34;.[start:end]&lt;br&gt;切片操作&#34;]
+      map[&#34;map()&lt;br&gt;映射转换&#34;]
+    输出格式
+      json[&#34;-o json&lt;br&gt;输出JSON格式&#34;]
+      yaml[&#34;-o yaml&lt;br&gt;输出YAML格式&#34;]
+      raw[&#34;-r&lt;br&gt;原始输出无引号&#34;]
+    文件操作
+      inplace[&#34;-i&lt;br&gt;就地编辑文件&#34;]
+      split[&#34;-s&lt;br&gt;分离多文档&#34;]
+</pre><h2 id=小结>小结</h2><p>yq - это &ldquo;интеллектуальная поисковая система&rdquo; для файлов YAML. Освойте ее, и вы сможете:</p><ul><li>Поиск любой информации в сложных конфигурационных файлах за считанные секунды</li><li>Изменяйте конфигурации партиями, не опасаясь человеческих ошибок</li><li>Автоматизация проверки конфигурации и предварительных проверок перед развертыванием</li><li>Генерируйте различные отчеты и статистику</li></ul><p>От традиционного поиска &ldquo;иголки в стоге сена&rdquo; до точного определения местоположения - yq делает работу с файлами YAML эффективной и надежной. В повседневной работе DevOps этот небольшой инструмент может сэкономить вам массу времени, позволяя сосредоточиться на более важных технических задачах.</p><p>Попробуйте использовать yq с файлом YAML, который есть у вас под рукой! Вы увидите, что управление сложными конфигурациями может быть очень простым.</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><a role=button class="btn btn-outline h-12" href=/ru/2025/07/ripgrep-data-extraction-quick-guide/ title="Магия извлечения данных: 5 минут, чтобы научиться использовать командную строку для обработки сложных журналов"><ion-icon name=chevron-back></ion-icon><div class="inline-flex flex-col items-start"><span class="text-base-content/60 text-xs font-normal">Предыдущая</span>
+<span class="max-w-48 truncate">Магия извлечения данных: 5 минут, чтобы научиться использовать командную строку для обработки сложных журналов</span></div></a><a role=button class="btn btn-outline h-12" href=/ru/2025/07/modern-civilization-three-ring-mechanism/ title="Три кольца современной цивилизации: институциональное чудо от жадности к сотрудничеству"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">Следующая</span>
+<span class="max-w-48 truncate">Три кольца современной цивилизации: институциональное чудо от жадности к сотрудничеству</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/ru/2025/07/yq-yaml-processor-guide/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#什么是yq>什么是yq？</a></li><li><a href=#为什么需要yq>为什么需要yq？</a></li><li><a href=#yq的核心概念>yq的核心概念</a></li><li><a href=#安装yq>安装yq</a></li><li><a href=#基础语法入门>基础语法入门</a><ul><li><a href=#基本查询操作>基本查询操作</a></li></ul></li><li><a href=#实用场景演示>实用场景演示</a><ul><li><a href=#场景1快速查看服务镜像版本>场景1：快速查看服务镜像版本</a></li><li><a href=#场景2提取服务端口配置>场景2：提取服务端口配置</a></li><li><a href=#场景3验证资源限制配置>场景3：验证资源限制配置</a></li></ul></li><li><a href=#修改yaml文件>修改YAML文件</a></li><li><a href=#高级技巧>高级技巧</a><ul><li><a href=#1-输出格式化>1. 输出格式化</a></li><li><a href=#2-条件组合>2. 条件组合</a></li><li><a href=#3-数据统计>3. 数据统计</a></li></ul></li><li><a href=#与其他工具配合>与其他工具配合</a></li><li><a href=#最佳实践建议>最佳实践建议</a></li><li><a href=#语法速查表>语法速查表</a></li><li><a href=#小结>小结</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 ЛюбимРешать</p><p>一个热爱解决问题的网站</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"ru"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
