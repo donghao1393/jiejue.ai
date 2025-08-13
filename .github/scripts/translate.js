@@ -7,7 +7,7 @@ const { glob } = require('glob');
 // 翻译函数
 async function translateWithDeepL(text, targetLang = 'RU') {
   try {
-    const response = await axios.post('https://api-free.deepl.com/v2/translate', 
+    const response = await axios.post('https://api.deepl.com/v2/translate',
       new URLSearchParams({
         auth_key: process.env.DEEPL_API_KEY,
         text: text,
@@ -99,39 +99,73 @@ async function processMarkdownFile(filePath) {
     }
   }
   
-  // 翻译正文内容（分段处理以保持质量）
+  // 翻译正文内容（智能处理特殊格式）
   console.log('Translating content...');
-  const paragraphs = parsed.body.split('\n\n');
-  const translatedParagraphs = [];
-  
-  for (let i = 0; i < paragraphs.length; i++) {
-    const paragraph = paragraphs[i].trim();
-    
-    // 跳过空段落、代码块、和某些特殊格式
-    if (!paragraph || 
-        paragraph.startsWith('```') || 
-        paragraph.startsWith('<!--') ||
-        paragraph.match(/^#{1,6}\s/) ||  // 跳过标题，单独处理
-        paragraph.startsWith('![') ||    // 跳过图片
-        paragraph.startsWith('[') ||     // 跳过某些链接
-        paragraph.includes('```')) {
-      translatedParagraphs.push(paragraph);
-      continue;
-    }
-    
-    try {
-      const translatedParagraph = await translateWithDeepL(paragraph);
-      translatedParagraphs.push(translatedParagraph);
-      
-      // 添加延迟避免API限制
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (error) {
-      console.warn(`Failed to translate paragraph ${i + 1}, keeping original:`, error.message);
-      translatedParagraphs.push(paragraph);
-    }
+
+  // 预处理：保护代码块和链接
+  let bodyToTranslate = parsed.body;
+  const protectedBlocks = [];
+  let blockIndex = 0;
+
+  // 保护代码块
+  bodyToTranslate = bodyToTranslate.replace(/```[\s\S]*?```/g, (match) => {
+    const placeholder = `__PROTECTED_CODE_BLOCK_${blockIndex}__`;
+    protectedBlocks[blockIndex] = match;
+    blockIndex++;
+    return placeholder;
+  });
+
+  // 保护内联代码
+  bodyToTranslate = bodyToTranslate.replace(/`[^`]+`/g, (match) => {
+    const placeholder = `__PROTECTED_INLINE_CODE_${blockIndex}__`;
+    protectedBlocks[blockIndex] = match;
+    blockIndex++;
+    return placeholder;
+  });
+
+  // 保护图片（完整保护，不翻译alt文本）
+  bodyToTranslate = bodyToTranslate.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match) => {
+    const placeholder = `__PROTECTED_IMAGE_${blockIndex}__`;
+    protectedBlocks[blockIndex] = match;
+    blockIndex++;
+    return placeholder;
+  });
+
+  // 保护链接URL（保护URL但允许链接文本被翻译）
+  bodyToTranslate = bodyToTranslate.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+    const placeholder = `__PROTECTED_LINK_URL_${blockIndex}__`;
+    protectedBlocks[blockIndex] = url;
+    blockIndex++;
+    return `[${text}](${placeholder})`;
+  });
+
+  // 保护Hugo shortcodes
+  bodyToTranslate = bodyToTranslate.replace(/\{\{<[^>]*>\}\}/g, (match) => {
+    const placeholder = `__PROTECTED_SHORTCODE_${blockIndex}__`;
+    protectedBlocks[blockIndex] = match;
+    blockIndex++;
+    return placeholder;
+  });
+
+  // 翻译处理后的内容
+  const translatedBody = await translateWithDeepL(bodyToTranslate);
+
+  // 恢复保护的内容
+  let finalBody = translatedBody;
+  for (let i = 0; i < protectedBlocks.length; i++) {
+    const codeBlockPlaceholder = `__PROTECTED_CODE_BLOCK_${i}__`;
+    const inlinePlaceholder = `__PROTECTED_INLINE_CODE_${i}__`;
+    const linkPlaceholder = `__PROTECTED_LINK_URL_${i}__`;
+    const imagePlaceholder = `__PROTECTED_IMAGE_${i}__`;
+    const shortcodePlaceholder = `__PROTECTED_SHORTCODE_${i}__`;
+
+    // 按类型恢复内容
+    finalBody = finalBody.replace(new RegExp(codeBlockPlaceholder, 'g'), protectedBlocks[i]);
+    finalBody = finalBody.replace(new RegExp(inlinePlaceholder, 'g'), protectedBlocks[i]);
+    finalBody = finalBody.replace(new RegExp(linkPlaceholder, 'g'), protectedBlocks[i]);
+    finalBody = finalBody.replace(new RegExp(imagePlaceholder, 'g'), protectedBlocks[i]);
+    finalBody = finalBody.replace(new RegExp(shortcodePlaceholder, 'g'), protectedBlocks[i]);
   }
-  
-  const translatedBody = translatedParagraphs.join('\n\n');
   
   // 构建俄语版本的完整内容
   // 手动构建markdown内容（front-matter格式）
@@ -149,7 +183,7 @@ async function processMarkdownFile(filePath) {
     }
   }).join('\n');
   
-  const ruContent = `---\n${frontMatterYaml}\n---\n\n${translatedBody}`;
+  const ruContent = `---\n${frontMatterYaml}\n---\n\n${finalBody}`;
 
   
   // 确保目录存在并写入文件
