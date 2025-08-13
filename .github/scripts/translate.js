@@ -60,12 +60,21 @@ async function processMarkdownFile(filePath) {
   
   // 翻译frontmatter
   const translatedAttributes = { ...parsed.attributes };
-  
+
+  // 保持date字段为原始字符串格式，不进行翻译
+  if (parsed.attributes.date) {
+    // 从原始内容中提取原始的date字符串
+    const dateMatch = content.match(/^date:\s*(.+)$/m);
+    if (dateMatch) {
+      translatedAttributes.date = dateMatch[1].trim();
+    }
+  }
+
   if (parsed.attributes.title) {
     console.log('Translating title...');
     translatedAttributes.title = await translateWithDeepL(parsed.attributes.title);
   }
-  
+
   if (parsed.attributes.description) {
     console.log('Translating description...');
     translatedAttributes.description = await translateWithDeepL(parsed.attributes.description);
@@ -130,6 +139,9 @@ async function processMarkdownFile(filePath) {
     const value = translatedAttributes[key];
     if (Array.isArray(value)) {
       return `${key}:\n${value.map(item => `  - ${JSON.stringify(item)}`).join('\n')}`;
+    } else if (key === 'date') {
+      // date字段不加引号，保持原始格式
+      return `${key}: ${value}`;
     } else if (typeof value === 'string') {
       return `${key}: ${JSON.stringify(value)}`;
     } else {
