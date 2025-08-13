@@ -1,6 +1,6 @@
 ---
 title: "Разрешение множественных конфликтов зависимостей Python: pyenv и venv в действии"
-date: Sun Apr 20 2025 20:09:43 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-21T00:09:43+04:00
 slug: "python-version-management-with-pyenv"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250421001116715.webp"

@@ -1,6 +1,6 @@
 ---
 title: "От неудач при входе в GitLab до понимания механизма аутентификации с помощью токенов: путь аутентификации для новичков в разработке"
-date: Wed Jun 18 2025 19:20:16 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-18T23:20:16+04:00
 slug: "from-gitlab-auth-failure-to-understanding-token-mechanism"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250618232252416.webp"

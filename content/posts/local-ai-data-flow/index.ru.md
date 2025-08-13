@@ -1,6 +1,6 @@
 ---
 title: "Поток данных для локальных инструментов ИИ: как обрабатываются ваши вопросы?"
-date: Thu Jul 17 2025 19:25:06 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-17T23:25:06+04:00
 slug: "local-ai-data-flow-explained"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250717232707536.webp"

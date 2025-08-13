@@ -1,6 +1,6 @@
 ---
 title: "Континуум ИТ-навыков: ваш гид по цифровым приключениям"
-date: Fri Jul 04 2025 17:58:08 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-04T21:58:08+04:00
 slug: "it-skill-map-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704220622487.webp"

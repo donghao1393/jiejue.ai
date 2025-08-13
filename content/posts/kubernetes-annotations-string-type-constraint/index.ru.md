@@ -1,6 +1,6 @@
 ---
 title: "Ограничения типов строк для аннотаций Kubernetes: от ошибок к пониманию"
-date: Tue Jul 15 2025 16:44:24 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-15T20:44:24+04:00
 slug: "kubernetes-annotations-string-type-constraint"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250715204757314.webp"

@@ -1,6 +1,6 @@
 ---
 title: "GitUI: высокопроизводительный терминальный Git-клиент на основе Rust - объяснение"
-date: Sat Mar 29 2025 14:07:58 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-29T18:07:58+04:00
 slug: "gitui-terminal-git-client-rust"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329181902877.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Делаем воспоминания больше, чем воспоминания: переосмысление каждой сделанной фотографии"
-date: Thu Feb 20 2025 17:56:22 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-20T21:56:22+04:00
 slug: "rethinking-the-value-of-our-photos"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250220213627208.webp"

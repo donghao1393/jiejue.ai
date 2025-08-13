@@ -1,6 +1,6 @@
 ---
 title: "Магия регулярных выражений: объяснение групп захвата и расширенное применение"
-date: Wed Apr 16 2025 18:08:48 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-16T22:08:48+04:00
 slug: "regex-capture-groups-advanced-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250416221201505.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Более глубокое понимание: Механизмы передачи международной электронной почты и причины задержек"
-date: Thu Jan 30 2025 15:03:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-01-30T19:03:19+04:00
 slug: "international-email-transmission-and-delay-deep"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250130232237397.webp"

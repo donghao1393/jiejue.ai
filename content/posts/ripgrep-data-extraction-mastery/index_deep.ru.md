@@ -1,6 +1,6 @@
 ---
 title: "Искусство обработки данных в командной строке: более глубокое понимание механизмов совместной работы ripgrep и конвейеров Unix"
-date: Sat Jul 26 2025 11:32:34 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-26T15:32:34+04:00
 slug: "ripgrep-unix-pipeline-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250726153651688.webp"

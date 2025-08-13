@@ -1,6 +1,6 @@
 ---
 title: "Проблема \"диалекта\" в регулярных выражениях: почему один и тот же код ведет себя по-разному в разных инструментах?"
-date: Thu Jul 31 2025 15:45:56 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-31T19:45:56+04:00
 slug: "regex-dialects-practical-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250731194914783.webp"

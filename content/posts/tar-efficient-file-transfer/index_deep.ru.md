@@ -1,6 +1,6 @@
 ---
 title: "Более глубокое понимание команды tar: технические детали для эффективной передачи большого количества маленьких файлов"
-date: Thu Mar 27 2025 19:10:12 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-27T23:10:12+04:00
 slug: "deep-dive-efficient-file-transfer-with-tar"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327231241540.webp"

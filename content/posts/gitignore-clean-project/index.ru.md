@@ -1,6 +1,6 @@
 ---
 title: "Попрощайтесь с беспорядком: сделайте каталог проекта чище с помощью .gitignore"
-date: Thu Jul 17 2025 20:38:58 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-18T00:38:58+04:00
 slug: "gitignore-clean-project"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250718004029570.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Получение поддержки CrossOver для игры в Warcraft 3 на Mac"
-date: Thu Dec 12 2024 17:35:12 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-12T21:35:12+04:00
 slug: "play-war3-on-mac"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201100422602.webp"

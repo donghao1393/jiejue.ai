@@ -1,6 +1,6 @@
 ---
 title: "Избегайте подводных камней: руководство по устранению конфликтов в конфигурации Kubernetes Ingress"
-date: Fri Mar 21 2025 14:53:50 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-21T18:53:50+04:00
 slug: "kubernetes-ingress-conflicts-troubleshooting"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250321185459888.webp"

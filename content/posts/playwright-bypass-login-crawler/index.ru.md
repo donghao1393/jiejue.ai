@@ -1,6 +1,6 @@
 ---
 title: "Разрушая границы традиционных краулеров: комплексное решение для подключения браузера пользователя к странице входа в систему с помощью Playwright"
-date: Sat Jul 05 2025 12:19:16 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-05T16:19:16+04:00
 slug: "playwright-bypass-login-crawler"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250705162011982.webp"

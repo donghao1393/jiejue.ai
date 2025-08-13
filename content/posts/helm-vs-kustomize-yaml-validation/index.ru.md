@@ -1,6 +1,6 @@
 ---
 title: "Почему развертывание Helm не удается, а Kustomize - удается? Глубокое погружение в различия в проверке YAML в инструментах конфигурации Kubernetes"
-date: Thu Jul 31 2025 13:14:09 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-31T17:14:09+04:00
 slug: "helm-vs-kustomize-yaml-validation-differences"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250731175254528.webp"

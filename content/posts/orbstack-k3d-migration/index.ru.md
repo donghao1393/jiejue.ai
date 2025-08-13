@@ -1,6 +1,6 @@
 ---
 title: "Полное руководство по легкому переносу сред Orbstack и k3d между компьютерами Mac"
-date: Thu Mar 27 2025 19:30:18 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-27T23:30:18+04:00
 slug: "mac-orbstack-k3d-migration-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250328000821584.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Освоение yq pick: элегантное извлечение нескольких ключевых значений из YAML"
-date: Thu Aug 07 2025 15:26:33 GMT+0000 (Coordinated Universal Time)
+date: 2025-08-07T19:26:33+04:00
 slug: "yq-pick-multiple-keys-from-yaml"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250807192913732.webp"

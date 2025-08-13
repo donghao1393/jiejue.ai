@@ -1,6 +1,6 @@
 ---
 title: "Автоматизация выпуска проектов: от хаоса к стандартизированным практикам"
-date: Wed Feb 19 2025 17:49:58 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-19T21:49:58+04:00
 slug: "release-automation-best-practices"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250219215307280.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Секреты временных каталогов: логика безопасности, скрывающаяся за /tmp и /private/tmp"
-date: Tue Apr 15 2025 19:14:00 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-15T23:14:00+04:00
 slug: "tmp-private-tmp-security"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415231607011.webp"

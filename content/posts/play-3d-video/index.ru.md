@@ -1,6 +1,6 @@
 ---
 title: "Воспроизведение 3D-видео с помощью ffplay на Mac"
-date: Sat Dec 07 2024 17:41:38 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-07T21:41:38+04:00
 slug: "play-3d-video"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202030000561.webp"

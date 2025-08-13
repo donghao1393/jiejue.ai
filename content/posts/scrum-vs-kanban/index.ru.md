@@ -1,6 +1,6 @@
 ---
 title: "Agile Battlefield: A Developer's Survival Guide to Scrum and Kanban"
-date: Tue Mar 18 2025 12:57:02 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-18T16:57:02+04:00
 slug: "scrum-vs-kanban-developers-survival-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318165917141.webp"

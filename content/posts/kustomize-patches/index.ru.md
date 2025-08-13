@@ -1,6 +1,6 @@
 ---
 title: "Kustomize Patch Operations Explained: пример управления конфигурацией K8s"
-date: Sat Feb 08 2025 15:01:43 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-08T19:01:43+04:00
 slug: "kustomize-patches-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208190510206.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Устранение неполадок с DNS в Kubernetes: когда поды не могут получить доступ к внешним доменам"
-date: Sat Feb 01 2025 04:50:37 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-01T08:50:37+04:00
 slug: "k8s-dns-troubleshooting"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201085756908.webp"

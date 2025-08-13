@@ -1,6 +1,6 @@
 ---
 title: "Автоматизация выпусков с помощью Semantic Release: подводные камни и решения"
-date: Thu Mar 13 2025 17:15:50 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-13T21:15:50+04:00
 slug: "automatic-versioning-with-semantic-release"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313211837337.webp"

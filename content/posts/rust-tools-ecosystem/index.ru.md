@@ -1,6 +1,6 @@
 ---
 title: "Панорама экосистемы инструментария Rust: сокровищница современных CLI для повышения эффективности"
-date: Sun Mar 30 2025 20:13:04 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-31T00:13:04+04:00
 slug: "rust-tools-ecosystem-overview"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250331001534659.webp"
@@ -41,7 +41,6 @@ tags:
 - Простой в использовании синтаксис скриптов
 - Встроенная система помощи и обширная документация
 
-[了解Fish Shell的安全编程]({{< ref "/posts/fish-shell-safety/index.md" >}} "Fish Shell 的安全编程：从文件重命名说起")
 
 ### Shell与命令历史
 
@@ -55,7 +54,6 @@ tags:
 - Мощная функция поиска, включая время, каталог, статус выхода и другие фильтры
 - Статистика и анализ использования команд
 
-[详细了解Atuin如何增强你的终端体验]({{< ref "/posts/atuin-shell-history/index.md" >}} "Atuin：给你的终端命令历史加点魔法")
 
 ### 终端复用器
 
@@ -70,7 +68,7 @@ tags:
 - Поддержка плавающих окон и панелей
 - Встроенная поддержка мыши
 
-[从tmux迁移到Zellij的完整指南]({{< ref "/posts/zellij-terminal-multiplexer/index.md" >}} "Zellij: 现代化的终端多路复用器——从 tmux 迁移指南")
+[从tmux迁移到Zellij的完整指南]({{< ref "/posts/zellij-terminal-multiplexer/index.ru.md" >}} "Zellij: 现代化的终端多路复用器——从 tmux 迁移指南")
 
 ### 系统工具
 
@@ -148,7 +146,7 @@ qsv stats data.csv
 qsv select name,age data.csv
 ```
 
-[详细了解使用QSV加速你的数据分析任务]({{< ref "/posts/qsv-data-tool/index.md" >}} "QSV：突破内存瓶颈的高性能数据处理利器")
+[详细了解使用QSV加速你的数据分析任务]({{< ref "/posts/qsv-data-tool/index.ru.md" >}} "QSV：突破内存瓶颈的高性能数据处理利器")
 
 ### 正则表达式生成
 
@@ -192,7 +190,7 @@ grex "user@example.com" "admin@server.org"
 - Интеграция TreeSitter обеспечивает точную подсветку синтаксиса и навигацию по коду
 - Интуитивно понятный пользовательский интерфейс и панель команд
 
-[Helix编辑器使用体验]({{< ref "/posts/helix/index.md" >}} "Helix编辑器：轻量高效的终端编辑体验")
+[Helix编辑器使用体验]({{< ref "/posts/helix/index.ru.md" >}} "Helix编辑器：轻量高效的终端编辑体验")
 
 ### Git工具
 
@@ -240,7 +238,6 @@ grex "user@example.com" "admin@server.org"
 - Гибкие возможности группировки и фильтрации
 - Безопасная обработка дубликатов файлов
 
-[用fclones整理重复照片]({{< ref "/posts/fclones-duplicate-cleaner/index.md" >}} "用 fclones 智能整理重复照片——摆脱繁琐的手动筛选")
 
 ### 文件管理器
 

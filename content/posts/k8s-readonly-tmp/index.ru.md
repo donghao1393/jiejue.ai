@@ -1,6 +1,6 @@
 ---
 title: "Глубокое погружение: реализация разрешений на запись в каталог /tmp в контейнерах Kubernetes, предназначенных только для чтения"
-date: Thu Mar 06 2025 12:42:50 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-06T16:42:50+04:00
 slug: "kubernetes-readonly-filesystem-tmp-directory-write-access-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250306165302266.webp"

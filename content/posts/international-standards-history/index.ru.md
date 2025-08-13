@@ -1,6 +1,6 @@
 ---
 title: "От Джи до ООН: забытая история интернационализации"
-date: Mon Jul 21 2025 17:15:03 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-21T21:15:03+04:00
 slug: "from-gi-to-un-forgotten-internationalization-history"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250721211709762.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Освободите шею, используя очки вместо экрана"
-date: Wed Dec 11 2024 17:39:36 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-11T21:39:36+04:00
 slug: "replace-display-with-viture-glasses"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202013113003.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Устранение неполадок при синхронизации OneDrive: простые и практичные способы диагностики и решения проблемы"
-date: Sat Apr 12 2025 20:58:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-13T00:58:19+04:00
 slug: "fix-onedrive-sync-issues"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250413005908731.webp"

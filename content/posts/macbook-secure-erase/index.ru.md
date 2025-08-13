@@ -1,6 +1,6 @@
 ---
 title: "Безопасное стирание данных с MacBook: секреты аппаратного шифрования Apple"
-date: Thu May 01 2025 13:56:46 GMT+0000 (Coordinated Universal Time)
+date: 2025-05-01T17:56:46+04:00
 slug: "secure-erase-macbook-data"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250501175925048.webp"

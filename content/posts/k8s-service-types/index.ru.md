@@ -1,6 +1,6 @@
 ---
 title: "Типы сервисов Kubernetes в деталях: почему ClusterIP тоже можно балансировать нагрузку"
-date: Thu Mar 13 2025 18:09:00 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-13T22:09:00+04:00
 slug: "k8s-service-types-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250313221221836.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Улучшение tmuxf: Улучшение сохранения и восстановления рабочего стола tmux"
-date: Sat Feb 01 2025 17:30:04 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-01T21:30:04+04:00
 slug: "tmuxf-capture-commands"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201213744907.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Ботанические шрифты и GitHub: от технической реализации к диалектическому мышлению"
-date: Sun Apr 20 2025 19:53:54 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-20T23:53:54+04:00
 slug: "nerd-fonts-github-philosophy"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250420235634187.webp"

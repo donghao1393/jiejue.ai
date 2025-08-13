@@ -1,6 +1,6 @@
 ---
 title: "yq: jq-инструмент YAML для элегантных запросов к конфигурационным файлам"
-date: Mon Jul 21 2025 17:52:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-21T21:52:19+04:00
 slug: "yq-yaml-query-tool-for-developers"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250721215422148.webp"

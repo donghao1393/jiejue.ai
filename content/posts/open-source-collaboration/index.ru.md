@@ -1,6 +1,6 @@
 ---
 title: "Изучение правовых и управленческих моделей сотрудничества в проектах с открытым исходным кодом"
-date: Sun Apr 20 2025 20:38:34 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-21T00:38:34+04:00
 slug: "open-source-collaboration-legal-governance"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250421004049703.webp"

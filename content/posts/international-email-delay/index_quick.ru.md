@@ -1,6 +1,6 @@
 ---
 title: "Почему отправка и получение международной почты занимает много времени?"
-date: Thu Jan 30 2025 15:03:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-01-30T19:03:19+04:00
 slug: "why-international-email-delay-quick"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250130232237397.webp"

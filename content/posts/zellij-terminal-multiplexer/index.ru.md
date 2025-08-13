@@ -1,6 +1,6 @@
 ---
 title: "Zellij: Модернизация терминального мультиплексора - руководство по переходу с tmux"
-date: Sat Mar 29 2025 20:48:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-30T00:48:19+04:00
 slug: "zellij-terminal-multiplexer-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330004913707.webp"

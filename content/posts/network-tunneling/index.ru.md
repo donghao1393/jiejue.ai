@@ -1,6 +1,6 @@
 ---
 title: "От SSH до облака: сетевое туннелирование в двух словах"
-date: Wed Feb 19 2025 17:22:48 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-19T21:22:48+04:00
 slug: "network-tunneling-from-ssh-to-cloud"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250219212606569.webp"

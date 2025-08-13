@@ -1,6 +1,6 @@
 ---
 title: "Hugo Blog Руководство по настройке фильтрации системных файлов"
-date: Sat Feb 15 2025 21:44:29 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-16T01:44:29+04:00
 slug: "hugo-file-filtering-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250216014557430.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Зачем писать 12pm, если 12pm - это полдень? Загадка времени, которая сводит с ума айтишников!"
-date: Wed Jun 18 2025 20:47:19 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-19T00:47:19+04:00
 slug: "time-format-mystery-12pm"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250619005036390.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Файловая система Linux: от инода к линковке"
-date: Sun Apr 06 2025 14:16:06 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-06T18:16:06+04:00
 slug: "linux-filesystem-internals"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250406181945788.webp"

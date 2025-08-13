@@ -1,6 +1,6 @@
 ---
 title: "Сокровища командной строки macOS: повышаем эффективность рабочего процесса"
-date: Tue Apr 15 2025 19:05:25 GMT+0000 (Coordinated Universal Time)
+date: 2025-04-15T23:05:25+04:00
 slug: "macos-command-line-treasures"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250415230851041.webp"

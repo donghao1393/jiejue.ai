@@ -1,6 +1,6 @@
 ---
 title: "Почему я не могу найти команды в PATH при запуске приложения из графического интерфейса Mac?"
-date: Mon Mar 17 2025 15:19:10 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-17T19:19:10+04:00
 slug: "macos-gui-launch-missing-path-commands"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250317192952444.webp"

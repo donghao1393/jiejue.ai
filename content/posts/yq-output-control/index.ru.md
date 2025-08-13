@@ -1,6 +1,6 @@
 ---
 title: "Полное руководство по управлению выводом yq: искусство преобразования данных из YAML в любой формат"
-date: Mon Aug 11 2025 14:58:27 GMT+0000 (Coordinated Universal Time)
+date: 2025-08-11T18:58:27+04:00
 slug: "yq-output-control-complete-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250811190257896.webp"

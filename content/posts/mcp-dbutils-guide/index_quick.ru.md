@@ -1,6 +1,6 @@
 ---
 title: "MCP Database Services: простое управление несколькими базами данных"
-date: Sun Feb 09 2025 17:32:00 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-09T21:32:00+04:00
 slug: "mcp-dbutils-quick-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250209213924711.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Размышления о гуманизации научно-технического развития: перспективы будущего с точки зрения потребностей"
-date: Thu Feb 13 2025 20:32:59 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-14T00:32:59+04:00
 slug: "technology-human-development-perspective"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250214003913698.webp"

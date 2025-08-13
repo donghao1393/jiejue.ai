@@ -1,6 +1,6 @@
 ---
 title: "Zoom AI Companion: технология распознавания голоса для интеллектуального диалога"
-date: Fri Jul 18 2025 04:04:59 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-18T08:04:59+04:00
 slug: "zoom-ai-companion-tech-analysis"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250718080753567.webp"

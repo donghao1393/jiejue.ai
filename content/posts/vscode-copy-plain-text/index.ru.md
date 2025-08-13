@@ -1,6 +1,6 @@
 ---
 title: "Копирование и вставка VS Code в Obsidian - лишние разрывы строк? Один трюк, чтобы исправить это"
-date: Mon Jul 21 2025 17:44:29 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-21T21:44:29+04:00
 slug: "vscode-copy-plain-text-solution"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250721214638215.webp"

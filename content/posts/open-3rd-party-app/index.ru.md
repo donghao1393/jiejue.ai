@@ -1,6 +1,6 @@
 ---
 title: "Открытие загруженных приложений сторонних разработчиков в macOS"
-date: Sat Feb 24 2024 19:15:40 GMT+0000 (Coordinated Universal Time)
+date: 2024-02-24T23:15:40+04:00
 slug: "open-3rd-party-app"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202022256132.webp"

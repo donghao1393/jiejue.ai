@@ -1,6 +1,6 @@
 ---
 title: "Полное руководство по субмодулям Git: понимание субмодулей по порядку"
-date: Fri Jul 04 2025 17:44:40 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-04T21:44:40+04:00
 slug: "git-submodule-complete-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704214642129.webp"

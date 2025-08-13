@@ -1,6 +1,6 @@
 ---
 title: "Передача файлов между двумя компьютерами Mac"
-date: Sat Feb 24 2024 18:12:11 GMT+0000 (Coordinated Universal Time)
+date: 2024-02-24T22:12:11+04:00
 slug: "sync-between-two-macs"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202022932603.webp"

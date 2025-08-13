@@ -1,6 +1,6 @@
 ---
 title: "Истинные генераторы случайных чисел: глубокое исследование криптографической безопасности и квантовой случайности"
-date: Thu May 01 2025 19:37:07 GMT+0000 (Coordinated Universal Time)
+date: 2025-05-01T23:37:07+04:00
 slug: "true-random-number-generator-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250502003617849.webp"

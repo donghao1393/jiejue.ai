@@ -1,6 +1,6 @@
 ---
 title: "QSV: высокопроизводительный инструмент для обработки данных, позволяющий преодолеть узкое место в памяти"
-date: Fri Mar 28 2025 19:41:57 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-28T23:41:57+04:00
 slug: "qsv-high-performance-data-processing-tool"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250328234405324.webp"

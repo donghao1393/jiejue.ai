@@ -1,6 +1,6 @@
 ---
 title: "Объяснение для разработчиков: почему прямой доступ к IP-адресу Kubernetes Ingress возвращает 404"
-date: Tue Mar 18 2025 19:04:16 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-18T23:04:16+04:00
 slug: "understanding-kubernetes-ingress-for-developers"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318230709119.webp"

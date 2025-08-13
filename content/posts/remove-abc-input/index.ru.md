@@ -1,6 +1,6 @@
 ---
 title: "Удалить метод ввода по умолчанию"
-date: Thu Apr 04 2024 20:12:11 GMT+0000 (Coordinated Universal Time)
+date: 2024-04-05T00:12:11+04:00
 slug: "remove-abc-input"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202020740418.webp"

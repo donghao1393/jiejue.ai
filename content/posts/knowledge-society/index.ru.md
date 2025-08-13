@@ -1,6 +1,6 @@
 ---
 title: "Общества знаний: каждый сам себе гид"
-date: Tue Feb 18 2025 06:00:14 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-18T10:00:14+04:00
 slug: "knowledge-society-guide-yourself"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250218100114871.webp"

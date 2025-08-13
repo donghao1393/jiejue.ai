@@ -1,6 +1,6 @@
 ---
 title: "Запуск Windows 11 VM на Mac: руководство по началу работы и практические советы"
-date: Sun Mar 30 2025 11:21:05 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-30T15:21:05+04:00
 slug: "windows-11-vmware-mac-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330152257692.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Helix Editor: легкое и эффективное средство редактирования конечных точек"
-date: Sun Mar 30 2025 13:18:26 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-30T17:18:26+04:00
 slug: "helix-editor-experience"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330173009598.webp"

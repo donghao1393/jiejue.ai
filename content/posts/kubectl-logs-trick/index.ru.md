@@ -1,6 +1,6 @@
 ---
 title: "Скрытые детали команды kubectl logs: селектор ограничивает количество строк, выводимых в журнал"
-date: Fri Mar 28 2025 20:16:14 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-29T00:16:14+04:00
 slug: "kubectl-logs-selector-limiting"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329001815828.webp"

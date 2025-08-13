@@ -1,6 +1,6 @@
 ---
 title: "От вызова функций к MCP: смена парадигмы в интеграции инструментов ИИ"
-date: Tue Mar 18 2025 13:44:43 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-18T17:44:43+04:00
 slug: "function-calling-to-mcp-paradigm-shift"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318173901141.webp"

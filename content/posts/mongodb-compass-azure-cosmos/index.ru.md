@@ -1,6 +1,6 @@
 ---
 title: "Устранение проблем совместимости версий при подключении MongoDB Compass к Azure Cosmos DB"
-date: Mon Feb 24 2025 20:15:48 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-25T00:15:48+04:00
 slug: "mongodb-compass-azure-cosmos-compatibility"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250225001857779.webp"

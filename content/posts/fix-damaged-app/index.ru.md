@@ -1,6 +1,6 @@
 ---
 title: "Восстановление сломанных приложений в macOS"
-date: Tue Apr 02 2024 20:12:11 GMT+0000 (Coordinated Universal Time)
+date: 2024-04-03T00:12:11+04:00
 slug: "fix-damaged-app"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202021703377.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Устранение проблем с SSL/TLS при подключении Grafana к Azure PostgreSQL"
-date: Tue Mar 04 2025 13:14:20 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-04T17:14:20+04:00
 slug: "solving-grafana-azure-postgresql-ssl-tls-issues"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250304171719989.webp"

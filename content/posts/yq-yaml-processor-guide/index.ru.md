@@ -1,6 +1,6 @@
 ---
 title: "yq: инструмент для простой и эффективной обработки файлов YAML"
-date: Tue Jul 22 2025 16:32:34 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-22T20:32:34+04:00
 slug: "yq-yaml-processor-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250722203458668.webp"

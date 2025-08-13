@@ -1,6 +1,6 @@
 ---
 title: "Идеальная синхронизация файлов с помощью Rsync: исчерпывающее руководство от новичка до продвинутого пользователя"
-date: Thu Mar 27 2025 18:47:42 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-27T22:47:42+04:00
 slug: "perfect-file-sync-with-rsync"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327225522772.webp"

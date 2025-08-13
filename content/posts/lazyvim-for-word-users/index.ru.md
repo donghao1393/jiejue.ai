@@ -1,6 +1,6 @@
 ---
 title: "От Word к LazyVim: руководство для начинающих по Neovim для вордовцев"
-date: Sat Feb 08 2025 10:19:07 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-08T14:19:07+04:00
 slug: "lazyvim-guide-for-word-users"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208142143106.webp"

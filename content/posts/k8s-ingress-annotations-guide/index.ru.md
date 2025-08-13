@@ -1,6 +1,6 @@
 ---
 title: "Практическое руководство по аннотациям Kubernetes Ingress: полное объяснение от ошибки 413 до стриминга"
-date: Tue Jul 15 2025 17:04:04 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-15T21:04:04+04:00
 slug: "k8s-ingress-annotations-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250715210559568.webp"

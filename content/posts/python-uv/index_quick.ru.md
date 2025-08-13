@@ -1,6 +1,6 @@
 ---
 title: "Попрощайтесь с утомительным процессом: uv делает управление средами Python проще и эффективнее."
-date: Thu Mar 27 2025 19:49:41 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-27T23:49:41+04:00
 slug: "python-uv-quick-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327235234200.webp"

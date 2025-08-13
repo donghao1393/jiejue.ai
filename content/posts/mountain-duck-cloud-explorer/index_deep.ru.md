@@ -1,6 +1,6 @@
 ---
 title: "Mountain Duck в деталях: как работают легкие инструменты для монтажа облачных хранилищ и лучшие практики"
-date: Fri Mar 28 2025 19:57:41 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-28T23:57:41+04:00
 slug: "mountain-duck-cloud-explorer-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329000041054.webp"

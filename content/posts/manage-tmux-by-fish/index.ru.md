@@ -1,6 +1,6 @@
 ---
 title: "Fish Shell позволяет легко управлять окружением tmux."
-date: Wed Jan 29 2025 17:00:39 GMT+0000 (Coordinated Universal Time)
+date: 2025-01-29T21:00:39+04:00
 slug: "manage-tmux-by-fish"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250131204441197.webp"

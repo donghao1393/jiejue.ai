@@ -1,6 +1,6 @@
 ---
 title: "Краткое введение в этот блог"
-date: Tue Jan 21 2025 05:11:06 GMT+0000 (Coordinated Universal Time)
+date: 2025-01-21T09:11:06+04:00
 slug: "about-this-blog"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250122211357575.webp"

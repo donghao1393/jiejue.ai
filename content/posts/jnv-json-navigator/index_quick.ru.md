@@ -1,6 +1,6 @@
 ---
 title: "JNV: интерактивный инструмент навигации, который делает данные JSON видимыми с первого взгляда"
-date: Sun Mar 30 2025 16:40:11 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-30T20:40:11+04:00
 slug: "jnv-json-navigator-interactive-tool"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250330204108805.webp"

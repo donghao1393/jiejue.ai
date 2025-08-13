@@ -1,6 +1,6 @@
 ---
 title: "Элегантное встраивание SVG-изображений в блоги Hugo: простой и практичный подход"
-date: Tue Mar 18 2025 17:44:39 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-18T21:44:39+04:00
 slug: "embedding-svg-in-hugo-blog-easy-way"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318215159430.webp"

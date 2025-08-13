@@ -1,6 +1,6 @@
 ---
 title: "Механика сортировки в разработке программного обеспечения: игра по распределению ресурсов для новичков"
-date: Wed Jun 18 2025 19:03:56 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-18T23:03:56+04:00
 slug: "software-triage-mechanism-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250618230724526.webp"

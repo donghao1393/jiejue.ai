@@ -1,6 +1,6 @@
 ---
 title: "Руководство по утилитам PostgreSQL: полный набор инструментов от экспорта структуры таблиц до обслуживания базы данных"
-date: Fri Jul 04 2025 16:31:59 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-04T20:31:59+04:00
 slug: "postgresql-practical-tools-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704203405412.webp"

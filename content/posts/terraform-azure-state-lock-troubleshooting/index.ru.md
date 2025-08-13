@@ -1,6 +1,6 @@
 ---
 title: "Подробное описание проблем блокировки состояния Terraform Azure: разрешения, разблокировка и лучшие практики"
-date: Wed Jun 25 2025 17:13:41 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-25T21:13:41+04:00
 slug: "terraform-azure-state-lock-troubleshooting"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250625211704888.webp"

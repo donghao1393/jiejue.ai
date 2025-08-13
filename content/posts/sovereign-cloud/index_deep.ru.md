@@ -1,6 +1,6 @@
 ---
 title: "Изменение облика облачных вычислений в эпоху цифрового суверенитета: от технологического инструмента к национальной стратегии"
-date: Wed Jun 25 2025 16:01:41 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-25T20:01:41+04:00
 slug: "digital-sovereignty-cloud-strategy"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250625200441324.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Начало работы с MCP: попрощайтесь с тонкой настройкой и легко находите службы с открытым исходным кодом"
-date: Tue Mar 18 2025 13:44:43 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-18T17:44:43+04:00
 slug: "mcp-beginner-guide-finding-services"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250318174824108.webp"

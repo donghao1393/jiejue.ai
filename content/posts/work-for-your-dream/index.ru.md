@@ -1,6 +1,6 @@
 ---
 title: "Дайте возможность каждому работать ради своей мечты"
-date: Mon Feb 24 2025 03:10:12 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-24T07:10:12+04:00
 slug: "work-for-your-dream"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250224072548822.webp"

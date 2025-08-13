@@ -1,6 +1,6 @@
 ---
 title: "Переосмысление безопасности ИИ: неправильно понятая тема"
-date: Thu Feb 13 2025 16:32:18 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-13T20:32:18+04:00
 slug: "rethinking-ai-security"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250213203825912.webp"

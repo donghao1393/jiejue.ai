@@ -1,6 +1,6 @@
 ---
 title: "Сверхбыстрая передача данных между компьютерами Mac: удивительная скорость кабеля Thunderbolt"
-date: Thu Mar 27 2025 19:19:21 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-27T23:19:21+04:00
 slug: "mac-thunderbolt-transfer-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250327232101037.webp"

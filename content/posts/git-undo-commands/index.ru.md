@@ -1,6 +1,6 @@
 ---
 title: "Руководство по исправлению ошибок в Git: как отменить ошибочные коммиты"
-date: Fri Mar 07 2025 20:23:27 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-08T00:23:27+04:00
 slug: "git-undo-commands-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250308002608381.webp"

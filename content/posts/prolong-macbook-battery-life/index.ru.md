@@ -1,6 +1,6 @@
 ---
 title: "Заставьте батареи MacBook работать дольше"
-date: Tue Dec 10 2024 16:06:11 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-10T20:06:11+04:00
 slug: "prolong-macbook-battery-life"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202014107426.webp"

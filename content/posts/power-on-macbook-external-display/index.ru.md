@@ -1,6 +1,6 @@
 ---
 title: "Подсветка внешнего дисплея вашего MacBook Air."
-date: Fri Dec 06 2024 17:40:09 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-06T21:40:09+04:00
 slug: "power-on-macbook-external-display"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250202025402372.webp"

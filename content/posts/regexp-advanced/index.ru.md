@@ -1,6 +1,6 @@
 ---
 title: "Изучение расширенных возможностей регулярных выражений: путешествие от ripgrep к PCRE2"
-date: Mon Feb 10 2025 09:13:02 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-10T13:13:02+04:00
 slug: "regexp-advanced-features"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250210131708495.webp"

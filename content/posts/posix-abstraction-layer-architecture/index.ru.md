@@ -1,6 +1,6 @@
 ---
 title: "Забытый слой магии: как POSIX навел порядок в компьютерном мире"
-date: Thu Jul 31 2025 15:45:56 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-31T19:45:56+04:00
 slug: "posix-abstraction-layer-architecture"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250731195239749.webp"

@@ -1,6 +1,6 @@
 ---
 title: "Более глубокое понимание автоматических обновлений Homebrew: от принципа к практике"
-date: Sat May 03 2025 07:09:08 GMT+0000 (Coordinated Universal Time)
+date: 2025-05-03T11:09:08+04:00
 slug: "homebrew-auto-update-deep-dive"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250503111511793.webp"

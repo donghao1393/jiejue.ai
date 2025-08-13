@@ -1,6 +1,6 @@
 ---
 title: "Redis primer: руководство по структуре данных, понятное даже новичку"
-date: Fri Jul 04 2025 16:55:21 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-04T20:55:21+04:00
 slug: "redis-starter-guide"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704211411434.webp"

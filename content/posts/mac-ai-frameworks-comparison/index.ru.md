@@ -1,6 +1,6 @@
 ---
 title: "Великая развилка разработки ИИ на платформе Mac: экологическая битва между MPS, MLX и PyTorch"
-date: Fri Jul 04 2025 19:19:41 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-04T23:19:41+04:00
 slug: "mac-ai-frameworks-comparison"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250704232154711.webp"

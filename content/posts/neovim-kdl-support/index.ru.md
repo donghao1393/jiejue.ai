@@ -1,6 +1,6 @@
 ---
 title: "Настройка поддержки языка KDL в Neovim"
-date: Sat Mar 29 2025 15:56:46 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-29T19:56:46+04:00
 slug: "configure-kdl-support-in-neovim"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250329200248895.webp"

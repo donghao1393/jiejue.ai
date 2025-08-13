@@ -1,6 +1,6 @@
 ---
 title: "Устранение неполадок с автоматическим отступом пасты Neovim в сеансах Tmux"
-date: Sat Feb 08 2025 09:43:58 GMT+0000 (Coordinated Universal Time)
+date: 2025-02-08T13:43:58+04:00
 slug: "tmux-nvim-paste-indent"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250208140012411.webp"

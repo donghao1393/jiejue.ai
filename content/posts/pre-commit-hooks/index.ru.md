@@ -1,6 +1,6 @@
 ---
 title: "Освободите руки: автоматизация проверок качества кода и исправлений с помощью pre-commit"
-date: Sun Mar 23 2025 13:33:47 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-23T17:33:47+04:00
 slug: "pre-commit-hooks-automation"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250323174022149.webp"

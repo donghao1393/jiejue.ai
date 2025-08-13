@@ -1,6 +1,6 @@
 ---
 title: "Освоение различных техник создания скриншотов в macOS"
-date: Fri Dec 13 2024 14:48:22 GMT+0000 (Coordinated Universal Time)
+date: 2024-12-13T18:48:22+04:00
 slug: "master-macos-screenshot"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250201095905780.webp"

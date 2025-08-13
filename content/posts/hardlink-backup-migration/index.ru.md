@@ -1,6 +1,6 @@
 ---
 title: "Скрытые ловушки жестких ссылок при миграции резервных копий: углубленный анализ различий в средствах манипулирования файлами"
-date: Thu Jul 17 2025 20:01:29 GMT+0000 (Coordinated Universal Time)
+date: 2025-07-18T00:01:29+04:00
 slug: "hardlink-backup-migration-pitfall"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250718000338810.webp"

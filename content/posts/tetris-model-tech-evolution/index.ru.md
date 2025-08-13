@@ -1,6 +1,6 @@
 ---
 title: "Модель технологической революции \"Тетрис\": закон иерархических рекурсивных инноваций"
-date: Fri Jun 27 2025 11:14:52 GMT+0000 (Coordinated Universal Time)
+date: 2025-06-27T15:14:52+04:00
 slug: "tetris-model-tech-evolution"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250627163232791.webp"

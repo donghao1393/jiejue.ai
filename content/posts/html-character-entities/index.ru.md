@@ -1,6 +1,6 @@
 ---
 title: "Освоение HTML и XML Character Entities: руководство для разработчиков"
-date: Wed Mar 19 2025 14:56:18 GMT+0000 (Coordinated Universal Time)
+date: 2025-03-19T18:56:18+04:00
 slug: "mastering-html-xml-character-entities"
 draft: false
 cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250319185845640.webp"
