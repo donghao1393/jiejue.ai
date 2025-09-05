@@ -1,0 +1,117 @@
+<!doctype html><html lang=zh-cn x-data :class=$store.darkMode.class() :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git Rebase --onto 深度解析：优雅处理复杂分支重构 | 爱解决</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/><meta name=author content="董昊"><meta name=description content="在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，git rebase --onto 就是那个精确而优雅的解决方案。
+"><meta name=keywords content="Git,版本控制,分支管理,技术工具"><meta name=generator content="Hugo 0.149.1"><meta property="og:url" content="https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="Git Rebase --onto 深度解析：优雅处理复杂分支重构"><meta property="og:description" content="在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，git rebase --onto 就是那个精确而优雅的解决方案。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-09-05T15:13:13+04:00"><meta property="article:modified_time" content="2025-09-05T15:27:06+04:00"><meta property="article:tag" content="Git"><meta property="article:tag" content="版本控制"><meta property="article:tag" content="分支管理"><meta property="article:tag" content="技术工具"><meta name=twitter:card content="summary"><meta name=twitter:title content="Git Rebase --onto 深度解析：优雅处理复杂分支重构"><meta name=twitter:description content="在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，git rebase --onto 就是那个精确而优雅的解决方案。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js integrity="sha256-PtHu0lJIiSHfZeNj1nFd6wTX+Squ255SGZ/fc8seCtM=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><div id=dream-global-bg></div><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-4"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="h-10 rounded-full"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-1 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Git Rebase --onto 深度解析：优雅处理复杂分支重构"><meta itemprop=description content="在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，git rebase --onto 就是那个精确而优雅的解决方案。"><meta itemprop=datePublished content="2025-09-05T15:13:13+04:00"><meta itemprop=dateModified content="2025-09-05T15:27:06+04:00"><meta itemprop=wordCount content="1580"><meta itemprop=keywords content="Git,版本控制,分支管理,技术工具"><header><h1 itemprop=headline>Git Rebase --onto 深度解析：优雅处理复杂分支重构</h1><p class=text-sm><span data-format=luxon>2025-09-05T15:13:13+04:00</span>
+| <span>4分钟阅读</span>
+| <span>更新于
+<span data-format=luxon>2025-09-05T15:27:06+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Git%20Rebase%20--onto%20%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%ef%bc%9a%e4%bc%98%e9%9b%85%e5%a4%84%e7%90%86%e5%a4%8d%e6%9d%82%e5%88%86%e6%94%af%e9%87%8d%e6%9e%84&amp;url=https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Git%20Rebase%20--onto%20%e6%b7%b1%e5%ba%a6%e8%a7%a3%e6%9e%90%ef%bc%9a%e4%bc%98%e9%9b%85%e5%a4%84%e7%90%86%e5%a4%8d%e6%9d%82%e5%88%86%e6%94%af%e9%87%8d%e6%9e%84%20https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><img class="w-full z-30" src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250905151737174.webp alt="Git Rebase --onto 深度解析：优雅处理复杂分支重构"><p>在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，<code>git rebase --onto</code> 就是那个精确而优雅的解决方案。</p><h2 id=为什么需要-rebase-onto>为什么需要 Rebase &ndash;onto？</h2><p>想象这样一个场景：你是一名技术人员，刚完成了三个工作提交，这些提交基于分支A（branch_A）。但现在你发现，由于分支A包含了太多你不熟悉的新内容，你更希望这些工作基于更稳定的分支B（branch_B）。</p><p>传统的解决方案可能是创建一个新分支，然后使用 cherry-pick 逐一挑选提交。但 <code>git rebase --onto</code> 提供了一个更系统化的方法。</p><h2 id=rebase-onto-的工作原理>Rebase &ndash;onto 的工作原理</h2><p><code>git rebase --onto</code> 的语法是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase --onto &lt;新基础&gt; &lt;旧基础&gt; <span style=color:#f92672>[</span>目标分支<span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>这个命令的执行逻辑是：</p><ol><li>找到目标分支与旧基础分支的公共祖先（merge-base）</li><li>提取从公共祖先到目标分支的所有提交</li><li>将这些提交重新应用到新基础分支上</li></ol><pre class=mermaid>
+  graph TD
+    A[找到 merge-base] --&gt; B[提取差异提交]
+    B --&gt; C[重新应用到新基础]
+    C --&gt; D[更新分支指针]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+</pre><h3 id=具体案例分析>具体案例分析</h3><p>假设我们有这样的分支结构：</p><pre class=mermaid>
+  gitGraph
+    commit id: &#34;M1&#34;
+    commit id: &#34;M2&#34;
+    branch branch_A
+    checkout branch_A
+    commit id: &#34;A1&#34;
+    commit id: &#34;A2&#34;
+    branch my_work
+    checkout my_work
+    commit id: &#34;Work1&#34;
+    commit id: &#34;Work2&#34;
+    commit id: &#34;Work3&#34;
+    checkout main
+    branch branch_B
+    checkout branch_B
+    commit id: &#34;B1&#34;
+    commit id: &#34;B2&#34;
+</pre><p>执行 <code>git rebase --onto branch_B branch_A my_work</code> 后：</p><pre class=mermaid>
+  gitGraph
+    commit id: &#34;M1&#34;
+    commit id: &#34;M2&#34;
+    branch branch_A
+    checkout branch_A
+    commit id: &#34;A1&#34;
+    commit id: &#34;A2&#34;
+    checkout main
+    branch branch_B
+    checkout branch_B
+    commit id: &#34;B1&#34;
+    commit id: &#34;B2&#34;
+    branch my_work_new
+    checkout my_work_new
+    commit id: &#34;Work1&#39;&#34;
+    commit id: &#34;Work2&#39;&#34;
+    commit id: &#34;Work3&#39;&#34;
+</pre><h2 id=实战演练真实工作场景>实战演练：真实工作场景</h2><p>让我们用一个实际的工作场景来演示 <code>rebase --onto</code> 的威力。</p><h3 id=场景设定>场景设定</h3><ul><li>你有一个工作分支 <code>my_work</code>，包含 3 个重要提交</li><li>这个分支当前基于 <code>branch_A</code> 分支</li><li>你希望将它重新基于稳定的 <code>branch_B</code> 分支</li></ul><h3 id=操作步骤>操作步骤</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 1. 确保所有分支都是最新的</span>
+</span></span><span style=display:flex><span>git fetch origin
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. 切换到你的工作分支</span>
+</span></span><span style=display:flex><span>git checkout my_work
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. 执行 rebase 操作</span>
+</span></span><span style=display:flex><span>git rebase --onto branch_B branch_A
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4. 验证结果</span>
+</span></span><span style=display:flex><span>git log --oneline --graph -10
+</span></span></code></pre></div><h3 id=为什么选择-rebase-onto-而不是-cherry-pick>为什么选择 Rebase &ndash;onto 而不是 Cherry-pick？</h3><p><strong>Rebase &ndash;onto 的优势：</strong></p><ul><li><strong>自动化程度高</strong>：一条命令完成整个操作</li><li><strong>保持提交逻辑</strong>：维护原有的提交顺序和关系</li><li><strong>历史清晰</strong>：不创建重复的提交记录</li><li><strong>拓扑感知</strong>：理解分支之间的真实关系</li></ul><p><strong>Cherry-pick 的局限：</strong></p><ul><li>需要手动指定每个提交</li><li>创建新的提交哈希，可能导致后续合并混乱</li><li>对于连续提交，操作繁琐</li></ul><h2 id=高级应用场景>高级应用场景</h2><h3 id=1-部分分支迁移>1. 部分分支迁移</h3><p>如果你只想迁移最近的几个提交，可以使用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase --onto target_branch HEAD~3
+</span></span></code></pre></div><h3 id=2-处理合并冲突>2. 处理合并冲突</h3><p>当 rebase 过程中遇到冲突：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 解决冲突后</span>
+</span></span><span style=display:flex><span>git add &lt;resolved-files&gt;
+</span></span><span style=display:flex><span>git rebase --continue
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果想要中止操作</span>
+</span></span><span style=display:flex><span>git rebase --abort
+</span></span></code></pre></div><h3 id=3-交互式-rebase-结合>3. 交互式 Rebase 结合</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rebase --onto branch_B branch_A --interactive
+</span></span></code></pre></div><p>这允许你在迁移过程中同时编辑、合并或删除提交。</p><h2 id=最佳实践与注意事项>最佳实践与注意事项</h2><h3 id=安全措施>安全措施</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 在操作前创建备份分支</span>
+</span></span><span style=display:flex><span>git checkout my_work
+</span></span><span style=display:flex><span>git checkout -b my_work_backup
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 执行 rebase</span>
+</span></span><span style=display:flex><span>git checkout my_work
+</span></span><span style=display:flex><span>git rebase --onto branch_B branch_A
+</span></span></code></pre></div><h3 id=团队协作考虑>团队协作考虑</h3><ul><li><strong>避免对已推送的公共分支使用 rebase</strong></li><li><strong>及时通知团队成员分支变更</strong></li><li><strong>在自动化流程中验证 rebase 结果</strong></li></ul><h3 id=验证清单>验证清单</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 检查分支基础是否正确</span>
+</span></span><span style=display:flex><span>git merge-base my_work branch_B
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 验证提交内容</span>
+</span></span><span style=display:flex><span>git log --oneline -5
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 检查文件变更</span>
+</span></span><span style=display:flex><span>git diff HEAD~3 HEAD
+</span></span></code></pre></div><h2 id=原理深入git-对象模型视角>原理深入：Git 对象模型视角</h2><p>从 Git 内部原理来看，<code>rebase --onto</code> 实际上是在操作提交对象的父指针。每个提交对象包含：</p><ul><li>内容快照的树对象引用</li><li>父提交的引用</li><li>作者和提交者信息</li><li>提交消息</li></ul><p>Rebase 过程创建新的提交对象，这些对象有相同的内容和消息，但父引用指向新的基础提交。</p><h2 id=扩展应用在不同工作流程中的价值>扩展应用：在不同工作流程中的价值</h2><h3 id=1-模块化开发>1. 模块化开发</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 将功能模块从一个基础迁移到另一个基础</span>
+</span></span><span style=display:flex><span>git rebase --onto stable_base experimental_base feature_module
+</span></span></code></pre></div><h3 id=2-紧急修复管理>2. 紧急修复管理</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 将紧急修复从主分支迁移到特定分支</span>
+</span></span><span style=display:flex><span>git rebase --onto stable_branch main urgent_fix
+</span></span></code></pre></div><h3 id=3-多版本支持>3. 多版本支持</h3><p>当管理多个版本的代码时，rebase &ndash;onto 帮助保持变更的一致性和可追溯性。</p><h2 id=技术发展的展望>技术发展的展望</h2><p>随着版本控制在软件开发中的应用越来越广泛，我们可能会看到：</p><ul><li><strong>智能分支策略推荐</strong>：分析代码依赖关系，自动推荐最佳的 rebase 策略</li><li><strong>冲突预测与解决</strong>：预测 rebase 过程中可能出现的冲突，并提供解决建议</li><li><strong>自动化工作流程</strong>：基于分支状态自动选择 rebase 或 merge 策略</li></ul><h2 id=总结>总结</h2><p><code>git rebase --onto</code> 是一个强大而精确的工具，特别适合需要重新组织分支结构的场景。它不仅仅是一个技术命令，更是一种思维方式——理解代码历史的拓扑关系，并能够精确地重构这种关系。</p><p>对于任何需要处理复杂分支场景的技术人员而言，掌握这个工具意味着能够更优雅地处理代码管理、版本控制和协作流程中的复杂分支场景。记住，最好的工具不是最复杂的，而是最适合解决问题的。</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><div></div><a role=button class="btn btn-outline h-12" href=/2025/09/git-rebase-onto-quick-guide/ title="Git 分支搬家神器：5分钟学会 rebase --onto"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
+<span class="max-w-48 truncate">Git 分支搬家神器：5分钟学会 rebase --onto</span></div><ion-icon name=chevron-forward></ion-icon></a></div><div class=divider></div><section class=space-y-4><article><div id=tcomment></div><script src=https://cdn.jsdelivr.net/npm/twikoo@1.6.41/dist/twikoo.min.js></script><script>twikoo.init({envId:"https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/",el:"#tcomment",region:"ap-east-1",path:"/2025/09/git-rebase-onto-deep-dive/",lang:"zh-CN"})</script></article></section></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#为什么需要-rebase-onto>为什么需要 Rebase &ndash;onto？</a></li><li><a href=#rebase-onto-的工作原理>Rebase &ndash;onto 的工作原理</a><ul><li><a href=#具体案例分析>具体案例分析</a></li></ul></li><li><a href=#实战演练真实工作场景>实战演练：真实工作场景</a><ul><li><a href=#场景设定>场景设定</a></li><li><a href=#操作步骤>操作步骤</a></li><li><a href=#为什么选择-rebase-onto-而不是-cherry-pick>为什么选择 Rebase &ndash;onto 而不是 Cherry-pick？</a></li></ul></li><li><a href=#高级应用场景>高级应用场景</a><ul><li><a href=#1-部分分支迁移>1. 部分分支迁移</a></li><li><a href=#2-处理合并冲突>2. 处理合并冲突</a></li><li><a href=#3-交互式-rebase-结合>3. 交互式 Rebase 结合</a></li></ul></li><li><a href=#最佳实践与注意事项>最佳实践与注意事项</a><ul><li><a href=#安全措施>安全措施</a></li><li><a href=#团队协作考虑>团队协作考虑</a></li><li><a href=#验证清单>验证清单</a></li></ul></li><li><a href=#原理深入git-对象模型视角>原理深入：Git 对象模型视角</a></li><li><a href=#扩展应用在不同工作流程中的价值>扩展应用：在不同工作流程中的价值</a><ul><li><a href=#1-模块化开发>1. 模块化开发</a></li><li><a href=#2-紧急修复管理>2. 紧急修复管理</a></li><li><a href=#3-多版本支持>3. 多版本支持</a></li></ul></li><li><a href=#技术发展的展望>技术发展的展望</a></li><li><a href=#总结>总结</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script>window.lightTheme="emerald",window.darkTheme="forest"</script><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@1.26.0 integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+      </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.esm.js integrity="sha256-/IFmi82bIhdYWctu0UddSlJqpnzWm7Vh2C4CM32wF/k=" crossorigin=anonymous></script><script nomodule src=https://cdn.jsdelivr.net/npm/ionicons@7.4.0/dist/ionicons/ionicons.js integrity="sha256-mr7eJMX3VC3F7G32mk4oWp1C6a2tlMYxUdptfT7uKI8=" crossorigin=anonymous></script></body></html>
