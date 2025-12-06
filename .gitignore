@@ -27,4 +27,5 @@ content/posts/*/**
 !content/posts/*/index_*.md
 
 # For Claude
-guide4claude.md
+guide4claude*.md
+skills/
