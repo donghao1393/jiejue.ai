@@ -127,10 +127,10 @@ params:
     page_pv_post: ""
   # Twikoo评论系统
   twikoo:
-    enabled: true
-    envID: https://6dhzwvtyqz753zhpkrvnnydhlm0vubmy.lambda-url.ap-east-1.on.aws/
-    region: ap-east-1
-    lang: zh-CN
+    enabled: false
+    envID: 
+    region: 
+    lang: 
 permalinks:
   posts: /:year/:month/:slug/
   tags: /:slug/
