@@ -1,0 +1,177 @@
+<!doctype html><html lang=zh-cn x-data :class="$store.darkMode.isDark() ? 'dark' : 'light'" :data-theme=$store.darkMode.theme()><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线 | 爱解决</title><link href=/favicon.ico rel=icon type=image/x-icon><link rel=canonical href=https://jiejue.ai/2026/07/swagger-openapi-explained/><meta name=author content="董昊"><meta name=description content="很多人把 Swagger 和 OpenAPI 混着叫，也有人学了 OpenAPI 规范之后仍然设计出让人皱眉的 API。这篇文章讲清楚两者的关系，以及一个更重要的真相：符合规范 ≠ 设计得好——前者是语法检查，后者是语义功底。最后搭一套 openapi.yaml → 校验 → 生成代码 → 文档发布 的 CI 流水线，让你从「写了份规范文件」直接跳到「它有用了」。
+"><meta name=keywords content="OpenAPI,Swagger,API,YAML"><meta name=generator content="Hugo 0.164.0"><meta property="og:url" content="https://jiejue.ai/2026/07/swagger-openapi-explained/"><meta property="og:site_name" content="爱解决"><meta property="og:title" content="Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线"><meta property="og:description" content="很多人把 Swagger 和 OpenAPI 混着叫，也有人学了 OpenAPI 规范之后仍然设计出让人皱眉的 API。这篇文章讲清楚两者的关系，以及一个更重要的真相：符合规范 ≠ 设计得好——前者是语法检查，后者是语义功底。最后搭一套 openapi.yaml → 校验 → 生成代码 → 文档发布 的 CI 流水线，让你从「写了份规范文件」直接跳到「它有用了」。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-07-19T01:31:55+04:00"><meta property="article:modified_time" content="2026-07-19T01:37:52+04:00"><meta property="article:tag" content="OpenAPI"><meta property="article:tag" content="Swagger"><meta property="article:tag" content="API"><meta property="article:tag" content="YAML"><meta name=twitter:card content="summary"><meta name=twitter:title content="Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线"><meta name=twitter:description content="很多人把 Swagger 和 OpenAPI 混着叫，也有人学了 OpenAPI 规范之后仍然设计出让人皱眉的 API。这篇文章讲清楚两者的关系，以及一个更重要的真相：符合规范 ≠ 设计得好——前者是语法检查，后者是语义功底。最后搭一套 openapi.yaml → 校验 → 生成代码 → 文档发布 的 CI 流水线，让你从「写了份规范文件」直接跳到「它有用了」。"><link rel=stylesheet href=/css/output.min.css><style>pre{padding:1em;overflow:auto}</style><script>window.lightTheme="emerald",window.darkTheme="forest",function(){const e="hugo-theme-dream-is-dark"in localStorage?window.localStorage.getItem("hugo-theme-dream-is-dark")==="y":window.matchMedia("(prefers-color-scheme: dark)").matches,t=e?window.darkTheme:window.lightTheme;document.documentElement.setAttribute("data-theme",t)}()</script><script defer src=https://cdn.jsdelivr.net/npm/alpinejs@3.15.12/dist/cdn.min.js integrity="sha256-V7N9fK6aJ9ll/a5K3MhEJF39xAfmVa7oXc//OggDaj8=" crossorigin=anonymous></script></head><body x-data="{
+    flip: false,
+  }"><nav x-data="{ isSticky: false }" x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })" class="sticky top-0 z-30 mt-4 lg:mt-8 py-4" :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }"><div class="container flex justify-between px-4"><section class="flex items-center gap-2"><div class="avatar cursor-pointer hover:avatar-online" @click="flip = !flip" title=翻转一下！><div class="w-12 h-12 rounded-full select-none"><img src=/favicon.ico alt=爱解决></div></div><div><a href=https://jiejue.ai/ class="text-lg font-semibold cursor-pointer">爱解决</a><div class="text-base-content/60 text-sm">用AI为人民服务</div></div></section><div class="dropdown dropdown-end sm:hidden"><div tabindex=0 role=button class="btn btn-ghost btn-square" aria-label="Select an option"><ion-icon name=menu class=text-2xl></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-10 shadow-md"><li><a class="group inline-flex items-center p-2 cursor-pointer" href=/search title=搜索><ion-icon name=search></ion-icon>搜索</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/index.xml title=RSS><ion-icon name=logo-rss></ion-icon>RSS</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div><section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/search title=搜索><ion-icon class=group-hover:text-primary-content name=search></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href=/index.xml title=RSS><ion-icon class=group-hover:text-primary-content name=logo-rss></ion-icon></a><div class="dropdown dropdown-end dropdown-hover"><div tabindex=0 role=button class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option"><ion-icon class="group-hover:text-primary-content text-xl" name=menu></ion-icon></div><ul tabindex=0 class="dropdown-content menu w-36 bg-base-100 rounded-box z-10 shadow-xl"><li><a class="inline-flex items-center p-2 cursor-pointer" href=/posts title=归档><ion-icon name=archive></ion-icon>归档</a></li><li><a class="inline-flex items-center p-2 cursor-pointer" href=/tags title=所有标签><ion-icon name=pricetags></ion-icon>所有标签</a></li></ul></div></section></div></nav><div class=flip-container :class="{ 'flip-it': flip }"><div class=flipper><div class=front><div class=container><div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4"><div class="hidden lg:block"></div><div class=lg:col-span-2><article class="mx-auto prose prose-quoteless dark:prose-invert" id=dream-single-post-main itemscope itemtype=http://schema.org/Article><meta itemprop=name content="Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线"><meta itemprop=description content="很多人把 Swagger 和 OpenAPI 混着叫，也有人学了 OpenAPI 规范之后仍然设计出让人皱眉的 API。这篇文章讲清楚两者的关系，以及一个更重要的真相：符合规范 ≠ 设计得好——前者是语法检查，后者是语义功底。最后搭一套 openapi.yaml → 校验 → 生成代码 → 文档发布 的 CI 流水线，让你从「写了份规范文件」直接跳到「它有用了」。"><meta itemprop=datePublished content="2026-07-19T01:31:55+04:00"><meta itemprop=dateModified content="2026-07-19T01:37:52+04:00"><meta itemprop=wordCount content="2903"><meta itemprop=keywords content="OpenAPI,Swagger,API,YAML"><header><h1 itemprop=headline>Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线</h1><p class=text-sm><span data-format=luxon>2026-07-19T01:31:55+04:00</span>
+| <span>6分钟阅读</span>
+| <span>更新于
+<span data-format=luxon>2026-07-19T01:37:52+04:00</span></span></p><div class="flex justify-between"><div class="flex items-center"><span>@</span>
+<span itemprop=author itemscope itemtype=https://schema.org/Person><span itemprop=name>董昊</span></span></div><div class="flex items-center gap-2"><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://x.com/intent/post?text=Swagger%20%e5%92%8c%20OpenAPI%20%e5%88%b0%e5%ba%95%e6%98%af%e4%bb%80%e4%b9%88%e5%85%b3%e7%b3%bb%ef%bc%9f%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%bb%bd%e8%83%bd%e8%b7%91%e8%b5%b7%e6%9d%a5%e7%9a%84%20API%20%e8%a7%84%e8%8c%83%e6%b5%81%e6%b0%b4%e7%ba%bf&amp;url=https://jiejue.ai/2026/07/swagger-openapi-explained/" target=_blank rel="noopener noreferrer" title="Share on X"><ion-icon class=group-hover:text-primary-content name=logo-x></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://facebook.com/sharer/sharer.php?u=https://jiejue.ai/2026/07/swagger-openapi-explained/" target=_blank rel="noopener noreferrer" title="Share on Facebook"><ion-icon class=group-hover:text-primary-content name=logo-facebook></ion-icon></a><a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://wa.me/?text=Swagger%20%e5%92%8c%20OpenAPI%20%e5%88%b0%e5%ba%95%e6%98%af%e4%bb%80%e4%b9%88%e5%85%b3%e7%b3%bb%ef%bc%9f%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%bb%bd%e8%83%bd%e8%b7%91%e8%b5%b7%e6%9d%a5%e7%9a%84%20API%20%e8%a7%84%e8%8c%83%e6%b5%81%e6%b0%b4%e7%ba%bf%20https://jiejue.ai/2026/07/swagger-openapi-explained/" target=_blank rel="noopener noreferrer" title="Share on WhatsApp"><ion-icon class=group-hover:text-primary-content name=logo-whatsapp></ion-icon></a></div></div></header><section id=dream-single-post-content itemprop=articleBody><figure><img class=z-30 src=https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260719013403991.webp alt="Swagger 和 OpenAPI 到底是什么关系？以及一份能跑起来的 API 规范流水线"></figure><p>很多人把 Swagger 和 OpenAPI 混着叫，也有人学了 OpenAPI 规范之后仍然设计出让人皱眉的 API。这篇文章讲清楚两者的关系，以及一个更重要的真相：<strong>符合规范 ≠ 设计得好</strong>——前者是语法检查，后者是语义功底。最后搭一套 <code>openapi.yaml → 校验 → 生成代码 → 文档发布</code> 的 CI 流水线，让你从「写了份规范文件」直接跳到「它有用了」。</p><h2 id=swagger-和-openapi一句话的关系>Swagger 和 OpenAPI：一句话的关系</h2><p><strong>OpenAPI 是标准，Swagger 是围绕这个标准的一套工具。</strong></p><ul><li><strong>OpenAPI 规范</strong>（OpenAPI Specification，简称 OAS）是一份<strong>语言无关的 REST API 描述标准</strong>——它定义了一套规则，告诉你用 JSON 或 YAML 怎么写一份「API 说明书」：有哪些端点、接受什么参数、返回什么结构、用什么认证方式</li><li><strong>Swagger</strong> 是 SmartBear 公司的品牌，旗下有一系列工具帮助开发者创建和消费 OpenAPI 规范文件：<strong>Swagger Editor</strong>（在线编辑器）、<strong>Swagger UI</strong>（交互式文档页面）、<strong>SwaggerHub</strong>（商业协作平台）</li></ul><p>混乱的来源是历史：Swagger 这个名字<strong>比 OpenAPI 早出生四年</strong>。2011 年，Wordnik 的工程师 Tony Tam 在开发内部 API 工具时创建了 Swagger 并开源。2015 年，SmartBear 将规范部分捐赠给 Linux 基金会，正式更名为 <strong>OpenAPI 规范</strong>。自此：</p><pre tabindex=0><code>规范的名字 → OpenAPI
+工具的品牌 → Swagger（SmartBear 继续持有）
+</code></pre><p>今天生态的实际情况是：OpenAPI 规范是唯一的行业标准，但围绕它的工具已经完全去中心化了——Swagger UI 只是文档方案之一，还有 <strong>Redoc</strong>（另一种风格的文档生成）、<strong>OpenAPI Generator</strong>（社区 fork 出的代码生成器，比原版 Swagger Codegen 活跃得多）、<strong>Stoplight</strong>（可视化设计平台）等。<strong>你可以不用任何带 Swagger 名字的工具，依然完整地走通 OpenAPI 规范的工作流。</strong></p><h2 id=为什么符合-openapi-规范--好的-api>为什么符合 OpenAPI 规范 ≠ 好的 API</h2><p>OpenAPI 规范管的是「怎么写」，不是「写什么」。它只做语法校验，不做设计评判——这是一个新手最容易栽进去的坑。</p><p>举个最经典的例子：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># OpenAPI 校验：全部绿灯 ✅</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># API 设计质量：灾难 ❌</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>POST /deleteUser        </span> <span style=color:#75715e># POST 不是用来删除的</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>GET  /get-user-by-id    </span> <span style=color:#75715e># 动词堆砌在 URL 上——GET 本身就是「获取」</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>PUT  /users/42/activate </span> <span style=color:#75715e># `activate` 是动作，不是资源</span>
+</span></span></code></pre></div><p>规范的校验器会告诉你：路径格式正确、HTTP 方法合法、参数类型匹配。但任何有经验的 API 设计师看到这三行都会重写：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#ae81ff>GET    /users/42         </span> <span style=color:#75715e># 获取</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>DELETE /users/42         </span> <span style=color:#75715e># 删除</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>PATCH  /users/42         </span> <span style=color:#75715e># 部分更新，请求体 {&#34;status&#34;: &#34;active&#34;}</span>
+</span></span></code></pre></div><p>核心原则只有一条：<strong>URL 指向资源（名词），HTTP 方法负责动作（动词）。</strong> 这条规则不在 OpenAPI 规范的任何一个章节里——它属于 REST 的设计哲学，要额外去学。</p><p>OpenAPI 真正擅长的是在<strong>已经做好设计决策之后</strong>，用机器可读的格式把它精确写下来。做到这一点，靠的是 JSON Schema 的数据建模能力：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>components</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>schemas</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>User</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>required</span>: [<span style=color:#ae81ff>id, name, email]</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>minimum</span>: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>minLength</span>: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>maxLength</span>: <span style=color:#ae81ff>100</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>email</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>format</span>: <span style=color:#ae81ff>email</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>role</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>enum</span>: [<span style=color:#ae81ff>admin, user, readonly]</span>
+</span></span></code></pre></div><p><code>minimum</code>、<code>minLength</code>、<code>format: email</code>、<code>enum</code>——这些不是「文档里的文字描述」，而是<strong>机器可执行的校验规则</strong>。OpenAPI Generator 能自动生成带参数校验的客户端代码，就是因为它解析了这个 JSON Schema。版本方面：**OpenAPI 3.1.0（2021 年发布）**已完全兼容 JSON Schema 2020-12 标准，像 <code>if/then/else</code> 条件逻辑这种高级关键字现在都能直接用。</p><h2 id=为什么规范文件用-yaml而-api-本身用-json>为什么规范文件用 YAML，而 API 本身用 JSON？</h2><p>这是每个初学者都会问的问题——两个都是数据序列化格式，为什么分工？</p><p><strong>YAML 是给人写的设计文件；JSON 是给机器消费的运行时格式。</strong> 它们不竞争，是两段工序。</p><p>YAML 做规范文件有几个刚需优势：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># 1. 注释——JSON 永远不可能有</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 认证模块：短信验证码接口暂未上线，先用邮箱验证</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>POST /auth/register</span>:
+</span></span><span style=display:flex><span>  <span style=color:#ae81ff>...</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. 锚点与引用——一处定义、处处复用</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>components</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>schemas</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UserResponse</span>: <span style=color:#75715e>&amp;user-ref</span>       <span style=color:#75715e># 定义一次</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>:   {<span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>: {<span style=color:#f92672>type</span>: <span style=color:#ae81ff>string}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>UserList</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>items</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>array</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>items</span>: <span style=color:#75715e>*user-ref</span>        <span style=color:#75715e># 引用，不用重复抄</span>
+</span></span></code></pre></div><p>一份生产级 OpenAPI 文件动辄几千行。没有注释，维护者三个月后看不懂自己写的；没有锚点，同一个 Schema 在 20 个端点下抄 20 次，改一处漏四处就是线上事故。</p><p>而 API 运行时用 JSON 是物理解析效率决定的——JSON 解析器天然内置在浏览器、操作系统、IoT 设备里，空白符极少，是 JavaScript 的原生子集。<strong>YAML 是设计室的绘图桌；JSON 是工厂流水线。</strong></p><p>一个有意思的历史细节：YAML 支持不是在 Swagger 诞生时就有的。<strong>Swagger 1.x（2011-2014）只支持 JSON。YAML 是随 Swagger 2.0 在 2014 年 9 月正式引入的</strong>——不是添头，而是整个设计文档结构化升级的一部分（<code>$ref</code>、<code>definitions</code> 等模块化体系也是在 2.0 一起出现的）。</p><h2 id=落地一条-ci-流水线让规范文件活起来>落地：一条 CI 流水线让规范文件「活」起来</h2><p>光有 <code>openapi.yaml</code> 文件没用，要让它成为 <strong>API 的唯一直相来源</strong>——所有文档和客户端代码都从它编译生成。工具链是三个开源 CLI：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 校验工具</span>
+</span></span><span style=display:flex><span>npm install -g @redocly/cli
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 代码生成器（社区活跃版本，不是原始的 Swagger Codegen）</span>
+</span></span><span style=display:flex><span>brew install openapi-generator
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 文档生成器（和 Swagger UI 不同风格，静态 HTML，更适合作为产品文档发布）</span>
+</span></span><span style=display:flex><span>npx @redocly/cli build-docs openapi.yaml -o docs/index.html
+</span></span></code></pre></div><p>项目结构：</p><pre tabindex=0><code>api/
+├── openapi.yaml           # 唯一的规范源文件
+├── .redocly.yaml          # 校验规则（语法 + 设计规则）
+├── .github/workflows/
+│   └── api-ci.yaml        # CI 流水线
+└── generated/             # 自动生成——不手动编辑
+    ├── docs/              # Redoc 文档站点
+    └── client/            # TS/Python/... SDK
+</code></pre><h3 id=关键文件redoclyyaml管的不只是语法>关键文件：<code>.redocly.yaml</code>——管的不只是语法</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>extends</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>recommended</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>rules</span>:
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 强制所有端点都有 summary</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>operation-summary</span>: <span style=color:#ae81ff>error</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 禁止路径中出现动词</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>path-declaration-must-match</span>: <span style=color:#ae81ff>error</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># 禁止未引用的 components</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>no-unused-components</span>: <span style=color:#ae81ff>error</span>
+</span></span></code></pre></div><p>这些规则就是前面的「设计哲学」变成了自动执行的门禁——<code>/deleteUser</code> 这种路径会在 CI 里直接挂掉，不需要有人在代码评审时指出。</p><h3 id=ci-流水线githubworkflowsapi-ciyaml>CI 流水线：<code>.github/workflows/api-ci.yaml</code></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>name</span>: <span style=color:#ae81ff>API CI</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>on</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>pull_request</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>: [<span style=color:#e6db74>&#34;api/openapi.yaml&#34;</span>]
+</span></span><span style=display:flex><span>  <span style=color:#f92672>push</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>branches</span>: [<span style=color:#ae81ff>main]</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>paths</span>: [<span style=color:#e6db74>&#34;api/openapi.yaml&#34;</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>jobs</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>lint</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/setup-node@v4</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>: { <span style=color:#f92672>node-version</span>: <span style=color:#e6db74>&#34;22&#34;</span> }
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>run</span>: <span style=color:#ae81ff>npm install -g @redocly/cli</span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>run</span>: <span style=color:#ae81ff>redocly lint api/openapi.yaml</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>build-and-publish</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>needs</span>: <span style=color:#ae81ff>lint</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>if</span>: <span style=color:#ae81ff>github.event_name == &#39;push&#39; &amp;&amp; github.ref == &#39;refs/heads/main&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>steps</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>生成 Redoc 文档</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          npx @redocly/cli build-docs api/openapi.yaml \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            --output api/generated/docs/index.html</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>生成 TypeScript 客户端</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          openapi-generator-cli generate \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -i api/openapi.yaml -g typescript-fetch \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -o api/generated/client/typescript</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>生成 Python 客户端</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>run</span>: |<span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          openapi-generator-cli generate \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -i api/openapi.yaml -g python \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            -o api/generated/client/python</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>发布到 Pages</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>peaceiris/actions-gh-pages@v4</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>with</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>github_token</span>: <span style=color:#ae81ff>${{ secrets.GITHUB_TOKEN }}</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>publish_dir</span>: <span style=color:#ae81ff>api/generated/docs</span>
+</span></span></code></pre></div><p>每次 PR 自动校验，合并到 main 后自动生成文档发布到 Pages + 更新多语言客户端 SDK：</p><pre class=mermaid>
+  flowchart LR
+    Y[&#34;你写 openapi.yaml&#34;] --&gt; PR[&#34;提交 PR&#34;]
+    PR --&gt; Lint[&#34;redocly lint&lt;br/&gt;语法 + 设计规则&#34;]
+    Lint --&gt;|失败| Fix[&#34;修好再推&#34;]
+    Lint --&gt;|通过| Merge[&#34;合并到 main&#34;]
+    Merge --&gt; Gen[&#34;生成文档 + TS/Python 客户端&#34;]
+    Gen --&gt; Pages[&#34;发布到 GitHub Pages&#34;]
+</pre><p>不是「把 YAML 当源码」这种口号——每一步都有命令可复现，规范文件的每一次修改都会自动触发校验和发布。内外部使用者拿到的文档和 SDK，永远是和你最新的规范文件同步的，不依赖任何人的记忆力。</p><h2 id=总结>总结</h2><ul><li><strong>Swagger 先有，OpenAPI 后成标准</strong>——2011 年 Swagger 诞生，2015 年规范捐赠给 Linux 基金会并改名为 OpenAPI；今天 OpenAPI 是标准，Swagger 是 SmartBear 的工具品牌，生态已经去中心化</li><li><strong>规范的语法 ≠ API 的质量</strong>——OpenAPI 校验器只管格式合不合法，不管设计好不好；设计哲学（URL 是名词，HTTP 方法是动词）要额外学、也可以用 <code>redocly</code> 规则自动化</li><li><strong>YAML 写设计文件，JSON 跑线上</strong>——注释和锚点让 YAML 成为写大型规范文件的首选；YAML 是随 Swagger 2.0（2014）引入的，1.x 时代只有 JSON</li><li><strong>不落地就只是 YAML 文件</strong>——<code>openapi.yaml</code> + <code>redocly lint</code> + <code>openapi-generator</code> + GitHub Actions 四件套，让规范文件成为文档和 SDK 的唯一真相来源</li></ul><hr><p>留一个动手练习：找一个你已经有的后端项目（或本地起一个 demo 项目），写一份最小化的 <code>openapi.yaml</code>（只要一个端点），用 <code>redocly lint</code> 校验通过，再用 <code>npx @redocly/cli build-docs</code> 生成一份 HTML 文档——感受一下从 YAML 到文档的一键编译过程。</p></section><div class=divider></div><div class="flex flex-col md:flex-row justify-between gap-4 py-4"><div></div><a role=button class="btn btn-outline h-12" href=/2026/07/k8s-conntrack-performance/ title="conntrack 表满了怎么办？NOTRACK、IPVS、nftables 与 DSR 的取舍"><div class="inline-flex flex-col items-end"><span class="text-base-content/60 text-xs font-normal">下一页</span>
+<span class="max-w-48 truncate">conntrack 表满了怎么办？NOTRACK、IPVS、nftables 与 DSR 的取舍</span></div><ion-icon name=chevron-forward></ion-icon></a></div></article></div><div x-data=tocHighlighter() @scroll.window=debouncedScroll class="hidden lg:flex lg:flex-col lg:items-end"><nav id=TableOfContents><ul><li><a href=#swagger-和-openapi一句话的关系>Swagger 和 OpenAPI：一句话的关系</a></li><li><a href=#为什么符合-openapi-规范--好的-api>为什么符合 OpenAPI 规范 ≠ 好的 API</a></li><li><a href=#为什么规范文件用-yaml而-api-本身用-json>为什么规范文件用 YAML，而 API 本身用 JSON？</a></li><li><a href=#落地一条-ci-流水线让规范文件活起来>落地：一条 CI 流水线让规范文件「活」起来</a><ul><li><a href=#关键文件redoclyyaml管的不只是语法>关键文件：<code>.redocly.yaml</code>——管的不只是语法</a></li><li><a href=#ci-流水线githubworkflowsapi-ciyaml>CI 流水线：<code>.github/workflows/api-ci.yaml</code></a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 - 2026 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-8 px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div><div class=back data-nosnippet><div class=container><div class="dream-grid dream-grid-about"></div><footer class="flex justify-between items-center gap-2 px-4 py-12"><div><p>© 2025 - 2026 爱解决</p><p>硅基生物幼稚园</p></div><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><section><span id=busuanzi_container_value_site_pv><i class="far fa-eye fa-fw"></i>
+本站总访问量 <span id=busuanzi_value_site_pv></span>
+</span>&nbsp;|&nbsp;
+<span id=busuanzi_container_value_site_uv><i class="fa fa-user"></i>
+本站访客数 <span id=busuanzi_value_site_uv></span></span></section></span></section></script><div x-data="{ icons: [
+    { name: 'sunny', status: 'n' },
+    { name: 'moon', status: 'y' },
+    { name: 'desktop', status: 'auto' }
+  ] }" class="flex items-center gap-2 h-8 px-2 bg-base-100 border border-base-content/30 rounded-full"><template x-for="icon in icons"><div role=button tabindex=0 :aria-label="'Select ' + icon.name + ' mode'" class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary" :class="$store.darkMode.icon() === icon.name && 'bg-primary'" @click=$store.darkMode.toggle(icon.status)><ion-icon :name="`${icon.name}-outline`" class=group-hover:text-primary-content :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"></ion-icon></div></template></div></footer></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin=anonymous></script><script src=/js/grid.min.js></script><script src=/js/main.min.js></script><script src=https://cdn.jsdelivr.net/npm/luxon@3.7.2/build/global/luxon.min.js integrity="sha256-UWxf6lyCvfH7XEcrmq/cqc2m3IBrLBLOnWLC4Pw0gQQ=" crossorigin=anonymous></script><script>format();function format(){document.querySelectorAll('span[data-format="luxon"]').forEach(e=>{const t=e.textContent;e.textContent=luxon.DateTime.fromISO(t,{locale:"zh"}).toFormat("yyyy年MM月dd日 HH:mm")})}</script><script src=/js/toc.min.js></script><script type=module>
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script><script type=module>
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.esm.min.mjs';
+
+        mermaid.initialize({ startOnLoad: false });
+        await mermaid.run({ querySelector: '.mermaid' });
+
+        document.querySelectorAll('.mermaid-panzoom').forEach((container) => {
+          const mermaid = container.firstElementChild;
+          const diagram = mermaid.querySelector('svg');
+          const panzoom = window.Panzoom(diagram, { maxScale: 5 });
+          const resetButton = container.querySelector('.mermaid-panzoom-reset');
+
+          mermaid.addEventListener('wheel', panzoom.zoomWithWheel);
+          resetButton.addEventListener('click', () => panzoom.reset());
+        });
+      </script><script src=https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.6.2/dist/panzoom.min.js integrity="sha256-PONU73tJPvtipNSsqvhvotYCfrYphXpOFEBB3hoRLB4=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-S0KCH9BW4F"></script><script>var doNotTrack=!1,dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes";if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-S0KCH9BW4F")}</script><script type=module src=https://cdn.jsdelivr.net/npm/ionicons@8.0.13/dist/ionicons/ionicons.esm.js integrity="sha256-46Vf2l/aX0tBSf2YXcaYMxF7JVJl30zn8Y9L9zZNXMA=" crossorigin=anonymous></script></body></html>
