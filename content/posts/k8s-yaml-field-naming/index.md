@@ -3,7 +3,7 @@ title: "写 K8s YAML 总拼错字段？两个工具帮你拿到正确用词"
 date: 2026-07-17T17:21:52+04:00
 slug: 'k8s-yaml-field-naming'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260717172902244.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260719001532896.webp"
 tags:
   - Kubernetes
   - YAML

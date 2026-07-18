@@ -3,7 +3,7 @@ title: "改了配置 Pod 却不动？搞懂 Deployment 和 ReplicaSet 的分工"
 date: 2026-07-17T18:36:30+04:00
 slug: 'k8s-deployment-replicaset-explained'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260717184254823.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260719001636281.webp"
 tags:
   - Kubernetes
   - Deployment
