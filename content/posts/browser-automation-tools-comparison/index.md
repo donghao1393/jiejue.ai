@@ -3,7 +3,7 @@ title: "Safari MCP、Chrome DevTools MCP、Playwright：三个浏览器自动化
 date: 2026-07-19T14:34:40+04:00
 slug: 'browser-automation-tools-comparison'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260719143646036.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260719145719850.webp"
 tags:
   - MCP
   - 浏览器自动化
