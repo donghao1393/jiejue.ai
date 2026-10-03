@@ -3,7 +3,7 @@ title: "Steam 云同步报错排查记：一个早被删掉的存档，和 Valve
 date: 2026-09-17T18:44:12+04:00
 slug: 'steam-cloud-sync-error'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20260917200931141.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261003220929333.webp"
 tags:
   - Steam
   - 故障排除

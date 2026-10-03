@@ -3,7 +3,7 @@ title: "PF_RING 不是 tcpdump 的插件：三处常见误解与它们的由来"
 date: 2026-10-03T21:41:34+04:00
 slug: 'pf-ring-tcpdump-explained'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261003214404932.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261003221002444.webp"
 tags:
   - 网络
   - Linux
