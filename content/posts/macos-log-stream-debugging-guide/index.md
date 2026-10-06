@@ -3,7 +3,7 @@ title: "掌握 macOS log stream：统一日志的四层结构、三个默认陷�
 date: 2026-10-04T18:58:00+04:00
 slug: 'macos-log-stream-debugging-guide'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261004185814622.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261006205755827.webp"
 tags:
   - macOS
   - 调试
