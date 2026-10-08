@@ -3,7 +3,7 @@ title: "正则入门到进阶：(?:、(?=、(?! 三个问号括号一次讲透"
 date: 2026-10-06T20:50:16+04:00
 slug: 'regex-noncapturing-group-and-lookahead'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261006205316953.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261008160948290.webp"
 tags:
   - 正则表达式
   - 文本处理
