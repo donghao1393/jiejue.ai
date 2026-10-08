@@ -3,7 +3,7 @@ title: "python3 到底是谁：四层地址、四套供给源，与一份 PATH �
 date: 2026-10-06T22:33:00+04:00
 slug: 'which-python3'
 draft: false
-cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261006222819294.webp"
+cover: "https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20261008160105940.webp"
 tags:
   - Python
   - uv
