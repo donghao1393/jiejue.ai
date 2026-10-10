@@ -135,6 +135,8 @@ def main():
             "Authorization": "Token " + api_key,
             "Content-Type": "application/json",
             "X-API-Version": "2026-04-01",
+            # One-time "yes, send for real" handshake; harmless afterwards.
+            "X-Buttondown-Live-Dangerously": "true",
         },
     )
     try:
