@@ -5,6 +5,11 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+    inputs:
+      since_sha:
+        description: 'Backfill/test: gather new posts since this SHA (leave empty to skip sending)'
+        required: false
 
 jobs:
   deploy:
@@ -44,3 +49,12 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+
+      - name: Notify Buttondown about new posts
+        if: github.ref == 'refs/heads/main'
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          SINCE_SHA: ${{ github.event.inputs.since_sha }}
+          GITHUB_BEFORE_SHA: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: python3 scripts/notify-buttondown.py
