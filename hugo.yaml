@@ -42,6 +42,12 @@ params:
   description: 硅基生物幼稚园协调员
   footerBottomText: 硅基生物幼稚园
   rss: true
+  # Newsletter 订阅（Buttondown）—— 注册后将用户名填入 buttondownUsername 即生效
+  newsletter:
+    enabled: true
+    provider: buttondown
+    # https://buttondown.com/<username> 中的 <username> 部分
+    buttondownUsername: "donghao"
   # Syntax highlighting
   # customSyntaxHighlighting: true
   # options

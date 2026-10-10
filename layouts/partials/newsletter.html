@@ -1,0 +1,83 @@
+{{- /* ============================================================
+     Newsletter 订阅卡片（Buttondown）
+     配置：hugo.yaml → params.newsletter
+       - enabled: true            开关
+       - buttondownUsername: ""   注册 Buttondown 后填入用户名即生效
+     注册地址：https://buttondown.com
+
+     调用位置：文章页（layouts/_default/single.html）与首页（layouts/index.html）
+
+     注意：主题的 Tailwind CSS（themes/hugo-theme-dream/assets/css/output.css）
+     是预编译产物，只包含主题模板用过的类。本组件仅使用其中已存在的类，
+     补足部分在下方 <style> 块中以 .newsletter-* 前缀自定义。
+     ============================================================ */ -}}
+{{- $nl := site.Params.newsletter -}}
+{{- if $nl.enabled -}}
+{{- $username := $nl.buttondownUsername -}}
+{{- /* 预览态：本地开发且未填用户名时显示禁用表单；生产环境未配置则不渲染，避免坏表单上线 */ -}}
+{{- if or $username hugo.IsDevelopment -}}
+<style>
+  .newsletter-card .card-body { gap: .75rem; }
+  .newsletter-form button { white-space: nowrap; }
+  .newsletter-preview-note {
+    font-size: .875rem;
+    padding: .5rem .75rem;
+    border: 1px dashed currentColor;
+    border-radius: .5rem;
+    opacity: .75;
+  }
+</style>
+<section class="not-prose newsletter-card mt-8" aria-label="Newsletter 订阅">
+  <div class="card bg-base-100 shadow-xl dark:border dark:border-base-content/30">
+    <div class="card-body">
+      <div class="flex items-center gap-2">
+        <ion-icon name="mail-outline" class="text-2xl"></ion-icon>
+        <h2 class="card-title">把解决过的问题，存进你的收件箱</h2>
+      </div>
+
+      <p class="text-base-content/60">Get the fixes, straight to your inbox.</p>
+
+      <p>
+        jiejue.ai 的解决笔记——K8s、macOS、DevOps、AI 工作流，每篇都是一次真实排障的沉淀。不发追热点的口水文，只发验证过的方案，和更新过的速查清单。
+      </p>
+
+      <p class="text-sm text-base-content/60">
+        Notes from real debugging sessions: K8s, macOS, DevOps, AI workflows. No fluff, no trends — just verified solutions and refreshed cheat sheets.
+      </p>
+
+      <p class="font-medium">
+        🎁 订阅即得《jq / gron / jless 速查合集》
+        <span class="text-base-content/60 text-sm font-normal">— Free: the jq / gron / jless Quick Reference Pack.</span>
+      </p>
+
+      {{- if $username }}
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/{{ $username }}"
+        method="post"
+        class="newsletter-form flex flex-col md:flex-row gap-2"
+        onsubmit="window.gtag && window.gtag('event', 'newsletter_submit', { event_category: 'newsletter' });"
+      >
+        <input type="email" name="email" required placeholder="你的邮箱 / your@email.com" class="input w-full" />
+        <input type="hidden" value="1" name="embed" />
+        <button type="submit" class="btn btn-primary">订阅解决笔记</button>
+      </form>
+      {{- else }}
+      <div class="newsletter-preview-note">
+        本地预览模式：注册 Buttondown 后，把用户名填入 hugo.yaml 的
+        params.newsletter.buttondownUsername，表单即会自动激活。
+      </div>
+      <form class="newsletter-form flex flex-col md:flex-row gap-2">
+        <input type="email" disabled placeholder="你的邮箱 / your@email.com" class="input w-full" />
+        <button type="submit" disabled class="btn btn-primary">订阅解决笔记</button>
+      </form>
+      {{- end }}
+
+      <p class="text-xs text-base-content/60">
+        每月 1–2 封，随时退订，绝不外泄。/ 1–2 emails a month. Unsubscribe anytime.
+        · Powered by <a class="hover:underline" href="https://buttondown.com" target="_blank" rel="noopener">Buttondown</a>
+      </p>
+    </div>
+  </div>
+</section>
+{{- end -}}
+{{- end -}}
