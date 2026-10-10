@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e打开 DevTools 的 Cookies 面板，你会看到一串像 \u003ccode\u003eeyJ1c2VyX2lkIjoxMjN9.a3f8c1...\u003c/code\u003e 的值。服务器凭什么相信它？流行答案是一句话：「服务器算一次 MAC，浏览器原样带回来，服务器再算一次，两次相同就放行。」这句话对了一半——而没对上的那一半，正是攻击者要用的地方。\u003c/p\u003e","title":"签名 Cookie 与 MAC：谁在算、算几次、算完证明了什么","url":"https://jiejue.ai/2026/10/hmac-signed-cookie-authentication/"}
