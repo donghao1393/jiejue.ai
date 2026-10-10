@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在一个平常的工作日，开发团队遇到了一个奇怪的问题：Kubernetes 集群中的某个 Pod 突然无法访问外部域名了。这个问题看似简单，实则涉及到了 Kubernetes DNS、Azure Private DNS 和服务发现等多个知识点。让我们一起来看看如何诊断和解决这个问题。\u003c/p\u003e","title":"Kubernetes DNS 故障排查：当 Pod 无法访问外部域名","url":"https://jiejue.ai/2025/02/k8s-dns-troubleshooting/"}

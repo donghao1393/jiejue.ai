@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为一名开发者，你是否遇到过这样的困扰：在项目的不同分支间穿梭时，看到一些似曾相识的commit，却无法确定它们之间的关系？这个功能是从哪个分支来的？是直接开发的还是从别处cherry-pick过来的？如果是后者，原始的commit在哪里？\u003c/p\u003e","title":"Git Cherry-pick追踪：解决代码变更血缘关系的迷失问题","url":"https://jiejue.ai/2025/07/git-cherry-pick-tracking-guide/"}

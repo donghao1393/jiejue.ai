@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为 Kubernetes 工作者，你可能经常与 Ingress 资源打交道，但对于那些看似神秘的 annotations（注解）配置，可能只是复制粘贴，却不太清楚它们的真正含义。当遇到 413 Request Entity Too Large 错误，或者需要支持大文件上传、流式传输时，你知道该调整哪些参数吗？\u003c/p\u003e","title":"Kubernetes Ingress Annotations 实战指南：从 413 错误到流式传输的完整解析","url":"https://jiejue.ai/2025/07/k8s-ingress-annotations-guide/"}

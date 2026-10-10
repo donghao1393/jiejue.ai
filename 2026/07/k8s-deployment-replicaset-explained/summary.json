@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e用 \u003ccode\u003ekubectl edit\u003c/code\u003e 改了 ReplicaSet 的配置，保存成功，然后——Pod 纹丝不动。等十分钟，还是不动。这不是 bug，而是 Kubernetes 故意的。理解了这件事背后的「控制链」设计，你会发现 K8s 里一大批反直觉现象瞬间变得顺理成章。\u003c/p\u003e","title":"改了配置 Pod 却不动？搞懂 Deployment 和 ReplicaSet 的分工","url":"https://jiejue.ai/2026/07/k8s-deployment-replicaset-explained/"}

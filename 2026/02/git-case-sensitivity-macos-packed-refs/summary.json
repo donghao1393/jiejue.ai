@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你用 macOS 写代码，用 Git 管理版本，某天 fetch 突然报错说 lock 文件已存在，删了 lock 文件下次 fetch 又报——这篇文章就是写给你的。\u003c/p\u003e","title":"Git 在 macOS 上的大小写幽灵：当 packed-refs 遇上不区分大小写的文件系统","url":"https://jiejue.ai/2026/02/git-case-sensitivity-macos-packed-refs/"}

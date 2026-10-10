@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在软件开发过程中，版本管理看似简单却常常令人头疼。手动管理版本不仅繁琐，还容易出错。通过语义化版本发布工具（Semantic Release），我们可以将这一过程自动化，但这个过程中也隐藏着一些易被忽视的陷阱。本文将分享我们团队在使用 Semantic Release 时遇到的问题和解决方案，帮助你避开这些坑。\u003c/p\u003e","title":"使用 Semantic Release 实现自动化版本发布：踩坑与解决方案","url":"https://jiejue.ai/2025/03/automatic-versioning-with-semantic-release/"}

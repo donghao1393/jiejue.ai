@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为一名开发工程师，你是否曾经遇到过这样的情况：你的应用在Kubernetes上部署，却不知为何直接访问服务的IP地址总是返回404错误？本文将通过一个实际案例，用通俗易懂的方式解释Kubernetes中Ingress的工作原理及其使用方法。\u003c/p\u003e","title":"为开发者解释：为什么直接访问Kubernetes Ingress的IP地址会返回404","url":"https://jiejue.ai/2025/03/understanding-kubernetes-ingress-for-developers/"}

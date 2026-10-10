@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当你管理多个环境（开发、测试、生产）时，配置不一致几乎是必然会遇到的问题。这篇文章从一个实际场景出发，介绍配置漂移检测的核心概念和实践方法。\u003c/p\u003e","title":"配置漂移检测：从一行 jq 命令到 DevOps 核心概念","url":"https://jiejue.ai/2025/12/configuration-drift-detection-for-beginners/"}

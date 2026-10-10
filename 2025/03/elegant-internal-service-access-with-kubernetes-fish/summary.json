@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是否曾经需要临时访问公司内网的服务，却苦于没有合适的工具？特别是当VPN因为安全限制无法使用，或者你只需要短暂地连接到特定服务时？本文将介绍一种基于Kubernetes和Fish Shell的解决方案，让你能够安全、便捷地通过K8s集群代理访问内网服务。\u003c/p\u003e","title":"通过Kubernetes和Fish Shell优雅地访问内网服务","url":"https://jiejue.ai/2025/03/elegant-internal-service-access-with-kubernetes-fish/"}

@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e刚接触 Kubernetes 的运维同学经常会遇到一个困惑：有些 deployment 的 yaml 里写了 resources.requests，有些却没写。没写的那些 Pod 用的是什么\u0026quot;默认值\u0026quot;？能不能查到它们实际占用了多少资源？\u003c/p\u003e","title":"Kubernetes 资源管理入门：从 kubectl top 到 LimitRange","url":"https://jiejue.ai/2025/12/kubernetes-resource-requests-top-limitrange/"}

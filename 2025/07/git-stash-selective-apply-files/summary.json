@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在日常开发中，你是否遇到过这样的情况：修改了多个文件，但只想应用其中某些文件的修改，而把其他文件的修改先放一边？传统的git stash要么全部保存，要么全部恢复，但实际上Git提供了更灵活的选择性操作方法。\u003c/p\u003e","title":"Git Stash选择性应用：如何只恢复需要的文件修改","url":"https://jiejue.ai/2025/07/git-stash-selective-apply-files/"}

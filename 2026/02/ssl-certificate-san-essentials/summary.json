@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e如果你负责过网站的 HTTPS 配置，大概率见过 SAN 这个缩写。它是 SSL/TLS 证书中决定\u0026quot;这张证书能保护哪些域名\u0026quot;的关键字段。这篇文章从概念出发，到用 \u003ccode\u003eopenssl\u003c/code\u003e 实际查看，再到证书续期时需要准备什么，帮你把这条线串起来。\u003c/p\u003e","title":"SSL 证书里的 SAN 是什么？从查看到续期的完整指南","url":"https://jiejue.ai/2026/02/ssl-certificate-san-essentials/"}

@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e为什么在 macOS 上，\u003ccode\u003e/tmp\u003c/code\u003e 和 \u003ccode\u003e/private/tmp\u003c/code\u003e 看起来是同一个目录，但在安全控制上却可能被区别对待？当我们需要临时目录进行实验时，应该遵循什么最佳实践？本文将揭示临时目录背后的技术奥秘和安全设计考量。\u003c/p\u003e","title":"临时目录的秘密：/tmp 与 /private/tmp 背后的安全逻辑","url":"https://jiejue.ai/2025/04/tmp-private-tmp-security/"}

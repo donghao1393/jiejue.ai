@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在将Azure Application Gateway从公网迁移到私网环境时，即使配置看似正确，你可能会突然遇到TLS连接被重置的问题。本文将分享一个看似简单却常被忽略的关键配置：SNI（Server Name Indication）参数设置，以及它如何解决连接重置问题。\u003c/p\u003e","title":"解决Azure Application Gateway私网环境下的连接重置问题：SNI参数的关键作用","url":"https://jiejue.ai/2025/03/solving-connection-reset-with-sni-in-azure-application-gateway/"}

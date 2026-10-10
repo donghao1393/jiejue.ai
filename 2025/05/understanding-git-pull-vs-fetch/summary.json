@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e如果你使用 Git 进行团队协作，一定会遇到这样的问题：\u003ccode\u003egit pull\u003c/code\u003e 和 \u003ccode\u003egit fetch\u003c/code\u003e 到底有什么区别？为什么有时候执行 \u003ccode\u003egit pull\u003c/code\u003e 后能看到新分支信息，但分支内容却没有更新？\u003c/p\u003e","title":"理解 Git Pull 和 Git Fetch 的区别","url":"https://jiejue.ai/2025/05/understanding-git-pull-vs-fetch/"}

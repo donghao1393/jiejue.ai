@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你有没有遇到过这样的场景：从某个系统导出的文本，格式乱七八糟，需要连续做好几步正则查找替换才能整理成想要的样子？比如先把转义的 \u003ccode\u003e\\n\u003c/code\u003e 变成真正的换行，再把转义的引号还原，最后用正则提取出关键字段——每次都要手动重复这套流程，烦不胜烦。\u003c/p\u003e","title":"在 VS Code 里把正则替换变成一键工作流","url":"https://jiejue.ai/2026/02/vscode-regex-workflow-find-and-transform/"}

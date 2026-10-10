@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003eKubernetes 有个让新手困惑的行为：用 Helm 更新了 ConfigMap，Pod 却不会自动重启。本文从 Hash 函数的基本原理讲起，解释为什么一行 \u003ccode\u003esha256sum\u003c/code\u003e 就能解决这个问题。\u003c/p\u003e","title":"从指纹到 Hash：理解 Helm 配置变更检测的原理","url":"https://jiejue.ai/2025/12/helm-configmap-checksum-auto-rollout-deep/"}

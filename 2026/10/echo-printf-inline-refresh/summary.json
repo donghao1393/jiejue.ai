@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e进度条、加载动画能在终端里原地刷新——同一行文字反复变化；而 \u003ccode\u003eecho\u003c/code\u003e 打出的文字却永远停在原地。秘密不在命令本身：终端是一块可以\u0026quot;重画\u0026quot;的画布，\u003ccode\u003e\\r\u003c/code\u003e 能把光标送回行首，而 echo 与 printf 对转义字符的处理方式不同，决定了谁能让画面动起来。\u003c/p\u003e","title":"echo 与 printf：终端原地刷新的原理与差别","url":"https://jiejue.ai/2026/10/echo-printf-inline-refresh/"}

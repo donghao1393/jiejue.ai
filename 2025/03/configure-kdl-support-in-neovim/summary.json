@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e最近接触了KDL（Kdl Document Language）这一新兴的文档语言，需要在Neovim中编辑KDL文件。本文将分享如何在Neovim（特别是LazyVim配置）中添加KDL语言支持，实现语法高亮和注释功能。\u003c/p\u003e","title":"在Neovim中配置KDL语言支持","url":"https://jiejue.ai/2025/03/configure-kdl-support-in-neovim/"}

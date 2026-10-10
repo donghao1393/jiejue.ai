@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e云厂商的 NAT 网关、家里的路由器、Kubernetes 的 Service——背后都是同一套 Linux 机制：NAT 改写地址，conntrack 记住怎么改回来。这篇文章不堆术语，用「导航软件」和「储物柜」两个比喻，把 DNAT、SNAT、Netfilter、conntrack 这一家子的分工彻底讲透——包括一个大多数教程都讲错的点：\u003cstrong\u003e回程根本不查规则\u003c/strong\u003e。\u003c/p\u003e","title":"数据包的导航软件：DNAT、SNAT 与 conntrack 是怎么配合的","url":"https://jiejue.ai/2026/07/nat-conntrack-explained/"}

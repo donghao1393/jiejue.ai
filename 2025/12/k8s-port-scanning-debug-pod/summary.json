@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在生产环境的Kubernetes集群中，我们经常需要检查某个Pod开放了哪些端口。但由于安全限制，目标Pod通常没有sudo权限，也可能缺少必要的网络调试工具。这时，我们可以用一个巧妙的方法：在同一命名空间中创建一个临时的调试Pod，从外部检查目标Pod的端口开放情况。\u003c/p\u003e\n\u003cp\u003e这种方法利用了Kubernetes的网络特性——同一命名空间内的Pod默认可以相互通信，同时又不需要修改目标Pod的任何配置，完全不会影响生产服务。\u003c/p\u003e","title":"Kubernetes生产环境调试：用临时Pod扫描端口","url":"https://jiejue.ai/2025/12/k8s-port-scanning-debug-pod/"}

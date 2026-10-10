@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为Azure开发者或DevOps工程师，你可能遇到过这样的场景：公司有多个Function App，但出于成本控制或管理便利性考虑，希望让它们共享同一个Storage Account。这样做可行吗？会有什么风险？如何正确配置？\u003c/p\u003e","title":"Azure Function App多应用共享Storage Account实践指南","url":"https://jiejue.ai/2025/07/azure-function-storage-sharing-guide/"}

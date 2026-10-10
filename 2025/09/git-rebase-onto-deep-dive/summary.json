@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在复杂的项目环境中，我们经常遇到需要重新调整分支基础的情况。当你的工作分支基于一个分支，但后来发现应该基于另一个分支时，\u003ccode\u003egit rebase --onto\u003c/code\u003e 就是那个精确而优雅的解决方案。\u003c/p\u003e","title":"Git Rebase --onto 深度解析：优雅处理复杂分支重构","url":"https://jiejue.ai/2025/09/git-rebase-onto-deep-dive/"}

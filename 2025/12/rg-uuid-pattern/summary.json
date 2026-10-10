@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在日志或配置文件里搜 UUID 是常见需求，ripgrep 配合一行正则就能搞定。\u003c/p\u003e","title":"用 ripgrep 匹配 UUID：一行正则与 fish 封装","url":"https://jiejue.ai/2025/12/rg-uuid-pattern/"}

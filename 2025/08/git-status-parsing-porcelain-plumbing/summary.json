@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当你在终端中运行 \u003ccode\u003egit status\u003c/code\u003e 时，看到的那些彩色、格式化的输出很漂亮，对吧？但如果你想在脚本中解析这些信息，或者通过管道命令进行进一步处理，那些\u0026quot;美观\u0026quot;的格式反而成了障碍。今天我们来探索 Git 状态输出的两面性：既要美观易读，又要机器友好。\u003c/p\u003e","title":"Git 状态解析：从美观输出到脚本友好格式的完全指南","url":"https://jiejue.ai/2025/08/git-status-parsing-porcelain-plumbing/"}

@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当你需要从 Azure Log Analytics 导出数百万行日志进行离线分析时，会发现 Azure Portal 的 3 万行限制远远不够。本文介绍一种通过 Azure Data Explorer 代理突破限制的方法，并提供完整的分批导出策略。\u003c/p\u003e","title":"突破 Azure Log Analytics 导出限制：百万级日志提取实战","url":"https://jiejue.ai/2025/12/azure-log-analytics-export-millions-rows/"}

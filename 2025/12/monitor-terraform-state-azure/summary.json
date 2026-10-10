@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你的同事正在用 Terraform 部署资源，state 文件被锁住了。你想知道他什么时候完成，但又不想每隔几分钟就问一次\u0026quot;好了吗？\u0026ldquo;本文介绍如何用命令行优雅地监控 Terraform state 文件的状态。\u003c/p\u003e","title":"不开浏览器，命令行监控 Terraform State 文件的更新状态","url":"https://jiejue.ai/2025/12/monitor-terraform-state-azure/"}

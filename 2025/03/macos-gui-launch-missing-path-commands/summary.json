@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是否遇到过这种情况：明明在终端里能正常使用的命令，通过图形界面启动的应用却无法找到？比如在终端中输入\u003ccode\u003enode -v\u003c/code\u003e能正常显示版本，但从Dock或Finder启动的应用却报错找不到node命令？最近我解决了一个类似的问题，想和大家分享其中的原理和解决方法。\u003c/p\u003e","title":"为什么从Mac GUI启动应用找不到PATH里的命令？","url":"https://jiejue.ai/2025/03/macos-gui-launch-missing-path-commands/"}

@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是不是经常用 \u003ccode\u003egit reset --hard HEAD~1\u003c/code\u003e 来撤销最近的一次提交？其实 Git 的重置功能远比这个强大得多。今天让我们一起来探索 Git Reset 的高级用法，看看如何像使用时光机一样自如地掌控你的代码历史。\u003c/p\u003e","title":"Git Reset 进阶：像时光机一样掌控代码历史","url":"https://jiejue.ai/2025/02/git-reset-advance/"}

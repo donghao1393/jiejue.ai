@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为程序员，我们每天都在使用Git，但你真的理解它的设计哲学吗？最近在一个开发场景中，我遇到了一个有趣的问题：当我的开发分支缺少一个即将被推送到主分支的文件时，应该用cherry-pick还是merge来解决？这个看似简单的选择，背后藏着Git设计的核心智慧。\u003c/p\u003e","title":"Git的设计哲学：为什么Merge比Cherry-pick更智能？","url":"https://jiejue.ai/2025/06/git-merge-vs-cherry-pick-design-philosophy/"}

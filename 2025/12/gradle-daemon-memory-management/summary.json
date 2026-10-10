@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你关掉了 Android Studio，以为终于可以把内存还给 Chrome 了，结果打开活动监视器一看——三个 Java 进程，每个占用 1.5GB 内存，安静地躺在那里。这是什么？病毒吗？\u003c/p\u003e\n\u003cp\u003e不是。这是 Gradle 的\u0026quot;官方功能\u0026quot;。\u003c/p\u003e","title":"Android Studio 退出后，为什么还有 Java 进程吃掉我好几个 GB 内存？","url":"https://jiejue.ai/2025/12/gradle-daemon-memory-management/"}

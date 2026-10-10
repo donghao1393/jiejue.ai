@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e如果你在 Kubernetes 上运行 Bitbucket self-hosted runners，可能会遇到一个令人困惑的问题：pipeline 执行完了，但 Pod 就是不退出，Job 永远显示 Active。这些\u0026quot;僵尸 Pod\u0026quot;会不断累积，消耗集群资源。本文将解释这个问题的根本原因，以及如何用 Kubernetes 原生特性彻底解决它。\u003c/p\u003e","title":"Bitbucket Runner 的僵尸 Pod 问题：从原理到根治","url":"https://jiejue.ai/2026/02/bitbucket-runner-zombie-pod-fix/"}

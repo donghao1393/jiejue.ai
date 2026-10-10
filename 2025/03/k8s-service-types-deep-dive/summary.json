@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在Kubernetes中，你选择的Service类型可能比想象中更重要 —— 它不仅影响应用的可访问性，还直接关系到架构效率和成本。我们今天深入讨论一个常被误解的问题：\u003cstrong\u003e为什么ClusterIP类型的Service也能实现负载均衡？\u003c/strong\u003e\u003c/p\u003e","title":"Kubernetes服务类型深度解析：为什么ClusterIP也能负载均衡？","url":"https://jiejue.ai/2025/03/k8s-service-types-deep-dive/"}

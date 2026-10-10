@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e用 Helm 部署应用时，你可能遇到过这种情况：明明改了配置，跑了 \u003ccode\u003ehelm upgrade\u003c/code\u003e，但应用还是用着旧配置。必须手动删 Pod 或者 \u003ccode\u003ekubectl rollout restart\u003c/code\u003e 才行。这篇文章教你一个小改动，让配置变更自动触发 Pod 重启。\u003c/p\u003e","title":"Helm 小技巧：改了配置文件，Pod 自动重启","url":"https://jiejue.ai/2025/12/helm-configmap-checksum-auto-rollout-quick/"}

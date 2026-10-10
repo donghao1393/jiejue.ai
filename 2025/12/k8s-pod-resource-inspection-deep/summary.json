@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在生产环境中，资源配置的可见性直接决定了容量规划和故障排查的效率。本文系统梳理 Kubernetes 中查看 Pod 资源配置的各种方法，从简单的命令行查询到复杂的 JSONPath 表达式，覆盖日常运维和自动化脚本的需求。\u003c/p\u003e","title":"Kubernetes 资源审计实战：从命令行到 YAML 的完整排查指南","url":"https://jiejue.ai/2025/12/k8s-pod-resource-inspection-deep/"}

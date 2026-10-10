@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是否曾经为了同时运行多个命令而开了一堆终端窗口？或者每次 SSH 到服务器后担心连接断开会丢失工作进度？终端多路复用器（Terminal Multiplexer）解决了这些问题，而 Zellij 是这个领域中 Rust 实现的后起之秀，带来了出色的用户体验和独特的功能。\u003c/p\u003e","title":"Zellij: 现代化的终端多路复用器——从 tmux 迁移指南","url":"https://jiejue.ai/2025/03/zellij-terminal-multiplexer-guide/"}

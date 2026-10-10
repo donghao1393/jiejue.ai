@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当多个项目需要共享同一份大型数据文件（比如机器学习模型权重）时，软链接是最直接的磁盘空间节省方案。但开发者常常担心：软链接在编译时能正常工作吗？会不会导致构建失败？\u003c/p\u003e","title":"macOS 软链接在 Python 项目编译中完全有效","url":"https://jiejue.ai/2025/12/symlink-works-in-compilation/"}

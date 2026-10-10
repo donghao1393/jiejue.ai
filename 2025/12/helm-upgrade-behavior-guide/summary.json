@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当你执行 \u003ccode\u003ehelm upgrade\u003c/code\u003e 后，哪些 Pod 会重启？ConfigMap 改了为什么应用没感知？这篇文章帮你彻底搞清楚 Helm 和 Kubernetes 的更新行为。\u003c/p\u003e","title":"Helm Upgrade 到底改了什么？Kubernetes 资源更新行为完全指南","url":"https://jiejue.ai/2025/12/helm-upgrade-behavior-guide/"}

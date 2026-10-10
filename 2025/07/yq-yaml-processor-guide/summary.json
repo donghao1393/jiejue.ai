@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e作为一名运维工程师，你是否经常需要在复杂的Kubernetes配置文件中查找特定的服务配置？或者需要从包含几十个资源定义的YAML文件中提取某个特定的Deployment？如果你还在用文本编辑器一行行查找，或者写复杂的脚本来处理YAML文件，那么yq这个工具将会彻底改变你的工作方式。\u003c/p\u003e","title":"yq：让YAML文件处理变得简单高效的神器","url":"https://jiejue.ai/2025/07/yq-yaml-processor-guide/"}

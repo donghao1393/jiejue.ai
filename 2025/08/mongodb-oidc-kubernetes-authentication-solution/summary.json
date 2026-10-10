@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在现代云原生架构中，无密码认证（Passwordless Authentication）已成为安全最佳实践。然而，当我们尝试在 Kubernetes 集群中使用 OIDC 认证连接 Azure Cosmos DB MongoDB vCore 时，却遭遇了一个看似简单却让人抓狂的问题。\u003c/p\u003e","title":"解决 MongoDB OIDC 认证在 Kubernetes 中的连接问题：从失败到成功的完整方案","url":"https://jiejue.ai/2025/08/mongodb-oidc-kubernetes-authentication-solution/"}

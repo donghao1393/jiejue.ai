@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你在两个分支上做了\u0026quot;效果一模一样\u0026quot;的修改，结果合并时 Git 给你报了冲突。你反复确认：两边的最终文件内容完全一致，为什么还会冲突？这篇文章带你从 Git 三路合并（three-way merge）的底层机制出发，彻底理解这个初学者最容易踩的坑。\u003c/p\u003e","title":"Git 合并冲突的反直觉陷阱：为什么\"效果相同\"的改动会打架？","url":"https://jiejue.ai/2026/02/git-three-way-merge-conflicts/"}

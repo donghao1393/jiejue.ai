@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当你使用Git时，是否曾被一些不想提交但总是显示为已修改的文件所困扰？例如MacOS的.DS_Store文件、IDE的配置文件或是子模块中的临时文件？本文将介绍Git中不为人熟知但极其实用的忽略文件变更的方法。\u003c/p\u003e","title":"Git进阶：优雅地忽略已追踪文件的变更","url":"https://jiejue.ai/2025/03/git-ignore-tracked-file-changes/"}

@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003eYAML 配置文件往往层级复杂，而我们常常只需要其中几个特定的值。\u003ccode\u003eyq\u003c/code\u003e 提供了灵活的语法，让你能从不同层级、不同父节点中一次性提取所需数据。\u003c/p\u003e","title":"yq 多路径取值：从 YAML 中精准提取你需要的数据","url":"https://jiejue.ai/2026/02/yq-extract-multiple-values-yaml/"}

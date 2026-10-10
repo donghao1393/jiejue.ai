@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在终端里搜索文件内容时，\u003ccode\u003efd\u003c/code\u003e 配合 \u003ccode\u003erg\u003c/code\u003e 是常见的组合。但一个看似合理的命令组合，可能比原生方案慢几百倍。\u003c/p\u003e","title":"为什么 fd -x rg 比 rg -t 慢 600 倍？进程 fork 开销的代价","url":"https://jiejue.ai/2026/01/fd-x-rg-vs-rg-performance-fork-overhead/"}

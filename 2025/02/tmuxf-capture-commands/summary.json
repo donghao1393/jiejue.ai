@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e几个月前写了一个 “让 Fish Shell 轻松管理你的tmux环境\u0026quot;，用于保存和恢复 tmux 工作台。但在实际使用中发现了一些问题，主要是在命令捕获和恢复方面存在不足。比如，有些长期运行的命令（如 hugo server）无法被正确保存，而一些特殊的监控命令（如 btm）则以不一致的方式被处理。这篇文章记录了改进过程中遇到的技术难点和解决方案。\u003c/p\u003e","title":"改进 tmuxf：完善 tmux 工作台的保存与恢复","url":"https://jiejue.ai/2025/02/tmuxf-capture-commands/"}

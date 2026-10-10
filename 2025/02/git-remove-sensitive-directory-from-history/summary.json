@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在使用Git进行版本控制时，我们偶尔会遇到这样的情况：某个目录或文件不小心被提交到了版本库中，而这个目录可能包含了一些不应该被版本控制的内容。这时，我们需要在保留文件的同时，将它从Git的历史记录中移除。\u003c/p\u003e","title":"Git时光机：如何优雅地移除历史提交中的敏感目录","url":"https://jiejue.ai/2025/02/git-remove-sensitive-directory-from-history/"}

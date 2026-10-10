@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是不是也有过这样的困扰：打开项目文件夹，密密麻麻的文件让你头晕眼花？测试产生的临时文件、编辑器的备份文件、系统自动生成的缓存文件，还有各种日志文件\u0026hellip;每次 \u003ccode\u003egit status\u003c/code\u003e 都显示一大堆\u0026quot;未跟踪的文件\u0026quot;，让你不知道哪些该提交，哪些不该提交。\u003c/p\u003e","title":"告别混乱：用 .gitignore 让你的项目目录清爽起来","url":"https://jiejue.ai/2025/07/gitignore-clean-project/"}

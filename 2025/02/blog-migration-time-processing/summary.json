@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在博客系统迁移过程中，文章的创建时间往往会成为一个容易被忽视却又不得不解决的问题。本文将分享一个从Zola迁移到Hugo过程中，如何通过Git历史信息和Shell脚本来恢复并维护文章时间的实践经验。\u003c/p\u003e","title":"博客迁移中的时间处理：从Git历史到元数据","url":"https://jiejue.ai/2025/02/blog-migration-time-processing/"}

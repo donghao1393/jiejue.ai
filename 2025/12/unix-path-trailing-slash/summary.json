@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在终端里想删除一个符号链接（symbolic link），结果报错说\u0026quot;Is a directory\u0026quot;——明明是个链接，怎么就成目录了？\u003c/p\u003e","title":"删不掉符号链接？那个斜杠惹的祸","url":"https://jiejue.ai/2025/12/unix-path-trailing-slash/"}

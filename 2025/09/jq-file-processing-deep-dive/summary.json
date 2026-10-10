@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在现代数据处理流程中，文件格式转换是一个基础但关键的环节。当我们需要将各种格式的原始数据转换为结构化的JSON格式时，jq工具提供了一系列强大的文件处理参数。本文将深入探讨jq的文件处理机制，特别是\u003ccode\u003e--rawfile\u003c/code\u003e系列参数的工作原理和应用场景。\u003c/p\u003e","title":"深度解析jq文件处理参数：从--rawfile到数据管道架构","url":"https://jiejue.ai/2025/09/jq-file-processing-deep-dive/"}

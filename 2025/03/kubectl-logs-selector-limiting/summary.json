@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在 Kubernetes 中进行日志查询时，你可能会遇到这样的情况：明明有大量日志，但使用 \u003ccode\u003ekubectl logs\u003c/code\u003e 命令时却只显示了少量内容。这个看似微小的细节却可能在关键的故障排查时刻成为重大障碍。\u003c/p\u003e","title":"kubectl logs 命令的隐藏细节：选择器会限制日志输出行数","url":"https://jiejue.ai/2025/03/kubectl-logs-selector-limiting/"}

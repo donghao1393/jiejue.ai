@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e你是否遇过这样的情况：同样的YAML配置文件，在一个环境用Helm部署就报错，换到另一个环境用Kustomize却能成功？如果你曾经被这种\u0026quot;灵异现象\u0026quot;困扰过，那这篇文章将为你揭开真相。\u003c/p\u003e","title":"为什么Helm部署失败而Kustomize成功？深入解析Kubernetes配置工具的YAML验证差异","url":"https://jiejue.ai/2025/07/helm-vs-kustomize-yaml-validation-differences/"}

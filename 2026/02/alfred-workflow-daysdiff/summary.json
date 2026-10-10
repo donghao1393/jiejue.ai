@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e每次想知道距离某个日期还有多少天，你是不是也要打开 Excel，输入公式 \u003ccode\u003e=DATEDIF(TODAY(), \u0026quot;2026-12-31\u0026quot;, \u0026quot;D\u0026quot;)\u003c/code\u003e？我决定彻底告别这个繁琐流程。\u003c/p\u003e","title":"告别 Excel：用 Alfred 三秒算出日期差","url":"https://jiejue.ai/2026/02/alfred-workflow-daysdiff/"}

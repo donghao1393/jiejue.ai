@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在日常的 DevOps 工作中，我们经常需要从复杂的 YAML 配置文件中提取特定的键值对。无论是处理 Kubernetes ConfigMap、Helm values 文件，还是各种应用配置，精确地选择所需的配置项是一项常见但重要的任务。\u003c/p\u003e","title":"掌握 yq pick：优雅地从 YAML 中提取多个键值","url":"https://jiejue.ai/2025/08/yq-pick-multiple-keys-from-yaml/"}

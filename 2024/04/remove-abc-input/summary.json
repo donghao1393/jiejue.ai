@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在MacOS中，会有一个输入法默认无法删除，例如ABC，这里删除按钮是灰色的。\u003c/p\u003e\n\u003cp\u003e要删除这个默认输入法，就需要编辑二进制的Plist文件，可以使用免费的Plist Editor软件。\u003c/p\u003e\n\u003cp\u003ePlist Editor下载地址：https://www.fatcatsoftware.com/plisteditpro/\u003c/p\u003e","title":"移除默认输入法","url":"https://jiejue.ai/2024/04/remove-abc-input/"}

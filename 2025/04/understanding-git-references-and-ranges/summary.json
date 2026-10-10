@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e在日常开发中，我们经常需要查看历史提交、比较不同版本之间的差异，或者创建补丁文件。但你是否曾被Git的各种引用表示法（如HEAD~3, HEAD^）和范围符号（..和\u0026hellip;）搞得一头雾水？本文将为你详细解析这些概念，帮助你从\u0026quot;点\u0026quot;到\u0026quot;线\u0026quot;的思维方式转变，更好地理解和使用Git。\u003c/p\u003e","title":"深入理解Git引用与范围表示法：从点到线的思维转变","url":"https://jiejue.ai/2025/04/understanding-git-references-and-ranges/"}

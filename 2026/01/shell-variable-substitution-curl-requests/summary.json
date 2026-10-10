@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e当 Postman 不可用，或者你只是想在终端里快速测试一个 API，curl 是最直接的选择。但当请求里需要动态插入 token、用户名、邮箱这些存在文件里的值时，shell 的引号规则会让人头疼。这篇文章整理了几种在 curl 请求中插入变量的方法，覆盖 Bash 和 Fish 两种常见 shell。\u003c/p\u003e","title":"终端里发 API 请求：Shell 变量替换的几种方法","url":"https://jiejue.ai/2026/01/shell-variable-substitution-curl-requests/"}

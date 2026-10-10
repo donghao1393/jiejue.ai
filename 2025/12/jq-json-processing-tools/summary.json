@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e日志文件里的 JSON 经常是\u0026quot;套娃\u0026quot;状态——一个 JSON 字段的值是另一个被转义的 JSON 字符串。本文记录如何用 jq 优雅地处理这类场景，并顺带梳理命令行下处理 JSON 的工具生态。\u003c/p\u003e","title":"jq 处理嵌套 JSON 与命令行 JSON 工具全景","url":"https://jiejue.ai/2025/12/jq-json-processing-tools/"}
