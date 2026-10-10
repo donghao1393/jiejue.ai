@@ -1,0 +1,4 @@
+{{- /* 每篇文章的机器可读摘要输出（summary.json），供 CI 的 Buttondown 邮件脚本读取。
+       summary = Hugo 渲染后的正文摘要（<!--more--> 之前；没有 more 时为前 70 词），
+       尖括号内嵌 shortcode（如 ref）已展开为最终链接。 */ -}}
+{{- dict "title" .Title "url" .Permalink "summary" .Summary | jsonify -}}

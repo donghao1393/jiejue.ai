@@ -140,6 +140,16 @@ params:
 permalinks:
   posts: /:year/:month/:slug/
   tags: /:slug/
+# 每篇文章额外输出渲染后的摘要（summary.json），供 CI 邮件脚本读取
+outputFormats:
+  summaries:
+    mediaType: application/json
+    baseName: summary
+    isPlainText: true
+outputs:
+  page:
+    - HTML
+    - summaries
 # Markup 配置
 markup:
   goldmark:
