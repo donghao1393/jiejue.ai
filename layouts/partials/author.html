@@ -1,0 +1,28 @@
+{{- /* 本文件覆盖主题的 partials/author.html（hugo-theme-dream），
+       与主题版本的唯一区别：站点级 params.authorlink 可作为默认值，
+       使未在 frontmatter 单独设置 authorlink 的文章也能链接到作者页面。
+       frontmatter 的 authorlink 仍然优先。
+       主题升级时，请将主题新版 author.html 的变更合并进来。 */ -}}
+{{- $authorURL := .Params.authorlink | default site.Params.authorlink -}}
+{{- $authorName := .Params.author | default site.Params.author -}}
+<div class="flex items-center">
+  {{ if .Params.avatar }}
+  <div class="avatar mr-1">
+    <div class="w-8 rounded-full">
+      <img class="my-0!" src="{{ .Params.avatar }}" alt="{{ $authorName }}" />
+    </div>
+  </div>
+  {{ else }}
+  <span>@</span>
+  {{ end }}
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  {{ if and $authorName $authorURL (eq .template "single") }}
+    <a class="hover:underline" itemprop="url" href="{{ $authorURL }}" target="_blank" rel="author noopener">
+      <span itemprop="name">{{ $authorName }}</span>
+    </a>
+  {{ else if $authorName }}
+    <span itemprop="name">{{ $authorName }}</span>
+  {{ end }}
+  </span>
+</div>

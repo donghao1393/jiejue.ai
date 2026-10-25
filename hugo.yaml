@@ -38,6 +38,8 @@ params:
   # backgroundImageDark: ""
   # 作者信息
   author: 董昊
+  # 文章页署名链接到的作者主页（frontmatter 的 authorlink 可单独覆盖）
+  authorlink: https://donghao.ac/
   avatar: /favicon.ico
   description: 硅基生物幼稚园协调员
   footerBottomText: 硅基生物幼稚园
