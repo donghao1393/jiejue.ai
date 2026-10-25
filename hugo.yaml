@@ -1,5 +1,5 @@
 baseURL: https://jiejue.ai/
-languageCode: zh-cn
+locale: zh-cn
 defaultContentLanguage: zh
 title: 爱解决
 theme: hugo-theme-dream
@@ -12,7 +12,7 @@ hasCJKLanguage: true
 uglyURLs: false
 module:
   mounts:
-    - includeFiles:
+    - files:
         - search/_index.md
         - "**/index.md"
         - "**/index_**.md"
