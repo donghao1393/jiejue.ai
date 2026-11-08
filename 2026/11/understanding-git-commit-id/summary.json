@@ -1,0 +1,1 @@
+{"summary":"\u003cp\u003e每次 \u003ccode\u003egit log\u003c/code\u003e，屏幕上那串 \u003ccode\u003ea1b2c3d…\u003c/code\u003e 总让人觉得是随机编号。其实它没有任何随机成分：它是 Git 对一份结构固定的文本——像一封电报——逐字节算出来的指纹。看懂这封电报，你就能一次性解释很多反直觉现象：为什么改提交信息会换 ID、为什么 rebase 后历史全变、为什么空提交也有 ID、为什么 Git 能发现历史被篡改。\u003c/p\u003e","title":"Git commit id 到底是什么？一封结构化“电报”的指纹","url":"https://jiejue.ai/2026/11/understanding-git-commit-id/"}
